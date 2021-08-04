@@ -152,7 +152,7 @@ class _RegistroClientePageState extends State<RegistroClientePage> {
     LocationData currentLocation;
     var location = new Location();
     currentLocation = await location.getLocation();
-    Map<String, dynamic> posicionActual = {
+    Map<String, dynamic> posicionRegistrada = {
       "lat": currentLocation.latitude,
       "long": currentLocation.longitude
     };
@@ -161,7 +161,7 @@ class _RegistroClientePageState extends State<RegistroClientePage> {
     Map<String, dynamic> clientes = {
       "nombre": nombre.text,
       "telefono": telefono.text,
-      "posicionActual": posicionActual
+      "posicionRegistrada": posicionRegistrada
     };
     firestoreInstance.collection("clients").add(clientes);
 

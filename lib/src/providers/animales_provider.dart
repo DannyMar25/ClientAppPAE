@@ -3,37 +3,36 @@ import 'dart:io';
 
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AnimalesProvider {
-  final String _url =
-      'https://flutter-varios-1637a-default-rtdb.firebaseio.com';
+  CollectionReference refAn = FirebaseFirestore.instance.collection('animales');
+  //late AnimalModel animal1;
 
-  final _prefs = new PreferenciasUsuario();
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   Future<List<AnimalModel>> cargarAnimal() async {
-    //final url = '$_url/animales.json?auth=${_prefs.token}';
-    final url = '$_url/animales.json';
-    final resp = await http.get(Uri.parse(url));
-    final Map<String, dynamic> decodedData = json.decode(resp.body);
     final List<AnimalModel> animales = <AnimalModel>[];
-
-    //print(decodedData);
-
-    if (decodedData == null) {
-      return [];
-    }
-
-    decodedData.forEach((id, animal) {
-      //print(prod);\
-      final animalTemp = AnimalModel.fromJson(animal);
-      animalTemp.id = id;
-
-      animales.add(animalTemp);
-    });
-
-    print(animales);
-
+    var documents = await refAn.get();
+    animales.addAll(documents.docs.map((e) {
+      //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
+      var data = e.data() as Map<String, dynamic>;
+      var animal = AnimalModel.fromJson({
+        "id": e.id,
+        "nombre": data["nombre"],
+        "edad": data["edad"],
+        "temperamento": data["temperamento"],
+        "peso": data["peso"],
+        "tamanio": data["tamanio"],
+        "color": data["color"],
+        "raza": data["raza"],
+        "caracteristicas": data["caracteristicas"],
+        "fotoUrl": data["fotoUrl"]
+      });
+      return animal;
+    }).toList());
     return animales;
   }
 }
