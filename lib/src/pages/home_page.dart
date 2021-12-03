@@ -1,13 +1,21 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
+import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
 //import 'package:formvalidation/src/bloc/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   //const HomePage({Key? key}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final animalesProvider = new AnimalesProvider();
+  final userProvider = new UsuarioProvider();
+
   @override
   Widget build(BuildContext context) {
     //final bloc = Provider.of(context);
@@ -15,6 +23,34 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
+        actions: [
+          Builder(builder: (BuildContext context) {
+            return Row(
+              children: [
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                  ),
+                  onPressed: () async {
+                    Navigator.pushNamed(context, 'login');
+                  },
+                  child: Text('Iniciar Sesión'),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                  ),
+                  onPressed: () async {
+                    Navigator.pushNamed(context, 'registro');
+                  },
+                  child: Text('Registrarse'),
+                ),
+              ],
+            );
+          }),
+        ],
       ),
       drawer: MenuWidget(),
       body: _crearListado(),
@@ -68,8 +104,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-//kjdklsf
 
   _crearBoton(BuildContext context) {
     return FloatingActionButton(

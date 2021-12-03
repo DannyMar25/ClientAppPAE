@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UsuarioProvider {
   final String _firebaseToken = 'AIzaSyCKF3vYr8Kn-6RQTrhiqc1IcEp1bC8HfWU';
   final _prefs = new PreferenciasUsuario();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     final authData = {
@@ -60,6 +62,31 @@ class UsuarioProvider {
   //cerrar sesion
   void signOut() async {
     await _auth.signOut();
+    await _googleSignIn.signOut();
     return;
+  }
+
+  //Iniciar sesion con google
+  User? get user {
+    return _auth.currentUser;
+  }
+
+  Future<User?> signInGoogle() async {
+    try {
+      final GoogleSignInAccount googleUser = (await _googleSignIn.signIn())!;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      final User? user = userCredential.user;
+      if (user!.uid == _auth.currentUser!.uid) return user;
+    } catch (e) {
+      print('Error in signInGoogle Method: ${e.toString()}');
+    }
+    return null;
   }
 }

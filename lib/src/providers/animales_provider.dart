@@ -1,11 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
+//import 'dart:convert';
+//import 'dart:io';
 
 import 'package:cliente_app_v1/src/models/animales_model.dart';
-import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+//import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:http/http.dart' as http;
+//import 'package:http/http.dart' as http;
 
 class AnimalesProvider {
   CollectionReference refAn = FirebaseFirestore.instance.collection('animales');
@@ -22,6 +22,7 @@ class AnimalesProvider {
       var animal = AnimalModel.fromJson({
         "id": e.id,
         "nombre": data["nombre"],
+        "sexo": data["sexo"],
         "edad": data["edad"],
         "temperamento": data["temperamento"],
         "peso": data["peso"],

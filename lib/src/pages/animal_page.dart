@@ -5,7 +5,7 @@ import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 class AnimalPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _AnimalPageState extends State<AnimalPage> {
   final userProvider = new UsuarioProvider();
 
   AnimalModel animal = new AnimalModel();
-  bool _guardando = false;
+  //bool _guardando = false;
   File? foto;
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,7 @@ class _AnimalPageState extends State<AnimalPage> {
               children: [
                 _mostrarFoto(),
                 _crearNombre(),
+                _crearSexo(),
                 _crearEdad(),
                 _crearTemperamento(),
                 _crearPeso(),
@@ -66,6 +67,7 @@ class _AnimalPageState extends State<AnimalPage> {
                 _crearColor(),
                 _crearRaza(),
                 _crearCaracteristicas(),
+                _crearBoton(),
                 // _crearDisponible(),
                 // _crearBoton(),
               ],
@@ -79,6 +81,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearNombre() {
     return TextFormField(
       initialValue: animal.nombre,
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Nombre',
@@ -94,9 +97,29 @@ class _AnimalPageState extends State<AnimalPage> {
     );
   }
 
+  Widget _crearSexo() {
+    return TextFormField(
+      initialValue: animal.sexo,
+      readOnly: true,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        labelText: 'Sexo',
+      ),
+      onSaved: (value) => animal.nombre = value!,
+      validator: (value) {
+        if (value!.length < 3) {
+          return 'Ingrese el nombre de la mascota';
+        } else {
+          return null;
+        }
+      },
+    );
+  }
+
   Widget _crearEdad() {
     return TextFormField(
       initialValue: animal.edad.toString(),
+      readOnly: true,
       //textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
@@ -116,6 +139,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearTemperamento() {
     return TextFormField(
       initialValue: animal.temperamento,
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Temperamento',
@@ -134,6 +158,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearPeso() {
     return TextFormField(
       initialValue: animal.peso.toString(),
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Peso',
@@ -152,16 +177,17 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearTamanio() {
     return TextFormField(
       initialValue: animal.tamanio.toString(),
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Tamaño',
       ),
-      onSaved: (value) => animal.tamanio = double.parse(value!),
+      onSaved: (value) => animal.tamanio = value!,
       validator: (value) {
-        if (utils.isNumeric(value!)) {
-          return null;
+        if (value!.length < 3) {
+          return 'Ingrese el tamanio de la mascota';
         } else {
-          return 'Solo numeros';
+          return null;
         }
       },
     );
@@ -170,6 +196,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearColor() {
     return TextFormField(
       initialValue: animal.color,
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Color',
@@ -188,6 +215,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearRaza() {
     return TextFormField(
       initialValue: animal.raza,
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Raza',
@@ -206,6 +234,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearCaracteristicas() {
     return TextFormField(
       initialValue: animal.caracteristicas,
+      readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Caracteristicas',
@@ -232,49 +261,38 @@ class _AnimalPageState extends State<AnimalPage> {
   //);
   //}
 
-  // Widget _crearBoton() {
-  //   return ElevatedButton.icon(
-  //     style: ButtonStyle(
-  //      backgroundColor:
-  //           MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-  //         return Colors.deepPurple;
-  //       }),
-  //     ),
-  //     label: Text('Guardar'),
-  //     icon: Icon(Icons.save),
-  //     autofocus: true,
-  //     onPressed: (_guardando) ? null : _submit,
-  //  );
-  //}
-
-  //void _submit() async {
-  //if (!formKey.currentState!.validate()) return;
-  //formKey.currentState!.save();
-
-  //print('Todo OK!');
-
-  //setState(() {
-  // _guardando = true;
-  //});
-
-  //Aqui se debe cargar la foto a la base
-  //if (foto != null) {
-  // await animalProvider.uploadPic(foto!, animal);
-  // }
-
-  //if (animal.id == '') {
-  //animalProvider.crearAnimal(animal);
-  //} else {
-  //animalProvider.editarAnimal(animal);
-  //}
-
-  // setState(() {
-  //   _guardando = false;
-  // });
-  //mostrarSnackbar('Registro guardado');
-
-  //Navigator.pushNamed(context, 'home');
-  //}
+  Widget _crearBoton() {
+    return Row(
+      children: [
+        ElevatedButton.icon(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                return Colors.deepPurple;
+              }),
+            ),
+            label: Text('Agendar cita'),
+            icon: Icon(Icons.save),
+            autofocus: true,
+            onPressed: () {
+              Navigator.pushNamed(context, 'registroCita', arguments: animal);
+            }),
+        ElevatedButton.icon(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith(
+                  (Set<MaterialState> states) {
+                return Colors.deepPurple;
+              }),
+            ),
+            label: Text('Llenar formulario'),
+            icon: Icon(Icons.save),
+            autofocus: true,
+            onPressed: () {
+              Navigator.pushNamed(context, 'formularioMain');
+            }),
+      ],
+    );
+  }
 
   void mostrarSnackbar(String mensaje) {
     final snackbar = SnackBar(
@@ -305,22 +323,22 @@ class _AnimalPageState extends State<AnimalPage> {
     }
   }
 
-  _seleccionarFoto() async {
-    _procesarImagen(ImageSource.gallery);
-  }
+  // _seleccionarFoto() async {
+  //   _procesarImagen(ImageSource.gallery);
+  // }
 
-  _tomarFoto() {
-    _procesarImagen(ImageSource.camera);
-  }
+  // _tomarFoto() {
+  //   _procesarImagen(ImageSource.camera);
+  // }
 
-  _procesarImagen(ImageSource origen) async {
-    final _picker = ImagePicker();
-    final pickedFile =
-        await _picker.getImage(source: origen, maxHeight: 720, maxWidth: 720);
-    foto = File(pickedFile!.path);
-    if (foto != null) {
-      animal.fotoUrl = '';
-    }
-    setState(() {});
-  }
+  // _procesarImagen(ImageSource origen) async {
+  //   final _picker = ImagePicker();
+  //   final pickedFile =
+  //       await _picker.getImage(source: origen, maxHeight: 720, maxWidth: 720);
+  //   foto = File(pickedFile!.path);
+  //   if (foto != null) {
+  //     animal.fotoUrl = '';
+  //   }
+  //   setState(() {});
+  // }
 }

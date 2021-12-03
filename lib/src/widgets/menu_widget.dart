@@ -41,7 +41,17 @@ class MenuWidget extends StatelessWidget {
               color: Colors.blue,
             ),
             title: Text('Llenar formulario de adopcion'),
-            onTap: () {},
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, 'formularioMain'),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.app_registration,
+              color: Colors.blue,
+            ),
+            title: Text('Registro citas'),
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, 'registroCita'),
           ),
           ListTile(
             leading: Icon(
