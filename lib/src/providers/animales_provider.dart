@@ -36,4 +36,26 @@ class AnimalesProvider {
     }).toList());
     return animales;
   }
+
+  Future<AnimalModel> cargarAnimalId(String id) async {
+    AnimalModel animals = new AnimalModel();
+    final doc = await refAn.doc(id).get();
+    var data = doc.data() as Map<String, dynamic>;
+
+    animals = AnimalModel.fromJson({
+      "id": doc.id,
+      "nombre": data["nombre"],
+      "sexo": data["sexo"],
+      "edad": data["edad"],
+      "temperamento": data["temperamento"],
+      "peso": data["peso"],
+      "tamanio": data["tamanio"],
+      "color": data["color"],
+      "raza": data["raza"],
+      "caracteristicas": data["caracteristicas"],
+      "fotoUrl": data["fotoUrl"]
+    });
+
+    return animals;
+  }
 }

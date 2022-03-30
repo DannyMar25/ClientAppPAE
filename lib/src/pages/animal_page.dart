@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
 //import 'package:image_picker/image_picker.dart';
@@ -43,7 +44,7 @@ class _AnimalPageState extends State<AnimalPage> {
               ),
               onPressed: () async {
                 userProvider.signOut();
-                Navigator.pushNamed(context, 'login');
+                Navigator.pushNamed(context, 'home');
               },
               child: Text('Sign Out'),
             );
@@ -263,9 +264,11 @@ class _AnimalPageState extends State<AnimalPage> {
 
   Widget _crearBoton() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton.icon(
             style: ButtonStyle(
+              //padding: new EdgeInsets.only(top: 5),
               backgroundColor: MaterialStateProperty.resolveWith(
                   (Set<MaterialState> states) {
                 return Colors.deepPurple;
@@ -277,19 +280,27 @@ class _AnimalPageState extends State<AnimalPage> {
             onPressed: () {
               Navigator.pushNamed(context, 'registroCita', arguments: animal);
             }),
-        ElevatedButton.icon(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                return Colors.deepPurple;
+        Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: ElevatedButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith(
+                    (Set<MaterialState> states) {
+                  return Colors.deepPurple;
+                }),
+              ),
+              label: Text('Llenar formulario'),
+              icon: Icon(Icons.save),
+              autofocus: true,
+              onPressed: () {
+                mostrarAlertaOkCancel(
+                    context,
+                    'Para poder ingresar al formulario, debe registrarse o iniciar sesion.',
+                    'login',
+                    animal);
+                //Navigator.pushNamed(context, 'formularioMain');
               }),
-            ),
-            label: Text('Llenar formulario'),
-            icon: Icon(Icons.save),
-            autofocus: true,
-            onPressed: () {
-              Navigator.pushNamed(context, 'formularioMain');
-            }),
+        ),
       ],
     );
   }

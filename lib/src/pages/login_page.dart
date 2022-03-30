@@ -1,14 +1,27 @@
 import 'package:cliente_app_v1/src/bloc/login_bloc.dart';
 import 'package:cliente_app_v1/src/bloc/provider.dart';
+import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   //const LoginPage({Key? key}) : super(key: key);
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final usuarioProvider = new UsuarioProvider();
+  AnimalModel animal = new AnimalModel();
+
   @override
   Widget build(BuildContext context) {
+    final Object? animData = ModalRoute.of(context)!.settings.arguments;
+    if (animData != null) {
+      animal = animData as AnimalModel;
+      print(animal.id);
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -157,7 +170,8 @@ class LoginPage extends StatelessWidget {
     //print('=================');
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
     if (info['ok']) {
-      Navigator.pushReplacementNamed(context, 'bienvenida');
+      Navigator.pushReplacementNamed(context, 'formularioMain',
+          arguments: animal);
     } else {
       mostrarAlerta(context, info['mensaje']);
     }
@@ -170,7 +184,7 @@ class LoginPage extends StatelessWidget {
       splashColor: Colors.grey,
       onPressed: () {
         usuarioProvider.signInGoogle();
-        Navigator.pushReplacementNamed(context, 'bienvenida');
+        Navigator.pushReplacementNamed(context, 'formularioMain');
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,

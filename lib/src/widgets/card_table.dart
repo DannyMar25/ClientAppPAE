@@ -13,7 +13,7 @@ class CardTable extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, 'formularioP1'),
             child: _SingleCard(
               color: Colors.blue,
-              icon: Icons.border_all,
+              icon: Icons.person,
               text: 'Datos personales',
             ),
           ),
@@ -22,7 +22,7 @@ class CardTable extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, 'formularioP2'),
             child: _SingleCard(
               color: Colors.pinkAccent,
-              icon: Icons.car_rental,
+              icon: Icons.people,
               text: 'Situacion Familiar',
             ),
           ),
@@ -33,7 +33,7 @@ class CardTable extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, 'formularioP3'),
             child: _SingleCard(
               color: Colors.purple,
-              icon: Icons.shop,
+              icon: Icons.home,
               text: 'Domicilio',
             ),
           ),
@@ -42,26 +42,8 @@ class CardTable extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, 'formularioP4'),
             child: _SingleCard(
               color: Colors.blue,
-              icon: Icons.cloud,
-              text: 'Relacion con los animales 1',
-            ),
-          ),
-        ]),
-        TableRow(children: [
-          InkWell(
-            onTap: () => Navigator.pushReplacementNamed(context, 'home'),
-            child: _SingleCard(
-              color: Colors.orange,
-              icon: Icons.movie,
-              text: 'Relacion con los animales 2',
-            ),
-          ),
-          InkWell(
-            onTap: () => Navigator.pushReplacementNamed(context, 'home'),
-            child: _SingleCard(
-              color: Colors.pinkAccent,
-              icon: Icons.food_bank,
-              text: 'Grocery',
+              icon: Icons.pets,
+              text: 'Relacion con los animales',
             ),
           ),
         ]),

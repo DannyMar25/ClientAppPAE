@@ -1,3 +1,4 @@
+import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:flutter/material.dart';
 
 bool isNumeric(String s) {
@@ -37,6 +38,29 @@ void mostrarAlertaOk(BuildContext context, String mensaje, String ruta) {
                 child: Text('Ok'),
                 //onPressed: () => Navigator.of(context).pop(),
                 onPressed: () => Navigator.pushNamed(context, ruta)),
+          ],
+        );
+      });
+}
+
+void mostrarAlertaOkCancel(
+    BuildContext context, String mensaje, String ruta, AnimalModel animal) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Aviso'),
+          content: Text(mensaje),
+          actions: [
+            TextButton(
+                child: Text('Ok'),
+                //onPressed: () => Navigator.of(context).pop(),
+                onPressed: () =>
+                    Navigator.pushNamed(context, ruta, arguments: animal)),
+            TextButton(
+                child: Text('Cancel'),
+                //onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).pop()),
           ],
         );
       });

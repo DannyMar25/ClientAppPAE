@@ -1,3 +1,6 @@
+import 'package:cliente_app_v1/src/models/formulario_domicilio_model.dart';
+import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +30,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   bool isChecked2 = false;
   bool isChecked3 = false;
 
+  bool _guardando = false;
+  var idFormu1;
+  FormulariosModel formulario = new FormulariosModel();
+  //SitFamiliarModel sitFamilia = new SitFamiliarModel();
+  //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
+  DomicilioModel domicilio = new DomicilioModel();
+  FormulariosProvider formulariosProvider = new FormulariosProvider();
+
   @override
   void initState() {
     // _selection = _items.last;
@@ -35,6 +46,12 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   @override
   Widget build(BuildContext context) {
+    var formData = ModalRoute.of(context)!.settings.arguments;
+    if (formData != null) {
+      //   formulario = formData as FormulariosModel;
+      idFormu1 = formData;
+      //   print(formulario.id);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('DOMICILIO'),
@@ -129,6 +146,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       _crearEdadM(),
                       _crearTamanio(),
                       Divider(),
+                      _crearBoton(),
                     ],
                   )),
             ),
@@ -140,24 +158,34 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearDimencion() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: domicilio.m2.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Especifique metros (m2)',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          domicilio.m2 = double.parse(s);
+        });
+      },
     );
   }
 
   Widget _crearTelefono() {
     return TextFormField(
-      //initialValue: animal.edad.toString(),
+      initialValue: domicilio.telfD,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       //keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
           labelText: 'Telefono',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          domicilio.telfD = s;
+        });
+      },
       // //onSaved: (value) => animal.edad = int.parse(value!),
       // validator: (value) {
       //   if (utils.isNumeric(value!)) {
@@ -171,12 +199,17 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearNombreD() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: domicilio.nombreD,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Nombre',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          domicilio.nombreD = s;
+        });
+      },
     );
   }
 
@@ -201,6 +234,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             onChanged: (s) {
               setState(() {
                 _selection = s;
+                domicilio.tipoInmueble = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -229,6 +263,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             onChanged: (s) {
               setState(() {
                 _selection1 = s;
+                domicilio.inmueble = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -238,12 +273,17 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearAltura() {
     return TextFormField(
-      //initialValue: animal.peso.toString(),
+      initialValue: domicilio.alturaC.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Altura (m2)',
       ),
+      onChanged: (s) {
+        setState(() {
+          domicilio.alturaC = double.parse(s);
+        });
+      },
       //onSaved: (value) => animal.peso = double.parse(value!),
       // validator: (value) {
       //   if (utils.isNumeric(value!)) {
@@ -275,6 +315,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
+          domicilio.planMudanza = "Si";
         });
       },
     );
@@ -300,6 +341,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked1 = value!;
+          domicilio.planMudanza = "No";
         });
       },
     );
@@ -325,6 +367,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked2 = value!;
+          domicilio.cerramiento = "Si";
         });
       },
     );
@@ -350,6 +393,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked3 = value!;
+          domicilio.cerramiento = "No";
         });
       },
     );
@@ -363,6 +407,11 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       decoration: InputDecoration(
           labelText: 'Material',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          domicilio.materialC = s;
+        });
+      },
     );
   }
 
@@ -387,6 +436,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             onChanged: (s) {
               setState(() {
                 _selection2 = s;
+                domicilio.sexoAd = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -415,6 +465,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             onChanged: (s) {
               setState(() {
                 _selection3 = s;
+                domicilio.edadAd = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -443,10 +494,43 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             onChanged: (s) {
               setState(() {
                 _selection4 = s;
+                domicilio.tamanioAd = s!;
                 //animal.tamanio = s!;
               });
             }),
       ],
     );
+  }
+
+  Widget _crearBoton() {
+    return ElevatedButton.icon(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return Colors.deepPurple;
+        }),
+      ),
+      label: Text('Guardar'),
+      icon: Icon(Icons.save),
+      autofocus: true,
+      onPressed: (_guardando) ? null : _submit,
+    );
+  }
+
+  void _submit() async {
+    if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
+    setState(() {
+      _guardando = true;
+    });
+//Sentencia If agregada recientemente
+    //if (idFormu != null) {
+    print(idFormu1);
+    formulariosProvider.crearFormDomicilio(domicilio, idFormu1, context);
+    // } else {
+    //animalProvider.editarAnimal(animal, foto!);
+    //print(idFormu);
+    // print("Debe llenar la parte 1 para poder continuar");
+    //}
   }
 }

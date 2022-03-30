@@ -1,3 +1,6 @@
+import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/models/formulario_situacionFam_model.dart';
+import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +14,17 @@ class FormSituacionFamPage extends StatefulWidget {
 }
 
 class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
+  bool _guardando = false;
+  FormulariosModel formulario = new FormulariosModel();
+  SitFamiliarModel sitFamilia = new SitFamiliarModel();
+  //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
+  FormulariosProvider formulariosProvider = new FormulariosProvider();
   final formKey = GlobalKey<FormState>();
   bool isChecked = false;
   bool isChecked1 = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
+  var idFormu;
 
   String _fecha = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
@@ -28,6 +37,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   @override
   Widget build(BuildContext context) {
+    var formData = ModalRoute.of(context)!.settings.arguments;
+    if (formData != null) {
+      //   formulario = formData as FormulariosModel;
+      idFormu = formData;
+      //   print(formulario.id);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('SITUACION FAMILIAR'),
@@ -65,24 +80,24 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         ],
                         rows: [
                           DataRow(selected: true, cells: [
-                            DataCell(_crearNombre()),
-                            DataCell(_crearEdad()),
-                            DataCell(_crearParentesco()),
+                            DataCell(_crearNombre1()),
+                            DataCell(_crearEdad1()),
+                            DataCell(_crearParentesco1()),
                           ]),
                           DataRow(cells: [
-                            DataCell(_crearNombre()),
-                            DataCell(_crearEdad()),
-                            DataCell(_crearParentesco()),
+                            DataCell(_crearNombre2()),
+                            DataCell(_crearEdad2()),
+                            DataCell(_crearParentesco2()),
                           ]),
                           DataRow(cells: [
-                            DataCell(_crearNombre()),
-                            DataCell(_crearEdad()),
-                            DataCell(_crearParentesco()),
+                            DataCell(_crearNombre3()),
+                            DataCell(_crearEdad3()),
+                            DataCell(_crearParentesco3()),
                           ]),
                           DataRow(cells: [
-                            DataCell(_crearNombre()),
-                            DataCell(_crearEdad()),
-                            DataCell(_crearParentesco()),
+                            DataCell(_crearNombre4()),
+                            DataCell(_crearEdad4()),
+                            DataCell(_crearParentesco4()),
                           ])
                         ],
                       ),
@@ -140,6 +155,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         ],
                       ),
                       Divider(),
+                      _crearBoton(),
                     ],
                   )),
             ),
@@ -149,27 +165,32 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     );
   }
 
-  Widget _crearNombre() {
+  Widget _crearNombre1() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: sitFamilia.nombreFam1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.nombreFam1 = s;
+        });
+      },
       //decoration: InputDecoration(
       //labelText: 'Nombre Completo',
       //labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
     );
   }
 
-  Widget _crearEdad() {
+  Widget _crearEdad1() {
     return TextFormField(
-      //initialValue: animal.edad.toString(),
+      initialValue: sitFamilia.edadFam1.toString(),
       readOnly: false,
       //textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       //decoration: InputDecoration(
       //  labelText: 'Edad',
       //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      // //onSaved: (value) => animal.edad = int.parse(value!),
+      onSaved: (value) => sitFamilia.edadFam1 = int.parse(value!),
       validator: (value) {
         if (utils.isNumeric(value!)) {
           return null;
@@ -180,11 +201,175 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     );
   }
 
-  Widget _crearParentesco() {
+  Widget _crearParentesco1() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: sitFamilia.parentescoFam1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.parentescoFam1 = s;
+        });
+      },
+      // decoration: InputDecoration(
+      //   labelText: 'Parentesco',
+      //   labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  //2
+  Widget _crearNombre2() {
+    return TextFormField(
+      initialValue: sitFamilia.nombreFam2,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.nombreFam2 = s;
+        });
+      },
+      //decoration: InputDecoration(
+      //labelText: 'Nombre Completo',
+      //labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  Widget _crearEdad2() {
+    return TextFormField(
+      initialValue: sitFamilia.edadFam2.toString(),
+      readOnly: false,
+      //textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      //decoration: InputDecoration(
+      //  labelText: 'Edad',
+      //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onSaved: (value) => sitFamilia.edadFam2 = int.parse(value!),
+      validator: (value) {
+        if (utils.isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
+    );
+  }
+
+  Widget _crearParentesco2() {
+    return TextFormField(
+      initialValue: sitFamilia.parentescoFam2,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.parentescoFam2 = s;
+        });
+      },
+      // decoration: InputDecoration(
+      //   labelText: 'Parentesco',
+      //   labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  //3
+  Widget _crearNombre3() {
+    return TextFormField(
+      initialValue: sitFamilia.nombreFam3,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.nombreFam3 = s;
+        });
+      },
+      //decoration: InputDecoration(
+      //labelText: 'Nombre Completo',
+      //labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  Widget _crearEdad3() {
+    return TextFormField(
+      initialValue: sitFamilia.edadFam3.toString(),
+      readOnly: false,
+      //textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      //decoration: InputDecoration(
+      //  labelText: 'Edad',
+      //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onSaved: (value) => sitFamilia.edadFam3 = int.parse(value!),
+      validator: (value) {
+        if (utils.isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
+    );
+  }
+
+  Widget _crearParentesco3() {
+    return TextFormField(
+      initialValue: sitFamilia.parentescoFam3,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.parentescoFam3 = s;
+        });
+      },
+      // decoration: InputDecoration(
+      //   labelText: 'Parentesco',
+      //   labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  //4
+  Widget _crearNombre4() {
+    return TextFormField(
+      initialValue: sitFamilia.nombreFam4,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.nombreFam4 = s;
+        });
+      },
+      //decoration: InputDecoration(
+      //labelText: 'Nombre Completo',
+      //labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  Widget _crearEdad4() {
+    return TextFormField(
+      initialValue: sitFamilia.edadFam4.toString(),
+      readOnly: false,
+      //textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      //decoration: InputDecoration(
+      //  labelText: 'Edad',
+      //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onSaved: (value) => sitFamilia.edadFam4 = int.parse(value!),
+      validator: (value) {
+        if (utils.isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
+    );
+  }
+
+  Widget _crearParentesco4() {
+    return TextFormField(
+      initialValue: sitFamilia.parentescoFam4,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          sitFamilia.parentescoFam4 = s;
+        });
+      },
       // decoration: InputDecoration(
       //   labelText: 'Parentesco',
       //   labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
@@ -211,6 +396,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
+          sitFamilia.esperaBebe = "Si";
         });
       },
     );
@@ -236,6 +422,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked1 = value!;
+          sitFamilia.esperaBebe = "No";
         });
       },
     );
@@ -261,6 +448,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked2 = value!;
+          sitFamilia.alergiaAnimal = "Si";
         });
       },
     );
@@ -286,6 +474,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       onChanged: (bool? value) {
         setState(() {
           isChecked3 = value!;
+          sitFamilia.alergiaAnimal = "No";
         });
       },
     );
@@ -330,5 +519,54 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         //horarios.dia = picked.toString();
       });
     }
+  }
+
+  Widget _crearBoton() {
+    return ElevatedButton.icon(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return Colors.deepPurple;
+        }),
+      ),
+      label: Text('Guardar'),
+      icon: Icon(Icons.save),
+      autofocus: true,
+      onPressed: (_guardando) ? null : _submit,
+    );
+  }
+
+  void _submit() async {
+    if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
+
+    //print('Todo OK!');
+
+    setState(() {
+      _guardando = true;
+    });
+//Sentencia If agregada recientemente
+    //if (idFormu != null) {
+    print(idFormu);
+    formulariosProvider.crearFormSituacionFam(sitFamilia, idFormu, context);
+    // } else {
+    //animalProvider.editarAnimal(animal, foto!);
+    //print(idFormu);
+    // print("Debe llenar la parte 1 para poder continuar");
+    //}
+    //setState(() {
+    //  _guardando = false;
+    // });
+
+    //mostrarSnackbar('Registro guardado');
+
+    // Navigator.pushNamed(context, 'formularioP3', arguments: formulario);
+    // if (animal.id == null) {
+    //   print("ssssss");
+    // }
+    // if (animal.id == "") {
+    //   print("aaaaaa");
+    // }
+    // print(animal.id);
   }
 }

@@ -89,4 +89,24 @@ class UsuarioProvider {
     }
     return null;
   }
+
+  Future<Null> changePassword(String newPassword) async {
+    final String changePasswordUrl =
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key=$_firebaseToken';
+
+    final String idToken =
+        await user!.getIdToken(); // where user is FirebaseUser user
+
+    final Map<String, dynamic> payload = {
+      'email': idToken,
+      'password': newPassword,
+      'returnSecureToken': true
+    };
+
+    await http.post(
+      Uri.parse(changePasswordUrl),
+      body: json.encode(payload),
+      headers: {'Content-Type': 'application/json'},
+    );
+  }
 }

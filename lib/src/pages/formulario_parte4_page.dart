@@ -1,3 +1,6 @@
+import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/models/formulario_relacionAnimal_model.dart';
+import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +49,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   String? _selection7;
   String? _selection8;
   String? _selection9;
+  String? _selection10;
 
   bool isChecked = false;
   bool isChecked1 = false;
@@ -58,6 +62,13 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   bool isChecked8 = false;
   bool isChecked9 = false;
 
+  bool _guardando = false;
+  var idFormu2;
+  FormulariosModel formulario = new FormulariosModel();
+  //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
+  RelacionAnimalesModel relacionAnim = new RelacionAnimalesModel();
+  FormulariosProvider formulariosProvider = new FormulariosProvider();
+
   @override
   void initState() {
     // _selection = _items.last;
@@ -66,6 +77,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   @override
   Widget build(BuildContext context) {
+    var formData = ModalRoute.of(context)!.settings.arguments;
+    if (formData != null) {
+      //   formulario = formData as FormulariosModel;
+      idFormu2 = formData;
+      //   print(formulario.id);
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('RELACION CON LOS ANIMALES'),
@@ -111,7 +128,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           ]),
                           DataRow(cells: [
                             DataCell(_crearTipoMascota1()),
-                            DataCell(_crearNombreM()),
+                            DataCell(_crearNombreM1()),
                             DataCell(_crearSexo1()),
                             DataCell(_crearSiNo1())
                           ]),
@@ -178,7 +195,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                       Row(
                         children: [Text('No'), _crearCheckBox2()],
                       ),
-                      _crearPorque(),
+                      _crearPorque1(),
                       Divider(),
                       Text(
                         '¿Está de acuerdo en que la  mascota sea esterilizada?',
@@ -199,7 +216,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                       Row(
                         children: [Text('No'), _crearCheckBox4()],
                       ),
-                      _crearPorque(),
+                      _crearPorque2(),
                       Divider(),
                       _crearPregunta11(),
                       _crearPregunta12(),
@@ -219,7 +236,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                       Divider(),
                       _crearSiNo(),
                       Divider(),
-                      _crearFamilia()
+                      _crearFamilia(),
+                      Divider(),
+                      _crearBoton(),
                     ],
                   )),
             ),
@@ -231,21 +250,47 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearLugarM() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.ubicMascota,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               'Donde esta ahora? Si fallecio, perdio o esta en otro lugar, indique la causa.',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.ubicMascota = s;
+        });
+      },
     );
   }
 
   Widget _crearNombreM() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.nombreMs1 = s;
+        });
+      },
+      // decoration: InputDecoration(
+      //     labelText: 'Nombre Mascota',
+      //     labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+    );
+  }
+
+  Widget _crearNombreM1() {
+    return TextFormField(
+      initialValue: relacionAnim.nombreMs1,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.nombreMs2 = s;
+        });
+      },
       // decoration: InputDecoration(
       //     labelText: 'Nombre Mascota',
       //     labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
@@ -273,6 +318,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection = s;
+                relacionAnim.tipoMs1 = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -301,6 +347,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection9 = s;
+                relacionAnim.tipoMs2 = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -308,7 +355,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     );
   }
 
-  Widget _crearPorque() {
+  Widget _crearPorque1() {
     return TextFormField(
       // initialValue: ,
       readOnly: false,
@@ -316,154 +363,240 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       decoration: InputDecoration(
           labelText: '¿Por qué?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.justificacion1 = s;
+        });
+      },
     );
   }
 
-  Widget _crearPregunta1() {
+  Widget _crearPorque2() {
     return TextFormField(
       // initialValue: ,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
+          labelText: '¿Por qué?',
+          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.justificacion2 = s;
+        });
+      },
+    );
+  }
+
+  Widget _crearPregunta1() {
+    return TextFormField(
+      initialValue: relacionAnim.deseoAdop,
+      readOnly: false,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
           labelText: '¿Por qué desea adoptar una mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.deseoAdop = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta2() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.cambioDomi,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.cambioDomi = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta3() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.relNuevaCasa,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               'Con relación a la anterior pregunta ¿Qué pasaria si los dueños de la nueva casa no aceptan mascotas?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.relNuevaCasa = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta4() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.tiempoSolaMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Cuánto tiempo en el dia pasará sola la mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.tiempoSolaMas = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta5() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.diaNocheMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde pasará durante el día y la noche?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.diaNocheMas = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta6() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.duermeMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde dormirá la mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.duermeMas = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunt7() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.necesidadMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde hará sus necesidades?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.necesidadMas = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta8() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.promedVida,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Cuántos años cree que vive un perro en promedio?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.promedVida = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta9() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.responGastos,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.responGastos = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta10() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.recursoVet,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.recursoVet = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta11() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.benefEst,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Conoce usted los beneficios de la esterilización?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.benefEst = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta12() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.tenenciaResp,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Según usted que es tenencia responsable?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.tenenciaResp = s;
+        });
+      },
     );
   }
 
   Widget _crearPregunta13() {
     return TextFormField(
-      // initialValue: ,
+      initialValue: relacionAnim.ordenMuni,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText:
               '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      onChanged: (s) {
+        setState(() {
+          relacionAnim.ordenMuni = s;
+        });
+      },
     );
   }
 
@@ -487,6 +620,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       onChanged: (bool? value) {
         setState(() {
           isChecked = value!;
+          relacionAnim.visitaPer = "Si";
         });
       },
     );
@@ -512,6 +646,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       onChanged: (bool? value) {
         setState(() {
           isChecked1 = value!;
+          relacionAnim.visitaPer = "No";
         });
       },
     );
@@ -537,6 +672,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       onChanged: (bool? value) {
         setState(() {
           isChecked2 = value!;
+          relacionAnim.acuerdoEst = "Si";
         });
       },
     );
@@ -562,13 +698,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       onChanged: (bool? value) {
         setState(() {
           isChecked3 = value!;
+          relacionAnim.acuerdoEst = "No";
         });
       },
     );
   }
 
   Widget _crearViaje() {
-    final dropdownMenuOptions = _items2
+    final dropdownMenuOptions = _items1
         .map((String item) =>
             //new DropdownMenuItem<String>(value: item, child: new Text(item)))
             new DropdownMenuItem<String>(value: item, child: new Text(item)))
@@ -583,11 +720,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
-            value: _selection2,
+            value: _selection1,
             items: dropdownMenuOptions,
             onChanged: (s) {
               setState(() {
-                _selection2 = s;
+                _selection1 = s;
+                relacionAnim.viajeMascota = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -616,6 +754,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection2 = s;
+                relacionAnim.comidaMas = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -644,6 +783,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection3 = s;
+                relacionAnim.enfermedadMas = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -672,6 +812,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection4 = s;
+                relacionAnim.dineroMas = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -700,6 +841,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection5 = s;
+                relacionAnim.famAcuerdo = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -728,6 +870,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection6 = s;
+                relacionAnim.sexoMs1 = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -756,6 +899,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection8 = s;
+                relacionAnim.sexoMs2 = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -784,6 +928,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
             onChanged: (s) {
               setState(() {
                 _selection7 = s;
+                relacionAnim.estMs1 = s!;
                 //animal.tamanio = s!;
               });
             }),
@@ -807,15 +952,48 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
-            value: _selection1,
+            value: _selection10,
             items: dropdownMenuOptions,
             onChanged: (s) {
               setState(() {
-                _selection1 = s;
+                _selection10 = s;
+                relacionAnim.estMs2 = s!;
                 //animal.tamanio = s!;
               });
             }),
       ],
     );
+  }
+
+  Widget _crearBoton() {
+    return ElevatedButton.icon(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return Colors.deepPurple;
+        }),
+      ),
+      label: Text('Guardar'),
+      icon: Icon(Icons.save),
+      autofocus: true,
+      onPressed: (_guardando) ? null : _submit,
+    );
+  }
+
+  void _submit() async {
+    if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
+    setState(() {
+      _guardando = true;
+    });
+//Sentencia If agregada recientemente
+    //if (idFormu != null) {
+    print(idFormu2);
+    formulariosProvider.crearFormRelacionAnim(relacionAnim, idFormu2, context);
+    // } else {
+    //animalProvider.editarAnimal(animal, foto!);
+    //print(idFormu);
+    // print("Debe llenar la parte 1 para poder continuar");
+    //}
   }
 }

@@ -157,7 +157,7 @@ class RegistroPage extends StatelessWidget {
     //print('=================');
 
     final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
-
+//Se anadio el null check !, si no funciona se debe borrar (diciembre 14)
     if (info['ok']) {
       Navigator.pushReplacementNamed(context, 'bienvenida');
     } else {

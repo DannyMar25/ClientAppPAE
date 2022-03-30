@@ -283,8 +283,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
 
     if (citas.id == "") {
       citasProvider.crearCita(citas);
-      mostrarAlertaOk(
-          context, 'La cita ha sido registrada con exito', 'bienvenida');
+      mostrarAlertaOk(context, 'La cita ha sido registrada con exito', 'home');
     }
 
     //Navigator.pushNamed(context, 'bienvenida');
