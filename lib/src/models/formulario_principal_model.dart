@@ -21,6 +21,7 @@ class FormulariosModel {
   String fechaRespuesta;
   String nombreClient;
   String identificacion;
+  String emailClient;
   String estado;
   String observacion;
   String idDatosPersonales;
@@ -41,6 +42,7 @@ class FormulariosModel {
     this.fechaRespuesta = '',
     this.nombreClient = '',
     this.identificacion = '',
+    this.emailClient = '',
     this.estado = '',
     this.observacion = '',
     this.idDatosPersonales = '',
@@ -62,6 +64,7 @@ class FormulariosModel {
         fechaRespuesta: json["fechaRespuesta"],
         nombreClient: json["nombreClient"],
         identificacion: json["identificacion"],
+        emailClient: json["emailClient"],
         estado: json["estado"],
         observacion: json["observacion"],
         idDatosPersonales: json["idDatosPersonales"],
@@ -81,6 +84,7 @@ class FormulariosModel {
         "fechaRespuesta": fechaRespuesta,
         "nombreClient": nombreClient,
         "identificacion": identificacion,
+        "emailClient": emailClient,
         "estado": estado,
         "observacion": observacion,
         "idDatosPersonales": idDatosPersonales,

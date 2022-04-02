@@ -217,6 +217,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       onChanged: (s) {
         setState(() {
           datoPersona.email = s;
+          formulario.emailClient = s;
         });
       },
     );
@@ -435,6 +436,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       formulario.estado = "Pendiente";
       formulario.observacion = "Pendiente";
       formulario.fechaRespuesta = "Pendiente";
+
       //Anadir ids de registros de evidencias
       formulario.idVacuna = "Pendiente";
       formulario.idDesparasitacion = "Pendiente";
