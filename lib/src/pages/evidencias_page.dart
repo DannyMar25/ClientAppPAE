@@ -39,6 +39,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Revision de solicitud'),
+          backgroundColor: Colors.green,
         ),
         drawer: MenuWidget(),
         body: Stack(alignment: Alignment.center, children: [

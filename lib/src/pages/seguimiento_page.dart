@@ -41,6 +41,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Segimiento de mascota adoptada'),
+          backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
         body: Stack(

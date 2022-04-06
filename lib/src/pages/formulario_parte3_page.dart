@@ -55,6 +55,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('DOMICILIO'),
+        backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
       body: Stack(

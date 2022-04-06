@@ -8,8 +8,8 @@ class Background extends StatelessWidget {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         stops: [
-          0.2,
-          0.8
+          0.1,
+          1,
         ],
         colors: [
           Color(0xff2E305F),
@@ -25,7 +25,7 @@ class Background extends StatelessWidget {
 
         //Pink box
         Positioned(
-          top: -100,
+          top: -110,
           //left: -2,
           child: _PinkBox(),
         )
@@ -38,16 +38,16 @@ class _PinkBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
-      angle: -pi / 5,
+      angle: -pi / 4,
       child: Container(
         width: 360,
         height: 360,
         decoration: BoxDecoration(
-          color: Colors.pink,
+          color: Colors.green,
           borderRadius: BorderRadius.circular(80),
           gradient: LinearGradient(colors: [
-            Color.fromRGBO(140, 198, 63, 1),
-            Color.fromRGBO(140, 198, 63, 1),
+            Color.fromRGBO(140, 180, 63, 5),
+            Color.fromRGBO(140, 180, 63, 5),
           ]),
         ),
       ),

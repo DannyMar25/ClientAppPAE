@@ -33,6 +33,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Registros de desparasitacion'),
+          backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
         body: Stack(

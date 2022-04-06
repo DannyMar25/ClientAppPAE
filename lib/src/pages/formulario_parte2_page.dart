@@ -46,6 +46,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('SITUACION FAMILIAR'),
+        backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
       body: Stack(

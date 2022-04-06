@@ -23,6 +23,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Formulario de adopcion'),
+        backgroundColor: Colors.green,
         actions: [
           Builder(builder: (BuildContext context) {
             return Row(

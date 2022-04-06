@@ -23,7 +23,7 @@ class _MenuWidgetState extends State<MenuWidget> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/menu-img.jpg'),
+                  image: AssetImage('assets/paw.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -31,8 +31,8 @@ class _MenuWidgetState extends State<MenuWidget> {
           ),
           ListTile(
             leading: Icon(
-              Icons.pages,
-              color: Colors.blue,
+              Icons.home,
+              color: Colors.green,
             ),
             title: Text('Home'),
             onTap: () => Navigator.pushReplacementNamed(context, 'home'),
@@ -40,7 +40,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           ListTile(
             leading: Icon(
               Icons.meeting_room,
-              color: Colors.blue,
+              color: Colors.green,
             ),
             title: Text('Agendar cita'),
             onTap: () {
@@ -50,7 +50,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           ListTile(
               leading: Icon(
                 Icons.assignment,
-                color: Colors.blue,
+                color: Colors.green,
               ),
               title: Text('Llenar formulario de adopcion'),
               onTap: () {
@@ -75,52 +75,16 @@ class _MenuWidgetState extends State<MenuWidget> {
                 //     'Para poder ingresar al formulario, debe registrarse o iniciar sesion.',
                 //     'login');
               }),
-          // ListTile(
-          //   leading: Icon(
-          //     Icons.meeting_room,
-          //     color: Colors.blue,
-          //   ),
-          //   title: Text('Subir archivos'),
-          //   onTap: () {
-          //     Navigator.pushReplacementNamed(context, 'demoArchivos');
-          //   },
-          // ),
-          // ListTile(
-          //   leading: Icon(
-          //     Icons.app_registration,
-          //     color: Colors.blue,
-          //   ),
-          //   title: Text('Registro citas'),
-          //   onTap: () =>
-          //       Navigator.pushReplacementNamed(context, 'registroCita'),
-          // ),
-          // ListTile(
-          //   leading: Icon(
-          //     Icons.app_registration,
-          //     color: Colors.blue,
-          //   ),
-          //   title: Text('Registro cliente'),
-          //   onTap: () => Navigator.pushReplacementNamed(context, 'regcliente'),
-          // ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
+            leading: Icon(Icons.fact_check, color: Colors.green),
             title: Text('Seguimiento'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushReplacementNamed(context, 'evidencia');
             },
           ),
-          // ListTile(
-          //   leading: Icon(
-          //     Icons.app_registration,
-          //     color: Colors.blue,
-          //   ),
-          //   title: Text('Ver ubicacion'),
-          //   onTap: () =>
-          //       Navigator.pushReplacementNamed(context, 'ubicacionMapC'),
-          // ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
+            leading: Icon(Icons.home, color: Colors.green),
             title: Text('Regresar'),
             onTap: () {
               //Navigator.pop(context);

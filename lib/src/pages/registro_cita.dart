@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/citas_model.dart';
 import 'package:cliente_app_v1/src/models/horarios_model.dart';
@@ -11,7 +9,6 @@ import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 class RegistroClienteCitas extends StatefulWidget {
   //RegistroClienteCitas({Key? key}) : super(key: key);
@@ -55,6 +52,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Registro de citas'),
+        backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
       body: SingleChildScrollView(
@@ -166,14 +164,6 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   }
 
   Widget _crearItem(BuildContext context, HorariosModel horario) {
-    // DateTime dia1 = DateTime.parse(horario.dia);
-
-    // String fecha2 = dia1.year.toString() +
-    //     '-' +
-    //     dia1.month.toString() +
-    //     '-' +
-    //     dia1.day.toString();
-    // //String hora2 = hora1.hour.toString() + ':' + hora1.minute.toString();
     return TextFormField(
       readOnly: true,
       onTap: () {
@@ -251,7 +241,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         style: ButtonStyle(
           backgroundColor:
               MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            return Colors.deepPurple;
+            return Colors.green[700];
           }),
         ),
         label: Text('Guardar'),

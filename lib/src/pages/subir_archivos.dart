@@ -54,6 +54,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Subir archivos'),
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       drawer: _menuWidget(context),

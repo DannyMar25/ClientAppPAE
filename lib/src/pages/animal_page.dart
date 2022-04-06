@@ -36,6 +36,7 @@ class _AnimalPageState extends State<AnimalPage> {
       key: scaffoldKey,
       appBar: AppBar(
         title: Text('Animal'),
+        backgroundColor: Colors.green,
         actions: [
           Builder(builder: (BuildContext context) {
             return TextButton(
@@ -271,7 +272,7 @@ class _AnimalPageState extends State<AnimalPage> {
               //padding: new EdgeInsets.only(top: 5),
               backgroundColor: MaterialStateProperty.resolveWith(
                   (Set<MaterialState> states) {
-                return Colors.deepPurple;
+                return Colors.green[700];
               }),
             ),
             label: Text('Agendar cita'),
@@ -286,7 +287,7 @@ class _AnimalPageState extends State<AnimalPage> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith(
                     (Set<MaterialState> states) {
-                  return Colors.deepPurple;
+                  return Colors.green[700];
                 }),
               ),
               label: Text('Llenar formulario'),

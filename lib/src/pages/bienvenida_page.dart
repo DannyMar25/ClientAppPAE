@@ -17,6 +17,7 @@ class BienvenidaPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Preferencias de usuario'),
+        backgroundColor: Colors.green,
         //backgroundColor: (prefs.colorSecundario) ? Colors.teal : Colors.blue,
       ),
       drawer: MenuWidget(),

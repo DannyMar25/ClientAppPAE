@@ -45,6 +45,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Registro de vacunas'),
+        backgroundColor: Colors.green,
       ),
       drawer: _menuWidget(),
       body: Stack(

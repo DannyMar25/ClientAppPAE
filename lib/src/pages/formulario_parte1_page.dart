@@ -51,6 +51,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           // textAlign: TextAlign.center,
         ),
       ),
+      backgroundColor: Colors.green,
       drawer: MenuWidget(),
       body: Stack(
         children: [

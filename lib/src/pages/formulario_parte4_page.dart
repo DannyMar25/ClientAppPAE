@@ -86,6 +86,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     return Scaffold(
       appBar: AppBar(
         title: Text('RELACION CON LOS ANIMALES'),
+        backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
       body: Stack(
