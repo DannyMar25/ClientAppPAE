@@ -72,6 +72,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _mostrarFoto(),
+                Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,7 +80,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                       style: ButtonStyle(backgroundColor:
                           MaterialStateProperty.resolveWith(
                               (Set<MaterialState> states) {
-                        return Colors.deepPurple;
+                        return Colors.green;
                       })),
                       icon: Icon(Icons.photo_camera),
                       label: Text('Tomar foto'),
@@ -90,7 +91,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                       style: ButtonStyle(backgroundColor:
                           MaterialStateProperty.resolveWith(
                               (Set<MaterialState> states) {
-                        return Colors.deepPurple;
+                        return Colors.green;
                       })),
                       icon: Icon(Icons.photo_album),
                       label: Text('Seleccionar foto'),
@@ -108,6 +109,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 //     onClicked: _seleccionarFoto),
                 Divider(),
                 ElevatedButton.icon(
+                  // style: ButtonStyle(backgroundColor:
+                  //     MaterialStateProperty.resolveWith(
+                  //         (Set<MaterialState> states) {
+                  //   return Colors.green;
+                  // })),
                   label: Text(
                     'Subir Foto',
                     style: TextStyle(fontSize: 20),
@@ -119,9 +125,14 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 task != null ? buildUploadStatus(task!) : Container(),
                 Divider(),
                 ElevatedButton.icon(
+                  style: ButtonStyle(backgroundColor:
+                      MaterialStateProperty.resolveWith(
+                          (Set<MaterialState> states) {
+                    return Colors.green;
+                  })),
                   label: Text(
                     'Seleccionar Archivo',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 16),
                   ),
                   icon: Icon(Icons.attach_file),
                   onPressed: selectFile,
@@ -129,15 +140,18 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 SizedBox(height: 10),
                 Text(
                   fileName,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 40),
                 ElevatedButton.icon(
-                  label: Text('Subir Archivo'),
+                  label: Text(
+                    'Subir Archivo',
+                    style: TextStyle(fontSize: 20),
+                  ),
                   icon: Icon(Icons.cloud_upload_outlined),
                   onPressed: uploadFile,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 task1 != null ? buildUploadStatus1(task1!) : Container(),
                 _crearBoton(context),
               ],
@@ -273,7 +287,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               //padding: new EdgeInsets.only(top: 5),
               backgroundColor: MaterialStateProperty.resolveWith(
                   (Set<MaterialState> states) {
-                return Colors.deepPurple;
+                return Colors.green;
               }),
             ),
             label: Text('Confirmar', style: TextStyle(fontSize: 20)),
@@ -302,8 +316,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/menu-img.jpg'),
-                  fit: BoxFit.cover,
+                  image: AssetImage('assets/pet-care.png'),
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -311,7 +325,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           ListTile(
             leading: Icon(
               Icons.pages,
-              color: Colors.blue,
+              color: Colors.green,
             ),
             title: Text('Seguimiento Home'),
             onTap: () => Navigator.pushReplacementNamed(
@@ -327,7 +341,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               ListTile(
                 leading: Icon(
                   Icons.meeting_room,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
@@ -342,7 +356,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               ListTile(
                 leading: Icon(
                   Icons.check,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Ver registros'),
                 onTap: () => Navigator.pushReplacementNamed(
@@ -355,14 +369,14 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ExpansionTile(
             title: Text('Registro de Desparasitacion'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.blue),
+                leading: Icon(Icons.settings, color: Colors.green),
                 title: Text('Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -375,7 +389,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.blue),
+                leading: Icon(Icons.check, color: Colors.green),
                 title: Text('Ver Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -390,11 +404,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
+            leading: Icon(Icons.settings, color: Colors.green),
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);

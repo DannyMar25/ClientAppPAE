@@ -88,8 +88,14 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           //hintText: 'Ingrese fecha de agendamiento de cita',
           labelText: 'Fecha de la cita',
           //helperText: 'Solo es el nombre',
-          suffixIcon: Icon(Icons.perm_contact_calendar),
-          icon: Icon(Icons.calendar_today),
+          suffixIcon: Icon(
+            Icons.perm_contact_calendar,
+            color: Colors.green,
+          ),
+          icon: Icon(
+            Icons.calendar_today,
+            color: Colors.green,
+          ),
         ),
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
@@ -101,8 +107,8 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: new DateTime.now(),
-      firstDate: new DateTime(2018),
-      lastDate: new DateTime(2025),
+      firstDate: new DateTime.now(),
+      lastDate: new DateTime.now().add(Duration(days: 7)),
       locale: Locale('es', 'ES'),
     );
 
@@ -164,18 +170,26 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   }
 
   Widget _crearItem(BuildContext context, HorariosModel horario) {
-    return TextFormField(
-      readOnly: true,
-      onTap: () {
-        citas.idHorario = horario.id;
-        horariosProvider.editarDisponible(horario);
-      },
-      initialValue: horario.hora + '  -   ' + horario.disponible,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          labelText: 'Hora',
-          suffixIcon: Icon(Icons.add),
-          icon: Icon(Icons.calendar_today)),
+    return Column(
+      children: [
+        TextFormField(
+          readOnly: true,
+          onTap: () {
+            citas.idHorario = horario.id;
+            horariosProvider.editarDisponible(horario);
+          },
+          initialValue: horario.hora + '  -   ' + horario.disponible,
+          decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+              //labelText: 'Hora',
+              suffixIcon: Icon(Icons.add),
+              icon: Icon(Icons.calendar_today)),
+        ),
+        Divider(
+          color: Colors.white,
+        )
+      ],
     );
   }
 

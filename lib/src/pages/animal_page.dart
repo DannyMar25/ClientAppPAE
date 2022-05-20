@@ -127,7 +127,7 @@ class _AnimalPageState extends State<AnimalPage> {
       decoration: InputDecoration(
         labelText: 'Edad',
       ),
-      onSaved: (value) => animal.edad = int.parse(value!),
+      onSaved: (value) => animal.edad = value!,
       validator: (value) {
         if (utils.isNumeric(value!)) {
           return null;

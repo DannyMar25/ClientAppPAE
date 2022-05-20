@@ -151,8 +151,8 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/menu-img.jpg'),
-                  fit: BoxFit.cover,
+                  image: AssetImage('assets/pet-care.png'),
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -160,7 +160,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
           ListTile(
             leading: Icon(
               Icons.pages,
-              color: Colors.blue,
+              color: Colors.green,
             ),
             title: Text('Seguimiento Home'),
             onTap: () => Navigator.pushReplacementNamed(
@@ -176,7 +176,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ListTile(
                 leading: Icon(
                   Icons.meeting_room,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
@@ -191,7 +191,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ListTile(
                 leading: Icon(
                   Icons.check,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Ver registros'),
                 onTap: () => Navigator.pushReplacementNamed(
@@ -204,14 +204,14 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ExpansionTile(
             title: Text('Registro de Desparasitacion'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.blue),
+                leading: Icon(Icons.settings, color: Colors.green),
                 title: Text('Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -224,7 +224,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.blue),
+                leading: Icon(Icons.check, color: Colors.green),
                 title: Text('Ver Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -239,11 +239,11 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
+            leading: Icon(Icons.settings, color: Colors.green),
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);

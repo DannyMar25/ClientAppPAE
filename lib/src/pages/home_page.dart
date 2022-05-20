@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.cover,
                 ),
           ListTile(
-            title: Text('${animal.nombre} - ${animal.edad} meses'),
+            title: Text('${animal.nombre} - ${animal.edad}'),
             subtitle: Text('${animal.color} - ${animal.id}'),
             onTap: () =>
                 Navigator.pushNamed(context, 'animal', arguments: animal),

@@ -296,7 +296,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   //padding: new EdgeInsets.only(top: 5),
                   backgroundColor: MaterialStateProperty.resolveWith(
                       (Set<MaterialState> states) {
-                    return Colors.deepPurple;
+                    return Colors.green;
                   }),
                 ),
                 label: Text('Registro Vacunas'),
@@ -318,7 +318,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (Set<MaterialState> states) {
-                      return Colors.deepPurple;
+                      return Colors.green;
                     }),
                   ),
                   label: Text('Registro Desparasitacion'),
@@ -341,7 +341,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith(
                     (Set<MaterialState> states) {
-                  return Colors.deepPurple;
+                  return Colors.green;
                 }),
               ),
               label: Text('Cargar evidencia'),
@@ -368,8 +368,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/menu-img.jpg'),
-                  fit: BoxFit.cover,
+                  image: AssetImage('assets/pet-care.png'),
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -377,9 +377,9 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
           ListTile(
             leading: Icon(
               Icons.pages,
-              color: Colors.blue,
+              color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Ir a Seguimiento Principal'),
             onTap: () => Navigator.pushReplacementNamed(
                 context, 'seguimientoMain', arguments: {
               'datosper': datosA,
@@ -393,7 +393,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ListTile(
                 leading: Icon(
                   Icons.meeting_room,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
@@ -408,7 +408,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ListTile(
                 leading: Icon(
                   Icons.check,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 title: Text('Ver registros'),
                 onTap: () => Navigator.pushReplacementNamed(
@@ -421,14 +421,14 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ExpansionTile(
             title: Text('Registro de Desparasitacion'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.blue),
+                leading: Icon(Icons.settings, color: Colors.green),
                 title: Text('Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -441,7 +441,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.blue),
+                leading: Icon(Icons.check, color: Colors.green),
                 title: Text('Ver Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
@@ -456,11 +456,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             ],
             leading: Icon(
               Icons.assignment,
-              color: Colors.blue,
+              color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blue),
+            leading: Icon(Icons.settings, color: Colors.green),
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
@@ -470,6 +470,17 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                     'formulario': formularios,
                     'animal': animal
                   });
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.home, color: Colors.green),
+            title: Text('Ir a Pagina Principal'),
+            onTap: () {
+              //Navigator.pop(context);
+              Navigator.pushReplacementNamed(
+                context,
+                'home',
+              );
             },
           ),
         ],

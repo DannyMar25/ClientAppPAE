@@ -43,7 +43,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
         ),
         drawer: MenuWidget(),
         body: Stack(alignment: Alignment.center, children: [
-          Background(),
+          //Background(),
           SingleChildScrollView(
               child: Container(
                   //color: Colors.lightGreenAccent,
@@ -57,7 +57,13 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 _crearCI(),
+                                Divider(
+                                  color: Colors.white,
+                                ),
                                 _crearBoton(),
+                                Divider(
+                                  color: Colors.white,
+                                ),
                                 _verListado()
                               ],
                             )
@@ -72,7 +78,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Ingrese su numero de cedula:',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+          labelStyle: TextStyle(fontSize: 22, color: Colors.black)),
       onChanged: (s) {
         setState(() {
           identificacion = s;
@@ -86,11 +92,17 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
+          return Colors.green;
         }),
       ),
-      label: Text('Verificar'),
-      icon: Icon(Icons.save),
+      label: Text(
+        'Verificar',
+        style: TextStyle(color: Colors.white),
+      ),
+      icon: Icon(
+        Icons.save,
+        color: Colors.white,
+      ),
       autofocus: true,
       onPressed: (_guardando) ? null : _submit,
     );
@@ -141,28 +153,33 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   }
 
   Widget _crearItem(BuildContext context, FormulariosModel formulario) {
-    return ListTile(
-        title: Column(
-          children: [
-            Divider(color: Colors.purple),
-            Text("Nombre del cliente: " + '${formulario.nombreClient}'),
-            Text("Numero de cedula: " '${formulario.identificacion}'),
-            Text("Su solicitud de adopcion fue:" '${formulario.estado}'),
-            Text("Nombre mascota adopatada:" '${formulario.animal!.nombre}'),
-            Divider(color: Colors.purple)
-          ],
-        ),
-        //subtitle: Text('${horario}'),
-        onTap: () async {
-          datosC = await formulariosProvider.cargarDPId(
-              formulario.id, formulario.idDatosPersonales);
-          animal = await animalesProvider.cargarAnimalId(formulario.idAnimal);
+    return Card(
+        color: Colors.lightGreen[200],
+        shadowColor: Colors.green,
+        child: ListTile(
+            title: Column(
+              children: [
+                //Divider(color: Colors.purple),
+                Text("Nombre del cliente: " + '${formulario.nombreClient}'),
+                Text("Numero de cedula: " '${formulario.identificacion}'),
+                Text("Su solicitud de adopcion fue:" '${formulario.estado}'),
+                Text(
+                    "Nombre mascota adopatada:" '${formulario.animal!.nombre}'),
+                //Divider(color: Colors.purple)
+              ],
+            ),
+            //subtitle: Text('${horario}'),
+            onTap: () async {
+              datosC = await formulariosProvider.cargarDPId(
+                  formulario.id, formulario.idDatosPersonales);
+              animal =
+                  await animalesProvider.cargarAnimalId(formulario.idAnimal);
 
-          Navigator.pushNamed(context, 'seguimientoMain', arguments: {
-            'datosper': datosC,
-            'formulario': formulario,
-            'animal': animal
-          });
-        });
+              Navigator.pushNamed(context, 'seguimientoMain', arguments: {
+                'datosper': datosC,
+                'formulario': formulario,
+                'animal': animal
+              });
+            }));
   }
 }

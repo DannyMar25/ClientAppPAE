@@ -75,6 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 30.0,
                 ),
                 _crearBoton(bloc),
+                Divider(
+                  color: Colors.white,
+                ),
                 _crearBotonGoogle(context),
               ],
             ),
@@ -82,7 +85,10 @@ class _LoginPageState extends State<LoginPage> {
           //Text('Olvido la contrasena?'),
           TextButton(
             onPressed: () => Navigator.pushNamed(context, 'registro'),
-            child: Text('Crear una nueva cuenta'),
+            child: Text(
+              'Crear una nueva cuenta',
+              style: TextStyle(color: Colors.green, fontSize: 17),
+            ),
           ),
           SizedBox(
             height: 100.0,
@@ -101,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
+              icon: Icon(Icons.alternate_email, color: Colors.green),
               hintText: 'ejemplo@correo.com',
               labelText: 'Correo electronico',
               counterText: snapshot.data,
@@ -125,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
             //keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
+              icon: Icon(Icons.lock_outline, color: Colors.green),
               //hintText: 'ejemplo@correo.com',
               labelText: 'Contrasena',
               counterText: snapshot.data,
@@ -155,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(5.0),
           ),
           elevation: 0.0,
-          color: Colors.deepPurple,
+          color: Colors.green,
           textColor: Colors.white,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
@@ -186,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
         usuarioProvider.signInGoogle();
         Navigator.pushReplacementNamed(context, 'formularioMain');
       },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       highlightElevation: 0,
       borderSide: BorderSide(color: Colors.grey),
       child: Padding(
@@ -201,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text(
                 'Sign in with Google',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 17,
                   color: Colors.grey,
                 ),
               ),
@@ -219,8 +225,8 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: <Color>[
-          Color.fromRGBO(63, 63, 156, 1.0),
-          Color.fromRGBO(90, 70, 178, 1.0),
+          Color.fromARGB(255, 11, 211, 78),
+          Color.fromARGB(255, 11, 180, 48),
         ]),
       ),
     );

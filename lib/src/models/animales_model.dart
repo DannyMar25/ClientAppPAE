@@ -14,7 +14,7 @@ class AnimalModel {
     this.id = '',
     this.nombre = '',
     this.sexo = '',
-    this.edad = 0,
+    this.edad = '',
     this.temperamento = '',
     this.peso = 0.0,
     this.tamanio = '',
@@ -29,7 +29,7 @@ class AnimalModel {
   String id;
   String nombre;
   String sexo;
-  int edad;
+  String edad;
   String temperamento;
   double peso;
   String tamanio;
