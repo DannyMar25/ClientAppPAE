@@ -42,6 +42,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text('Registro de desparasitacion'),
         backgroundColor: Colors.green,
@@ -49,7 +50,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       drawer: _menuWidget(),
       body: Stack(
         children: [
-          Background(),
+          //Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -63,13 +64,22 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       Divider(),
                       DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        ),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 146, 155, 185)),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          border: Border.all(width: 1, color: Colors.white),
+                        ),
                         sortColumnIndex: 1,
                         sortAscending: false,
                         columns: [
@@ -87,6 +97,15 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                         ],
                       ),
                       DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        ),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 146, 155, 185)),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          border: Border.all(width: 1, color: Colors.white),
+                        ),
                         sortColumnIndex: 1,
                         sortAscending: false,
                         columns: [

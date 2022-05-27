@@ -44,6 +44,8 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       //   print(formulario.id);
     }
     return Scaffold(
+      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text('SITUACION FAMILIAR'),
         backgroundColor: Colors.green,
@@ -51,7 +53,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       drawer: MenuWidget(),
       body: Stack(
         children: [
-          Background(),
+          //Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -66,7 +68,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -111,7 +113,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                       ),
                       Divider(),
@@ -137,7 +139,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -387,7 +389,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -413,7 +415,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -439,7 +441,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -465,7 +467,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -527,7 +529,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
+          return Colors.green;
         }),
       ),
       label: Text('Guardar'),

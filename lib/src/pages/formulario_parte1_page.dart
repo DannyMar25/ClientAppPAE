@@ -45,17 +45,19 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     }
 
     return Scaffold(
+      // backgroundColor: Color.fromARGB(223, 221, 248, 153),
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text(
           'DATOS PERSONALES',
-          // textAlign: TextAlign.center,
         ),
+        backgroundColor: Colors.green,
       ),
-      backgroundColor: Colors.green,
+      //backgroundColor: Colors.green,
       drawer: MenuWidget(),
       body: Stack(
         children: [
-          Background(),
+          // Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -69,8 +71,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -87,8 +89,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                       ),
                       Divider(),
@@ -100,8 +102,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -116,8 +118,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -127,7 +129,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       _crearTelefonoRef(),
                       Divider(),
                       _crearBoton(context),
-                      _crearBoton1(context)
+                      // _crearBoton1(context)
                     ],
                   )),
             ),
@@ -371,7 +373,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
+          return Colors.green;
         }),
       ),
       label: Text('Guardar'),

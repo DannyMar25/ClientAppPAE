@@ -1,7 +1,6 @@
 import 'package:cliente_app_v1/src/models/formulario_domicilio_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +52,8 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       //   print(formulario.id);
     }
     return Scaffold(
+      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text('DOMICILIO'),
         backgroundColor: Colors.green,
@@ -60,7 +61,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       drawer: MenuWidget(),
       body: Stack(
         children: [
-          Background(),
+          //Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -75,7 +76,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -97,7 +98,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -116,7 +117,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -138,7 +139,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -306,7 +307,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -332,7 +333,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -358,7 +359,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -384,7 +385,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -508,7 +509,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
+          return Colors.green;
         }),
       ),
       label: Text('Guardar'),

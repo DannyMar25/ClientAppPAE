@@ -43,6 +43,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text('Registro de vacunas'),
         backgroundColor: Colors.green,
@@ -50,7 +51,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
       drawer: _menuWidget(),
       body: Stack(
         children: [
-          Background(),
+          // Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -64,13 +65,22 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                           fontSize: 33,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       Divider(),
                       DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        ),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 146, 155, 185)),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          border: Border.all(width: 1, color: Colors.white),
+                        ),
                         sortColumnIndex: 2,
                         sortAscending: false,
                         columns: [
@@ -80,13 +90,31 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                         ],
                         rows: [
                           DataRow(selected: true, cells: [
-                            DataCell(_crearFechaConsulta(context)),
-                            DataCell(_crearPesoActual()),
-                            DataCell(_crearFechaProxima(context)),
+                            DataCell(Container(
+                              child: _crearFechaConsulta(context),
+                              width: 85,
+                            )),
+                            DataCell(Container(
+                              child: _crearPesoActual(),
+                              width: 70,
+                            )),
+                            DataCell(Container(
+                              child: _crearFechaProxima(context),
+                              width: 85,
+                            )),
                           ]),
                         ],
                       ),
                       DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        ),
+                        dataRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 146, 155, 185)),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          border: Border.all(width: 1, color: Colors.white),
+                        ),
                         sortColumnIndex: 1,
                         sortAscending: false,
                         columns: [
@@ -95,8 +123,14 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                         ],
                         rows: [
                           DataRow(selected: true, cells: [
-                            DataCell(_crearVacuna()),
-                            DataCell(_crearVeterinario()),
+                            DataCell(Container(
+                              child: _crearVacuna(),
+                              width: 100,
+                            )),
+                            DataCell(Container(
+                              child: _crearVeterinario(),
+                              width: 100,
+                            )),
                           ]),
                         ],
                       ),

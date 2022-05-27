@@ -30,6 +30,7 @@ class HorariosProvider {
     var documents = await refAn
         .where('dia', isEqualTo: dia)
         .where('disponible', isEqualTo: 'Disponible')
+        .orderBy('hora')
         .get();
     horarios.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);

@@ -20,6 +20,7 @@ class AnimalModel {
     this.tamanio = '',
     this.color = '',
     this.raza = '',
+    this.estado = '',
     this.caracteristicas = '',
     this.fotoUrl = '',
   });
@@ -35,6 +36,7 @@ class AnimalModel {
   String tamanio;
   String color;
   String raza;
+  String estado;
   String caracteristicas;
   String fotoUrl;
 
@@ -48,6 +50,7 @@ class AnimalModel {
         tamanio: json["tamanio"],
         color: json["color"],
         raza: json["raza"],
+        estado: json["estado"],
         caracteristicas: json["caracteristicas"],
         fotoUrl: json["fotoUrl"],
       );
@@ -62,6 +65,7 @@ class AnimalModel {
         "tamanio": tamanio,
         "color": color,
         "raza": raza,
+        "estado": estado,
         "caracteristicas": caracteristicas,
         "fotoUrl": fotoUrl,
       };

@@ -31,6 +31,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
+        backgroundColor: Color.fromARGB(223, 211, 212, 207),
         appBar: AppBar(
           title: Text('Registros de desparasitacion'),
           backgroundColor: Colors.green,
@@ -38,7 +39,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
         drawer: _menuWidget(),
         body: Stack(
           children: [
-            Background(),
+            //Background(),
             SingleChildScrollView(
                 child: Container(
                     //color: Colors.lightGreenAccent,
@@ -49,13 +50,13 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Registro de vacunas',
+                              'Registro de desparasitacion',
                               style: TextStyle(
                                 fontSize: 28,
                                 foreground: Paint()
                                   ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 3
-                                  ..color = Colors.orange[100]!,
+                                  ..strokeWidth = 2
+                                  ..color = Colors.blueGrey,
                               ),
                               textAlign: TextAlign.start,
                             ),
@@ -95,37 +96,67 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
     return ListTile(
         title: Column(
           children: [
-            Divider(color: Colors.purple),
+            Divider(color: Colors.transparent),
             DataTable(
+              headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Color.fromARGB(255, 120, 110, 148),
+              ),
+              dataRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 146, 155, 185)),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                border: Border.all(width: 1, color: Colors.white),
+              ),
               sortColumnIndex: 1,
               sortAscending: false,
               columns: [
-                DataColumn(label: Text("Fecha consulta                      ")),
-                DataColumn(label: Text("Producto    ")),
+                DataColumn(label: Text("Fecha consulta")),
+                DataColumn(label: Text("Producto")),
               ],
               rows: [
                 DataRow(selected: true, cells: [
-                  DataCell(Text('${desparasitacion.fecha}')),
+                  DataCell(Container(
+                    child: Text('${desparasitacion.fecha}'),
+                    width: 140,
+                  )),
                   //DataCell(_crearPesoActual()),
-                  DataCell(Text('${desparasitacion.nombreProducto}')),
+                  DataCell(Container(
+                    child: Text('${desparasitacion.nombreProducto}'),
+                    width: 140,
+                  )),
                 ]),
               ],
             ),
             DataTable(
+              headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Color.fromARGB(255, 120, 110, 148),
+              ),
+              dataRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 146, 155, 185)),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                border: Border.all(width: 1, color: Colors.white),
+              ),
               sortColumnIndex: 1,
               sortAscending: false,
               columns: [
-                DataColumn(label: Text("        Peso(Kg)"), numeric: true),
+                DataColumn(label: Text("Peso(Kg)")),
                 DataColumn(label: Text("Proxima desparacitacion")),
               ],
               rows: [
                 DataRow(selected: true, cells: [
-                  DataCell(Text('${desparasitacion.pesoActual}')),
-                  DataCell(Text('${desparasitacion.fechaProxDesparasitacion}')),
+                  DataCell(Container(
+                    child: Text('${desparasitacion.pesoActual}'),
+                    width: 100,
+                  )),
+                  DataCell(Container(
+                    child: Text('${desparasitacion.fechaProxDesparasitacion}'),
+                    width: 100,
+                  )),
                 ]),
               ],
             ),
-            Divider(color: Colors.purple)
+            Divider(color: Colors.transparent)
           ],
         ),
         //subtitle: Text('${horario}'),

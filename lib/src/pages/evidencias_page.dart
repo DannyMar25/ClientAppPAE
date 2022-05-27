@@ -100,7 +100,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
         style: TextStyle(color: Colors.white),
       ),
       icon: Icon(
-        Icons.save,
+        Icons.verified,
         color: Colors.white,
       ),
       autofocus: true,

@@ -84,6 +84,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       //   print(formulario.id);
     }
     return Scaffold(
+      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
+      backgroundColor: Color.fromARGB(223, 211, 212, 207),
       appBar: AppBar(
         title: Text('RELACION CON LOS ANIMALES'),
         backgroundColor: Colors.green,
@@ -91,7 +93,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       drawer: MenuWidget(),
       body: Stack(
         children: [
-          Background(),
+          //Background(),
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(15.0),
@@ -106,7 +108,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -185,7 +187,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -205,7 +207,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -230,7 +232,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 3
-                            ..color = Colors.orange[100]!,
+                            ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -611,7 +613,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -637,7 +639,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -663,7 +665,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -689,7 +691,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.blue;
     }
 
     return Checkbox(
@@ -971,7 +973,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
+          return Colors.green;
         }),
       ),
       label: Text('Guardar'),

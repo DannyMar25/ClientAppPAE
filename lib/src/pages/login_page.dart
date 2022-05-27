@@ -179,7 +179,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacementNamed(context, 'formularioMain',
           arguments: animal);
     } else {
-      mostrarAlerta(context, info['mensaje']);
+      //mostrarAlerta(context, info['mensaje']);
+      mostrarAlerta(context, 'El correo o contraseña son incorrectos');
     }
 
     //Navigator.pushReplacementNamed(context, 'home');
@@ -250,12 +251,13 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(top: 80.0),
           child: Column(
             children: [
-              Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0),
+              //Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0),
+              Image.asset('assets/pet-care.png', height: 190),
               SizedBox(height: 10.0, width: double.infinity),
-              Text(
-                'BIENVENID@',
-                style: TextStyle(color: Colors.white, fontSize: 25.0),
-              ),
+              // Text(
+              //   'BIENVENID@',
+              //   style: TextStyle(color: Colors.white, fontSize: 25.0),
+              // ),
             ],
           ),
         ),

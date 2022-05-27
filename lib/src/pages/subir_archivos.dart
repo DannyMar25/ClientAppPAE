@@ -52,6 +52,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 206, 210, 212),
       appBar: AppBar(
         title: Text('Subir archivos'),
         backgroundColor: Colors.green,
@@ -59,12 +60,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
       ),
       drawer: _menuWidget(context),
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/fondoanimales.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage("assets/fondoanimales.jpg"),
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         padding: EdgeInsets.all(32),
         child: Center(
           child: SingleChildScrollView(

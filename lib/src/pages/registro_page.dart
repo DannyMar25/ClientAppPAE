@@ -202,7 +202,8 @@ class RegistroPage extends StatelessWidget {
           padding: EdgeInsets.only(top: 80.0),
           child: Column(
             children: [
-              Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0),
+              Image.asset('assets/pet-care.png', height: 190),
+              //Icon(Icons.person_pin_circle, color: Colors.white, size: 100.0),
               SizedBox(height: 10.0, width: double.infinity),
               Text(
                 'Bienvenid@',

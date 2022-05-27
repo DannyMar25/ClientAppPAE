@@ -268,8 +268,11 @@ class FormulariosProvider {
   Future<List<Future<RegistroVacunasModel>>> cargarRegistrosVacunas(
       String idFormu) async {
     final List<RegistroVacunasModel> vacunas = <RegistroVacunasModel>[];
-    var documents =
-        await refForm.doc(idFormu).collection('registroVacunas').get();
+    var documents = await refForm
+        .doc(idFormu)
+        .collection('registroVacunas')
+        .orderBy('fechaConsulta')
+        .get();
     //citas.addAll
     var s = (documents.docs.map((e) async {
       var data = e.data() as Map<String, dynamic>;
@@ -289,8 +292,11 @@ class FormulariosProvider {
 
   Future<List<RegistroVacunasModel>> cargarVacunas(String idForm) async {
     final List<RegistroVacunasModel> vacunas = <RegistroVacunasModel>[];
-    var documents =
-        await refForm.doc(idForm).collection('registroVacunas').get();
+    var documents = await refForm
+        .doc(idForm)
+        .collection('registroVacunas')
+        .orderBy('fechaConsulta')
+        .get();
     vacunas.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
       var data = e.data() as Map<String, dynamic>;
@@ -311,8 +317,11 @@ class FormulariosProvider {
       String idForm) async {
     final List<RegistroDesparasitacionModel> desparasitaciones =
         <RegistroDesparasitacionModel>[];
-    var documents =
-        await refForm.doc(idForm).collection('registroDesparasitacion').get();
+    var documents = await refForm
+        .doc(idForm)
+        .collection('registroDesparasitacion')
+        .orderBy('fecha')
+        .get();
     desparasitaciones.addAll(documents.docs.map((e) {
       var data = e.data() as Map<String, dynamic>;
       var desparasitacion = RegistroDesparasitacionModel.fromJson({
@@ -331,8 +340,11 @@ class FormulariosProvider {
       cargarRegistrosDesparasitacion(String idFormu) async {
     final List<RegistroDesparasitacionModel> desparasitacion =
         <RegistroDesparasitacionModel>[];
-    var documents =
-        await refForm.doc(idFormu).collection('registroDesparasitacion').get();
+    var documents = await refForm
+        .doc(idFormu)
+        .collection('registroDesparasitacion')
+        .orderBy('fecha')
+        .get();
     //citas.addAll
     var s = (documents.docs.map((e) async {
       var data = e.data() as Map<String, dynamic>;
