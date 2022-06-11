@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final prefs = new PreferenciasUsuario();
     print(prefs.token);
+    final email = prefs.email;
 
     return Provider(
       child: MaterialApp(

@@ -1,6 +1,9 @@
 import 'package:cliente_app_v1/src/bloc/login_bloc.dart';
 import 'package:cliente_app_v1/src/bloc/provider.dart';
+import 'package:cliente_app_v1/src/models/usuarios_model.dart';
+import 'package:cliente_app_v1/src/utils/constants.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
@@ -8,6 +11,9 @@ import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 class RegistroPage extends StatelessWidget {
   //const RegistroPage({Key? key}) : super(key: key);
   final usuarioProvider = new UsuarioProvider();
+  final usuario = new UsuariosModel();
+  CollectionReference refUser =
+      FirebaseFirestore.instance.collection('usuarios');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +58,11 @@ class RegistroPage extends StatelessWidget {
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
-                  height: 60.0,
+                  height: 30.0,
+                ),
+                _crearNombreUs(bloc),
+                SizedBox(
+                  height: 30.0,
                 ),
                 _crearEmail(bloc),
                 SizedBox(
@@ -83,6 +93,29 @@ class RegistroPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _crearNombreUs(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.nameStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            keyboardType: TextInputType.name,
+            decoration: InputDecoration(
+              icon: Icon(Icons.alternate_email, color: Colors.green),
+              //hintText: 'dany',
+              labelText: 'Nombre de usuario:',
+              counterText: snapshot.data,
+              errorText:
+                  snapshot.error != null ? snapshot.error.toString() : null,
+            ),
+            onChanged: bloc.changeName,
+          ),
+        );
+      },
     );
   }
 
@@ -185,9 +218,15 @@ class RegistroPage extends StatelessWidget {
     //print('Password: ${bloc.password}');
     //print('=================');
 
-    final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+    final info = await usuarioProvider.nuevoUsuario(
+        bloc.email, bloc.password, bloc.name);
 //Se anadio el null check !, si no funciona se debe borrar (diciembre 14)
     if (info['ok']) {
+      usuario.id = info['uid'];
+      usuario.nombre = bloc.name;
+      usuario.email = bloc.email;
+      usuario.rol = Roles.cliente;
+      usuarioProvider.crearUsuario(usuario);
       Navigator.pushReplacementNamed(context, 'bienvenida');
     } else {
       mostrarAlerta(context, info['mensaje']);

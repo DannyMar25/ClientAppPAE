@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:cliente_app_v1/src/models/usuarios_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,6 +13,8 @@ class UsuarioProvider {
   final _prefs = new PreferenciasUsuario();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  CollectionReference refUser =
+      FirebaseFirestore.instance.collection('usuarios');
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     final authData = {
@@ -29,17 +34,22 @@ class UsuarioProvider {
     if (decodedResp.containsKey('idToken')) {
       _prefs.token = decodedResp['idToken'];
 
-      return {'ok': true, 'token': decodedResp['idToken']};
+      return {
+        'ok': true,
+        'token': decodedResp['idToken'],
+        'uid': decodedResp['localId']
+      };
     } else {
       return {'ok': false, 'mensaje': decodedResp['error']['message']};
     }
   }
 
   Future<Map<String, dynamic>> nuevoUsuario(
-      String email, String password) async {
+      String email, String password, String name) async {
     final authData = {
       'email': email,
       'password': password,
+      'displayName': name,
       'returnSecureToken': true
     };
 
@@ -53,7 +63,11 @@ class UsuarioProvider {
 
     if (decodedResp.containsKey('idToken')) {
       _prefs.token = decodedResp['idToken'];
-      return {'ok': true, 'token': decodedResp['idToken']};
+      return {
+        'ok': true,
+        'token': decodedResp['idToken'],
+        'uid': decodedResp['localId']
+      };
     } else {
       return {'ok': false, 'mensaje': decodedResp['error']['message']};
     }
@@ -61,6 +75,7 @@ class UsuarioProvider {
 
   //cerrar sesion
   void signOut() async {
+    _prefs.removeEmail();
     await _auth.signOut();
     await _googleSignIn.signOut();
     return;
@@ -83,6 +98,8 @@ class UsuarioProvider {
       final UserCredential userCredential =
           await _auth.signInWithCredential(credential);
       final User? user = userCredential.user;
+      print(user);
+
       if (user!.uid == _auth.currentUser!.uid) return user;
     } catch (e) {
       print('Error in signInGoogle Method: ${e.toString()}');
@@ -108,5 +125,52 @@ class UsuarioProvider {
       body: json.encode(payload),
       headers: {'Content-Type': 'application/json'},
     );
+  }
+
+  Future<bool> crearUsuario(
+    UsuariosModel usuario,
+  ) async {
+    try {
+      // print("este esadkjljdkjadkjskadjlkjsdljasdljasdj");
+      await refUser.doc(usuario.id).set(usuario.toJson());
+      //await refUser.doc(usuariosAdd.id).update({"idUs": usuariosAdd.id});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> comprobarUsuario(String uid) async {
+    try {
+      // print("este esadkjljdkjadkjskadjlkjsdljasdljasdj");
+      final user = await refUser.doc(uid).get();
+      // print(user.data());
+      //print(user.id);
+      if (user.data() == null) {
+        return true;
+      } else {
+        return false;
+      }
+      //await refUser.doc(usuariosAdd.id).update({"idUs": usuariosAdd.id});
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<dynamic> obtenerUsuario(String uid) async {
+    try {
+      // print("este esadkjljdkjadkjskadjlkjsdljasdljasdj");
+      final user = await refUser.doc(uid).get();
+      // print(user.data());
+      //print(user.id);
+      // if (user.data() == null) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+      return user.data() as dynamic;
+    } catch (e) {
+      return false;
+    }
   }
 }

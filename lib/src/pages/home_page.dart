@@ -1,4 +1,5 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
@@ -15,11 +16,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final animalesProvider = new AnimalesProvider();
   final userProvider = new UsuarioProvider();
+  final prefs = new PreferenciasUsuario();
 
   @override
   Widget build(BuildContext context) {
     //final bloc = Provider.of(context);
-
+    final email = prefs.email;
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
@@ -28,16 +30,18 @@ class _HomePageState extends State<HomePage> {
           Builder(builder: (BuildContext context) {
             return Row(
               children: [
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () async {
-                    Navigator.pushNamed(context, 'login');
-                  },
-                  child: Text('Iniciar Sesión'),
-                ),
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'login');
+                        },
+                        child: Text('Iniciar Sesión'),
+                      )
+                    : SizedBox(),
                 TextButton(
                   style: ButtonStyle(
                     foregroundColor:

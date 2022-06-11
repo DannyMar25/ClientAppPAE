@@ -1,7 +1,10 @@
 import 'package:cliente_app_v1/src/bloc/login_bloc.dart';
 import 'package:cliente_app_v1/src/bloc/provider.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/models/usuarios_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
+import 'package:cliente_app_v1/src/utils/constants.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -150,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
     //snapshot.hasData
     //true ? algo asi si true: algo asi si false
     return StreamBuilder(
-      stream: bloc.formValidStream,
+      stream: bloc.formValidStreamL,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return RaisedButton(
           child: Container(
@@ -170,12 +173,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _login(LoginBloc bloc, BuildContext context) async {
-    //print('=================');
-    //print('Email:${bloc.email}');
-    //print('Password: ${bloc.password}');
-    //print('=================');
+    final prefs = new PreferenciasUsuario();
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
     if (info['ok']) {
+      final user = await usuarioProvider.obtenerUsuario(info['uid']);
+      prefs.setEmail(bloc.email);
+      prefs.setRol(user['rol']);
       Navigator.pushReplacementNamed(context, 'formularioMain',
           arguments: animal);
     } else {
@@ -189,8 +192,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget _crearBotonGoogle(BuildContext context) {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-        usuarioProvider.signInGoogle();
+      onPressed: () async {
+        final user = await usuarioProvider.signInGoogle();
+        final comprobar = await usuarioProvider.comprobarUsuario(user!.uid);
+        if (comprobar) {
+          usuarioProvider.crearUsuario(UsuariosModel(
+              email: user.email!,
+              nombre: user.displayName!,
+              id: user.uid,
+              rol: Roles.cliente));
+        }
         Navigator.pushReplacementNamed(context, 'formularioMain');
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

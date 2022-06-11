@@ -18,8 +18,8 @@ class LoginBloc with Validators {
       _emailController.stream.transform(validarEmail);
   Stream<String> get passwordStream =>
       _passwordController.stream.transform(validarPassword);
-  // Stream<String> get nameStream =>
-  //     _usNameController.stream.transform(validarNombre);
+  Stream<String> get nameStream =>
+      _usNameController.stream.transform(validarNombre);
 
   //nuevo
 
@@ -31,11 +31,13 @@ class LoginBloc with Validators {
         }
       });
 
-  Stream<bool> get formValidStream =>
+  Stream<bool> get formValidStream => Rx.combineLatest3(
+      emailStream, passwordStream, nameStream, (e, p, n) => true);
+  Stream<bool> get formValidStreamL =>
       Rx.combineLatest2(emailStream, passwordStream, (e, p) => true);
 
-  Stream<bool> get formValidStream1 => Rx.combineLatest3(
-      emailStream, passwordStream, passwordConfirmStream, (e, p, s) => true);
+  Stream<bool> get formValidStream1 => Rx.combineLatest4(emailStream,
+      passwordStream, nameStream, passwordConfirmStream, (e, p, n, s) => true);
 
   //Insertar valores al stream
   Function(String) get changeEmail => _emailController.sink.add;
