@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             Locale('en', 'US'), // English, no country code
             Locale('es', 'ES'), // Spanish, no country code
           ],
-          initialRoute: 'home',
+          initialRoute: 'bienvenida',
           routes: {
             'login': (_) => LoginPage(),
             'registro': (_) => RegistroPage(),

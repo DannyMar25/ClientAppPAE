@@ -54,11 +54,14 @@ class _MenuWidgetState extends State<MenuWidget> {
               ),
               title: Text('Llenar formulario de adopcion'),
               onTap: () {
+                //Navigator.pushReplacementNamed(context, 'login');
                 _auth.authStateChanges().listen((User? user) {
                   if (user == null) {
                     print('User is currently signed out!');
+                    Navigator.pushReplacementNamed(context, 'home');
                   } else {
                     print('User is signed in!');
+                    Navigator.pushReplacementNamed(context, 'formularioMain');
                   }
                 });
                 // if (user != null) {
@@ -84,11 +87,14 @@ class _MenuWidgetState extends State<MenuWidget> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.home, color: Colors.green),
-            title: Text('Regresar'),
+            leading: Icon(
+              Icons.home,
+              color: Colors.green,
+            ),
+            title: Text('Inicio'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'home');
+              Navigator.pushReplacementNamed(context, 'bienvenida');
             },
           ),
         ],

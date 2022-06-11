@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/card_table.dart';
+import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:cliente_app_v1/src/widgets/page_title.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -29,31 +30,32 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
           Builder(builder: (BuildContext context) {
             return Row(
               children: [
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () async {
-                    Navigator.pushNamed(context, 'login');
-                  },
-                  child: Text('Iniciar Sesión'),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                  ),
-                  onPressed: () async {
-                    Navigator.pushNamed(context, 'registro');
-                  },
-                  child: Text('Registrarse'),
-                ),
+                // TextButton(
+                //   style: ButtonStyle(
+                //     foregroundColor:
+                //         MaterialStateProperty.all<Color>(Colors.white),
+                //   ),
+                //   onPressed: () async {
+                //     Navigator.pushNamed(context, 'login');
+                //   },
+                //   child: Text('Iniciar Sesión'),
+                // ),
+                // TextButton(
+                //   style: ButtonStyle(
+                //     foregroundColor:
+                //         MaterialStateProperty.all<Color>(Colors.white),
+                //   ),
+                //   onPressed: () async {
+                //     Navigator.pushNamed(context, 'registro');
+                //   },
+                //   child: Text('Registrarse'),
+                // ),
               ],
             );
           }),
         ],
       ),
+      drawer: MenuWidget(),
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
