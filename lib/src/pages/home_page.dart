@@ -63,6 +63,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Widget _crearListado() {
+  //   return FutureBuilder(
+  //       future: animalesProvider.cargarAnimal(),
+  //       builder:
+  //           (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
+  //         if (snapshot.hasData) {
+  //           final animales = snapshot.data;
+  //           return ListView.builder(
+  //             itemCount: animales!.length,
+  //             itemBuilder: (context, i) => _crearItem(context, animales[i]),
+  //           );
+  //         } else {
+  //           return Center(child: CircularProgressIndicator());
+  //         }
+  //       });
+  // }
   Widget _crearListado() {
     return FutureBuilder(
         future: animalesProvider.cargarAnimal(),
@@ -70,9 +86,17 @@ class _HomePageState extends State<HomePage> {
             (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
           if (snapshot.hasData) {
             final animales = snapshot.data;
-            return ListView.builder(
-              itemCount: animales!.length,
-              itemBuilder: (context, i) => _crearItem(context, animales[i]),
+            return GridView.count(
+              childAspectRatio: 50 / 100,
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              children: List.generate(animales!.length, (index) {
+                return _crearItem(context, animales[index]);
+              }),
+
+//            return ListView.builder(
+//             itemCount: animales!.length,
+//              itemBuilder: (context, i) => _crearItem(context, animales[i]),
             );
           } else {
             return Center(child: CircularProgressIndicator());
@@ -81,12 +105,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _crearItem(BuildContext context, AnimalModel animal) {
-    // return Dismissible(
-    //   key: UniqueKey(),
-    //   background: Container(
-    //     color: Colors.red,
-    //   ),
     return Card(
+      color: Color.fromARGB(248, 202, 241, 170),
+      elevation: 4.0,
+      //margin: EdgeInsets.only(bottom: 90.0, left: 10.0, right: 10.0),
       child: Column(
         children: [
           (animal.fotoUrl == "")
@@ -98,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
+          //Padding(padding: EdgeInsets.only(bottom: 5.0)),
           ListTile(
             title: Text('${animal.nombre} - ${animal.edad}'),
             subtitle: Text('${animal.color} - ${animal.id}'),
