@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/citas_model.dart';
 import 'package:cliente_app_v1/src/models/horarios_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/citas_provider.dart';
 import 'package:cliente_app_v1/src/providers/horarios_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
@@ -32,6 +33,8 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   String _fecha = '';
   String _fechaCompleta = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
+  String campoVacio = 'Por favor, llena este campo';
+  final prefs = new PreferenciasUsuario();
 
   //bool _guardando = false;
   //final formKey = GlobalKey<FormState>();
@@ -44,6 +47,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   AnimalModel animal = new AnimalModel();
   @override
   Widget build(BuildContext context) {
+    final email = prefs.email;
     final Object? animData = ModalRoute.of(context)!.settings.arguments;
     if (animData != null) {
       animal = animData as AnimalModel;
@@ -53,6 +57,48 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       appBar: AppBar(
         title: Text('Registro de citas'),
         backgroundColor: Colors.green,
+        actions: [
+          Builder(builder: (BuildContext context) {
+            return Row(
+              children: [
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'login');
+                        },
+                        child: Text('Iniciar sesión'),
+                      )
+                    : TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          userProvider.signOut();
+                          Navigator.pushNamed(context, 'home');
+                        },
+                        child: Text('Cerrar sesión'),
+                      ),
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'registro');
+                        },
+                        child: Text('Registrarse'),
+                      )
+                    : SizedBox(),
+              ],
+            );
+          }),
+        ],
       ),
       drawer: MenuWidget(),
       body: SingleChildScrollView(
@@ -262,7 +308,16 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         icon: Icon(Icons.save),
         autofocus: true,
         onPressed: () {
-          _submit();
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
         }
         // onPressed: () {
         //   print(animal.id);
@@ -280,7 +335,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     if (animal.id == '') {
       citas.idAnimal = 'WCkke2saDQ5AfeJkU6ck';
     } else {
-      citas.idAnimal = animal.id;
+      citas.idAnimal = animal.id!;
     }
 
     //citas.idHorario = horarios.id;

@@ -3,6 +3,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -42,33 +43,36 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           backgroundColor: Colors.green,
         ),
         drawer: MenuWidget(),
-        body: Stack(alignment: Alignment.center, children: [
-          //Background(),
-          SingleChildScrollView(
-              child: Container(
-                  //color: Colors.lightGreenAccent,
-                  padding: new EdgeInsets.only(top: 230.0),
-                  child: Form(
-                      key: formKey,
-                      child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                _crearCI(),
-                                Divider(
-                                  color: Colors.white,
-                                ),
-                                _crearBoton(),
-                                Divider(
-                                  color: Colors.white,
-                                ),
-                                _verListado()
-                              ],
-                            )
-                          ]))))
-        ]));
+        body: SingleChildScrollView(
+            child: Container(
+                //color: Colors.lightGreenAccent,
+                padding: new EdgeInsets.only(top: 20.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        mostrarImagen1(),
+                        _crearCI(),
+                        Divider(
+                          color: Colors.white,
+                        ),
+                        _crearBoton(),
+                        Divider(
+                          color: Colors.white,
+                        ),
+                        _verListado()
+                      ],
+                    )))));
+  }
+
+  Widget mostrarImagen1() {
+    return SizedBox(
+      height: 200.0,
+      child: Image(
+        image: AssetImage('assets/cat_1.gif'),
+      ),
+    );
   }
 
   Widget _crearCI() {
@@ -153,22 +157,11 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   }
 
   Widget _crearItem(BuildContext context, FormulariosModel formulario) {
-    return Card(
-        color: Colors.lightGreen[200],
-        shadowColor: Colors.green,
-        child: ListTile(
-            title: Column(
-              children: [
-                //Divider(color: Colors.purple),
-                Text("Nombre del cliente: " + '${formulario.nombreClient}'),
-                Text("Numero de cedula: " '${formulario.identificacion}'),
-                Text("Su solicitud de adopcion fue:" '${formulario.estado}'),
-                Text(
-                    "Nombre mascota adopatada:" '${formulario.animal!.nombre}'),
-                //Divider(color: Colors.purple)
-              ],
-            ),
-            //subtitle: Text('${horario}'),
+    if (formulario.estado == 'Aprobado') {
+      return Card(
+          color: Colors.lightGreen[200],
+          shadowColor: Colors.green,
+          child: InkWell(
             onTap: () async {
               datosC = await formulariosProvider.cargarDPId(
                   formulario.id, formulario.idDatosPersonales);
@@ -180,6 +173,119 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                 'formulario': formulario,
                 'animal': animal
               });
-            }));
+            },
+            child: Column(
+              children: [
+                ListTile(
+                  title: Column(
+                    children: [
+                      //Divider(color: Colors.purple),
+                      Text("Nombre del cliente: " +
+                          '${formulario.nombreClient}'),
+                      Text("Numero de cedula: " '${formulario.identificacion}'),
+                      Text("Su solicitud de adopcion fue:"
+                          '${formulario.estado}'),
+                      Text("Nombre mascota adopatada:"
+                          '${formulario.animal!.nombre}'),
+                      //Divider(color: Colors.purple)
+                    ],
+                  ),
+                  //subtitle: Text('${horario}'),
+                ),
+                SizedBox(
+                  child: Image(
+                    image: AssetImage('assets/dog_an8.gif'),
+                  ),
+                )
+              ],
+            ),
+          ));
+    } else if (formulario.estado == 'Pendiente') {
+      return Card(
+          color: Colors.lightGreen[200],
+          shadowColor: Colors.green,
+          child: InkWell(
+            onTap: () async {
+              // datosC = await formulariosProvider.cargarDPId(
+              //     formulario.id, formulario.idDatosPersonales);
+              // animal =
+              //     await animalesProvider.cargarAnimalId(formulario.idAnimal);
+
+              // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
+              //   'datosper': datosC,
+              //   'formulario': formulario,
+              //   'animal': animal
+              // });
+            },
+            child: Column(
+              children: [
+                ListTile(
+                  title: Column(
+                    children: [
+                      //Divider(color: Colors.purple),
+                      Text("Nombre del cliente: " +
+                          '${formulario.nombreClient}'),
+                      Text("Numero de cedula: " '${formulario.identificacion}'),
+                      Text("Su solicitud de adopcion fue:"
+                          '${formulario.estado}'),
+                      Text("Nombre mascota adopatada:"
+                          '${formulario.animal!.nombre}'),
+                      //Divider(color: Colors.purple)
+                    ],
+                  ),
+                  //subtitle: Text('${horario}'),
+                ),
+                SizedBox(
+                  child: Image(
+                    image: AssetImage('assets/cat_4.gif'),
+                  ),
+                )
+              ],
+            ),
+          ));
+    } else {
+      return Card(
+          color: Colors.lightGreen[200],
+          shadowColor: Colors.green,
+          child: InkWell(
+            onTap: () async {
+              // datosC = await formulariosProvider.cargarDPId(
+              //     formulario.id, formulario.idDatosPersonales);
+              // animal =
+              //     await animalesProvider.cargarAnimalId(formulario.idAnimal);
+
+              // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
+              //   'datosper': datosC,
+              //   'formulario': formulario,
+              //   'animal': animal
+              // });
+            },
+            child: Column(
+              children: [
+                ListTile(
+                  title: Column(
+                    children: [
+                      //Divider(color: Colors.purple),
+                      Text("Nombre del cliente: " +
+                          '${formulario.nombreClient}'),
+                      Text("Numero de cedula: " '${formulario.identificacion}'),
+                      Text("Su solicitud de adopcion fue:"
+                          '${formulario.estado}'),
+                      Text("Nombre mascota adopatada:"
+                          '${formulario.animal!.nombre}'),
+                      //Divider(color: Colors.purple)
+                    ],
+                  ),
+                  //subtitle: Text('${horario}'),
+                ),
+                SizedBox(
+                  child: Image(
+                    image: AssetImage('assets/cat_6.gif'),
+                  ),
+                )
+              ],
+            ),
+          ));
+    }
   }
 }

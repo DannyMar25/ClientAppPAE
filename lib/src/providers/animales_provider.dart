@@ -21,6 +21,7 @@ class AnimalesProvider {
       var data = e.data() as Map<String, dynamic>;
       var animal = AnimalModel.fromJson({
         "id": e.id,
+        "especie": data["especie"],
         "nombre": data["nombre"],
         "sexo": data["sexo"],
         "edad": data["edad"],
@@ -45,6 +46,7 @@ class AnimalesProvider {
 
     animals = AnimalModel.fromJson({
       "id": doc.id,
+      "especie": data["especie"],
       "nombre": data["nombre"],
       "sexo": data["sexo"],
       "edad": data["edad"],
@@ -59,6 +61,38 @@ class AnimalesProvider {
     });
 
     return animals;
+  }
+
+  Future<List<AnimalModel>> cargarBusqueda(
+      String especie, String sexo, String edad, String tamanio) async {
+    final List<AnimalModel> animales = <AnimalModel>[];
+    var documents = await refAn
+        .where('especie', isEqualTo: especie)
+        .where('sexo', isEqualTo: sexo)
+        .where('edad', isEqualTo: edad)
+        .where('tamanio', isEqualTo: tamanio)
+        .get();
+    animales.addAll(documents.docs.map((e) {
+      //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
+      var data = e.data() as Map<String, dynamic>;
+      var animal = AnimalModel.fromJson({
+        "id": e.id,
+        "especie": data["especie"],
+        "nombre": data["nombre"],
+        "sexo": data["sexo"],
+        "edad": data["edad"],
+        "temperamento": data["temperamento"],
+        "peso": data["peso"],
+        "tamanio": data["tamanio"],
+        "color": data["color"],
+        "raza": data["raza"],
+        "estado": data["estado"],
+        "caracteristicas": data["caracteristicas"],
+        "fotoUrl": data["fotoUrl"]
+      });
+      return animal;
+    }).toList());
+    return animales;
   }
 
   Future<bool> editarEstado(AnimalModel animal, String estado) async {

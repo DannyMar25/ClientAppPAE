@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_relacionAnimal_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   bool isChecked9 = false;
 
   bool _guardando = false;
+  bool isDisable = true;
   var idFormu2;
+  String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
   RelacionAnimalesModel relacionAnim = new RelacionAnimalesModel();
@@ -241,6 +244,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                       Divider(),
                       _crearFamilia(),
                       Divider(),
+                      _crearBotonRevisar(context),
                       _crearBoton(),
                     ],
                   )),
@@ -253,6 +257,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearLugarM() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.ubicMascota,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -270,6 +280,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearNombreM() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -286,6 +302,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearNombreM1() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -361,6 +383,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   Widget _crearPorque1() {
     return TextFormField(
       // initialValue: ,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -376,6 +404,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPorque2() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       // initialValue: ,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -392,6 +426,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta1() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.deseoAdop,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -408,6 +448,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta2() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.cambioDomi,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -425,6 +471,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta3() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.relNuevaCasa,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -442,6 +494,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta4() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.tiempoSolaMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -458,6 +516,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta5() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.diaNocheMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -474,6 +538,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta6() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.duermeMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -490,6 +560,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunt7() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.necesidadMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -506,6 +582,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta8() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.promedVida,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -522,6 +604,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta9() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.responGastos,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -539,6 +627,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta10() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.recursoVet,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -556,6 +650,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta11() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.benefEst,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -572,6 +672,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta12() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.tenenciaResp,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -588,6 +694,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearPregunta13() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: relacionAnim.ordenMuni,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -973,22 +1085,42 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.green;
+          if (isDisable == true) {
+            return Colors.grey;
+          } else {
+            return Colors.green;
+          }
         }),
       ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
       autofocus: true,
-      onPressed: (_guardando) ? null : _submit,
+      //onPressed: (_guardando) ? null : _submit,
+      onPressed: () {
+        if (isDisable == true) {
+          return null;
+        } else {
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
+        }
+      },
     );
   }
 
   void _submit() async {
-    if (!formKey.currentState!.validate()) return;
-    formKey.currentState!.save();
-    setState(() {
-      _guardando = true;
-    });
+    // if (!formKey.currentState!.validate()) return;
+    // formKey.currentState!.save();
+    // setState(() {
+    //   _guardando = true;
+    // });
 //Sentencia If agregada recientemente
     //if (idFormu != null) {
     print(idFormu2);
@@ -998,5 +1130,47 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     //print(idFormu);
     // print("Debe llenar la parte 1 para poder continuar");
     //}
+  }
+
+  Widget _crearBotonRevisar(BuildContext context) {
+    return ElevatedButton.icon(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            return Colors.green;
+          }),
+        ),
+        label: Text('Revisar'),
+        icon: Icon(Icons.reviews),
+        autofocus: true,
+        onPressed: () {
+          _mostrarConfirmacion(context);
+        });
+  }
+
+  Future _mostrarConfirmacion(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Confirmacion'),
+            content: Text(
+                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+            actions: [
+              TextButton(
+                  child: Text('Lo he revisado'),
+                  //onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    setState(() {
+                      isDisable = false;
+                      Navigator.of(context).pop();
+                    });
+                  }),
+              TextButton(
+                  child: Text('Revisar'),
+                  onPressed: () => Navigator.of(context).pop()),
+            ],
+          );
+        });
   }
 }

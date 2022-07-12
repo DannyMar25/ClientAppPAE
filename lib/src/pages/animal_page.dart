@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
@@ -25,8 +26,10 @@ class _AnimalPageState extends State<AnimalPage> {
   AnimalModel animal = new AnimalModel();
   //bool _guardando = false;
   File? foto;
+  final prefs = new PreferenciasUsuario();
   @override
   Widget build(BuildContext context) {
+    final email = prefs.email;
     final Object? animData = ModalRoute.of(context)!.settings.arguments;
     if (animData != null) {
       animal = animData as AnimalModel;
@@ -39,15 +42,43 @@ class _AnimalPageState extends State<AnimalPage> {
         backgroundColor: Colors.green,
         actions: [
           Builder(builder: (BuildContext context) {
-            return TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-              ),
-              onPressed: () async {
-                userProvider.signOut();
-                Navigator.pushNamed(context, 'home');
-              },
-              child: Text('Sign Out'),
+            return Row(
+              children: [
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'login');
+                        },
+                        child: Text('Iniciar sesión'),
+                      )
+                    : TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          userProvider.signOut();
+                          Navigator.pushNamed(context, 'home');
+                        },
+                        child: Text('Cerrar sesión'),
+                      ),
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'registro');
+                        },
+                        child: Text('Registrarse'),
+                      )
+                    : SizedBox(),
+              ],
             );
           }),
         ],
@@ -60,6 +91,7 @@ class _AnimalPageState extends State<AnimalPage> {
             child: Column(
               children: [
                 _mostrarFoto(),
+                _crearEspecie(),
                 _crearNombre(),
                 _crearSexo(),
                 _crearEdad(),
@@ -69,7 +101,14 @@ class _AnimalPageState extends State<AnimalPage> {
                 _crearColor(),
                 _crearRaza(),
                 _crearCaracteristicas(),
-                _crearBoton(),
+                Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                cardCita(),
+                Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                _crearBotonCita(),
+                Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                cardAdopcion(),
+                Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                _crearBotonAdopta(),
                 // _crearDisponible(),
                 // _crearBoton(),
               ],
@@ -77,6 +116,25 @@ class _AnimalPageState extends State<AnimalPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _crearEspecie() {
+    return TextFormField(
+      initialValue: animal.especie,
+      readOnly: true,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        labelText: 'Especie',
+      ),
+      onSaved: (value) => animal.especie = value!,
+      validator: (value) {
+        if (value!.length < 3) {
+          return 'Ingrese la especie de la mascota';
+        } else {
+          return null;
+        }
+      },
     );
   }
 
@@ -263,46 +321,73 @@ class _AnimalPageState extends State<AnimalPage> {
   //);
   //}
 
-  Widget _crearBoton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton.icon(
-            style: ButtonStyle(
-              //padding: new EdgeInsets.only(top: 5),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                  (Set<MaterialState> states) {
-                return Colors.green[700];
-              }),
-            ),
-            label: Text('Agendar cita'),
-            icon: Icon(Icons.save),
-            autofocus: true,
-            onPressed: () {
-              Navigator.pushNamed(context, 'registroCita', arguments: animal);
-            }),
-        Padding(
-          padding: const EdgeInsets.all(22.0),
-          child: ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (Set<MaterialState> states) {
-                  return Colors.green[700];
-                }),
-              ),
-              label: Text('Llenar formulario'),
-              icon: Icon(Icons.save),
-              autofocus: true,
-              onPressed: () {
-                mostrarAlertaOkCancel(
-                    context,
-                    'Para poder ingresar al formulario, debe registrarse o iniciar sesion.',
-                    'login',
-                    animal);
-                //Navigator.pushNamed(context, 'formularioMain');
-              }),
-        ),
-      ],
+  Widget _crearBotonCita() {
+    //final email = prefs.email;
+    return TextButton(
+      style: TextButton.styleFrom(
+          //backgroundColor: Color.fromARGB(255, 170, 235, 164),
+          shadowColor: Colors.lightGreen,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+      onPressed: () {
+        Navigator.pushNamed(context, 'registroCita', arguments: animal);
+      },
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.date_range,
+            color: Color.fromARGB(255, 3, 86, 97),
+            size: 80.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2.0),
+          ),
+          Text(
+            'Agendar cita',
+            style: TextStyle(color: Colors.black),
+          ),
+        ],
+      ),
+    );
+    //Padding(padding: EdgeInsets.only(right: 10.0)),
+  }
+
+  Widget _crearBotonAdopta() {
+    final email = prefs.email;
+    return TextButton(
+      style: TextButton.styleFrom(
+          //backgroundColor: Color.fromARGB(255, 226, 155, 233),
+          shadowColor: Colors.lightGreen,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+      onPressed: () {
+        if (email != '') {
+          Navigator.pushReplacementNamed(context, 'formularioMain',
+              arguments: animal);
+        } else {
+          mostrarAlertaOkCancel(
+              context,
+              'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
+              'login',
+              animal);
+        }
+      },
+      child: Column(
+        children: <Widget>[
+          Icon(
+            Icons.pets,
+            color: Colors.green,
+            size: 60.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2.0),
+          ),
+          Text(
+            '¡Quiero Adoptarlo!',
+            style: TextStyle(color: Colors.black),
+          ),
+        ],
+      ),
     );
   }
 
@@ -333,6 +418,96 @@ class _AnimalPageState extends State<AnimalPage> {
       }
       return Image.asset(foto?.path ?? 'assets/no-image.png');
     }
+  }
+
+  Widget cardCita() {
+    return Card(
+      child: Container(
+        height: 100,
+        color: Colors.white,
+        child: Row(
+          children: [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Expanded(
+                  child: Image.asset("assets/dog_an8.gif"),
+                  flex: 2,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: ListTile(
+                        title: Text("Agenda una cita!"),
+                        subtitle: Text(
+                          "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipcion.",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              flex: 8,
+            ),
+          ],
+        ),
+      ),
+      elevation: 8,
+      margin: EdgeInsets.all(10),
+      shadowColor: Colors.green,
+    );
+  }
+
+  Widget cardAdopcion() {
+    return Card(
+      child: Container(
+        height: 100,
+        color: Colors.white,
+        child: Row(
+          children: [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Expanded(
+                  child: Image.asset("assets/dog_an7.gif"),
+                  flex: 2,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: ListTile(
+                        title: Text("Deseas adoptar a ${animal.nombre}!"),
+                        subtitle: Text(
+                          "Si deseas adoptarlo debes llenar el formulario de adopcion.",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              flex: 8,
+            ),
+          ],
+        ),
+      ),
+      elevation: 8,
+      margin: EdgeInsets.all(10),
+      shadowColor: Colors.green,
+    );
   }
 
   // _seleccionarFoto() async {

@@ -227,7 +227,7 @@ class RegistroPage extends StatelessWidget {
       usuario.email = bloc.email;
       usuario.rol = Roles.cliente;
       usuarioProvider.crearUsuario(usuario);
-      Navigator.pushReplacementNamed(context, 'bienvenida');
+      Navigator.pushReplacementNamed(context, 'intro');
     } else {
       mostrarAlerta(context, info['mensaje']);
     }

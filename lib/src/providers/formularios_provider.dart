@@ -8,6 +8,7 @@ import 'package:cliente_app_v1/src/models/formulario_situacionFam_model.dart';
 import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +127,11 @@ class FormulariosProvider {
           .doc(relacionAnimAdd.id)
           .update({"id": relacionAnimAdd.id});
       await refForm.doc(idFormu2).update({"idRelacionAn": relacionAnimAdd.id});
-      Navigator.pushNamed(context, 'home');
+      mostrarAlertaOk(
+          context,
+          'La informacion a sido guardada correctamente! Se revisa de 24 a 48 horas, la respuesta a tu solicitud llega a tu mail, por favor revisar también la bandeja de correo no deseado o spam',
+          'home');
+      //Navigator.pushNamed(context, 'home');
       return true;
     } catch (e) {
       return false;
@@ -137,7 +142,7 @@ class FormulariosProvider {
       String identificacion) async {
     final List<FormulariosModel> formularios = <FormulariosModel>[];
     var documents = await refForm
-        .where('estado', isEqualTo: 'Aprobado')
+        //.where('estado', isEqualTo: 'Aprobado')
         .where('identificacion', isEqualTo: identificacion)
         .get();
     //citas.addAll

@@ -2,6 +2,7 @@ import 'package:cliente_app_v1/src/bloc/login_bloc.dart';
 import 'package:cliente_app_v1/src/bloc/provider.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/usuarios_model.dart';
+import 'package:cliente_app_v1/src/pages/forgotPassword_page.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/constants.dart';
@@ -85,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
+          _crearBotonPass(context),
           //Text('Olvido la contrasena?'),
           TextButton(
             onPressed: () => Navigator.pushNamed(context, 'registro'),
@@ -179,8 +181,7 @@ class _LoginPageState extends State<LoginPage> {
       final user = await usuarioProvider.obtenerUsuario(info['uid']);
       prefs.setEmail(bloc.email);
       prefs.setRol(user['rol']);
-      Navigator.pushReplacementNamed(context, 'formularioMain',
-          arguments: animal);
+      Navigator.pushReplacementNamed(context, 'home', arguments: animal);
     } else {
       //mostrarAlerta(context, info['mensaje']);
       mostrarAlerta(context, 'El correo o contraseña son incorrectos');
@@ -202,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
               id: user.uid,
               rol: Roles.cliente));
         }
-        Navigator.pushReplacementNamed(context, 'formularioMain');
+        Navigator.pushReplacementNamed(context, 'home');
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       highlightElevation: 0,
@@ -273,6 +274,21 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _crearBotonPass(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          ForgotPassword.id,
+        );
+      },
+      child: Text(
+        'Olvido la contraseña?',
+        style: TextStyle(color: Colors.green, fontSize: 20),
+      ),
     );
   }
 }

@@ -15,6 +15,7 @@ class FormSituacionFamPage extends StatefulWidget {
 
 class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   bool _guardando = false;
+  bool isDisable = true;
   FormulariosModel formulario = new FormulariosModel();
   SitFamiliarModel sitFamilia = new SitFamiliarModel();
   //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
@@ -25,6 +26,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   bool isChecked2 = false;
   bool isChecked3 = false;
   var idFormu;
+  String campoVacio = 'Campo vacio';
 
   String _fecha = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
@@ -158,6 +160,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         ],
                       ),
                       Divider(),
+                      _crearBotonRevisar(context),
                       _crearBoton(),
                     ],
                   )),
@@ -170,6 +173,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearNombre1() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.nombreFam1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -206,6 +215,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearParentesco1() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.parentescoFam1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -223,6 +238,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   //2
   Widget _crearNombre2() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.nombreFam2,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -259,6 +280,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearParentesco2() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.parentescoFam2,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -276,6 +303,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   //3
   Widget _crearNombre3() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.nombreFam3,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -312,6 +345,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearParentesco3() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.parentescoFam3,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -329,6 +368,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   //4
   Widget _crearNombre4() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.nombreFam4,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -365,6 +410,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearParentesco4() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: sitFamilia.parentescoFam4,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -485,6 +536,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearFechaParto(BuildContext context) {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       controller: _inputFieldDateController,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -529,25 +586,46 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.green;
+          if (isDisable == true) {
+            return Colors.grey;
+          } else {
+            return Colors.green;
+          }
         }),
       ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
       autofocus: true,
-      onPressed: (_guardando) ? null : _submit,
+      //onPressed: (_guardando) ? null : _submit,
+      onPressed: () {
+        if (isDisable == true) {
+          return null;
+        } else {
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            utils.mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
+        }
+      },
     );
   }
 
   void _submit() async {
-    if (!formKey.currentState!.validate()) return;
-    formKey.currentState!.save();
+    // if (!formKey.currentState!.validate()) return;
+    // formKey.currentState!.save();
 
-    //print('Todo OK!');
+    // //print('Todo OK!');
 
-    setState(() {
-      _guardando = true;
-    });
+    // setState(() {
+    //   _guardando = true;
+    // });
 //Sentencia If agregada recientemente
     //if (idFormu != null) {
     print(idFormu);
@@ -562,14 +640,47 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     // });
 
     //mostrarSnackbar('Registro guardado');
+  }
 
-    // Navigator.pushNamed(context, 'formularioP3', arguments: formulario);
-    // if (animal.id == null) {
-    //   print("ssssss");
-    // }
-    // if (animal.id == "") {
-    //   print("aaaaaa");
-    // }
-    // print(animal.id);
+  Widget _crearBotonRevisar(BuildContext context) {
+    return ElevatedButton.icon(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            return Colors.green;
+          }),
+        ),
+        label: Text('Revisar'),
+        icon: Icon(Icons.reviews),
+        autofocus: true,
+        onPressed: () {
+          _mostrarConfirmacion(context);
+        });
+  }
+
+  Future _mostrarConfirmacion(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Confirmacion'),
+            content: Text(
+                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+            actions: [
+              TextButton(
+                  child: Text('Lo he revisado'),
+                  //onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    setState(() {
+                      isDisable = false;
+                      Navigator.of(context).pop();
+                    });
+                  }),
+              TextButton(
+                  child: Text('Revisar'),
+                  onPressed: () => Navigator.of(context).pop()),
+            ],
+          );
+        });
   }
 }

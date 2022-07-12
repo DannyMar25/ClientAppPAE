@@ -1,19 +1,23 @@
 import 'package:cliente_app_v1/src/bloc/provider.dart';
 import 'package:cliente_app_v1/src/pages/animal_page.dart';
 import 'package:cliente_app_v1/src/pages/bienvenida_page.dart';
+import 'package:cliente_app_v1/src/pages/busqueda_page.dart';
 import 'package:cliente_app_v1/src/pages/evidencias_page.dart';
+import 'package:cliente_app_v1/src/pages/forgotPassword_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte1_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte2_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte3_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte4_page.dart';
 import 'package:cliente_app_v1/src/pages/home_page.dart';
+import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/pages/login_page.dart';
 import 'package:cliente_app_v1/src/pages/registro_cita.dart';
 import 'package:cliente_app_v1/src/pages/registro_cliente.dart';
 import 'package:cliente_app_v1/src/pages/registro_desp_page.dart';
 import 'package:cliente_app_v1/src/pages/registro_page.dart';
 import 'package:cliente_app_v1/src/pages/registro_vacunas_page.dart';
+import 'package:cliente_app_v1/src/pages/resultados_busqueda_page.dart';
 import 'package:cliente_app_v1/src/pages/seguimiento_page.dart';
 import 'package:cliente_app_v1/src/pages/subir_archivos.dart';
 import 'package:cliente_app_v1/src/pages/ubicacion_cliente_page.dart';
@@ -52,7 +56,7 @@ class MyApp extends StatelessWidget {
             Locale('en', 'US'), // English, no country code
             Locale('es', 'ES'), // Spanish, no country code
           ],
-          initialRoute: 'bienvenida',
+          initialRoute: 'intro',
           routes: {
             'login': (_) => LoginPage(),
             'registro': (_) => RegistroPage(),
@@ -74,6 +78,10 @@ class MyApp extends StatelessWidget {
             'verRegistroDesp': (_) => VerRegistroDespPage(),
             'demoArchivos': (_) => SubirArchivosPage(),
             'evidencia': (_) => EvidenciasPage(),
+            'intro': (_) => IntroPage(),
+            'busqueda': (_) => BusquedaPage(),
+            'resultadoBusqueda': (_) => ResultadosBusquedaPage(),
+            ForgotPassword.id: (context) => ForgotPassword(),
           },
           theme: ThemeData(primaryColor: Colors.deepPurple)),
     );

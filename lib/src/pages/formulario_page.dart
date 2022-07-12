@@ -1,8 +1,8 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/card_table.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
-import 'package:cliente_app_v1/src/widgets/page_title.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -14,8 +14,17 @@ class FormularioAdopcionPage extends StatefulWidget {
 class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
   AnimalModel animal = new AnimalModel();
   final formKey = GlobalKey<FormState>();
+  final userProvider = new UsuarioProvider();
+  final prefs = new PreferenciasUsuario();
+  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+    //backgroundColor: Colors.green,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+  );
   @override
   Widget build(BuildContext context) {
+    final email = prefs.email;
     final Object? animData = ModalRoute.of(context)!.settings.arguments;
     if (animData != null) {
       animal = animData as AnimalModel;
@@ -30,26 +39,40 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
           Builder(builder: (BuildContext context) {
             return Row(
               children: [
-                // TextButton(
-                //   style: ButtonStyle(
-                //     foregroundColor:
-                //         MaterialStateProperty.all<Color>(Colors.white),
-                //   ),
-                //   onPressed: () async {
-                //     Navigator.pushNamed(context, 'login');
-                //   },
-                //   child: Text('Iniciar Sesión'),
-                // ),
-                // TextButton(
-                //   style: ButtonStyle(
-                //     foregroundColor:
-                //         MaterialStateProperty.all<Color>(Colors.white),
-                //   ),
-                //   onPressed: () async {
-                //     Navigator.pushNamed(context, 'registro');
-                //   },
-                //   child: Text('Registrarse'),
-                // ),
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'login');
+                        },
+                        child: Text('Iniciar sesión'),
+                      )
+                    : TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          userProvider.signOut();
+                          Navigator.pushNamed(context, 'home');
+                        },
+                        child: Text('Cerrar sesión'),
+                      ),
+                email == ''
+                    ? TextButton(
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                        ),
+                        onPressed: () async {
+                          Navigator.pushNamed(context, 'registro');
+                        },
+                        child: Text('Registrarse'),
+                      )
+                    : SizedBox(),
               ],
             );
           }),
@@ -66,99 +89,94 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                 child: Form(
                     key: formKey,
                     child: Column(children: [
-                      Padding(padding: EdgeInsets.only(bottom: 90.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
+
                       Text(
-                        'Solicitud de adocpion',
+                        'Solicitud de adopción',
                         style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.deepPurple),
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20.0)),
-                      // SizedBox(
-                      //   height: 800,
-                      // ),
-                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
-                      Text(
-                        'Modulos a llenar para la solicitud de adopcion de una mascota',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      SizedBox(
+                        child: Image(
+                          image: AssetImage("assets/dog_an9.gif"),
+                        ),
+                        height: 150.0,
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
-                      Table(
-                        children: [
-                          TableRow(children: [
-                            InkWell(
-                              onTap: () => Navigator.pushReplacementNamed(
-                                  context, 'formularioP1',
-                                  arguments: animal),
-                              child: _SingleCard(
-                                color: Colors.blue,
-                                icon: Icons.person,
-                                text: 'Datos personales',
-                              ),
+                      Padding(padding: EdgeInsets.only(bottom: 30.0)),
+                      Text(
+                        'Por favor llena el siguiente formulario con tus datos personales e información acerca de las condiciones de adopción, nuestros asesores la revisarán y se pondrán en contacto contigo para seguir el proceso.',
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        textAlign: TextAlign.justify,
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 40.0)),
+                      TextButton(
+                        style: flatButtonStyle,
+                        onPressed: () {
+                          //cardB.currentState?.collapse();
+                          Navigator.pushReplacementNamed(
+                              context, 'formularioP1',
+                              arguments: animal);
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            Icon(
+                              Icons.list_alt,
+                              color: Colors.green,
+                              size: 100.0,
                             ),
-                            InkWell(
-                              onTap: () => Navigator.pushReplacementNamed(
-                                  context, 'formularioP2'),
-                              child: _SingleCard(
-                                color: Colors.pinkAccent,
-                                icon: Icons.people,
-                                text: 'Situacion Familiar',
-                              ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 2.0),
                             ),
-                          ]),
-                          TableRow(children: [
-                            InkWell(
-                              onTap: () => Navigator.pushReplacementNamed(
-                                  context, 'formularioP3'),
-                              child: _SingleCard(
-                                color: Colors.purple,
-                                icon: Icons.home,
-                                text: 'Domicilio',
-                              ),
+                            Text(
+                              'Llenar Formulario',
+                              style: TextStyle(color: Colors.green),
                             ),
-                            InkWell(
-                              onTap: () => Navigator.pushReplacementNamed(
-                                  context, 'formularioP4'),
-                              child: _SingleCard(
-                                color: Colors.green,
-                                icon: Icons.pets,
-                                text: 'Relacion con los animales',
-                              ),
-                            ),
-                          ]),
-                        ],
-                      )
+                          ],
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 40.0)),
+                      OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'home');
+                          },
+                          icon: Icon(
+                            Icons.photo_album,
+                            size: 30,
+                            color: Colors.green,
+                          ),
+                          label: Text(
+                            "Volver a la galeria",
+                            style: TextStyle(color: Colors.green, fontSize: 14),
+                          )),
+                      //Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                      // _HomeBody()
                     ]))),
           )
-          //Background
-          //Padding(padding: EdgeInsets.only(bottom: 20.0)),
-
-          //Home body
-          // _HomeBody(),
-        ],
-      ),
-      //bottomNavigationBar: CustomBottomNavigation(),
-    );
-  }
-}
-
-class _HomeBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          //Titulos
-          PageTitle(),
-
-          //Card Table
-          CardTable(),
         ],
       ),
     );
   }
 }
+
+// class _HomeBody extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SingleChildScrollView(
+//       child: Column(
+//         children: [
+//           //Titulos
+//           //PageTitle(),
+//           //Card Table
+//           //CardTable(),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _SingleCard extends StatelessWidget {
   final IconData icon;
@@ -222,4 +240,51 @@ class _CardBackground extends StatelessWidget {
       ),
     );
   }
+
+  // Widget contenidoAnt(BuildContext context, AnimalModel animal) {
+  //   return Table(
+  //     children: [
+  //       TableRow(children: [
+  //         InkWell(
+  //           onTap: () => Navigator.pushReplacementNamed(context, 'formularioP1',
+  //               arguments: animal),
+  //           child: _SingleCard(
+  //             color: Colors.blue,
+  //             icon: Icons.person,
+  //             text: 'Datos personales',
+  //           ),
+  //         ),
+  //         InkWell(
+  //           onTap: () =>
+  //               Navigator.pushReplacementNamed(context, 'formularioP2'),
+  //           child: _SingleCard(
+  //             color: Colors.pinkAccent,
+  //             icon: Icons.people,
+  //             text: 'Situacion Familiar',
+  //           ),
+  //         ),
+  //       ]),
+  //       TableRow(children: [
+  //         InkWell(
+  //           onTap: () =>
+  //               Navigator.pushReplacementNamed(context, 'formularioP3'),
+  //           child: _SingleCard(
+  //             color: Colors.purple,
+  //             icon: Icons.home,
+  //             text: 'Domicilio',
+  //           ),
+  //         ),
+  //         InkWell(
+  //           onTap: () =>
+  //               Navigator.pushReplacementNamed(context, 'formularioP4'),
+  //           child: _SingleCard(
+  //             color: Colors.green,
+  //             icon: Icons.pets,
+  //             text: 'Relacion con los animales',
+  //           ),
+  //         ),
+  //       ]),
+  //     ],
+  //   );
+  // }
 }

@@ -47,6 +47,9 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   photo_view: ^0.13.0
   file_picker: ^4.3.0
+  flutter_slimy_card: ^1.0.2
+  expansion_tile_card: ^2.0.0
+  accordion: ^2.3.0
  
 
 

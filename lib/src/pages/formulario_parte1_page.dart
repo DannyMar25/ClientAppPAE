@@ -17,6 +17,8 @@ class FormDatPersonalesPage extends StatefulWidget {
 
 class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   bool _guardando = false;
+  bool isDisable = true;
+  String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   DatosPersonalesModel datoPersona = new DatosPersonalesModel();
   FormulariosProvider formulariosProvider = new FormulariosProvider();
@@ -128,6 +130,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       _crearParentescoRef(),
                       _crearTelefonoRef(),
                       Divider(),
+                      // _crearBoton(context),
+                      _crearBotonRevisar(context),
+
                       _crearBoton(context),
                       // _crearBoton1(context)
                     ],
@@ -141,6 +146,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearNombre() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.nombreCom,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -158,6 +169,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearCI() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.cedula,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -187,7 +204,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         if (utils.isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Ingrese solo numeros';
         }
       },
     );
@@ -195,6 +212,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearOcupacion() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.ocupacion,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -211,6 +234,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearEmail() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.email,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -228,6 +257,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearDireccion() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.direccion,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -274,6 +309,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearTelfDomicilio() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.telfDomi,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -290,6 +331,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearTelfCelular() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.telfCel,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -306,6 +353,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearTelfTrabajo() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.telfTrab,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -322,6 +375,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearNombreRef() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.nombreRef,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -338,6 +397,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearParentescoRef() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.parentescoRef,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -354,6 +419,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearTelefonoRef() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       initialValue: datoPersona.telfRef,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -373,67 +444,47 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.green;
+          if (isDisable == true) {
+            return Colors.grey;
+          } else {
+            return Colors.green;
+          }
         }),
       ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
       autofocus: true,
-      onPressed: (_guardando) ? null : _submit,
+      //onPressed: (_guardando) ? null : _submit,
+      onPressed: () {
+        if (isDisable == true) {
+          return null;
+        } else {
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            utils.mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
+        }
+      },
     );
-  }
-
-  Widget _crearBoton1(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.deepPurple;
-        }),
-      ),
-      label: Text('Siguiente'),
-      icon: Icon(Icons.save),
-      autofocus: true,
-      onPressed: _onPressed1,
-      //onPressed: () {
-      //print("Hola ID:" + );
-      // Navigator.pushNamed(context, 'formularioP2', arguments: formulario);
-      //
-      //},
-    );
-  }
-
-  void _onPressed1() {
-    FirebaseFirestore.instance
-        .collection("formularios")
-        .get()
-        .then((querySnapshot) {
-      print(querySnapshot.docs.last);
-      querySnapshot.docs.last;
-    });
-  }
-
-  void _onPressed() {
-    FirebaseFirestore.instance
-        .collection("formularios")
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        print(result.data());
-      });
-    });
   }
 
   void _submit() async {
-    if (!formKey.currentState!.validate()) return;
-    formKey.currentState!.save();
+    // if (!formKey.currentState!.validate()) return;
+    // formKey.currentState!.save();
 
-    print('Todo OK!');
+    // print('Todo OK!');
 
-    setState(() {
-      _guardando = true;
-      print(formulario.id);
-    });
+    // setState(() {
+    //   _guardando = true;
+    //   print(formulario.id);
+    // });
 
     if (formulario.id == "") {
       formulario.estado = "Pendiente";
@@ -447,7 +498,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       if (animal.id == '') {
         formulario.idAnimal = 'WCkke2saDQ5AfeJkU6ck';
       } else {
-        formulario.idAnimal = animal.id;
+        formulario.idAnimal = animal.id!;
       }
       //formulario.idAnimal = "0H05tnjVPjfF1E8DBw0p";
       formulario.fechaIngreso = DateTime.now().toString();
@@ -455,15 +506,57 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     } else {
       //animalProvider.editarAnimal(animal, foto!);
     }
-    setState(() {
-      _guardando = false;
-      // var idd = formulariosProvider
-      //     .crearFormularioPrin(formulario, datoPersona)
-      //     .toString();
-      // print("Hola ID:" + idd);
-      //Navigator.pushNamed(context, 'formularioP2', arguments: formulario);
-    });
+    // setState(() {
+    //   _guardando = false;
+    //   // var idd = formulariosProvider
+    //   //     .crearFormularioPrin(formulario, datoPersona)
+    //   //     .toString();
+    //   // print("Hola ID:" + idd);
+    //   //Navigator.pushNamed(context, 'formularioP2', arguments: formulario);
+    // });
 
     //mostrarSnackbar('Registro guardado');
+  }
+
+  Widget _crearBotonRevisar(BuildContext context) {
+    return ElevatedButton.icon(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            return Colors.green;
+          }),
+        ),
+        label: Text('Revisar'),
+        icon: Icon(Icons.save),
+        autofocus: true,
+        onPressed: () {
+          _mostrarConfirmacion(context);
+        });
+  }
+
+  Future _mostrarConfirmacion(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Confirmacion'),
+            content: Text(
+                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+            actions: [
+              TextButton(
+                  child: Text('Lo he revisado'),
+                  //onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    setState(() {
+                      isDisable = false;
+                      Navigator.of(context).pop();
+                    });
+                  }),
+              TextButton(
+                  child: Text('Revisar'),
+                  onPressed: () => Navigator.of(context).pop()),
+            ],
+          );
+        });
   }
 }

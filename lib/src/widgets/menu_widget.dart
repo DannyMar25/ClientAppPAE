@@ -1,4 +1,5 @@
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,17 @@ class _MenuWidgetState extends State<MenuWidget> {
               Icons.home,
               color: Colors.green,
             ),
-            title: Text('Home'),
+            title: Text('Inicio'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'intro');
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.pets,
+              color: Colors.green,
+            ),
+            title: Text('Galeria de mascotas'),
             onTap: () => Navigator.pushReplacementNamed(context, 'home'),
           ),
           ListTile(
@@ -56,31 +67,13 @@ class _MenuWidgetState extends State<MenuWidget> {
                     Icons.assignment,
                     color: Colors.green,
                   ),
-                  title: Text('Llenar formulario de adopcion'),
+                  title: Text('Llenar formulario de adopción'),
                   onTap: () {
-                    _auth.authStateChanges().listen((User? user) {
-                      if (user == null) {
-                        print('User is currently signed out!');
-                        Navigator.pushReplacementNamed(context, 'home');
-                      } else {
-                        print('User is signed in!');
-                        Navigator.pushReplacementNamed(
-                            context, 'formularioMain');
-                      }
-                    });
-                    // if (user != null) {
-                    //   Navigator.pushReplacementNamed(context, 'formularioMain');
-                    // } else {
-                    //   mostrarAlertaOkCancel(
-                    //       context,
-                    //       'Para poder ingresar al formulario, debe registrarse o iniciar sesion.',
-                    //       'login');
-                    // }
-
-                    // mostrarAlertaOkCancel(
-                    //     context,
-                    //     'Para poder ingresar al formulario, debe registrarse o iniciar sesion.',
-                    //     'login');
+                    mostrarAlertaOk(
+                        context,
+                        'Para poder llenar el formulario de adopción debes seleccionar a tu futura mascota en nuestra galeria.',
+                        'home');
+                    //Navigator.pushReplacementNamed(context, 'home');
                   })
               : SizedBox(),
           ListTile(
@@ -89,16 +82,6 @@ class _MenuWidgetState extends State<MenuWidget> {
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushReplacementNamed(context, 'evidencia');
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.home,
-              color: Colors.green,
-            ),
-            title: Text('Inicio'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, 'bienvenida');
             },
           ),
         ],

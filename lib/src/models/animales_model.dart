@@ -12,6 +12,7 @@ String animalModelToJson(AnimalModel data) => json.encode(data.toJson());
 class AnimalModel {
   AnimalModel({
     this.id = '',
+    this.especie = '',
     this.nombre = '',
     this.sexo = '',
     this.edad = '',
@@ -25,12 +26,11 @@ class AnimalModel {
     this.fotoUrl = '',
   });
 
-  //AnimalModel.one();
-
-  String id;
+  String? id;
+  String especie;
   String nombre;
   String sexo;
-  String edad;
+  String edad; //Cambio de int a String
   String temperamento;
   double peso;
   String tamanio;
@@ -42,6 +42,7 @@ class AnimalModel {
 
   factory AnimalModel.fromJson(Map<String, dynamic> json) => AnimalModel(
         id: json["id"],
+        especie: json["especie"],
         nombre: json["nombre"],
         sexo: json["sexo"],
         edad: json["edad"],
@@ -57,6 +58,7 @@ class AnimalModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "especie": especie,
         "nombre": nombre,
         "sexo": sexo,
         "edad": edad,

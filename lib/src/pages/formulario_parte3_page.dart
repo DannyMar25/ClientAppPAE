@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/models/formulario_domicilio_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +31,9 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   bool isChecked3 = false;
 
   bool _guardando = false;
+  bool isDisable = true;
   var idFormu1;
+  String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   //SitFamiliarModel sitFamilia = new SitFamiliarModel();
   //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
@@ -148,6 +151,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       _crearEdadM(),
                       _crearTamanio(),
                       Divider(),
+                      _crearBotonRevisar(context),
                       _crearBoton(),
                     ],
                   )),
@@ -160,6 +164,13 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearDimencion() {
     return TextFormField(
+      validator: (value) {
+        if (isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
       initialValue: domicilio.m2.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -275,6 +286,13 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearAltura() {
     return TextFormField(
+      validator: (value) {
+        if (isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
       initialValue: domicilio.alturaC.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -403,6 +421,12 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _crearMaterial() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return campoVacio;
+        }
+        return null;
+      },
       // initialValue: ,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -509,13 +533,33 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       style: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.green;
+          if (isDisable == true) {
+            return Colors.grey;
+          } else {
+            return Colors.green;
+          }
         }),
       ),
       label: Text('Guardar'),
       icon: Icon(Icons.save),
       autofocus: true,
-      onPressed: (_guardando) ? null : _submit,
+      //onPressed: (_guardando) ? null : _submit,
+      onPressed: () {
+        if (isDisable == true) {
+          return null;
+        } else {
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
+        }
+      },
     );
   }
 
@@ -534,5 +578,47 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     //print(idFormu);
     // print("Debe llenar la parte 1 para poder continuar");
     //}
+  }
+
+  Widget _crearBotonRevisar(BuildContext context) {
+    return ElevatedButton.icon(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            return Colors.green;
+          }),
+        ),
+        label: Text('Revisar'),
+        icon: Icon(Icons.reviews),
+        autofocus: true,
+        onPressed: () {
+          _mostrarConfirmacion(context);
+        });
+  }
+
+  Future _mostrarConfirmacion(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Confirmacion'),
+            content: Text(
+                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+            actions: [
+              TextButton(
+                  child: Text('Lo he revisado'),
+                  //onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    setState(() {
+                      isDisable = false;
+                      Navigator.of(context).pop();
+                    });
+                  }),
+              TextButton(
+                  child: Text('Revisar'),
+                  onPressed: () => Navigator.of(context).pop()),
+            ],
+          );
+        });
   }
 }
