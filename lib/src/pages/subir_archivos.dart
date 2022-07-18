@@ -154,6 +154,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 ),
                 SizedBox(height: 15),
                 task1 != null ? buildUploadStatus1(task1!) : Container(),
+                Divider(),
+                Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 _crearBoton(context),
               ],
             ),
@@ -291,7 +293,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 return Colors.green;
               }),
             ),
-            label: Text('Confirmar', style: TextStyle(fontSize: 20)),
+            label:
+                Text('Guardar fotos/archivos', style: TextStyle(fontSize: 20)),
             icon: Icon(Icons.save),
             autofocus: true,
             onPressed: () {

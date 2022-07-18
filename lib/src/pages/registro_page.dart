@@ -198,7 +198,7 @@ class RegistroPage extends StatelessWidget {
         return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Ingresar'),
+            child: Text('Registrar'),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
@@ -227,7 +227,8 @@ class RegistroPage extends StatelessWidget {
       usuario.email = bloc.email;
       usuario.rol = Roles.cliente;
       usuarioProvider.crearUsuario(usuario);
-      Navigator.pushReplacementNamed(context, 'intro');
+      mostrarAlertaOk(context, 'Se ha registrado con exito.', 'login');
+      //Navigator.pushReplacementNamed(context, 'intro');
     } else {
       mostrarAlerta(context, info['mensaje']);
     }

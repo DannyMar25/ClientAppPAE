@@ -122,70 +122,75 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
 
   Widget _crearItem(BuildContext context, RegistroVacunasModel vacuna) {
     return ListTile(
-        title: Column(
-          children: [
-            Divider(color: Colors.transparent),
-            DataTable(
-              headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Color.fromARGB(255, 120, 110, 148),
+        title: Flexible(
+          fit: FlexFit.loose,
+          child: Column(
+            children: [
+              Divider(color: Colors.transparent),
+              DataTable(
+                columnSpacing: 26,
+                headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 120, 110, 148),
+                ),
+                dataRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 146, 155, 185)),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(width: 1, color: Colors.white),
+                ),
+                columns: [
+                  DataColumn(label: Text("Fecha")),
+                  DataColumn(label: Text("Peso(Kg)")),
+                  DataColumn(label: Text("Proxima vacuna")),
+                ],
+                rows: [
+                  DataRow(selected: true, cells: [
+                    DataCell(Container(
+                      child: Text('${vacuna.fechaConsulta}'),
+                      width: 85,
+                    )),
+                    DataCell(Container(
+                      child: Text('${vacuna.pesoActual}'),
+                      width: 70,
+                    )),
+                    DataCell(Container(
+                      child: Text('${vacuna.fechaProximaVacuna}'),
+                      width: 85,
+                    )),
+                  ]),
+                ],
               ),
-              dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 146, 155, 185)),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                border: Border.all(width: 1, color: Colors.white),
+              DataTable(
+                columnSpacing: 20,
+                headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 120, 110, 148),
+                ),
+                dataRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 146, 155, 185)),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(width: 1, color: Colors.white),
+                ),
+                columns: [
+                  DataColumn(label: Text("Vacuna Laboratorio")),
+                  DataColumn(label: Text("Veterinario ")),
+                ],
+                rows: [
+                  DataRow(selected: true, cells: [
+                    DataCell(Container(
+                      child: Text('${vacuna.tipoVacuna}'),
+                      width: 120,
+                    )),
+                    DataCell(Container(
+                      child: Text('${vacuna.veterinarioResp}'),
+                      width: 165,
+                    )),
+                  ]),
+                ],
               ),
-              columns: [
-                DataColumn(label: Text("Fecha")),
-                DataColumn(label: Text("Peso(Kg)")),
-                DataColumn(label: Text("Proxima vacuna")),
-              ],
-              rows: [
-                DataRow(selected: true, cells: [
-                  DataCell(Container(
-                    child: Text('${vacuna.fechaConsulta}'),
-                    width: 85,
-                  )),
-                  DataCell(Container(
-                    child: Text('${vacuna.pesoActual}'),
-                    width: 70,
-                  )),
-                  DataCell(Container(
-                    child: Text('${vacuna.fechaProximaVacuna}'),
-                    width: 85,
-                  )),
-                ]),
-              ],
-            ),
-            DataTable(
-              headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Color.fromARGB(255, 120, 110, 148),
-              ),
-              dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 146, 155, 185)),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                border: Border.all(width: 1, color: Colors.white),
-              ),
-              columns: [
-                DataColumn(label: Text("Vacuna Laboratorio")),
-                DataColumn(label: Text("Veterinario ")),
-              ],
-              rows: [
-                DataRow(selected: true, cells: [
-                  DataCell(Container(
-                    child: Text('${vacuna.tipoVacuna}'),
-                    width: 165,
-                  )),
-                  DataCell(Container(
-                    child: Text('${vacuna.veterinarioResp}'),
-                    width: 165,
-                  )),
-                ]),
-              ],
-            ),
-            Divider(color: Colors.transparent)
-          ],
+              Divider(color: Colors.transparent)
+            ],
+          ),
         ),
         //subtitle: Text('${horario}'),
         onTap: () async {

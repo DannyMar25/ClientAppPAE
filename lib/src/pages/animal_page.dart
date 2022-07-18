@@ -100,15 +100,18 @@ class _AnimalPageState extends State<AnimalPage> {
                 _crearTamanio(),
                 _crearColor(),
                 _crearRaza(),
+                _crearEsterilizado(),
                 _crearCaracteristicas(),
+                Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                cardEtapasVida(),
                 Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 cardCita(),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
-                _crearBotonCita(),
+                //_crearBotonCita(),
                 Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 cardAdopcion(),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
-                _crearBotonAdopta(),
+                //_crearBotonAdopta(),
                 // _crearDisponible(),
                 // _crearBoton(),
               ],
@@ -178,21 +181,21 @@ class _AnimalPageState extends State<AnimalPage> {
 
   Widget _crearEdad() {
     return TextFormField(
-      initialValue: animal.edad.toString(),
+      initialValue: animal.etapaVida,
       readOnly: true,
-      //textCapitalization: TextCapitalization.sentences,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      textCapitalization: TextCapitalization.sentences,
+      //keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
-        labelText: 'Edad',
+        labelText: 'Etapa de vida',
       ),
-      onSaved: (value) => animal.edad = value!,
-      validator: (value) {
-        if (utils.isNumeric(value!)) {
-          return null;
-        } else {
-          return 'Solo numeros';
-        }
-      },
+      onSaved: (value) => animal.etapaVida = value!,
+      // validator: (value) {
+      //   if (utils.isNumeric(value!)) {
+      //     return null;
+      //   } else {
+      //     return 'Solo numeros';
+      //   }
+      // },
     );
   }
 
@@ -217,7 +220,7 @@ class _AnimalPageState extends State<AnimalPage> {
 
   Widget _crearPeso() {
     return TextFormField(
-      initialValue: animal.peso.toString(),
+      initialValue: animal.peso.toString() + ' ' + 'Kg.',
       readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -284,6 +287,25 @@ class _AnimalPageState extends State<AnimalPage> {
       validator: (value) {
         if (value!.length < 3) {
           return 'Ingrese la raza de la mascota';
+        } else {
+          return null;
+        }
+      },
+    );
+  }
+
+  Widget _crearEsterilizado() {
+    return TextFormField(
+      initialValue: animal.esterilizado,
+      readOnly: true,
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        labelText: 'Esterilizado',
+      ),
+      onSaved: (value) => animal.especie = value!,
+      validator: (value) {
+        if (value!.length < 3) {
+          return 'Ingrese la especie de la mascota';
         } else {
           return null;
         }
@@ -420,18 +442,20 @@ class _AnimalPageState extends State<AnimalPage> {
     }
   }
 
-  Widget cardCita() {
+  Widget cardEtapasVida() {
     return Card(
       child: Container(
-        height: 100,
+        height: 150,
         color: Colors.white,
         child: Row(
           children: [
-            Center(
+            SizedBox(
+              height: 110,
+              width: 110,
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
                 child: Expanded(
-                  child: Image.asset("assets/dog_an8.gif"),
+                  child: Image.asset("assets/dog_an3.gif"),
                   flex: 2,
                 ),
               ),
@@ -442,15 +466,25 @@ class _AnimalPageState extends State<AnimalPage> {
                 child: Column(
                   children: [
                     Expanded(
-                      flex: 5,
-                      child: ListTile(
-                        title: Text("Agenda una cita!"),
-                        subtitle: Text(
-                          "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipcion.",
-                          textAlign: TextAlign.justify,
-                        ),
-                      ),
-                    ),
+                        flex: 5,
+                        child: ListTile(
+                          title: Text(
+                            "Etapas de Vida",
+                            textAlign: TextAlign.center,
+                          ),
+                          subtitle: Column(
+                            children: [
+                              Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 10.0, bottom: 5.0)),
+                              Text("Cachorro: 0 a 6 meses"),
+                              Text("Joven: 7 meses a 2 años"),
+                              Text("Adulto: 2 a 6 años"),
+                              Text("Anciano: 7 a 11 años"),
+                              Text("Geriátrico: mayor a 12 años"),
+                            ],
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -465,43 +499,169 @@ class _AnimalPageState extends State<AnimalPage> {
     );
   }
 
-  Widget cardAdopcion() {
+  Widget cardCita() {
     return Card(
-      child: Container(
-        height: 100,
-        color: Colors.white,
-        child: Row(
-          children: [
-            Center(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Expanded(
-                  child: Image.asset("assets/dog_an7.gif"),
-                  flex: 2,
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, 'registroCita', arguments: animal);
+        },
+        child: Container(
+          height: 150,
+          color: Colors.white,
+          child: Row(
+            children: [
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Expanded(
+                    child: Image.asset("assets/dog_an8.gif"),
+                    flex: 2,
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: ListTile(
-                        title: Text("Deseas adoptar a ${animal.nombre}!"),
-                        subtitle: Text(
-                          "Si deseas adoptarlo debes llenar el formulario de adopcion.",
-                          textAlign: TextAlign.justify,
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Expanded(
+                          flex: 5,
+                          child: ListTile(
+                            title: Text("Agenda una cita!"),
+                            subtitle: Text(
+                              "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipcion.",
+                              textAlign: TextAlign.justify,
+                            ),
+                          )),
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              child: Text("Agendar"),
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'registroCita',
+                                    arguments: animal);
+                              },
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            TextButton(
+                              child: Text("Volver a galeria"),
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'home');
+                              },
+                            ),
+                            SizedBox(
+                              width: 8,
+                            )
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                flex: 8,
+              ),
+            ],
+          ),
+        ),
+      ),
+      elevation: 8,
+      margin: EdgeInsets.all(10),
+      shadowColor: Colors.green,
+    );
+  }
+
+  Widget cardAdopcion() {
+    final email = prefs.email;
+    return Card(
+      child: InkWell(
+        onTap: () {
+          if (email != '') {
+            Navigator.pushReplacementNamed(context, 'formularioMain',
+                arguments: animal);
+          } else {
+            mostrarAlertaOkCancel(
+                context,
+                'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
+                'login',
+                animal);
+          }
+        },
+        child: Container(
+          height: 150,
+          color: Colors.white,
+          child: Row(
+            children: [
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Expanded(
+                    child: Image.asset("assets/dog_an7.gif"),
+                    flex: 2,
+                  ),
                 ),
               ),
-              flex: 8,
-            ),
-          ],
+              Expanded(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Expanded(
+                          flex: 5,
+                          child: ListTile(
+                            title: Text("Deseas adoptar a ${animal.nombre}!"),
+                            subtitle: Text(
+                              "Si deseas adoptarlo debes llenar el formulario de adopcion.",
+                              textAlign: TextAlign.justify,
+                            ),
+                          )),
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              child: Text("Adoptarlo!"),
+                              onPressed: () {
+                                if (email != '') {
+                                  Navigator.pushReplacementNamed(
+                                      context, 'formularioMain',
+                                      arguments: animal);
+                                } else {
+                                  mostrarAlertaOkCancel(
+                                      context,
+                                      'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
+                                      'login',
+                                      animal);
+                                }
+                              },
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            TextButton(
+                              child: Text("Volver a galeria"),
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'home');
+                              },
+                            ),
+                            SizedBox(
+                              width: 8,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                flex: 8,
+              ),
+            ],
+          ),
         ),
       ),
       elevation: 8,

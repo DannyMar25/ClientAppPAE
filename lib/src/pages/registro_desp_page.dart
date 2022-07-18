@@ -52,79 +52,86 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
         children: [
           //Background(),
           SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Registro de desparacitaciones',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
+            child: Flexible(
+              fit: FlexFit.loose,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Registro de desparacitaciones',
+                          style: TextStyle(
+                            fontSize: 33,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        Divider(),
+                        DataTable(
+                          columnSpacing: 25,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 120, 110, 148),
+                          ),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => Color.fromARGB(255, 146, 155, 185)),
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            border: Border.all(width: 1, color: Colors.white),
+                          ),
+                          sortColumnIndex: 1,
+                          sortAscending: false,
+                          columns: [
+                            DataColumn(
+                                label: Text(
+                                    "Fecha consulta                      ")),
+                            DataColumn(label: Text("Producto    ")),
+                          ],
+                          rows: [
+                            DataRow(selected: true, cells: [
+                              DataCell(_crearFechaConsulta(context)),
+                              //DataCell(_crearPesoActual()),
+                              DataCell(_crearProducto()),
+                            ]),
+                          ],
                         ),
-                        dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 146, 155, 185)),
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          border: Border.all(width: 1, color: Colors.white),
+                        DataTable(
+                          columnSpacing: 30,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 120, 110, 148),
+                          ),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => Color.fromARGB(255, 146, 155, 185)),
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            border: Border.all(width: 1, color: Colors.white),
+                          ),
+                          sortColumnIndex: 1,
+                          sortAscending: false,
+                          columns: [
+                            DataColumn(label: Text("Peso(Kg)"), numeric: true),
+                            DataColumn(label: Text("Proxima desparacitacion")),
+                          ],
+                          rows: [
+                            DataRow(selected: true, cells: [
+                              DataCell(_crearPesoActual()),
+                              DataCell(Container(
+                                child: _crearFechaProxima(context),
+                                height: 140.0,
+                              )),
+                            ]),
+                          ],
                         ),
-                        sortColumnIndex: 1,
-                        sortAscending: false,
-                        columns: [
-                          DataColumn(
-                              label:
-                                  Text("Fecha consulta                      ")),
-                          DataColumn(label: Text("Producto    ")),
-                        ],
-                        rows: [
-                          DataRow(selected: true, cells: [
-                            DataCell(_crearFechaConsulta(context)),
-                            //DataCell(_crearPesoActual()),
-                            DataCell(_crearProducto()),
-                          ]),
-                        ],
-                      ),
-                      DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                          (states) => Color.fromARGB(255, 120, 110, 148),
-                        ),
-                        dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 146, 155, 185)),
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          border: Border.all(width: 1, color: Colors.white),
-                        ),
-                        sortColumnIndex: 1,
-                        sortAscending: false,
-                        columns: [
-                          DataColumn(
-                              label: Text("        Peso(Kg)"), numeric: true),
-                          DataColumn(label: Text("Proxima desparacitacion")),
-                        ],
-                        rows: [
-                          DataRow(selected: true, cells: [
-                            DataCell(_crearPesoActual()),
-                            DataCell(_crearFechaProxima(context)),
-                          ]),
-                        ],
-                      ),
-                      Divider(),
-                      _crearBoton(context),
-                      _crearBoton1(context)
-                    ],
-                  )),
+                        Divider(),
+                        _crearBoton(context),
+                        _crearBoton1(context)
+                      ],
+                    )),
+              ),
             ),
           ),
         ],

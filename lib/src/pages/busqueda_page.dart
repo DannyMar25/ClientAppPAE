@@ -1,3 +1,4 @@
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class BusquedaPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
   String? _selection;
   final List<String> _sexo = ['Macho', 'Hembra'].toList();
   String? _selection1;
-  final List<String> _edad = [
+  final List<String> _etapaVida = [
     'Cachorro (0 a 6 meses)',
     'Joven (6 meses a 2 años)',
     'Adulto (2 a 6 años)',
@@ -26,7 +27,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
 
   bool isChecked1 = false;
   bool isChecked2 = false;
-  String? _selection4;
+  String? selection4;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,67 +45,126 @@ class _BusquedaPageState extends State<BusquedaPage> {
         children: [
           //Background(),
           SingleChildScrollView(
-            child: Container(
-              //padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      //Padding(padding: EdgeInsets.only(top: 1.0)),
-                      SizedBox(
-                        height: 170,
-                        child: Image(
-                          image: AssetImage("assets/dog_an6.gif"),
-                          fit: BoxFit.fill,
+            child: Flexible(
+              fit: FlexFit.loose,
+              child: Container(
+                //padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        //Padding(padding: EdgeInsets.only(top: 1.0)),
+                        SizedBox(
+                          height: 170,
+                          child: Image(
+                            image: AssetImage("assets/dog_an6.gif"),
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
-                      Text('Buscador',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 30,
-                          )),
-                      Text(
-                        'Selecciona la o las categorias de tu gusto y te mostraremos los resultados',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      //Divider(),
-                      //Text('Especie:'),
-                      Divider(),
-                      Row(
-                        children: [
-                          Padding(padding: EdgeInsets.only(left: 120.0)),
-                          SizedBox(
-                              height: 80,
-                              child: Image(
-                                  image: AssetImage("assets/dog_an1.gif"))),
-                          Padding(padding: EdgeInsets.only(left: 60.0)),
-                          SizedBox(
-                              height: 80,
-                              child: Image(
-                                  image: AssetImage("assets/cat_im2.jpg")))
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                      _seleccionarEspecie(),
-                      //Divider(),
-                      //Text('Sexo:'),
-                      //Divider(),
-                      Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                      _seleccionarSexo(),
-                      //Divider(),
-                      //Text('Edad:'),
-                      Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                      _seleccionarEdad(),
-                      // Divider(),
-                      //Text('Tamaño:'),
-                      //Divider(),
-                      Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                      _seleccionarTamanio(),
-                      Padding(padding: EdgeInsets.only(bottom: 40.0)),
-                      _crearBoton()
-                    ],
-                  )),
+                        Text('Buscador',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 30,
+                            )),
+                        Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                        Text(
+                          'Selecciona la o las categorias de tu gusto y te mostraremos los resultados',
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        //Divider(),
+                        //Text('Especie:'),
+                        Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //Padding(padding: EdgeInsets.only(left: 160.0)),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 80,
+                                  child: Image(
+                                      image: AssetImage("assets/dog_an1.gif"))),
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 80,
+                                  child: Image(
+                                      image: AssetImage("assets/cat_im2.jpg"))),
+                            ),
+                          ],
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        _seleccionarEspecie(),
+                        Divider(),
+                        Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        //Divider(),
+                        //Text('Sexo:'),
+                        //Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //Padding(padding: EdgeInsets.only(left: 170.0)),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 60,
+                                  child: Image(
+                                      image: AssetImage(
+                                          "assets/huella_azul3.png"))),
+                            ),
+                            // Padding(
+                            //     padding:
+                            //         EdgeInsets.only(left: 65.0, right: 10.0)),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 140,
+                                  child: Image(
+                                      image: AssetImage(
+                                          "assets/huella_rosa3.png"))),
+                            )
+                          ],
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        _seleccionarSexo(),
+                        Padding(padding: EdgeInsets.only(bottom: 25.0)),
+                        //Divider(),
+                        //Text('Edad:'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //Padding(padding: EdgeInsets.only(left: 50.0)),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 200.0,
+                                  child: Image(
+                                      image: AssetImage("assets/pets_4.png"))),
+                            ),
+                          ],
+                        ),
+                        Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        _seleccionarEtapaVida(),
+                        // Divider(),
+                        //Text('Tamaño:'),
+                        //Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //Padding(padding: EdgeInsets.only(left: 150.0)),
+                            Expanded(
+                              child: SizedBox(
+                                  height: 200,
+                                  child: Image(
+                                      image: AssetImage("assets/pets_2.png"))),
+                            ),
+                          ],
+                        ),
+                        //Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                        _seleccionarTamanio(),
+                        Padding(padding: EdgeInsets.only(bottom: 40.0)),
+                        _crearBoton()
+                      ],
+                    )),
+              ),
             ),
           ),
         ],
@@ -183,30 +243,26 @@ class _BusquedaPageState extends State<BusquedaPage> {
         Padding(padding: EdgeInsets.only(top: 10.0)),
         DecoratedBox(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 229, 215, 230),
-                Color.fromARGB(225, 109, 245, 170),
-                Color.fromARGB(255, 210, 235, 250)
-                //add more colors
-              ]),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
-                    blurRadius: 5) //blur radius of shadow
-              ]),
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(10.0)),
           child: Padding(
             padding: EdgeInsets.only(left: 30, right: 30),
-            child: DropdownButton<String>(
-                //hint: Text(animal.tamanio.toString()),
-                value: _selection,
-                items: dropdownMenuOptions,
-                onChanged: (s) {
-                  setState(() {
-                    _selection = s;
-                    //animal.tamanio = s!;
-                  });
-                }),
+            //Se cambio dropdownbutton por dropdownbuttonformfiel y con esto se anadio validator
+            child: SizedBox(
+              width: 150.0,
+              child: DropdownButtonFormField<String>(
+                  //hint: Text(animal.tamanio.toString()),
+                  value: _selection,
+                  items: dropdownMenuOptions,
+                  validator: (value) =>
+                      value == null ? 'Selecciona una opción' : null,
+                  onChanged: (s) {
+                    setState(() {
+                      _selection = s;
+                      //animal.tamanio = s!;
+                    });
+                  }),
+            ),
           ),
         ),
       ],
@@ -230,38 +286,33 @@ class _BusquedaPageState extends State<BusquedaPage> {
         Padding(padding: EdgeInsets.only(top: 10.0)),
         DecoratedBox(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 229, 215, 230),
-                Color.fromARGB(225, 109, 245, 170),
-                Color.fromARGB(255, 210, 235, 250)
-                //add more colors
-              ]),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
-                    blurRadius: 5) //blur radius of shadow
-              ]),
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(10.0)),
           child: Padding(
             padding: EdgeInsets.only(left: 30, right: 30),
-            child: DropdownButton<String>(
-                //hint: Text(animal.tamanio.toString()),
-                value: _selection1,
-                items: dropdownMenuOptions,
-                onChanged: (s) {
-                  setState(() {
-                    _selection1 = s;
-                    //animal.tamanio = s!;
-                  });
-                }),
+            child: SizedBox(
+              width: 150.0,
+              child: DropdownButtonFormField<String>(
+                  //hint: Text(animal.tamanio.toString()),
+                  value: _selection1,
+                  items: dropdownMenuOptions,
+                  validator: (value) =>
+                      value == null ? 'Selecciona una opción' : null,
+                  onChanged: (s) {
+                    setState(() {
+                      _selection1 = s;
+                      //animal.tamanio = s!;
+                    });
+                  }),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _seleccionarEdad() {
-    final dropdownMenuOptions = _edad
+  Widget _seleccionarEtapaVida() {
+    final dropdownMenuOptions = _etapaVida
         .map((String edad) =>
             //new DropdownMenuItem<String>(value: item, child: new Text(item)))
             new DropdownMenuItem<String>(value: edad, child: new Text(edad)))
@@ -271,36 +322,31 @@ class _BusquedaPageState extends State<BusquedaPage> {
       children: [
         Padding(padding: EdgeInsets.only(top: 10.0)),
         Text(
-          'Seleccione edad:',
+          'Seleccione etapa:',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         Padding(padding: EdgeInsets.only(top: 10.0)),
         DecoratedBox(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 229, 215, 230),
-                Color.fromARGB(225, 109, 245, 170),
-                Color.fromARGB(255, 210, 235, 250)
-                //add more colors
-              ]),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
-                    blurRadius: 5) //blur radius of shadow
-              ]),
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(10.0)),
           child: Padding(
             padding: EdgeInsets.only(left: 30, right: 30),
-            child: DropdownButton<String>(
-                //hint: Text(animal.tamanio.toString()),
-                value: _selection2,
-                items: dropdownMenuOptions,
-                onChanged: (s) {
-                  setState(() {
-                    _selection2 = s;
-                    //animal.tamanio = s!;
-                  });
-                }),
+            child: SizedBox(
+              width: 280.0,
+              child: DropdownButtonFormField<String>(
+                  //hint: Text(animal.tamanio.toString()),
+                  value: _selection2,
+                  items: dropdownMenuOptions,
+                  validator: (value) =>
+                      value == null ? 'Selecciona una opción' : null,
+                  onChanged: (s) {
+                    setState(() {
+                      _selection2 = s;
+                      //animal.tamanio = s!;
+                    });
+                  }),
+            ),
           ),
         ),
       ],
@@ -325,30 +371,25 @@ class _BusquedaPageState extends State<BusquedaPage> {
         Padding(padding: EdgeInsets.only(top: 10.0)),
         DecoratedBox(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 229, 215, 230),
-                Color.fromARGB(225, 109, 245, 170),
-                Color.fromARGB(255, 210, 235, 250)
-                //add more colors
-              ]),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.57), //shadow for button
-                    blurRadius: 5) //blur radius of shadow
-              ]),
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(10.0)),
           child: Padding(
             padding: EdgeInsets.only(left: 30, right: 30),
-            child: DropdownButton<String>(
-                //hint: Text(animal.tamanio.toString()),
-                value: _selection3,
-                items: dropdownMenuOptions,
-                onChanged: (s) {
-                  setState(() {
-                    _selection3 = s;
-                    //animal.tamanio = s!;
-                  });
-                }),
+            child: SizedBox(
+              width: 150.0,
+              child: DropdownButtonFormField<String>(
+                  //hint: Text(animal.tamanio.toString()),
+                  value: _selection3,
+                  items: dropdownMenuOptions,
+                  validator: (value) =>
+                      value == null ? 'Selecciona una opción' : null,
+                  onChanged: (s) {
+                    setState(() {
+                      _selection3 = s;
+                      //animal.tamanio = s!;
+                    });
+                  }),
+            ),
           ),
         ),
       ],
@@ -368,7 +409,16 @@ class _BusquedaPageState extends State<BusquedaPage> {
       autofocus: true,
       //onPressed: (_guardando) ? null : _submit,
       onPressed: () {
-        _submit();
+        if (formKey.currentState!.validate()) {
+          SnackBar(
+            content: Text('Por favor selecciona una opcion'),
+          );
+          _submit();
+        } else {
+          mostrarAlerta(context,
+              'Todos los campos deben ser seleccionados. Asegurate de haber completado todos');
+        }
+        //_submit();
       },
     );
   }
@@ -379,7 +429,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
     Navigator.pushNamed(context, 'resultadoBusqueda', arguments: {
       'especie': _selection,
       'sexo': _selection1,
-      'edad': _selection2,
+      'etapaVida': _selection2,
       'tamanio': _selection3
     });
   }

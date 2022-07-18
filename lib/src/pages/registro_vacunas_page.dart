@@ -53,92 +53,97 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
         children: [
           // Background(),
           SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Registro de vacunas',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
+            child: Flexible(
+              fit: FlexFit.loose,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Registro de vacunas',
+                          style: TextStyle(
+                            fontSize: 33,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                          (states) => Color.fromARGB(255, 120, 110, 148),
+                        Divider(),
+                        DataTable(
+                          columnSpacing: 25,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 120, 110, 148),
+                          ),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => Color.fromARGB(255, 146, 155, 185)),
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            border: Border.all(width: 1, color: Colors.white),
+                          ),
+                          sortColumnIndex: 2,
+                          sortAscending: false,
+                          columns: [
+                            DataColumn(label: Text("Fecha")),
+                            DataColumn(label: Text("Peso(Kg)"), numeric: true),
+                            DataColumn(label: Text("Proxima vacuna")),
+                          ],
+                          rows: [
+                            DataRow(selected: true, cells: [
+                              DataCell(Container(
+                                child: _crearFechaConsulta(context),
+                                width: 85,
+                              )),
+                              DataCell(Container(
+                                child: _crearPesoActual(),
+                                width: 70,
+                              )),
+                              DataCell(Container(
+                                child: _crearFechaProxima(context),
+                                width: 85,
+                              )),
+                            ]),
+                          ],
                         ),
-                        dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 146, 155, 185)),
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          border: Border.all(width: 1, color: Colors.white),
+                        DataTable(
+                          columnSpacing: 25,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromARGB(255, 120, 110, 148),
+                          ),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => Color.fromARGB(255, 146, 155, 185)),
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            border: Border.all(width: 1, color: Colors.white),
+                          ),
+                          sortColumnIndex: 1,
+                          sortAscending: false,
+                          columns: [
+                            DataColumn(label: Text("Vacuna Laboratorio ")),
+                            DataColumn(label: Text("Veterinario responsable")),
+                          ],
+                          rows: [
+                            DataRow(selected: true, cells: [
+                              DataCell(Container(
+                                child: _crearVacuna(),
+                                width: 100,
+                              )),
+                              DataCell(Container(
+                                child: _crearVeterinario(),
+                                width: 100,
+                              )),
+                            ]),
+                          ],
                         ),
-                        sortColumnIndex: 2,
-                        sortAscending: false,
-                        columns: [
-                          DataColumn(label: Text("Fecha")),
-                          DataColumn(label: Text("Peso(Kg)"), numeric: true),
-                          DataColumn(label: Text("Proxima vacuna")),
-                        ],
-                        rows: [
-                          DataRow(selected: true, cells: [
-                            DataCell(Container(
-                              child: _crearFechaConsulta(context),
-                              width: 85,
-                            )),
-                            DataCell(Container(
-                              child: _crearPesoActual(),
-                              width: 70,
-                            )),
-                            DataCell(Container(
-                              child: _crearFechaProxima(context),
-                              width: 85,
-                            )),
-                          ]),
-                        ],
-                      ),
-                      DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                          (states) => Color.fromARGB(255, 120, 110, 148),
-                        ),
-                        dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 146, 155, 185)),
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          border: Border.all(width: 1, color: Colors.white),
-                        ),
-                        sortColumnIndex: 1,
-                        sortAscending: false,
-                        columns: [
-                          DataColumn(label: Text("Vacuna Laboratorio ")),
-                          DataColumn(label: Text("Veterinario responsable")),
-                        ],
-                        rows: [
-                          DataRow(selected: true, cells: [
-                            DataCell(Container(
-                              child: _crearVacuna(),
-                              width: 100,
-                            )),
-                            DataCell(Container(
-                              child: _crearVeterinario(),
-                              width: 100,
-                            )),
-                          ]),
-                        ],
-                      ),
-                      Divider(),
-                      _crearBoton(context),
-                      _crearBoton1(context)
-                    ],
-                  )),
+                        Divider(),
+                        _crearBoton(context),
+                        _crearBoton1(context)
+                      ],
+                    )),
+              ),
             ),
           ),
         ],

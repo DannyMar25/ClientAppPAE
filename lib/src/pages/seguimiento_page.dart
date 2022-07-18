@@ -52,167 +52,210 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             //_verGaleria(context),
             //Text('Hola'),
             SingleChildScrollView(
-              child: Container(
-                //color: Colors.lightGreenAccent,
-                //padding: new EdgeInsets.only(top: 230.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Informacion de la mascota adoptada',
-                            style: TextStyle(
-                              fontSize: 28,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 3
-                                ..color = Colors.blueAccent,
+              child: Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  //color: Colors.lightGreenAccent,
+                  //padding: new EdgeInsets.only(top: 230.0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Información de la mascota adoptada',
+                              style: TextStyle(
+                                fontSize: 28,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 3
+                                  ..color = Colors.blueAccent,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Divider(),
-                          _mostrarFoto(),
-                          Divider(
-                            color: Colors.white,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Nombre: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.nombre}                                ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Edad: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.edad}      ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Raza: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.raza}',
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          Row(
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Color: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.color}               ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Tamaño: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.tamanio}      ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                'Sexo: ',
-                                textAlign: TextAlign.left,
-                              ),
-                              Text(
-                                '${animal.sexo}',
-                                textAlign: TextAlign.left,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          Divider(
-                            color: Colors.white,
-                          ),
-                          Text(
-                            'Informacion del adoptante',
-                            style: TextStyle(
-                              fontSize: 28,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 3
-                                ..color = Colors.blueAccent,
+                            Divider(),
+                            _mostrarFoto(),
+                            Divider(
+                              color: Colors.white,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Divider(),
-                          Divider(
-                            color: Colors.white,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Nombre: ',
-                                textAlign: TextAlign.center,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Nombre: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.nombre}',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Etapa de vida: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.etapaVida}',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Raza: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.raza}',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            Row(
+                              //crossAxisAlignment: CrossAxisAlignment.end,
+                              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Color: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.color}               ',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Tamaño: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.tamanio}      ',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Sexo: ',
+                                    textAlign: TextAlign.left,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '${animal.sexo}',
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            Divider(
+                              color: Colors.white,
+                            ),
+                            Text(
+                              'Informacion del adoptante',
+                              style: TextStyle(
+                                fontSize: 28,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 3
+                                  ..color = Colors.blueAccent,
                               ),
-                              Text(
-                                '${datosA.nombreCom}  ',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          Row(
-                            children: [
-                              Text(
-                                'Direccion: ',
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                '${datosA.direccion}',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          Row(
-                            children: [
-                              Text(
-                                'Telefono: ',
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                '${datosA.telfCel}',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                          Row(
-                            children: [
-                              Text(
-                                'Correo: ',
-                                textAlign: TextAlign.center,
-                              ),
-                              Text(
-                                '${datosA.email}',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                          Divider(),
-                        ],
-                      ),
-                      _crearBoton(context),
-                    ],
+                              textAlign: TextAlign.center,
+                            ),
+                            Divider(),
+                            Divider(
+                              color: Colors.white,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Nombre: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '${datosA.nombreCom}  ',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            Row(
+                              children: [
+                                Text(
+                                  'Direccion: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '${datosA.direccion}',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            Row(
+                              children: [
+                                Text(
+                                  'Telefono: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '${datosA.telfCel}',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                            Row(
+                              children: [
+                                Text(
+                                  'Correo: ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '${datosA.email}',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            Divider(),
+                          ],
+                        ),
+                        _crearBoton(context),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,7 +264,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         ));
   }
 
-  Widget _obtenerImagenes() {
+  Widget obtenerImagenes() {
     Reference ref = storage.ref().child(
         'gs://flutter-varios-1637a.appspot.com/animales/0H05tnjVPjfF1E8DBw0p');
 
@@ -250,7 +293,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     }
   }
 
-  Widget _verGaleria(BuildContext context) {
+  Widget verGaleria(BuildContext context) {
     return PhotoViewGallery.builder(
       customSize: Size(450.0, 450.0),
       itemCount: imageList.length,
@@ -292,41 +335,22 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-                style: ButtonStyle(
-                  //padding: new EdgeInsets.only(top: 5),
-                  backgroundColor: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) {
-                    return Colors.green;
-                  }),
-                ),
-                label: Text('Registro Vacunas'),
-                icon: Icon(Icons.save),
-                autofocus: true,
-                onPressed: () {
-                  // Navigator.pushNamed(context, 'registroVacunas',
-                  //     arguments: animal);
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
-                }),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
+            Expanded(
               child: ElevatedButton.icon(
                   style: ButtonStyle(
+                    //padding: new EdgeInsets.only(top: 5),
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (Set<MaterialState> states) {
                       return Colors.green;
                     }),
                   ),
-                  label: Text('Registro Desparasitacion'),
+                  label: Text('Registro Vacunas'),
                   icon: Icon(Icons.save),
                   autofocus: true,
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, 'registroDesp',
+                    // Navigator.pushNamed(context, 'registroVacunas',
+                    //     arguments: animal);
+                    Navigator.pushReplacementNamed(context, 'registroVacunas',
                         arguments: {
                           'datosper': datosA,
                           'formulario': formularios,
@@ -334,27 +358,52 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         });
                   }),
             ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Expanded(
+                child: ElevatedButton.icon(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith(
+                          (Set<MaterialState> states) {
+                        return Colors.green;
+                      }),
+                    ),
+                    label: Text('Registro Desparasitacion'),
+                    icon: Icon(Icons.save),
+                    autofocus: true,
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, 'registroDesp',
+                          arguments: {
+                            'datosper': datosA,
+                            'formulario': formularios,
+                            'animal': animal
+                          });
+                    }),
+              ),
+            ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.all(10.0),
-          child: ElevatedButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(
-                    (Set<MaterialState> states) {
-                  return Colors.green;
+          child: Expanded(
+            child: ElevatedButton.icon(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.resolveWith(
+                      (Set<MaterialState> states) {
+                    return Colors.green;
+                  }),
+                ),
+                label: Text('Cargar evidencia'),
+                icon: Icon(Icons.save),
+                autofocus: true,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 }),
-              ),
-              label: Text('Cargar evidencia'),
-              icon: Icon(Icons.save),
-              autofocus: true,
-              onPressed: () {
-                Navigator.pushNamed(context, 'demoArchivos', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                });
-              }),
+          ),
         ),
       ],
     );

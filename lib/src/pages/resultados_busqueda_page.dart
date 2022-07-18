@@ -2,6 +2,7 @@ import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -23,7 +24,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
   final formKey = GlobalKey<FormState>();
   String? especie;
   String? sexo;
-  String? edad;
+  String? etapaVida;
   String? tamanio;
 
   @override
@@ -35,12 +36,12 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
     especie = arg['especie'];
     //print(formularios.idDatosPersonales);
     sexo = arg['sexo'];
-    edad = arg['edad'];
+    etapaVida = arg['etapaVida'];
     tamanio = arg['tamanio'];
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Home Page'),
+          title: Text('Resultados de busqueda'),
           backgroundColor: Colors.green,
           actions: [
             Builder(builder: (BuildContext context) {
@@ -55,19 +56,31 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
                           onPressed: () async {
                             Navigator.pushNamed(context, 'login');
                           },
-                          child: Text('Iniciar Sesión'),
+                          child: Text('Iniciar sesión'),
+                        )
+                      : TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () async {
+                            userProvider.signOut();
+                            Navigator.pushNamed(context, 'home');
+                          },
+                          child: Text('Cerrar sesión'),
+                        ),
+                  email == ''
+                      ? TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () async {
+                            Navigator.pushNamed(context, 'registro');
+                          },
+                          child: Text('Registrarse'),
                         )
                       : SizedBox(),
-                  TextButton(
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    onPressed: () async {
-                      Navigator.pushNamed(context, 'registro');
-                    },
-                    child: Text('Registrarse'),
-                  ),
                 ],
               );
             }),
@@ -90,8 +103,8 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
   Widget _crearListadoBusqueda() {
     return FutureBuilder(
-        future:
-            animalesProvider.cargarBusqueda(especie!, sexo!, edad!, tamanio!),
+        future: animalesProvider.cargarBusqueda(
+            especie!, sexo!, etapaVida!, tamanio!),
         builder:
             (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
           if (snapshot.hasData) {
@@ -103,43 +116,96 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
               children: List.generate(animales!.length, (index) {
                 return _crearItem1(context, animales[index]);
               }),
-
-              //            return ListView.builder(
-              //             itemCount: animales!.length,
-              //              itemBuilder: (context, i) => _crearItem(context, animales[i]),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Column(children: [
+              AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 50,
+                    ),
+                    Text('Resultado de busqueda!'),
+                  ],
+                ),
+                content: Text(
+                    'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+                actions: [
+                  TextButton(
+                      child: Text('Ok'),
+                      //onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'home');
+                      })
+                ],
+              )
+            ]);
+            // return AlertDialog(
+            //   title: Row(
+            //     children: [
+            //       Icon(
+            //         Icons.check_circle,
+            //         color: Colors.green,
+            //         size: 50,
+            //       ),
+            //       Text('Resultado de busqueda!'),
+            //     ],
+            //   ),
+            //   content: Text(
+            //       'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+            //   actions: [
+            //     TextButton(
+            //         child: Text('Ok'),
+            //         //onPressed: () => Navigator.of(context).pop(),
+            //         onPressed: () {
+            //           Navigator.pushNamed(context, 'home');
+            //         })
+            //   ],
+            // );
           }
         });
   }
 
   Widget _crearItem1(BuildContext context, AnimalModel animal) {
-    return Card(
-      color: Color.fromARGB(248, 202, 241, 170),
-      elevation: 4.0,
-      margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
-      child: InkWell(
-        onTap: () => Navigator.pushNamed(context, 'animal', arguments: animal),
-        child: Column(
-          children: [
-            (animal.fotoUrl == "")
-                ? Image(image: AssetImage('assets/no-image.png'))
-                : FadeInImage(
-                    image: NetworkImage(animal.fotoUrl),
-                    placeholder: AssetImage('assets/cat_1.gif'),
-                    height: 300.0,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+    return Expanded(
+      child: Container(
+        height: 100.0,
+        width: 200.0,
+        child: Card(
+          color: Color.fromARGB(248, 202, 241, 170),
+          elevation: 4.0,
+          margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
+          child: Flexible(
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, 'animal', arguments: animal),
+              child: Column(
+                children: [
+                  (animal.fotoUrl == "")
+                      ? Image(image: AssetImage('assets/no-image.png'))
+                      : Expanded(
+                          child: FadeInImage(
+                            image: NetworkImage(animal.fotoUrl),
+                            placeholder: AssetImage('assets/cat_1.gif'),
+                            height: 300.0,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                  //Padding(padding: EdgeInsets.only(bottom: 5.0)),
+                  ListTile(
+                    title: Text('${animal.nombre}'),
+                    subtitle: Text('${animal.especie} - ${animal.sexo}'),
+                    // onTap: () =>
+                    //     Navigator.pushNamed(context, 'animal', arguments: animal),
                   ),
-            //Padding(padding: EdgeInsets.only(bottom: 5.0)),
-            ListTile(
-              title: Text('${animal.nombre}'),
-              subtitle: Text('${animal.especie} - ${animal.sexo}'),
-              // onTap: () =>
-              //     Navigator.pushNamed(context, 'animal', arguments: animal),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -223,7 +289,7 @@ Si deseas puedes usar nuestros filtros para realizar una busqueda mas personaliz
                 },
                 child: Column(
                   children: <Widget>[
-                    Icon(Icons.pets),
+                    Icon(Icons.search),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2.0),
                     ),

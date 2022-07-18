@@ -164,36 +164,44 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _crearItem(BuildContext context, AnimalModel animal) {
-    return Container(
-      height: 100.0,
-      width: 200.0,
-      child: Card(
-        color: Color.fromARGB(248, 202, 241, 170),
-        elevation: 4.0,
-        margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
-        child: InkWell(
-          onTap: () =>
-              Navigator.pushNamed(context, 'animal', arguments: animal),
-          child: Column(
-            children: [
-              (animal.fotoUrl == "")
-                  ? Image(image: AssetImage('assets/no-image.png'))
-                  : FadeInImage(
-                      image: NetworkImage(animal.fotoUrl),
-                      placeholder: AssetImage('assets/cat_1.gif'),
-                      height: 300.0,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-              //Padding(padding: EdgeInsets.only(bottom: 5.0)),
-              ListTile(
-                title: Text('${animal.nombre}'),
-                // title: Text('${animal.nombre} - ${animal.edad}'),
-                subtitle: Text('Especie: ${animal.especie} - ${animal.sexo}'),
-                // onTap: () =>
-                //     Navigator.pushNamed(context, 'animal', arguments: animal),
+    return Expanded(
+      child: Container(
+        height: 100.0,
+        width: 200.0,
+        child: Card(
+          color: Color.fromARGB(248, 202, 241, 170),
+          elevation: 4.0,
+          margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
+          child: Flexible(
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, 'animal', arguments: animal),
+              child: Column(
+                children: [
+                  (animal.fotoUrl == "")
+                      ? Image(image: AssetImage('assets/no-image.png'))
+                      : Expanded(
+                          child: FadeInImage(
+                            image: NetworkImage(animal.fotoUrl),
+                            placeholder: AssetImage('assets/cat_1.gif'),
+                            height: 300.0,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                  //Padding(padding: EdgeInsets.only(bottom: 5.0)),
+                  ListTile(
+                    title: Text('${animal.nombre}'),
+                    // title: Text('${animal.nombre} - ${animal.edad}'),
+                    subtitle:
+                        Text('Especie: ${animal.especie} - ${animal.sexo}'),
+                    // onTap: () =>
+                    //     Navigator.pushNamed(context, 'animal', arguments: animal),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -288,6 +296,7 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: ExpansionTileCard(
+        baseColor: Colors.green[100],
         shadowColor: Colors.green,
         key: cardA,
         //leading: CircleAvatar(child: Text('A')),
@@ -297,8 +306,12 @@ class _HomePageState extends State<HomePage> {
               image: AssetImage("assets/pet-care.png"),
               fit: BoxFit.fitWidth,
             )),
-        title: Text('Bienvenido a nuestra galeria de mascotas!'),
-        subtitle: Text('Ver más!'),
+        title: Text('Bienvenido a nuestra galeria de mascotas!',
+            style: TextStyle(fontSize: 17.0)),
+        subtitle: Text(
+          'Ver más!',
+          style: TextStyle(color: Colors.blue, fontSize: 15.0),
+        ),
         children: <Widget>[
           Divider(
             thickness: 1.0,

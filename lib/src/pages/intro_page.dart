@@ -42,10 +42,10 @@ class _IntroPageState extends State<IntroPage> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
+        //centerTitle: true,
+        title: Text(
           'POLIPET',
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.left,
         ),
         backgroundColor: Colors.green,
         actions: [
@@ -145,7 +145,11 @@ class _IntroPageState extends State<IntroPage> {
                               Color.fromARGB(95, 128, 21, 122),
                           headerBackgroundColorOpened:
                               Color.fromARGB(137, 118, 28, 153),
-                          header: Text('Galeria', style: _headerStyle),
+                          header: Text(
+                            'Galeria',
+                            style: _headerStyle,
+                            textAlign: TextAlign.justify,
+                          ),
                           content: Column(
                             children: [
                               Text('Encuentra tu mascota',
@@ -209,6 +213,7 @@ class _IntroPageState extends State<IntroPage> {
                                       flex: 1,
                                       child: Text(
                                           'Puedes usar el buscador si deseas encontrar una mascota que se adapte a tu estilo de vida.',
+                                          textAlign: TextAlign.justify,
                                           style: _contentStyle)),
                                 ],
                               ),
@@ -286,11 +291,27 @@ class _IntroPageState extends State<IntroPage> {
                 header: Text('Adopta!', style: _headerStyle),
                 content: Column(
                   children: [
+                    Text.rich(
+                      TextSpan(
+                          style: TextStyle(),
+                          text:
+                              'Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion ',
+                          children: [
+                            TextSpan(
+                                text: '¡Quiero Adoptarlo!.',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ]),
+                      textAlign: TextAlign.justify,
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 10.0)),
                     Text(
-                        "Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion '¡Quiero Adoptarlo!'"),
+                      'Ten en cuenta que para poder relalizar este proceso debes iniciar sesion o registrate en la aplicacion.',
+                      textAlign: TextAlign.justify,
+                    ),
+                    //"Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion '¡Quiero Adoptarlo!'", textAlign: TextAlign.justify,),
 
-                    Text(
-                        "Ten en cuenta que para poder relalizar este proceso debes iniciar sesion o registrate en la aplicacion."),
+                    //Text(
+                    // "Ten en cuenta que para poder relalizar este proceso debes iniciar sesion o registrate en la aplicacion."),
                     TextButton(
                       style: flatButtonStyle,
                       onPressed: () {
@@ -329,9 +350,14 @@ class _IntroPageState extends State<IntroPage> {
                 content: Column(
                   children: [
                     Text(
-                        "Si ya enviaste el formulario de adopcion y has recibido una respuesta positiva, puedes llevar un control de tu mascota en la seccion de Seguimiento."),
+                      "Si ya enviaste el formulario de adopcion y has recibido una respuesta positiva, puedes llevar un control de tu mascota en la seccion de Seguimiento.",
+                      textAlign: TextAlign.justify,
+                    ),
+                    Padding(padding: EdgeInsets.only(bottom: 10.0)),
                     Text(
-                        "Ten en cuenta que para ingresar a esta seccion debemos comprobar si tus datos son correctos."),
+                      "Ten en cuenta que para ingresar a esta seccion debemos comprobar si tus datos son correctos.",
+                      textAlign: TextAlign.justify,
+                    ),
                     TextButton(
                       style: flatButtonStyle,
                       onPressed: () {

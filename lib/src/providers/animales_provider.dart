@@ -15,7 +15,8 @@ class AnimalesProvider {
 
   Future<List<AnimalModel>> cargarAnimal() async {
     final List<AnimalModel> animales = <AnimalModel>[];
-    var documents = await refAn.get();
+    var documents =
+        await refAn.where('nombre', isNotEqualTo: 'Sin Definir').get();
     animales.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
       var data = e.data() as Map<String, dynamic>;
@@ -24,12 +25,13 @@ class AnimalesProvider {
         "especie": data["especie"],
         "nombre": data["nombre"],
         "sexo": data["sexo"],
-        "edad": data["edad"],
+        "etapaVida": data["etapaVida"],
         "temperamento": data["temperamento"],
         "peso": data["peso"],
         "tamanio": data["tamanio"],
         "color": data["color"],
         "raza": data["raza"],
+        "esterilizado": data["esterilizado"],
         "estado": data["estado"],
         "caracteristicas": data["caracteristicas"],
         "fotoUrl": data["fotoUrl"]
@@ -49,12 +51,13 @@ class AnimalesProvider {
       "especie": data["especie"],
       "nombre": data["nombre"],
       "sexo": data["sexo"],
-      "edad": data["edad"],
+      "etapaVida": data["etapaVida"],
       "temperamento": data["temperamento"],
       "peso": data["peso"],
       "tamanio": data["tamanio"],
       "color": data["color"],
       "raza": data["raza"],
+      "esterilizado": data["esterilizado"],
       "estado": data["estado"],
       "caracteristicas": data["caracteristicas"],
       "fotoUrl": data["fotoUrl"]
@@ -64,12 +67,12 @@ class AnimalesProvider {
   }
 
   Future<List<AnimalModel>> cargarBusqueda(
-      String especie, String sexo, String edad, String tamanio) async {
+      String especie, String sexo, String etapaVida, String tamanio) async {
     final List<AnimalModel> animales = <AnimalModel>[];
     var documents = await refAn
         .where('especie', isEqualTo: especie)
         .where('sexo', isEqualTo: sexo)
-        .where('edad', isEqualTo: edad)
+        .where('etapaVida', isEqualTo: etapaVida)
         .where('tamanio', isEqualTo: tamanio)
         .get();
     animales.addAll(documents.docs.map((e) {
@@ -80,12 +83,13 @@ class AnimalesProvider {
         "especie": data["especie"],
         "nombre": data["nombre"],
         "sexo": data["sexo"],
-        "edad": data["edad"],
+        "etapaVida": data["etapaVida"],
         "temperamento": data["temperamento"],
         "peso": data["peso"],
         "tamanio": data["tamanio"],
         "color": data["color"],
         "raza": data["raza"],
+        "esterilizado": data["esterilizado"],
         "estado": data["estado"],
         "caracteristicas": data["caracteristicas"],
         "fotoUrl": data["fotoUrl"]

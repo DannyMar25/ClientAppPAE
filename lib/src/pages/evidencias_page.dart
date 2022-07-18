@@ -1,8 +1,10 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
@@ -29,6 +31,8 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   DatosPersonalesModel datosC = new DatosPersonalesModel();
   String identificacion = '';
   bool _guardando = false;
+  final prefs = new PreferenciasUsuario();
+  final userProvider = new UsuarioProvider();
   @override
   void initState() {
     super.initState();
@@ -37,10 +41,53 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
 
   @override
   Widget build(BuildContext context) {
+    final email = prefs.email;
     return Scaffold(
         appBar: AppBar(
           title: Text('Revision de solicitud'),
           backgroundColor: Colors.green,
+          actions: [
+            Builder(builder: (BuildContext context) {
+              return Row(
+                children: [
+                  email == ''
+                      ? TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () async {
+                            Navigator.pushNamed(context, 'login');
+                          },
+                          child: Text('Iniciar sesión'),
+                        )
+                      : TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () async {
+                            userProvider.signOut();
+                            Navigator.pushNamed(context, 'home');
+                          },
+                          child: Text('Cerrar sesión'),
+                        ),
+                  email == ''
+                      ? TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () async {
+                            Navigator.pushNamed(context, 'registro');
+                          },
+                          child: Text('Registrarse'),
+                        )
+                      : SizedBox(),
+                ],
+              );
+            }),
+          ],
         ),
         drawer: MenuWidget(),
         body: SingleChildScrollView(
@@ -88,28 +135,47 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           identificacion = s;
         });
       },
+      validator: (value) {
+        if (isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo numeros';
+        }
+      },
     );
   }
 
   Widget _crearBoton() {
     return ElevatedButton.icon(
-      style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-          return Colors.green;
-        }),
-      ),
-      label: Text(
-        'Verificar',
-        style: TextStyle(color: Colors.white),
-      ),
-      icon: Icon(
-        Icons.verified,
-        color: Colors.white,
-      ),
-      autofocus: true,
-      onPressed: (_guardando) ? null : _submit,
-    );
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            return Colors.green;
+          }),
+        ),
+        label: Text(
+          'Verificar',
+          style: TextStyle(color: Colors.white),
+        ),
+        icon: Icon(
+          Icons.verified,
+          color: Colors.white,
+        ),
+        autofocus: true,
+        //onPressed: (_guardando) ? null : _submit,
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            // Si el formulario es válido, queremos mostrar un Snackbar
+            //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
+            SnackBar(
+              content: Text('Informacion ingresada correctamente'),
+            );
+            _submit();
+          } else {
+            mostrarAlerta(
+                context, 'Asegurate de que todos los campos estan llenos.');
+          }
+        });
   }
 
   void _submit() async {
@@ -183,8 +249,10 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
                       Text("Numero de cedula: " '${formulario.identificacion}'),
-                      Text("Su solicitud de adopcion fue:"
+                      Text("Su solicitud de adopción fue:"
                           '${formulario.estado}'),
+                      Text("Fecha de aprobación de solicitud: "
+                          '${formulario.fechaRespuesta}'),
                       Text("Nombre mascota adopatada:"
                           '${formulario.animal!.nombre}'),
                       //Divider(color: Colors.purple)
@@ -193,10 +261,16 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
+                  height: 150.0,
                   child: Image(
                     image: AssetImage('assets/dog_an8.gif'),
                   ),
-                )
+                ),
+                Text(
+                  '¡Haz click aquí!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ));
@@ -236,6 +310,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
+                  height: 200.0,
                   child: Image(
                     image: AssetImage('assets/cat_4.gif'),
                   ),
@@ -279,6 +354,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
+                  height: 200.0,
                   child: Image(
                     image: AssetImage('assets/cat_6.gif'),
                   ),

@@ -18,7 +18,7 @@ class Validators {
     if (password.length >= 6) {
       sink.add(password);
     } else {
-      sink.addError('Mas de 6 caracteres por favor');
+      sink.addError('Más de 8 caracteres por favor');
     }
   });
   final validarNombre = StreamTransformer<String, String>.fromHandlers(

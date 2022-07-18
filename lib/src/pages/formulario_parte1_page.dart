@@ -24,8 +24,10 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   FormulariosProvider formulariosProvider = new FormulariosProvider();
   final formKey = GlobalKey<FormState>();
   final List<String> _items =
-      ['Primaria', 'Secundaria', 'Universidad', 'Posgrado'].toList();
+      ['Primaria', 'Secundaria', 'Tercer nivel', 'Posgrado'].toList();
   String? _selection;
+  String _fecha = '';
+  TextEditingController _inputFieldDateController = new TextEditingController();
   @override
   void initState() {
     // _selection = _items.last;
@@ -81,7 +83,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       _crearNombre(),
                       _crearCI(),
                       _crearDireccion(),
-                      _crearEdad(),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      _crearFechaNacimiento(context),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
                       _crearOcupacion(),
                       _crearEmail(),
                       Divider(),
@@ -190,24 +198,73 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     );
   }
 
-  Widget _crearEdad() {
+  // Widget _crearEdad() {
+  //   return TextFormField(
+  //     initialValue: datoPersona.fechaNacimiento,
+  //     readOnly: false,
+  //     //textCapitalization: TextCapitalization.sentences,
+  //     keyboardType: TextInputType.numberWithOptions(decimal: true),
+  //     decoration: InputDecoration(
+  //         labelText: 'Edad',
+  //         labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+  //     onSaved: (value) => datoPersona.fechaNacimiento = value!,
+  //     validator: (value) {
+  //       if (utils.isNumeric(value!)) {
+  //         return null;
+  //       } else {
+  //         return 'Ingrese solo numeros';
+  //       }
+  //     },
+  //   );
+  // }
+  Widget _crearFechaNacimiento(BuildContext context) {
     return TextFormField(
-      initialValue: datoPersona.edad.toString(),
-      readOnly: false,
-      //textCapitalization: TextCapitalization.sentences,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
-      decoration: InputDecoration(
-          labelText: 'Edad',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      onSaved: (value) => datoPersona.edad = int.parse(value!),
-      validator: (value) {
-        if (utils.isNumeric(value!)) {
-          return null;
-        } else {
-          return 'Ingrese solo numeros';
-        }
-      },
+        controller: _inputFieldDateController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+          //counter: Text('Letras ${_nombre.length}'),
+          //hintText: 'Ingrese fecha de agendamiento de cita',
+          labelText: 'Fecha de nacimiento:',
+          //helperText: 'Solo es el nombre',
+          suffixIcon: Icon(
+            Icons.perm_contact_calendar,
+            color: Colors.green,
+          ),
+          // icon: Icon(
+          //   Icons.calendar_today,
+          //   color: Colors.green,
+          // ),
+        ),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDate(context);
+        });
+  }
+
+  _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: new DateTime.now(),
+      firstDate: DateTime(1910),
+      lastDate: new DateTime.now(),
+      locale: Locale('es', 'ES'),
     );
+
+    if (picked != null) {
+      setState(() {
+        _fecha = picked.year.toString() +
+            '-' +
+            picked.month.toString() +
+            '-' +
+            picked.day.toString();
+
+        // _fecha = picked.toString();
+
+        //_fecha = DateFormat('EEEE').format(picked);
+        _inputFieldDateController.text = _fecha;
+        datoPersona.fechaNacimiento = _fecha;
+      });
+    }
   }
 
   Widget _crearOcupacion() {

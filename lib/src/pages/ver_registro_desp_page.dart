@@ -94,70 +94,76 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
   Widget _crearItem(
       BuildContext context, RegistroDesparasitacionModel desparasitacion) {
     return ListTile(
-        title: Column(
-          children: [
-            Divider(color: Colors.transparent),
-            DataTable(
-              headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Color.fromARGB(255, 120, 110, 148),
+        title: Flexible(
+          fit: FlexFit.loose,
+          child: Column(
+            children: [
+              Divider(color: Colors.transparent),
+              DataTable(
+                columnSpacing: 25,
+                headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 120, 110, 148),
+                ),
+                dataRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 146, 155, 185)),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(width: 1, color: Colors.white),
+                ),
+                sortColumnIndex: 1,
+                sortAscending: false,
+                columns: [
+                  DataColumn(label: Text("Fecha consulta")),
+                  DataColumn(label: Text("Producto")),
+                ],
+                rows: [
+                  DataRow(selected: true, cells: [
+                    DataCell(Container(
+                      child: Text('${desparasitacion.fecha}'),
+                      width: 140,
+                    )),
+                    //DataCell(_crearPesoActual()),
+                    DataCell(Container(
+                      child: Text('${desparasitacion.nombreProducto}'),
+                      width: 140,
+                    )),
+                  ]),
+                ],
               ),
-              dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 146, 155, 185)),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                border: Border.all(width: 1, color: Colors.white),
+              DataTable(
+                columnSpacing: 35,
+                headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Color.fromARGB(255, 120, 110, 148),
+                ),
+                dataRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color.fromARGB(255, 146, 155, 185)),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(width: 1, color: Colors.white),
+                ),
+                sortColumnIndex: 1,
+                sortAscending: false,
+                columns: [
+                  DataColumn(label: Text("Peso(Kg)")),
+                  DataColumn(label: Text("Proxima desparacitacion")),
+                ],
+                rows: [
+                  DataRow(selected: true, cells: [
+                    DataCell(Container(
+                      child: Text('${desparasitacion.pesoActual}'),
+                      width: 100,
+                    )),
+                    DataCell(Container(
+                      child:
+                          Text('${desparasitacion.fechaProxDesparasitacion}'),
+                      width: 100,
+                    )),
+                  ]),
+                ],
               ),
-              sortColumnIndex: 1,
-              sortAscending: false,
-              columns: [
-                DataColumn(label: Text("Fecha consulta")),
-                DataColumn(label: Text("Producto")),
-              ],
-              rows: [
-                DataRow(selected: true, cells: [
-                  DataCell(Container(
-                    child: Text('${desparasitacion.fecha}'),
-                    width: 140,
-                  )),
-                  //DataCell(_crearPesoActual()),
-                  DataCell(Container(
-                    child: Text('${desparasitacion.nombreProducto}'),
-                    width: 140,
-                  )),
-                ]),
-              ],
-            ),
-            DataTable(
-              headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Color.fromARGB(255, 120, 110, 148),
-              ),
-              dataRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 146, 155, 185)),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                border: Border.all(width: 1, color: Colors.white),
-              ),
-              sortColumnIndex: 1,
-              sortAscending: false,
-              columns: [
-                DataColumn(label: Text("Peso(Kg)")),
-                DataColumn(label: Text("Proxima desparacitacion")),
-              ],
-              rows: [
-                DataRow(selected: true, cells: [
-                  DataCell(Container(
-                    child: Text('${desparasitacion.pesoActual}'),
-                    width: 100,
-                  )),
-                  DataCell(Container(
-                    child: Text('${desparasitacion.fechaProxDesparasitacion}'),
-                    width: 100,
-                  )),
-                ]),
-              ],
-            ),
-            Divider(color: Colors.transparent)
-          ],
+              Divider(color: Colors.transparent)
+            ],
+          ),
         ),
         //subtitle: Text('${horario}'),
         onTap: () async {
