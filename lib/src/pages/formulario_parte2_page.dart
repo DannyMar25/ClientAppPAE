@@ -47,7 +47,8 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('SITUACION FAMILIAR'),
         backgroundColor: Colors.green,
@@ -57,113 +58,124 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         children: [
           //Background(),
           SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Mencione las personas con las que vive',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      DataTable(
-                        sortColumnIndex: 2,
-                        sortAscending: false,
-                        columns: [
-                          DataColumn(label: Text("Nombre")),
-                          DataColumn(label: Text("Edad "), numeric: true),
-                          DataColumn(label: Text("Parentesco")),
-                        ],
-                        rows: [
-                          DataRow(selected: true, cells: [
-                            DataCell(_crearNombre1()),
-                            DataCell(_crearEdad1()),
-                            DataCell(_crearParentesco1()),
-                          ]),
-                          DataRow(cells: [
-                            DataCell(_crearNombre2()),
-                            DataCell(_crearEdad2()),
-                            DataCell(_crearParentesco2()),
-                          ]),
-                          DataRow(cells: [
-                            DataCell(_crearNombre3()),
-                            DataCell(_crearEdad3()),
-                            DataCell(_crearParentesco3()),
-                          ]),
-                          DataRow(cells: [
-                            DataCell(_crearNombre4()),
-                            DataCell(_crearEdad4()),
-                            DataCell(_crearParentesco4()),
-                          ])
-                        ],
-                      ),
-
-                      Divider(),
-                      Text(
-                        'Algun familiar espera un bebe?',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.blueGrey,
-                        ),
-                      ),
-                      Divider(),
-                      //Column(
-                      // children: [
-                      Row(
-                        children: [
-                          Text('Si'),
-                          _crearCheckBox1(),
-                          //_crearFechaParto(context),
-                        ],
-                      ),
-                      Row(
-                        children: [Text('No'), _crearCheckBox2()],
-                      ),
-                      // ],
-                      //),
-                      Divider(),
-                      Text(
-                        'Alguien que viva con usted es alergico a los animales o sufre de asma?',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text('Si'),
-                              _crearCheckBox3(),
-                            ],
+            child: Flexible(
+              fit: FlexFit.loose,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Mencione las personas con las que vive',
+                          style: TextStyle(
+                            fontSize: 33,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 3
+                              ..color = Colors.blueGrey,
                           ),
-                          Row(
-                            children: [Text('No'), _crearCheckBox4()],
-                          )
-                        ],
-                      ),
-                      Divider(),
-                      _crearBotonRevisar(context),
-                      _crearBoton(),
-                    ],
-                  )),
+                          textAlign: TextAlign.center,
+                        ),
+                        //Divider(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        DataTable(
+                          sortColumnIndex: 2,
+                          sortAscending: false,
+                          columnSpacing: 30,
+                          columns: [
+                            DataColumn(label: Text("Nombre")),
+                            DataColumn(label: Text("Edad "), numeric: true),
+                            DataColumn(label: Text("Parentesco")),
+                          ],
+                          rows: [
+                            DataRow(selected: true, cells: [
+                              DataCell(_crearNombre1()),
+                              DataCell(_crearEdad1()),
+                              DataCell(_crearParentesco1()),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(_crearNombre2()),
+                              DataCell(_crearEdad2()),
+                              DataCell(_crearParentesco2()),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(_crearNombre3()),
+                              DataCell(_crearEdad3()),
+                              DataCell(_crearParentesco3()),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(_crearNombre4()),
+                              DataCell(_crearEdad4()),
+                              DataCell(_crearParentesco4()),
+                            ])
+                          ],
+                        ),
+
+                        Divider(),
+                        Text(
+                          'Algun familiar espera un bebe?',
+                          style: TextStyle(
+                            fontSize: 33,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 3
+                              ..color = Colors.blueGrey,
+                          ),
+                        ),
+                        Divider(),
+                        //Column(
+                        // children: [
+                        Row(
+                          children: [
+                            Text('Si'),
+                            _crearCheckBox1(),
+                            //_crearFechaParto(context),
+                          ],
+                        ),
+                        Row(
+                          children: [Text('No'), _crearCheckBox2()],
+                        ),
+                        // ],
+                        //),
+                        Divider(),
+                        Text(
+                          'Alguien que viva con usted es alergico a los animales o sufre de asma?',
+                          style: TextStyle(
+                            fontSize: 33,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 3
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Divider(),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text('Si'),
+                                _crearCheckBox3(),
+                              ],
+                            ),
+                            Row(
+                              children: [Text('No'), _crearCheckBox4()],
+                            )
+                          ],
+                        ),
+                        Divider(),
+                        _crearBotonRevisar(context),
+                        _crearBoton(),
+                      ],
+                    )),
+              ),
             ),
           ),
         ],
@@ -682,5 +694,27 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
             ],
           );
         });
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        title: Text(
+          "Formulario: Situacion familiar",
+          style: TextStyle(
+              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'En este formulario debe ingresar informacion de las personas con las que vive.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 }

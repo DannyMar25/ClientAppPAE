@@ -28,6 +28,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   String? _selection;
   String _fecha = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
+  String cedula = '';
   @override
   void initState() {
     // _selection = _items.last;
@@ -50,7 +51,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
     return Scaffold(
       // backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      // backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text(
           'DATOS PERSONALES',
@@ -79,6 +81,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                             ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
+                      ),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      _detalle(),
+                      Divider(
+                        color: Colors.transparent,
                       ),
                       _crearNombre(),
                       _crearCI(),
@@ -191,8 +200,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
-          formulario.identificacion = s;
-          datoPersona.cedula = s;
+          // formulario.identificacion = s;
+          // datoPersona.cedula = s;
+          cedula = s;
         });
       },
     );
@@ -517,12 +527,137 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           return null;
         } else {
           if (formKey.currentState!.validate()) {
-            // Si el formulario es válido, queremos mostrar un Snackbar
-            //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
-            SnackBar(
-              content: Text('Informacion ingresada correctamente'),
-            );
-            _submit();
+            if (cedula.length == 10) {
+              //Obtenemos el digito de la region que sonlos dos primeros digitos
+              var digito_region = int.parse(cedula.substring(0, 2));
+
+              //Pregunto si la region existe ecuador se divide en 24 regiones
+              if (digito_region >= 1 && digito_region <= 24) {
+                // Extraigo el ultimo digito
+                var ultimo_digito = int.parse(cedula.substring(9, 10));
+
+                //Agrupo todos los pares y los sumo
+                var pares = int.parse(cedula.substring(1, 2)) +
+                    int.parse(cedula.substring(3, 4)) +
+                    int.parse(cedula.substring(5, 6)) +
+                    int.parse(cedula.substring(7, 8));
+
+                //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
+                var numero1 = int.parse(cedula.substring(0, 1));
+                numero1 = (numero1 * 2);
+                if (numero1 > 9) {
+                  numero1 = (numero1 - 9);
+                }
+
+                var numero3 = int.parse(cedula.substring(2, 3));
+                numero3 = (numero3 * 2);
+                if (numero3 > 9) {
+                  numero3 = (numero3 - 9);
+                }
+
+                var numero5 = int.parse(cedula.substring(4, 5));
+                numero5 = (numero5 * 2);
+                if (numero5 > 9) {
+                  numero5 = (numero5 - 9);
+                }
+
+                var numero7 = int.parse(cedula.substring(6, 7));
+                numero7 = (numero7 * 2);
+                if (numero7 > 9) {
+                  numero7 = (numero7 - 9);
+                }
+
+                var numero9 = int.parse(cedula.substring(8, 9));
+                numero9 = (numero9 * 2);
+                if (numero9 > 9) {
+                  numero9 = (numero9 - 9);
+                }
+
+                var impares = numero1 + numero3 + numero5 + numero7 + numero9;
+
+                //Suma total
+                var suma_total = (pares + impares);
+
+                //extraemos el primero digito
+                var primer_digito_suma =
+                    (suma_total).toString().substring(0, 1);
+
+                //Obtenemos la decena inmediata
+                var decena = (int.parse(primer_digito_suma) + 1) * 10;
+
+                //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
+                var digito_validador = decena - suma_total;
+
+                //Si el digito validador es = a 10 toma el valor de 0
+                if (digito_validador == 10) var digito_validador = 0;
+
+                //Validamos que el digito validador sea igual al de la cedula
+                if (digito_validador == ultimo_digito) {
+                  print('la cedula:' + cedula + ' es correcta');
+                  SnackBar(
+                    content: Text('Informacion ingresada correctamente'),
+                  );
+                  formulario.identificacion = cedula;
+                  datoPersona.cedula = cedula;
+                  _submit();
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('Informacion incorrecta'),
+                          content: Text('Numero de cedula incorrecto'),
+                          actions: [
+                            TextButton(
+                              child: Text('Ok'),
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          ],
+                        );
+                      });
+                  print('la cedula:' + cedula + ' es incorrecta');
+                }
+              } else {
+                // imprimimos en consola si la region no pertenece
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Informacion incorrecta'),
+                        content: Text('Cedula no pertenece a ninguna region'),
+                        actions: [
+                          TextButton(
+                            child: Text('Ok'),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ],
+                      );
+                    });
+                print('Esta cedula no pertenece a ninguna region');
+              }
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Informacion incorrecta'),
+                      content: Text('Debe tener al meno 10 digitos'),
+                      actions: [
+                        TextButton(
+                          child: Text('Ok'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    );
+                  });
+              //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
+              print('Esta cedula tiene mas o menos de 10 Digitos');
+            }
+            //Codigo anterior
+            // SnackBar(
+            //   content: Text('Informacion ingresada correctamente'),
+            // );
+            // _submit();
           } else {
             utils.mostrarAlerta(
                 context, 'Asegurate de que todos los campos estan llenos.');
@@ -533,16 +668,6 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   }
 
   void _submit() async {
-    // if (!formKey.currentState!.validate()) return;
-    // formKey.currentState!.save();
-
-    // print('Todo OK!');
-
-    // setState(() {
-    //   _guardando = true;
-    //   print(formulario.id);
-    // });
-
     if (formulario.id == "") {
       formulario.estado = "Pendiente";
       formulario.observacion = "Pendiente";
@@ -563,16 +688,6 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     } else {
       //animalProvider.editarAnimal(animal, foto!);
     }
-    // setState(() {
-    //   _guardando = false;
-    //   // var idd = formulariosProvider
-    //   //     .crearFormularioPrin(formulario, datoPersona)
-    //   //     .toString();
-    //   // print("Hola ID:" + idd);
-    //   //Navigator.pushNamed(context, 'formularioP2', arguments: formulario);
-    // });
-
-    //mostrarSnackbar('Registro guardado');
   }
 
   Widget _crearBotonRevisar(BuildContext context) {
@@ -615,5 +730,27 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
             ],
           );
         });
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        title: Text(
+          "Formulario: Datos Personales",
+          style: TextStyle(
+              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'En este formulario debe ingresar sus datos personales, ten en cuenta que estos son importantes durante el proceso de adopcion.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 }

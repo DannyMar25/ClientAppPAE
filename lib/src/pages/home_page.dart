@@ -122,22 +122,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Widget _crearListado() {
-  //   return FutureBuilder(
-  //       future: animalesProvider.cargarAnimal(),
-  //       builder:
-  //           (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
-  //         if (snapshot.hasData) {
-  //           final animales = snapshot.data;
-  //           return ListView.builder(
-  //             itemCount: animales!.length,
-  //             itemBuilder: (context, i) => _crearItem(context, animales[i]),
-  //           );
-  //         } else {
-  //           return Center(child: CircularProgressIndicator());
-  //         }
-  //       });
-  // }
   Widget _crearListado() {
     return FutureBuilder(
         future: animalesProvider.cargarAnimal(),
@@ -208,32 +192,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _crearListadoBusqueda() {
-    return FutureBuilder(
-        future:
-            animalesProvider.cargarBusqueda(especie!, sexo!, edad!, tamanio!),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
-          if (snapshot.hasData) {
-            final animales = snapshot.data;
-            return GridView.count(
-              childAspectRatio: 50 / 100,
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              children: List.generate(animales!.length, (index) {
-                return _crearItem1(context, animales[index]);
-              }),
-
-              //            return ListView.builder(
-              //             itemCount: animales!.length,
-              //              itemBuilder: (context, i) => _crearItem(context, animales[i]),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        });
-  }
-
   Widget _crearItem1(BuildContext context, AnimalModel animal) {
     return Container(
       height: 100.0,
@@ -277,14 +235,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.deepPurple,
       onPressed: () => Navigator.pushNamed(context, 'animal'),
     );
-  }
-
-  Widget _buildChild() {
-    if (especie == null && sexo == null && edad == null && tamanio == null) {
-      return _crearListado();
-    } else {
-      return _crearListadoBusqueda();
-    }
   }
 
   Widget expand_card() {

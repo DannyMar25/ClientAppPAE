@@ -50,6 +50,9 @@ dependencies:
   flutter_slimy_card: ^1.0.2
   expansion_tile_card: ^2.0.0
   accordion: ^2.3.0
+  syncfusion_flutter_pdf: ^20.2.39
+  open_file: ^3.2.1
+  path_provider: ^2.0.11
  
 
 

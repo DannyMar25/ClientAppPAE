@@ -66,6 +66,7 @@ class AnimalesProvider {
     return animals;
   }
 
+  //Future<List<Future<AnimalModel>>> cargarBusqueda(
   Future<List<AnimalModel>> cargarBusqueda(
       String especie, String sexo, String etapaVida, String tamanio) async {
     final List<AnimalModel> animales = <AnimalModel>[];
@@ -75,6 +76,7 @@ class AnimalesProvider {
         .where('etapaVida', isEqualTo: etapaVida)
         .where('tamanio', isEqualTo: tamanio)
         .get();
+    //var s = (documents.docs.map((e) async {
     animales.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
       var data = e.data() as Map<String, dynamic>;
@@ -96,12 +98,12 @@ class AnimalesProvider {
       });
       return animal;
     }).toList());
+    //return s.toList();
     return animales;
   }
 
   Future<bool> editarEstado(AnimalModel animal, String estado) async {
     try {
-      //String disp = "";
       await refAn.doc(animal.id).update({"estado": estado});
       return true;
     } catch (e) {

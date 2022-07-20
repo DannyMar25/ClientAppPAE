@@ -15,11 +15,11 @@ class _BusquedaPageState extends State<BusquedaPage> {
   final List<String> _sexo = ['Macho', 'Hembra'].toList();
   String? _selection1;
   final List<String> _etapaVida = [
-    'Cachorro (0 a 6 meses)',
-    'Joven (6 meses a 2 años)',
-    'Adulto (2 a 6 años)',
-    'Anciano (7 a 11 años)',
-    'Geriátrico (mayor a 12 años)',
+    'Cachorro',
+    'Joven',
+    'Adulto',
+    'Anciano',
+    'Geriátrico',
   ].toList();
   String? _selection2;
   final List<String> _tamanio = ['Pequeño', 'Mediano', 'Grande'].toList();
@@ -28,6 +28,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
   bool isChecked1 = false;
   bool isChecked2 = false;
   String? selection4;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,59 +172,6 @@ class _BusquedaPageState extends State<BusquedaPage> {
       ),
     );
   }
-
-  // Widget _crearCheckBox1() {
-  //   Color getColor(Set<MaterialState> states) {
-  //     const Set<MaterialState> interactiveStates = <MaterialState>{
-  //       MaterialState.pressed,
-  //       MaterialState.hovered,
-  //       MaterialState.focused,
-  //     };
-  //     if (states.any(interactiveStates.contains)) {
-  //       return Colors.blue;
-  //     }
-  //     return Colors.blue;
-  //   }
-
-  //   return Checkbox(
-  //     checkColor: Colors.white,
-  //     fillColor: MaterialStateProperty.resolveWith(getColor),
-  //     value: isChecked1,
-  //     onChanged: (bool? value) {
-  //       setState(() {
-  //         isChecked1 = value!;
-  //         _selection4 = 'Canina';
-  //       });
-  //     },
-  //   );
-  // }
-
-  // Widget _crearCheckBox2() {
-  //   Color getColor(Set<MaterialState> states) {
-  //     const Set<MaterialState> interactiveStates = <MaterialState>{
-  //       MaterialState.pressed,
-  //       MaterialState.hovered,
-  //       MaterialState.focused,
-  //     };
-  //     if (states.any(interactiveStates.contains)) {
-  //       return Colors.blue;
-  //     }
-  //     return Colors.blue;
-  //   }
-
-  //   return Checkbox(
-  //     checkColor: Colors.white,
-  //     fillColor: MaterialStateProperty.resolveWith(getColor),
-  //     value: isChecked2,
-  //     onChanged: (bool? value) {
-  //       setState(() {
-  //         isChecked2 = value!;
-  //         //sitFamilia.esperaBebe = "No";
-  //         _selection4 = 'Felina';
-  //       });
-  //     },
-  //   );
-  // }
 
   Widget _seleccionarEspecie() {
     final dropdownMenuOptions = _especie
@@ -424,8 +372,6 @@ class _BusquedaPageState extends State<BusquedaPage> {
   }
 
   void _submit() async {
-    //mostrarSnackbar('Registro guardado');
-    //Navigator.pushNamed(context, 'horariosAdd');
     Navigator.pushNamed(context, 'resultadoBusqueda', arguments: {
       'especie': _selection,
       'sexo': _selection1,

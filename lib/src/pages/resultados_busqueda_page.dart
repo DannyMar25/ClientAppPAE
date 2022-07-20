@@ -26,10 +26,18 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
   String? sexo;
   String? etapaVida;
   String? tamanio;
+  List<AnimalModel> citasA = [];
+  List<Future<AnimalModel>> listaC = [];
+  @override
+  // void initState() {
+  //   super.initState();
+  //   showCitas();
+  // }
 
   @override
   Widget build(BuildContext context) {
     //final bloc = Provider.of(context);
+    //showCitas();
     final email = prefs.email;
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     //if (dat == arg['datosper']) {
@@ -92,7 +100,9 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
             Padding(padding: EdgeInsets.only(bottom: 10.0)),
             expand_card(),
             Padding(padding: EdgeInsets.only(bottom: 10.0)),
-            Expanded(child: _crearListadoBusqueda())
+            Expanded(
+              child: _crearListadoBusqueda(),
+            )
             //_crearListado(),
           ],
         )
@@ -100,6 +110,68 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
         //floatingActionButton: _crearBoton(context),
         );
   }
+
+  // showCitas() async {
+  //   citasA.clear();
+  //   listaC = await animalesProvider.cargarBusqueda(
+  //       especie!, sexo!, etapaVida!, tamanio!);
+  //   for (var yy in listaC) {
+  //     AnimalModel cit = await yy;
+  //     setState(() {
+  //       citasA.add(cit);
+  //     });
+  //   }
+  // }
+
+  // Widget _verListado() {
+  //   return Column(
+  //     children: [
+  //       SizedBox(
+  //         height: 800,
+  //         child: ListView.builder(
+  //           itemCount: citasA.length,
+  //           itemBuilder: (context, i) => _crearItem1(context, citasA[i]),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // Widget _buildChild() {
+  //   if (citasA.length == 0) {
+  //     // return Text('Hola');
+  //     return _alerta();
+  //   } else {
+  //     return _verListado();
+  //   }
+  // }
+
+  // Widget _alerta() {
+  //   return Column(children: [
+  //     AlertDialog(
+  //       title: Row(
+  //         children: [
+  //           Icon(
+  //             Icons.check_circle,
+  //             color: Colors.green,
+  //             size: 50,
+  //           ),
+  //           Text('Resultado de busqueda!'),
+  //         ],
+  //       ),
+  //       content: Text(
+  //           'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+  //       actions: [
+  //         TextButton(
+  //             child: Text('Ok'),
+  //             //onPressed: () => Navigator.of(context).pop(),
+  //             onPressed: () {
+  //               Navigator.pushNamed(context, 'home');
+  //             })
+  //       ],
+  //     )
+  //   ]);
+  // }
 
   Widget _crearListadoBusqueda() {
     return FutureBuilder(
@@ -109,63 +181,69 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
             (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
           if (snapshot.hasData) {
             final animales = snapshot.data;
+            if (animales!.length == 0) {
+              return Column(children: [
+                AlertDialog(
+                  title: Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 50,
+                      ),
+                      Text('Resultado de busqueda!'),
+                    ],
+                  ),
+                  content: Text(
+                      'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+                  actions: [
+                    TextButton(
+                        child: Text('Ok'),
+                        //onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'home');
+                        })
+                  ],
+                )
+              ]);
+            }
             return GridView.count(
               childAspectRatio: 50 / 100,
               shrinkWrap: true,
               crossAxisCount: 2,
-              children: List.generate(animales!.length, (index) {
+              children: List.generate(animales.length, (index) {
                 return _crearItem1(context, animales[index]);
               }),
             );
           } else {
-            return Column(children: [
-              AlertDialog(
-                title: Row(
-                  children: [
-                    Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 50,
-                    ),
-                    Text('Resultado de busqueda!'),
-                  ],
-                ),
-                content: Text(
-                    'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
-                actions: [
-                  TextButton(
-                      child: Text('Ok'),
-                      //onPressed: () => Navigator.of(context).pop(),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'home');
-                      })
-                ],
-              )
-            ]);
-            // return AlertDialog(
-            //   title: Row(
-            //     children: [
-            //       Icon(
-            //         Icons.check_circle,
-            //         color: Colors.green,
-            //         size: 50,
-            //       ),
-            //       Text('Resultado de busqueda!'),
-            //     ],
-            //   ),
-            //   content: Text(
-            //       'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
-            //   actions: [
-            //     TextButton(
-            //         child: Text('Ok'),
-            //         //onPressed: () => Navigator.of(context).pop(),
-            //         onPressed: () {
-            //           Navigator.pushNamed(context, 'home');
-            //         })
-            //   ],
-            // );
+            return Center(child: CircularProgressIndicator());
           }
         });
+  }
+
+  Widget _crearItem2(BuildContext context, AnimalModel animal) {
+    return Expanded(
+      child: Container(
+        height: 100.0,
+        width: 200.0,
+        child: Card(
+          color: Color.fromARGB(248, 202, 241, 170),
+          elevation: 4.0,
+          margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
+          child: Flexible(
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () => Navigator.pushNamed(context, 'home'),
+              child: Column(
+                children: [
+                  Text('No se ha encontrado ningun resultado.....!!!!'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _crearItem1(BuildContext context, AnimalModel animal) {
@@ -211,13 +289,13 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
     );
   }
 
-  _crearBoton(BuildContext context) {
-    return FloatingActionButton(
-      child: Icon(Icons.add),
-      backgroundColor: Colors.deepPurple,
-      onPressed: () => Navigator.pushNamed(context, 'animal'),
-    );
-  }
+  // _crearBoton(BuildContext context) {
+  //   return FloatingActionButton(
+  //     child: Icon(Icons.add),
+  //     backgroundColor: Colors.deepPurple,
+  //     onPressed: () => Navigator.pushNamed(context, 'animal'),
+  //   );
+  // }
 
   Widget expand_card() {
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -228,6 +306,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: ExpansionTileCard(
+        baseColor: Colors.green[100],
         shadowColor: Colors.green,
         key: cardA,
         //leading: CircleAvatar(child: Text('A')),
@@ -266,21 +345,6 @@ Si deseas puedes usar nuestros filtros para realizar una busqueda mas personaliz
             buttonHeight: 52.0,
             buttonMinWidth: 90.0,
             children: <Widget>[
-              // TextButton(
-              //   style: flatButtonStyle,
-              //   onPressed: () {
-              //     cardB.currentState?.expand();
-              //   },
-              //   child: Column(
-              //     children: <Widget>[
-              //       Icon(Icons.arrow_downward),
-              //       Padding(
-              //         padding: const EdgeInsets.symmetric(vertical: 2.0),
-              //       ),
-              //       Text('Open'),
-              //     ],
-              //   ),
-              // ),
               TextButton(
                 style: flatButtonStyle,
                 onPressed: () {
@@ -297,21 +361,6 @@ Si deseas puedes usar nuestros filtros para realizar una busqueda mas personaliz
                   ],
                 ),
               ),
-              // TextButton(
-              //   style: flatButtonStyle,
-              //   onPressed: () {
-              //     cardB.currentState?.toggleExpansion();
-              //   },
-              //   child: Column(
-              //     children: <Widget>[
-              //       Icon(Icons.swap_vert),
-              //       Padding(
-              //         padding: const EdgeInsets.symmetric(vertical: 2.0),
-              //       ),
-              //       Text('Toggle'),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ],

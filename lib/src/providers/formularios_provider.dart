@@ -127,10 +127,11 @@ class FormulariosProvider {
           .doc(relacionAnimAdd.id)
           .update({"id": relacionAnimAdd.id});
       await refForm.doc(idFormu2).update({"idRelacionAn": relacionAnimAdd.id});
-      mostrarAlertaOk(
+      mostrarOkFormulario(
           context,
           'La informacion a sido guardada correctamente! Se revisa de 24 a 48 horas, la respuesta a tu solicitud llega a tu mail, por favor revisar también la bandeja de correo no deseado o spam',
-          'home');
+          'perfilMascota',
+          idFormu2);
       //Navigator.pushNamed(context, 'home');
       return true;
     } catch (e) {
@@ -381,6 +382,46 @@ class FormulariosProvider {
         "archivoUrl": e["archivoUrl"],
       });
       return evidencia;
+    }));
+    return s.toList();
+  }
+
+  Future<List<Future<FormulariosModel>>> cargarInfoAnimal(
+      String idFormu) async {
+    final List<FormulariosModel> formularios = <FormulariosModel>[];
+    var documents = await refForm
+        //.where('estado', isEqualTo: 'Aprobado')
+        .where('id', isEqualTo: idFormu)
+        .get();
+    //citas.addAll
+    var s = (documents.docs.map((e) async {
+      //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
+      var data = e.data() as Map<String, dynamic>;
+      //HorariosModel h1 = new HorariosModel();
+      AnimalModel anim = new AnimalModel();
+      //h1 = await horariosProvider.cargarHorarioId(e["idHorario"]);
+      anim = await animalesProvider.cargarAnimalId(e["idAnimal"]);
+      var formulario = FormulariosModel.fromJson({
+        "id": e.id,
+        "idAnimal": e["idAnimal"],
+        "fechaIngreso": e["fechaIngreso"],
+        "fechaRespuesta": e["fechaRespuesta"],
+        "nombreClient": e["nombreClient"],
+        "identificacion": e["identificacion"],
+        "emailClient": e["emailClient"],
+        "estado": e["estado"],
+        "observacion": e["observacion"],
+        "idDatosPersonales": e["idDatosPersonales"],
+        "idSituacionFam": e["idSituacionFam"],
+        "idDomicilio": e["idDomicilio"],
+        "idRelacionAn": e["idRelacionAn"],
+        "idVacuna": e["idVacuna"],
+        "idDesparasitacion": e["idDesparasitacion"],
+        "idEvidencia": e["idEvidencia"],
+      });
+      //cita.horario = h1;
+      formulario.animal = anim;
+      return formulario;
     }));
     return s.toList();
   }

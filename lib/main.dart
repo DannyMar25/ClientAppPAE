@@ -12,6 +12,8 @@ import 'package:cliente_app_v1/src/pages/formulario_parte4_page.dart';
 import 'package:cliente_app_v1/src/pages/home_page.dart';
 import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/pages/login_page.dart';
+import 'package:cliente_app_v1/src/pages/perfilMascotaMain_page.dart';
+import 'package:cliente_app_v1/src/pages/perfilMascota_pdf_page.dart';
 import 'package:cliente_app_v1/src/pages/registro_cita.dart';
 import 'package:cliente_app_v1/src/pages/registro_cliente.dart';
 import 'package:cliente_app_v1/src/pages/registro_desp_page.dart';
@@ -57,6 +59,7 @@ class MyApp extends StatelessWidget {
             Locale('es', 'ES'), // Spanish, no country code
           ],
           initialRoute: 'intro',
+          //initialRoute: 'perfilMascota',
           routes: {
             'login': (_) => LoginPage(),
             'registro': (_) => RegistroPage(),
@@ -82,6 +85,8 @@ class MyApp extends StatelessWidget {
             'busqueda': (_) => BusquedaPage(),
             'resultadoBusqueda': (_) => ResultadosBusquedaPage(),
             ForgotPassword.id: (context) => ForgotPassword(),
+            'perfilMascota': (_) => PerfilMainPage(),
+            'perfilMascotaPdf': (_) => CrearPerfilMascotaPdfPage(),
           },
           theme: ThemeData(primaryColor: Colors.deepPurple)),
     );

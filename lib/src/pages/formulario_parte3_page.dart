@@ -56,7 +56,8 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('DOMICILIO'),
         backgroundColor: Colors.green,
@@ -83,7 +84,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Divider(),
+                      //Divider(),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      _detalle(),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
                       _crearTipoInmueble(),
                       _crearDimencion(),
                       _crearPropiedad(),
@@ -620,5 +628,27 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
             ],
           );
         });
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        title: Text(
+          "Formulario: Domicilio",
+          style: TextStyle(
+              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'En este formulario debe ingresar caracteristicas de su domicilio, necesarias para...',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 }
