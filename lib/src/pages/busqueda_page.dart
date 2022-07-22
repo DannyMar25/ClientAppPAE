@@ -70,7 +70,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
                             )),
                         Padding(padding: EdgeInsets.only(bottom: 10.0)),
                         Text(
-                          'Selecciona la o las categorias de tu gusto y te mostraremos los resultados',
+                          'Selecciona la o las categorías de tu gusto y te mostraremos los resultados',
                           textAlign: TextAlign.justify,
                           style: TextStyle(fontSize: 15),
                         ),
@@ -228,7 +228,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
       children: [
         Padding(padding: EdgeInsets.only(top: 10.0)),
         Text(
-          'Seleccione genero:',
+          'Seleccione género:',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         Padding(padding: EdgeInsets.only(top: 10.0)),
@@ -281,7 +281,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
           child: Padding(
             padding: EdgeInsets.only(left: 30, right: 30),
             child: SizedBox(
-              width: 280.0,
+              width: 150.0,
               child: DropdownButtonFormField<String>(
                   //hint: Text(animal.tamanio.toString()),
                   value: _selection2,
@@ -359,7 +359,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
       onPressed: () {
         if (formKey.currentState!.validate()) {
           SnackBar(
-            content: Text('Por favor selecciona una opcion'),
+            content: Text('Por favor selecciona una opción'),
           );
           _submit();
         } else {

@@ -48,7 +48,7 @@ class _MenuWidgetState extends State<MenuWidget> {
               Icons.pets,
               color: Colors.green,
             ),
-            title: Text('Galeria de mascotas'),
+            title: Text('Galería de mascotas'),
             onTap: () => Navigator.pushReplacementNamed(context, 'home'),
           ),
           ListTile(
@@ -71,7 +71,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   onTap: () {
                     mostrarAlertaOk(
                         context,
-                        'Para poder llenar el formulario de adopción debes seleccionar a tu futura mascota en nuestra galeria.',
+                        'Para poder llenar el formulario de adopción debes seleccionar a tu futura mascota en nuestra galería.',
                         'home');
                     //Navigator.pushReplacementNamed(context, 'home');
                   })

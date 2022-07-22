@@ -76,7 +76,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                   child: Column(
                     children: [
                       Text(
-                        'Que tipo de inmueble posee?',
+                        '¿Qué tipo de inmueble posee?',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -104,7 +104,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       // _crearTelefono(),
                       Divider(),
                       Text(
-                        'Planea mudarse proximamente?',
+                        '¿Planea mudarse próximamente?',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -123,7 +123,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       ),
                       Divider(),
                       Text(
-                        'El lugar donde pasara la mascota, tiene cerramiento?',
+                        'El lugar donde pasara la mascota, ¿Tiene cerramiento?',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -146,7 +146,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       ),
                       Divider(),
                       Text(
-                        'Cual piensa que es la mascota mas adecuada para Ud.?',
+                        '¿Cuál piensa que es la mascota más adecuada para Ud.?',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -179,7 +179,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         if (isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
       initialValue: domicilio.m2.toString(),
@@ -203,7 +203,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       textCapitalization: TextCapitalization.sentences,
       //keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
-          labelText: 'Telefono',
+          labelText: 'Teléfono',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -301,7 +301,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         if (isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
       initialValue: domicilio.alturaC.toString(),
@@ -591,12 +591,12 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           if (formKey.currentState!.validate()) {
             // Si el formulario es válido, queremos mostrar un Snackbar
             SnackBar(
-              content: Text('Informacion ingresada correctamente'),
+              content: Text('Información ingresada correctamente'),
             );
             _submit();
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+                context, 'Asegurate de que todos los campos están llenos.');
           }
         }
       },
@@ -641,9 +641,9 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Confirmacion'),
+            title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),
@@ -671,7 +671,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe ingresar caracteristicas de su domicilio, necesarias para...',
+          'En este formulario debe ingresar características de su domicilio, necesarias para...',
           textAlign: TextAlign.justify,
         ),
       ),

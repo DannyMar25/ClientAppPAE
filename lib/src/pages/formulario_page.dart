@@ -33,7 +33,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 250, 249),
       appBar: AppBar(
-        title: Text('Formulario de adopcion'),
+        title: Text('Formulario de adopción'),
         backgroundColor: Colors.green,
         actions: [
           Builder(builder: (BuildContext context) {
@@ -149,7 +149,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                             color: Colors.green,
                           ),
                           label: Text(
-                            "Volver a la galeria",
+                            "Volver a la galería",
                             style: TextStyle(color: Colors.green, fontSize: 14),
                           )),
                       //Padding(padding: EdgeInsets.only(bottom: 20.0)),

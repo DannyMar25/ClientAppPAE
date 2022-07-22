@@ -248,7 +248,7 @@ class _AnimalPageState extends State<AnimalPage> {
       onSaved: (value) => animal.tamanio = value!,
       validator: (value) {
         if (value!.length < 3) {
-          return 'Ingrese el tamanio de la mascota';
+          return 'Ingrese el tamaño de la mascota';
         } else {
           return null;
         }
@@ -305,7 +305,7 @@ class _AnimalPageState extends State<AnimalPage> {
       onSaved: (value) => animal.especie = value!,
       validator: (value) {
         if (value!.length < 3) {
-          return 'Ingrese la especie de la mascota';
+          return 'Ingrese información';
         } else {
           return null;
         }
@@ -319,12 +319,12 @@ class _AnimalPageState extends State<AnimalPage> {
       readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Caracteristicas',
+        labelText: 'Características',
       ),
       onSaved: (value) => animal.caracteristicas = value!,
       validator: (value) {
         if (value!.length < 3) {
-          return 'Ingrese las caracteristicas especiales';
+          return 'Ingrese las características especiales';
         } else {
           return null;
         }
@@ -529,7 +529,7 @@ class _AnimalPageState extends State<AnimalPage> {
                           child: ListTile(
                             title: Text("Agenda una cita!"),
                             subtitle: Text(
-                              "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipcion.",
+                              "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipción.",
                               textAlign: TextAlign.justify,
                             ),
                           )),
@@ -550,7 +550,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               width: 8,
                             ),
                             TextButton(
-                              child: Text("Volver a galeria"),
+                              child: Text("Volver a galería"),
                               onPressed: () {
                                 Navigator.pushNamed(context, 'home');
                               },
@@ -616,7 +616,7 @@ class _AnimalPageState extends State<AnimalPage> {
                           child: ListTile(
                             title: Text("Deseas adoptar a ${animal.nombre}!"),
                             subtitle: Text(
-                              "Si deseas adoptarlo debes llenar el formulario de adopcion.",
+                              "Si deseas adoptarlo debes llenar el formulario de adopción.",
                               textAlign: TextAlign.justify,
                             ),
                           )),
@@ -646,7 +646,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               width: 8,
                             ),
                             TextButton(
-                              child: Text("Volver a galeria"),
+                              child: Text("Volver a galería"),
                               onPressed: () {
                                 Navigator.pushNamed(context, 'home');
                               },

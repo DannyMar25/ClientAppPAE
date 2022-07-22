@@ -62,7 +62,25 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                           key: formKey,
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.center,
-                            children: [_mostrarImagen(), _verListado()],
+                            children: [
+                              _mostrarImagen(),
+                              _verListado(),
+                              Padding(padding: EdgeInsets.only(bottom: 40.0)),
+                              OutlinedButton.icon(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, 'home');
+                                  },
+                                  icon: Icon(
+                                    Icons.photo_album,
+                                    size: 30,
+                                    color: Colors.green,
+                                  ),
+                                  label: Text(
+                                    "Volver a la galeria",
+                                    style: TextStyle(
+                                        color: Colors.green, fontSize: 14),
+                                  )),
+                            ],
                           )))))
         ]));
   }

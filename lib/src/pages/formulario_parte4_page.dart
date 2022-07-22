@@ -89,7 +89,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('RELACION CON LOS ANIMALES'),
+        title: Text('RELACIÓN CON LOS ANIMALES'),
         backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
@@ -113,7 +113,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           color: Colors.transparent,
                         ),
                         Text(
-                          'Liste sus dos ultimas mascotas',
+                          'Liste sus dos últimas mascotas',
                           style: TextStyle(
                             fontSize: 33,
                             foreground: Paint()
@@ -150,10 +150,28 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           ],
                         ),
                         Divider(),
+                        Text(
+                          '¿Donde esta ahora? Si fallecio, perdió o esta en otro lugar, indique la causa.',
+                          style: TextStyle(fontSize: 16),
+                        ),
                         _crearLugarM(),
                         Divider(),
                         _crearPregunta1(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        Text(
+                          'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
+                          style: TextStyle(fontSize: 16),
+                        ),
                         _crearPregunta2(),
+                        Text(
+                          'Con relación a la anterior pregunta ¿Qué pasaria si los dueños de la nueva casa no aceptan mascotas?',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
                         _crearPregunta3(),
                         Divider(),
                         Text(
@@ -182,6 +200,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         _crearEnfermedad(),
                         Divider(),
+                        Text(
+                          '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                         _crearPregunta9(),
                         Divider(),
                         Text(
@@ -190,6 +214,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         _crearGastos(),
                         Divider(),
+                        Text(
+                          '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                         _crearPregunta10(),
                         Divider(),
                         Text(
@@ -235,6 +265,15 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Divider(),
                         _crearPregunta11(),
                         _crearPregunta12(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        Text(
+                          '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                         _crearPregunta13(),
                         Divider(),
                         Text(
@@ -278,8 +317,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              'Donde esta ahora? Si fallecio, perdio o esta en otro lugar, indique la causa.',
+          //contentPadding: const EdgeInsets.all(0.0),
+          // labelText:
+          //     'Donde esta ahora? Si fallecio, perdio o esta en otro lugar, indique la causa.',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -469,8 +509,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
+          // labelText:
+          //     'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -492,8 +532,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              'Con relación a la anterior pregunta ¿Qué pasaria si los dueños de la nueva casa no aceptan mascotas?',
+          //labelText:
+          //   'Con relación a la anterior pregunta ¿Qué pasaria si los dueños de la nueva casa no aceptan mascotas?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -625,8 +665,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
+          // labelText:
+          //    '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -648,8 +688,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?',
+          //labelText:
+          //    '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -715,8 +755,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText:
-              '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
+          //labelText:
+          //   '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -1164,9 +1204,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Confirmacion'),
+            title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),
@@ -1194,7 +1234,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe responder algunas preguntas acerca de su relacion con los animales...',
+          'En este formulario debe responder algunas preguntas acerca de su relación con los animales...',
           textAlign: TextAlign.justify,
         ),
       ),

@@ -61,7 +61,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Home Page'),
+            title: Text('Galería de mascotas'),
             backgroundColor: Colors.green,
             actions: [
               Builder(builder: (BuildContext context) {
@@ -256,7 +256,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
               image: AssetImage("assets/pet-care.png"),
               fit: BoxFit.fitWidth,
             )),
-        title: Text('Bienvenido a nuestra galeria de mascotas!',
+        title: Text('Bienvenido a nuestra galería de mascotas!',
             style: TextStyle(fontSize: 17.0)),
         subtitle: Text(
           'Ver más!',
@@ -275,7 +275,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
                 vertical: 8.0,
               ),
               child: Text(
-                """Hola, a continuacion puedes ver nuestra galeria de mascotas en adopcion. 
+                """Hola, a continuación puedes ver nuestra galería de mascotas en adopción. 
 Si deseas puedes usar nuestros filtros para realizar una busqueda mas personalizada dependiendo de tus gustos en mascotas.""",
                 style: Theme.of(context)
                     .textTheme

@@ -29,7 +29,7 @@ class _IntroPageState extends State<IntroPage> {
       fontSize: 14,
       fontWeight: FontWeight.normal);
   final _loremIpsum =
-      '''PoliPet es una app dedicada a difundir la adopcion de mascotas, nuestro principal objetivo es mejorar la calidad de vida de animalitos que no tienen un hogar''';
+      '''PoliPet es una app dedicada a difundir la adopción de mascotas, nuestro principal objetivo es mejorar la calidad de vida de animalitos que no tienen un hogar''';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     //backgroundColor: Colors.green,
     shape: const RoundedRectangleBorder(
@@ -146,13 +146,13 @@ class _IntroPageState extends State<IntroPage> {
                           headerBackgroundColorOpened:
                               Color.fromARGB(137, 118, 28, 153),
                           header: Text(
-                            'Galeria',
+                            'Galería',
                             style: _headerStyle,
                             textAlign: TextAlign.justify,
                           ),
                           content: Column(
                             children: [
-                              Text('Encuentra tu mascota',
+                              Text('Encuentra tu mascota.',
                                   style: _contentStyle),
                               SizedBox(
                                 child: Image(
@@ -178,7 +178,7 @@ class _IntroPageState extends State<IntroPage> {
                                           vertical: 2.0),
                                     ),
                                     Text(
-                                      'Galeria',
+                                      'Galería',
                                       style: TextStyle(color: Colors.green),
                                     ),
                                   ],
@@ -207,7 +207,7 @@ class _IntroPageState extends State<IntroPage> {
                                     child: Image(
                                       image: AssetImage("assets/pet.jpg"),
                                     ),
-                                    height: 200.0,
+                                    height: 100.0,
                                   ),
                                   Flexible(
                                       flex: 1,
@@ -258,7 +258,7 @@ class _IntroPageState extends State<IntroPage> {
                 content: Column(
                   children: [
                     Text(
-                        "Si deseas conocer mas animalitos puedes agendar una cita y visitarnos."),
+                        "Si deseas conocer más animalitos puedes agendar una cita y visitarnos."),
                     Padding(padding: EdgeInsets.only(bottom: 10.0)),
                     TextButton(
                       style: flatButtonStyle,
@@ -295,7 +295,7 @@ class _IntroPageState extends State<IntroPage> {
                       TextSpan(
                           style: TextStyle(),
                           text:
-                              'Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion ',
+                              'Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galería y dentro de su perfil dar clic en la opción ',
                           children: [
                             TextSpan(
                                 text: '¡Quiero Adoptarlo!.',
@@ -305,7 +305,7 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 10.0)),
                     Text(
-                      'Ten en cuenta que para poder relalizar este proceso debes iniciar sesion o registrate en la aplicacion.',
+                      'Ten en cuenta que para poder relalizar este proceso debes iniciar sesión o registrate en la aplicación.',
                       textAlign: TextAlign.justify,
                     ),
                     //"Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion '¡Quiero Adoptarlo!'", textAlign: TextAlign.justify,),
@@ -327,7 +327,7 @@ class _IntroPageState extends State<IntroPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Galeria',
+                            'Galería',
                             style: TextStyle(color: Colors.green),
                           ),
                         ],
@@ -350,12 +350,12 @@ class _IntroPageState extends State<IntroPage> {
                 content: Column(
                   children: [
                     Text(
-                      "Si ya enviaste el formulario de adopcion y has recibido una respuesta positiva, puedes llevar un control de tu mascota en la seccion de Seguimiento.",
+                      "Si ya enviaste el formulario de adopción y has recibido una respuesta positiva, puedes llevar un control de tu mascota en la sección de Seguimiento.",
                       textAlign: TextAlign.justify,
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 10.0)),
                     Text(
-                      "Ten en cuenta que para ingresar a esta seccion debemos comprobar si tus datos son correctos.",
+                      "Ten en cuenta que para ingresar a esta sección debemos comprobar si tus datos son correctos.",
                       textAlign: TextAlign.justify,
                     ),
                     TextButton(
@@ -373,7 +373,7 @@ class _IntroPageState extends State<IntroPage> {
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                           ),
                           Text(
-                            'Verificar estado de adopcion',
+                            'Verificar estado de adopción',
                             style: TextStyle(color: Colors.green),
                           ),
                         ],

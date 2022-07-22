@@ -264,12 +264,12 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       controller: telefono,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Telefono',
+        labelText: 'Teléfono',
       ),
       onSaved: (value) => telefono = value as TextEditingController,
       validator: (value) {
         if (value!.length < 3) {
-          return 'Ingrese su numero de telefono';
+          return 'Ingrese su número de teléfono';
         } else {
           return null;
         }
@@ -288,7 +288,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       onSaved: (value) => correo = value as TextEditingController,
       validator: (value) {
         if (value!.length < 3) {
-          return 'Ingrese su correo electronico';
+          return 'Ingrese su correo electrónico';
         } else {
           return null;
         }
@@ -311,12 +311,12 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           if (formKey.currentState!.validate()) {
             // Si el formulario es válido, queremos mostrar un Snackbar
             SnackBar(
-              content: Text('Informacion ingresada correctamente'),
+              content: Text('Información ingresada correctamente'),
             );
             _submit();
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+                context, 'Asegurate de que todos los campos están llenos.');
           }
         }
         // onPressed: () {

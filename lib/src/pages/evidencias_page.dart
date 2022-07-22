@@ -128,7 +128,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Ingrese su numero de cedula:',
+          labelText: 'Ingrese su número de cédula:',
           labelStyle: TextStyle(fontSize: 22, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -139,7 +139,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
         if (isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
     );
@@ -168,12 +168,12 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
             // Si el formulario es válido, queremos mostrar un Snackbar
             //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
             SnackBar(
-              content: Text('Informacion ingresada correctamente'),
+              content: Text('Información ingresada correctamente'),
             );
             _submit();
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+                context, 'Asegurate de que todos los campos están llenos.');
           }
         });
   }
@@ -248,7 +248,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       //Divider(color: Colors.purple),
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
-                      Text("Numero de cedula: " '${formulario.identificacion}'),
+                      Text("Número de cédula: " '${formulario.identificacion}'),
                       Text("Su solicitud de adopción fue:"
                           '${formulario.estado}'),
                       Text("Fecha de aprobación de solicitud: "

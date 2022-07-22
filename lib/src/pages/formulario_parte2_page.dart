@@ -26,7 +26,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   bool isChecked2 = false;
   bool isChecked3 = false;
   var idFormu;
-  String campoVacio = 'Campo vacio';
+  String campoVacio = 'Campo vacío';
 
   String _fecha = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
@@ -50,7 +50,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('SITUACION FAMILIAR'),
+        title: Text('SITUACIÓN FAMILIAR'),
         backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
@@ -146,7 +146,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         //),
                         Divider(),
                         Text(
-                          'Alguien que viva con usted es alergico a los animales o sufre de asma?',
+                          'Alguien que viva con usted es alérgico a los animales o sufre de asma?',
                           style: TextStyle(
                             fontSize: 33,
                             foreground: Paint()
@@ -617,12 +617,12 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
             // Si el formulario es válido, queremos mostrar un Snackbar
             //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
             SnackBar(
-              content: Text('Informacion ingresada correctamente'),
+              content: Text('Información ingresada correctamente'),
             );
             _submit();
           } else {
             utils.mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+                context, 'Asegurate de que todos los campos están llenos.');
           }
         }
       },
@@ -675,9 +675,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Confirmacion'),
+            title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),
@@ -705,7 +705,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe ingresar informacion de las personas con las que vive.',
+          'En este formulario debe ingresar información de las personas con las que vive.',
           textAlign: TextAlign.justify,
         ),
       ),

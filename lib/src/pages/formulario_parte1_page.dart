@@ -2,9 +2,7 @@ import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
 
@@ -116,7 +114,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       _crearInstruccion(),
                       Divider(),
                       Text(
-                        'Telefonos de contacto',
+                        'Teléfonos de contacto',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -196,7 +194,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Cedula',
+          labelText: 'Cédula',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -289,7 +287,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Ocupacion',
+          labelText: 'Ocupación',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -335,7 +333,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Direccion exacta donde estara la mascota',
+          labelText: 'Dirección exacta donde estará la mascota',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -356,7 +354,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione nivel de instruccion: ',
+          'Seleccione nivel de instrucción: ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         DropdownButton<String>(
@@ -387,7 +385,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Telefono de domicilio',
+          labelText: 'Teléfono de domicilio',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -409,7 +407,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Telefono celular',
+          labelText: 'Teléfono celular',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -431,7 +429,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Telefono de trabajo',
+          labelText: 'Teléfono de trabajo',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -497,7 +495,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Telefono',
+          labelText: 'Teléfono',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -594,7 +592,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
                 //Validamos que el digito validador sea igual al de la cedula
                 if (digito_validador == ultimo_digito) {
-                  print('la cedula:' + cedula + ' es correcta');
+                  print('La cédula:' + cedula + ' es correcta');
                   SnackBar(
                     content: Text('Información ingresada correctamente'),
                   );
@@ -607,7 +605,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       builder: (context) {
                         return AlertDialog(
                           title: Text('Información incorrecta'),
-                          content: Text('Número de cedula incorrecto'),
+                          content: Text('Número de cédula incorrecto'),
                           actions: [
                             TextButton(
                               child: Text('Ok'),
@@ -625,7 +623,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                     builder: (context) {
                       return AlertDialog(
                         title: Text('Información incorrecta'),
-                        content: Text('Cedula no pertenece a ninguna región'),
+                        content: Text('Cédula no pertenece a ninguna región'),
                         actions: [
                           TextButton(
                             child: Text('OK'),
@@ -634,7 +632,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                         ],
                       );
                     });
-                print('Esta cedula no pertenece a ninguna región');
+                print('Esta cédula no pertenece a ninguna región');
               }
             } else {
               showDialog(
@@ -642,7 +640,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                   builder: (context) {
                     return AlertDialog(
                       title: Text('Información incorrecta'),
-                      content: Text('Debe tener al meno 10 digitos'),
+                      content: Text('Debe tener al meno 10 dígitos'),
                       actions: [
                         TextButton(
                           child: Text('Ok'),
@@ -652,7 +650,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                     );
                   });
               //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
-              print('Esta cedula tiene mas o menos de 10 Digitos');
+              print('Esta cédula tiene mas o menos de 10 Dígitos');
             }
             //Codigo anterior
             // SnackBar(
@@ -661,7 +659,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
             // _submit();
           } else {
             utils.mostrarAlerta(context,
-                'Asegurate de que los datos hayan sido ingresados correctamente y que no existan campos vacios.');
+                'Asegurate de que los datos hayan sido ingresados correctamente y que no existan campos vacíos.');
           }
         }
       },
@@ -712,9 +710,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Confirmacion'),
+            title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta seccion, asegurate de haber llenado todos lo campos con la informacion solicitada.'),
+                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),
