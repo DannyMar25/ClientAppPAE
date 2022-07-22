@@ -3,8 +3,6 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
 class VerRegistroDespPage extends StatefulWidget {
@@ -31,9 +29,10 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-        backgroundColor: Color.fromARGB(223, 211, 212, 207),
+        //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
         appBar: AppBar(
-          title: Text('Registros de desparasitacion'),
+          title: Text('Registros de desparasitación'),
           backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
@@ -50,7 +49,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Registro de desparasitacion',
+                              'Registros de desparasitación',
                               style: TextStyle(
                                 fontSize: 28,
                                 foreground: Paint()
@@ -60,11 +59,40 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                               ),
                               textAlign: TextAlign.start,
                             ),
+                            Divider(
+                              color: Colors.transparent,
+                            ),
+                            _detalle(),
+                            Divider(
+                              color: Colors.transparent,
+                            ),
                             _crearListado()
                           ],
                         ))))
           ],
         ));
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        // title: Text(
+        //   "Registro de vacunas",
+        //   style: TextStyle(
+        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        // ),
+        subtitle: Text(
+          'Aqui encontraras una lista de todas las desparacitaciones de tu mascota.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 
   Widget _crearListado() {
@@ -100,7 +128,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             children: [
               Divider(color: Colors.transparent),
               DataTable(
-                columnSpacing: 25,
+                columnSpacing: 35,
                 headingRowColor: MaterialStateColor.resolveWith(
                   (states) => Color.fromARGB(255, 120, 110, 148),
                 ),
@@ -151,7 +179,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                   DataRow(selected: true, cells: [
                     DataCell(Container(
                       child: Text('${desparasitacion.pesoActual}'),
-                      width: 100,
+                      width: 115,
                     )),
                     DataCell(Container(
                       child:

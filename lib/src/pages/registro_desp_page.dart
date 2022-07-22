@@ -42,9 +42,10 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-      backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('Registro de desparasitacion'),
+        title: Text('Registro de desparasitación'),
         backgroundColor: Colors.green,
       ),
       drawer: _menuWidget(),
@@ -61,7 +62,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                     child: Column(
                       children: [
                         Text(
-                          'Registro de desparacitaciones',
+                          'Registrar desparacitaciones',
                           style: TextStyle(
                             fontSize: 33,
                             foreground: Paint()
@@ -71,9 +72,16 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Divider(),
+                        //Divider(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
                         DataTable(
-                          columnSpacing: 25,
+                          columnSpacing: 15,
                           headingRowColor: MaterialStateColor.resolveWith(
                             (states) => Color.fromARGB(255, 120, 110, 148),
                           ),
@@ -87,9 +95,10 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                           sortAscending: false,
                           columns: [
                             DataColumn(
-                                label: Text(
-                                    "Fecha consulta                      ")),
-                            DataColumn(label: Text("Producto    ")),
+                                label: Text("Fecha consulta             ")),
+                            DataColumn(
+                                label:
+                                    Text("            Producto              ")),
                           ],
                           rows: [
                             DataRow(selected: true, cells: [
@@ -100,7 +109,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                           ],
                         ),
                         DataTable(
-                          columnSpacing: 30,
+                          columnSpacing: 20,
                           headingRowColor: MaterialStateColor.resolveWith(
                             (states) => Color.fromARGB(255, 120, 110, 148),
                           ),
@@ -112,16 +121,19 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                           ),
                           sortColumnIndex: 1,
                           sortAscending: false,
+                          //dataRowHeight: 25,
                           columns: [
-                            DataColumn(label: Text("Peso(Kg)"), numeric: true),
-                            DataColumn(label: Text("Proxima desparacitacion")),
+                            DataColumn(
+                                label: Text("Peso(Kg)                "),
+                                numeric: true),
+                            DataColumn(label: Text("Próxima desparacitación")),
                           ],
                           rows: [
                             DataRow(selected: true, cells: [
                               DataCell(_crearPesoActual()),
                               DataCell(Container(
+                                width: 110,
                                 child: _crearFechaProxima(context),
-                                height: 140.0,
                               )),
                             ]),
                           ],
@@ -136,6 +148,28 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        // title: Text(
+        //   "Registro de vacunas",
+        //   style: TextStyle(
+        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        // ),
+        subtitle: Text(
+          'En esta sección podras llevar un registro de las desparacitaciones de tu mascota, este registro sera enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
     );
   }
 

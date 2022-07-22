@@ -6,9 +6,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/firebase_api.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/button_widget.dart';
-import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +50,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 206, 210, 212),
+      //backgroundColor: Color.fromARGB(255, 206, 210, 212),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('Subir archivos'),
         backgroundColor: Colors.green,

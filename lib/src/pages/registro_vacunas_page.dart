@@ -43,7 +43,8 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-      backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+      backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('Registro de vacunas'),
         backgroundColor: Colors.green,
@@ -62,7 +63,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                     child: Column(
                       children: [
                         Text(
-                          'Registro de vacunas',
+                          'Registrar vacunas',
                           style: TextStyle(
                             fontSize: 33,
                             foreground: Paint()
@@ -72,9 +73,16 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Divider(),
+                        //Divider(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
                         DataTable(
-                          columnSpacing: 25,
+                          columnSpacing: 32,
                           headingRowColor: MaterialStateColor.resolveWith(
                             (states) => Color.fromARGB(255, 120, 110, 148),
                           ),
@@ -95,15 +103,15 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                             DataRow(selected: true, cells: [
                               DataCell(Container(
                                 child: _crearFechaConsulta(context),
-                                width: 85,
+                                width: 80,
                               )),
                               DataCell(Container(
                                 child: _crearPesoActual(),
-                                width: 70,
+                                width: 60,
                               )),
                               DataCell(Container(
                                 child: _crearFechaProxima(context),
-                                width: 85,
+                                width: 83,
                               )),
                             ]),
                           ],
@@ -261,6 +269,28 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
           vacunas.veterinarioResp = s;
         });
       },
+    );
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        // title: Text(
+        //   "Registro de vacunas",
+        //   style: TextStyle(
+        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        // ),
+        subtitle: Text(
+          'En esta sección podras llevar un registro de las vacunas de tu mascota, este registro sera enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
     );
   }
 

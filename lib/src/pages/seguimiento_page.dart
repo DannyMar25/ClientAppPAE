@@ -181,7 +181,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                               color: Colors.white,
                             ),
                             Text(
-                              'Informacion del adoptante',
+                              'Información del adoptante',
                               style: TextStyle(
                                 fontSize: 28,
                                 foreground: Paint()
@@ -212,7 +212,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             Row(
                               children: [
                                 Text(
-                                  'Direccion: ',
+                                  'Dirección: ',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
@@ -226,7 +226,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             Row(
                               children: [
                                 Text(
-                                  'Telefono: ',
+                                  'Teléfono: ',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
@@ -251,6 +251,17 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                               ],
                             ),
                             Divider(),
+                            Text(
+                              'Ingresa información de tu mascota',
+                              style: TextStyle(
+                                fontSize: 28,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 3
+                                  ..color = Colors.blueAccent,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ],
                         ),
                         _crearBoton(context),
@@ -344,8 +355,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                       return Colors.green;
                     }),
                   ),
-                  label: Text('Registro Vacunas'),
-                  icon: Icon(Icons.save),
+                  label: Text('Registrar Vacunas'),
+                  icon: Icon(Icons.edit_note),
                   autofocus: true,
                   onPressed: () {
                     // Navigator.pushNamed(context, 'registroVacunas',
@@ -368,8 +379,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         return Colors.green;
                       }),
                     ),
-                    label: Text('Registro Desparasitacion'),
-                    icon: Icon(Icons.save),
+                    label: Text('Registrar Desparasitaciones'),
+                    icon: Icon(Icons.edit_note),
                     autofocus: true,
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, 'registroDesp',
@@ -393,8 +404,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                     return Colors.green;
                   }),
                 ),
-                label: Text('Cargar evidencia'),
-                icon: Icon(Icons.save),
+                label: Text('Subir evidencia'),
+                icon: Icon(Icons.photo_library),
                 autofocus: true,
                 onPressed: () {
                   Navigator.pushNamed(context, 'demoArchivos', arguments: {

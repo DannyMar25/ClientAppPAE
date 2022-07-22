@@ -37,7 +37,8 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-        backgroundColor: Color.fromARGB(223, 211, 212, 207),
+        //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
         appBar: AppBar(
           title: Text('Registros'),
           backgroundColor: Colors.green,
@@ -46,29 +47,61 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
         body: Stack(children: [
           // Background(),
           SingleChildScrollView(
-              child: Container(
-                  //color: Colors.lightGreenAccent,
-                  padding: new EdgeInsets.only(top: 10.0),
-                  child: Form(
-                      key: formKey,
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Registro de vacunas',
-                            style: TextStyle(
-                              fontSize: 28,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 2
-                                ..color = Colors.blueGrey,
-                            ),
-                            textAlign: TextAlign.start,
+              child: Flexible(
+            fit: FlexFit.loose,
+            child: Container(
+                //color: Colors.lightGreenAccent,
+                padding: new EdgeInsets.only(top: 10.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Registro de vacunas',
+                          style: TextStyle(
+                            fontSize: 28,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
                           ),
-                          _crearListado()
-                        ],
-                      ))))
+                          textAlign: TextAlign.start,
+                        ),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _crearListado()
+                      ],
+                    ))),
+          ))
         ]));
+  }
+
+  Widget _detalle() {
+    return Card(
+      child: ListTile(
+        // title: Text(
+        //   "Registro de vacunas",
+        //   style: TextStyle(
+        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        // ),
+        subtitle: Text(
+          'Aqui encontraras una lista de todas las vacunas de tu mascota.',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 
   showCitas() async {
@@ -128,7 +161,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
             children: [
               Divider(color: Colors.transparent),
               DataTable(
-                columnSpacing: 26,
+                columnSpacing: 25,
                 headingRowColor: MaterialStateColor.resolveWith(
                   (states) => Color.fromARGB(255, 120, 110, 148),
                 ),

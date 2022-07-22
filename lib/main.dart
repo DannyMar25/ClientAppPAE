@@ -9,7 +9,7 @@ import 'package:cliente_app_v1/src/pages/formulario_parte1_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte2_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte3_page.dart';
 import 'package:cliente_app_v1/src/pages/formulario_parte4_page.dart';
-import 'package:cliente_app_v1/src/pages/home_page.dart';
+import 'package:cliente_app_v1/src/pages/galeriaMascotas_page.dart';
 import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/pages/login_page.dart';
 import 'package:cliente_app_v1/src/pages/perfilMascotaMain_page.dart';
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           routes: {
             'login': (_) => LoginPage(),
             'registro': (_) => RegistroPage(),
-            'home': (_) => HomePage(),
+            'home': (_) => GaleriaMascotasPage(),
             'animal': (_) => AnimalPage(),
             'bienvenida': (_) => BienvenidaPage(),
             'regcliente': (_) => RegistroClientePage(),

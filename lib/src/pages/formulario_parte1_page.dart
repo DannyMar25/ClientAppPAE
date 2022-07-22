@@ -301,12 +301,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _crearEmail() {
     return TextFormField(
-      validator: (value) {
-        if (value!.isEmpty) {
-          return campoVacio;
-        }
-        return null;
-      },
+      validator: (value) => utils.validarEmail(value),
+      // {
+      //   if (value!.isEmpty) {
+      //     return campoVacio;
+      //   }
+      //   return null;
+      // },
       initialValue: datoPersona.email,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -595,7 +596,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                 if (digito_validador == ultimo_digito) {
                   print('la cedula:' + cedula + ' es correcta');
                   SnackBar(
-                    content: Text('Informacion ingresada correctamente'),
+                    content: Text('Información ingresada correctamente'),
                   );
                   formulario.identificacion = cedula;
                   datoPersona.cedula = cedula;
@@ -605,8 +606,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('Informacion incorrecta'),
-                          content: Text('Numero de cedula incorrecto'),
+                          title: Text('Información incorrecta'),
+                          content: Text('Número de cedula incorrecto'),
                           actions: [
                             TextButton(
                               child: Text('Ok'),
@@ -623,24 +624,24 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Informacion incorrecta'),
-                        content: Text('Cedula no pertenece a ninguna region'),
+                        title: Text('Información incorrecta'),
+                        content: Text('Cedula no pertenece a ninguna región'),
                         actions: [
                           TextButton(
-                            child: Text('Ok'),
+                            child: Text('OK'),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                         ],
                       );
                     });
-                print('Esta cedula no pertenece a ninguna region');
+                print('Esta cedula no pertenece a ninguna región');
               }
             } else {
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text('Informacion incorrecta'),
+                      title: Text('Información incorrecta'),
                       content: Text('Debe tener al meno 10 digitos'),
                       actions: [
                         TextButton(
@@ -659,8 +660,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
             // );
             // _submit();
           } else {
-            utils.mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+            utils.mostrarAlerta(context,
+                'Asegurate de que los datos hayan sido ingresados correctamente y que no existan campos vacios.');
           }
         }
       },

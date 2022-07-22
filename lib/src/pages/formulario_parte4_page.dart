@@ -86,7 +86,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       //   print(formulario.id);
     }
     return Scaffold(
-      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
@@ -274,6 +273,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         }
         return null;
       },
+      textAlign: TextAlign.justify,
       initialValue: relacionAnim.ubicMascota,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,

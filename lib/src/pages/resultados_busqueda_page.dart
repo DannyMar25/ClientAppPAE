@@ -2,7 +2,7 @@ import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
-import 'package:cliente_app_v1/src/utils/utils.dart';
+
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -183,27 +183,30 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
             final animales = snapshot.data;
             if (animales!.length == 0) {
               return Column(children: [
-                AlertDialog(
-                  title: Row(
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 50,
-                      ),
-                      Text('Resultado de busqueda!'),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: AlertDialog(
+                    title: Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.green,
+                          size: 45,
+                        ),
+                        Text('Resultado de busqueda!'),
+                      ],
+                    ),
+                    content: Text(
+                        'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+                    actions: [
+                      TextButton(
+                          child: Text('Ok'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'home');
+                          })
                     ],
                   ),
-                  content: Text(
-                      'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
-                  actions: [
-                    TextButton(
-                        child: Text('Ok'),
-                        //onPressed: () => Navigator.of(context).pop(),
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'home');
-                        })
-                  ],
                 )
               ]);
             }

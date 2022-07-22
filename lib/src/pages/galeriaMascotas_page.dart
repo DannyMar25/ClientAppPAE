@@ -8,13 +8,13 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 //import 'package:formvalidation/src/bloc/provider.dart';
 
-class HomePage extends StatefulWidget {
+class GaleriaMascotasPage extends StatefulWidget {
   //const HomePage({Key? key}) : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState();
+  _GaleriaMascotasPageState createState() => _GaleriaMascotasPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
   final animalesProvider = new AnimalesProvider();
   final userProvider = new UsuarioProvider();
   final prefs = new PreferenciasUsuario();

@@ -506,13 +506,13 @@ class _AnimalPageState extends State<AnimalPage> {
           Navigator.pushNamed(context, 'registroCita', arguments: animal);
         },
         child: Container(
-          height: 150,
+          height: 110,
           color: Colors.white,
           child: Row(
             children: [
               Center(
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(20),
                   child: Expanded(
                     child: Image.asset("assets/dog_an8.gif"),
                     flex: 2,
@@ -533,6 +533,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               textAlign: TextAlign.justify,
                             ),
                           )),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       Expanded(
                         flex: 5,
                         child: Row(
@@ -592,7 +593,7 @@ class _AnimalPageState extends State<AnimalPage> {
           }
         },
         child: Container(
-          height: 150,
+          height: 110,
           color: Colors.white,
           child: Row(
             children: [
@@ -619,6 +620,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               textAlign: TextAlign.justify,
                             ),
                           )),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       Expanded(
                         flex: 5,
                         child: Row(

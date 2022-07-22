@@ -16,14 +16,16 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   final formKey = GlobalKey<FormState>();
   final List<String> _items = ['Casa', 'Departamento', 'Otro'].toList();
   final List<String> _items1 = ['Propio', 'Arrendado'].toList();
-  final List<String> _items2 = ['Macho', 'Hembra'].toList();
+  final List<String> _items2 = ['Macho', 'Hembra', 'Ambos'].toList();
   final List<String> _items3 = ['Adulto', 'Cachorro'].toList();
   final List<String> _items4 = ['Pequeño', 'Mediano', 'Grande'].toList();
+  final List<String> _items5 = ['Canina', 'Felina'].toList();
   String? _selection;
   String? _selection1;
   String? _selection2;
   String? _selection3;
   String? _selection4;
+  String? _selection5;
 
   bool isChecked = false;
   bool isChecked1 = false;
@@ -96,11 +98,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       _crearDimencion(),
                       _crearPropiedad(),
                       Divider(),
-                      Text(
-                          'Si es arrendado, ponga el nombre y telefono del dueño de la casa:'),
-                      Divider(),
-                      _crearNombreD(),
-                      _crearTelefono(),
+
+                      _buildChild1(),
+                      // _crearNombreD(),
+                      // _crearTelefono(),
                       Divider(),
                       Text(
                         'Planea mudarse proximamente?',
@@ -136,8 +137,9 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       Row(
                         children: [Text('Si'), _crearCheckBox3()],
                       ),
-                      _crearAltura(),
-                      _crearMaterial(),
+                      _buildChild2(),
+                      // _crearAltura(),
+                      // _crearMaterial(),
                       Divider(),
                       Row(
                         children: [Text('No'), _crearCheckBox4()],
@@ -155,6 +157,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                         textAlign: TextAlign.center,
                       ),
                       Divider(),
+                      _crearEspecie(),
                       _crearSexo(),
                       _crearEdadM(),
                       _crearTamanio(),
@@ -305,7 +308,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Altura (m2)',
+        labelText: 'Altura (m)',
       ),
       onChanged: (s) {
         setState(() {
@@ -446,6 +449,35 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           domicilio.materialC = s;
         });
       },
+    );
+  }
+
+  Widget _crearEspecie() {
+    final dropdownMenuOptions = _items5
+        .map((String item) =>
+            //new DropdownMenuItem<String>(value: item, child: new Text(item)))
+            new DropdownMenuItem<String>(value: item, child: new Text(item)))
+        .toList();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      //mainAxisSize: MainAxisSize.max,
+      children: [
+        Text(
+          'Especie:          ',
+          style: TextStyle(fontSize: 16, color: Colors.black),
+        ),
+        DropdownButton<String>(
+            //hint: Text(animal.tamanio.toString()),
+            value: _selection5,
+            items: dropdownMenuOptions,
+            onChanged: (s) {
+              setState(() {
+                _selection5 = s;
+                domicilio.especieAd = s!;
+                //animal.tamanio = s!;
+              });
+            }),
+      ],
     );
   }
 
@@ -650,5 +682,34 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: Colors.green, width: 1)),
     );
+  }
+
+  Widget _buildChild1() {
+    if (_selection1 == 'Arrendado') {
+      return Column(
+        children: [
+          Text(
+              'Si es arrendado, ponga el nombre y telefono del dueño de la casa:'),
+          Divider(),
+          _crearNombreD(),
+          _crearTelefono()
+        ],
+      );
+    } //else {
+    //   if (_selection == 'Otros') {
+    //     return _crearDonacion();
+    //   }
+    // }
+    return Text('');
+  }
+
+  Widget _buildChild2() {
+    if (isChecked2 == true) {
+      return Column(
+        children: [_crearAltura(), _crearMaterial()],
+      );
+    } //else {
+
+    return Text('');
   }
 }

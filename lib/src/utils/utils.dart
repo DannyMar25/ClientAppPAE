@@ -242,3 +242,13 @@ validarCedula(String cedula, BuildContext context) {
     print('Esta cedula tiene mas o menos de 10 Digitos');
   }
 }
+
+String? validarEmail(String? value) {
+  String pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regex = RegExp(pattern);
+  if (value == null || value.isEmpty || !regex.hasMatch(value))
+    return 'Ingrese una dirección de correo valida.';
+  else
+    return null;
+}
