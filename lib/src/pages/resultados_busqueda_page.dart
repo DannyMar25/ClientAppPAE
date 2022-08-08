@@ -111,68 +111,6 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
         );
   }
 
-  // showCitas() async {
-  //   citasA.clear();
-  //   listaC = await animalesProvider.cargarBusqueda(
-  //       especie!, sexo!, etapaVida!, tamanio!);
-  //   for (var yy in listaC) {
-  //     AnimalModel cit = await yy;
-  //     setState(() {
-  //       citasA.add(cit);
-  //     });
-  //   }
-  // }
-
-  // Widget _verListado() {
-  //   return Column(
-  //     children: [
-  //       SizedBox(
-  //         height: 800,
-  //         child: ListView.builder(
-  //           itemCount: citasA.length,
-  //           itemBuilder: (context, i) => _crearItem1(context, citasA[i]),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  // Widget _buildChild() {
-  //   if (citasA.length == 0) {
-  //     // return Text('Hola');
-  //     return _alerta();
-  //   } else {
-  //     return _verListado();
-  //   }
-  // }
-
-  // Widget _alerta() {
-  //   return Column(children: [
-  //     AlertDialog(
-  //       title: Row(
-  //         children: [
-  //           Icon(
-  //             Icons.check_circle,
-  //             color: Colors.green,
-  //             size: 50,
-  //           ),
-  //           Text('Resultado de busqueda!'),
-  //         ],
-  //       ),
-  //       content: Text(
-  //           'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
-  //       actions: [
-  //         TextButton(
-  //             child: Text('Ok'),
-  //             //onPressed: () => Navigator.of(context).pop(),
-  //             onPressed: () {
-  //               Navigator.pushNamed(context, 'home');
-  //             })
-  //       ],
-  //     )
-  //   ]);
-  // }
-
   Widget _crearListadoBusqueda() {
     return FutureBuilder(
         future: animalesProvider.cargarBusqueda(
@@ -291,14 +229,6 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
       ),
     );
   }
-
-  // _crearBoton(BuildContext context) {
-  //   return FloatingActionButton(
-  //     child: Icon(Icons.add),
-  //     backgroundColor: Colors.deepPurple,
-  //     onPressed: () => Navigator.pushNamed(context, 'animal'),
-  //   );
-  // }
 
   Widget expand_card() {
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(

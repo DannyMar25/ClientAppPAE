@@ -25,8 +25,11 @@ class FormulariosProvider {
 
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  Future<String> crearFormularioPrin(FormulariosModel formulario,
-      DatosPersonalesModel datosPersona, BuildContext context) async {
+  Future<String> crearFormularioPrin(
+      FormulariosModel formulario,
+      DatosPersonalesModel datosPersona,
+      BuildContext context,
+      var idAnimal) async {
     try {
       var formularioAdd = await refForm.add(formulario.toJson());
       await refForm.doc(formularioAdd.id).update({"id": formularioAdd.id});
@@ -44,7 +47,8 @@ class FormulariosProvider {
           .update({"idDatosPersonales": datosPersonalesAdd.id});
       //return formularioAdd.id;
       var idFormu = formularioAdd.id;
-      Navigator.pushNamed(context, 'formularioP2', arguments: idFormu);
+      Navigator.pushNamed(context, 'formularioP2',
+          arguments: {'idFormu': idFormu, 'idAnimal': idAnimal});
       print(idFormu);
       return idFormu;
     } catch (e) {
@@ -77,8 +81,8 @@ class FormulariosProvider {
     }
   }
 
-  Future<bool> crearFormSituacionFam(
-      SitFamiliarModel sitFamilia, var idFormu, BuildContext context) async {
+  Future<bool> crearFormSituacionFam(SitFamiliarModel sitFamilia, var idFormu,
+      BuildContext context, var idAnimal) async {
     CollectionReference refFormSF = FirebaseFirestore.instance
         .collection('formularios')
         .doc(idFormu)
@@ -89,7 +93,8 @@ class FormulariosProvider {
 
       await refForm.doc(idFormu).update({"idSituacionFam": sitFamiliarAdd.id});
       var idFormu1 = idFormu;
-      Navigator.pushNamed(context, 'formularioP3', arguments: idFormu1);
+      Navigator.pushNamed(context, 'formularioP3',
+          arguments: {'idFormu': idFormu1, 'idAnimal': idAnimal});
 
       return true;
     } catch (e) {
@@ -97,8 +102,8 @@ class FormulariosProvider {
     }
   }
 
-  Future<bool> crearFormDomicilio(
-      DomicilioModel domicilio, var idFormu1, BuildContext context) async {
+  Future<bool> crearFormDomicilio(DomicilioModel domicilio, var idFormu1,
+      BuildContext context, var idAnimal) async {
     CollectionReference refFormDom = FirebaseFirestore.instance
         .collection('formularios')
         .doc(idFormu1)
@@ -108,7 +113,8 @@ class FormulariosProvider {
       await refFormDom.doc(domicilioAdd.id).update({"id": domicilioAdd.id});
       await refForm.doc(idFormu1).update({"idDomicilio": domicilioAdd.id});
       var idFormu2 = idFormu1;
-      Navigator.pushNamed(context, 'formularioP4', arguments: idFormu2);
+      Navigator.pushNamed(context, 'formularioP4',
+          arguments: {'idFormu': idFormu2, 'idAnimal': idAnimal});
       return true;
     } catch (e) {
       return false;

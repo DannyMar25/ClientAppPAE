@@ -1,3 +1,4 @@
+import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_situacionFam_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
@@ -17,6 +18,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   bool _guardando = false;
   bool isDisable = true;
   FormulariosModel formulario = new FormulariosModel();
+  AnimalModel animal = new AnimalModel();
   SitFamiliarModel sitFamilia = new SitFamiliarModel();
   //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
   FormulariosProvider formulariosProvider = new FormulariosProvider();
@@ -26,6 +28,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   bool isChecked2 = false;
   bool isChecked3 = false;
   var idFormu;
+  var idAnimal;
   String campoVacio = 'Campo vacío';
 
   String _fecha = '';
@@ -39,12 +42,15 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   @override
   Widget build(BuildContext context) {
-    var formData = ModalRoute.of(context)!.settings.arguments;
-    if (formData != null) {
-      //   formulario = formData as FormulariosModel;
-      idFormu = formData;
-      //   print(formulario.id);
-    }
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    idFormu = arg['idFormu'];
+    print(idFormu);
+    idAnimal = arg['idAnimal'];
+    print(idAnimal);
+    // var formData = ModalRoute.of(context)!.settings.arguments;
+    // if (formData != null) {
+    //   idFormu = formData;
+    // }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 221, 248, 153),
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
@@ -641,7 +647,8 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 //Sentencia If agregada recientemente
     //if (idFormu != null) {
     print(idFormu);
-    formulariosProvider.crearFormSituacionFam(sitFamilia, idFormu, context);
+    formulariosProvider.crearFormSituacionFam(
+        sitFamilia, idFormu, context, idAnimal);
     // } else {
     //animalProvider.editarAnimal(animal, foto!);
     //print(idFormu);

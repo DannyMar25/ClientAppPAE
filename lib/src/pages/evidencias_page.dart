@@ -126,6 +126,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     return TextFormField(
       //initialValue: ,
       readOnly: false,
+      keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Ingrese su número de cédula:',

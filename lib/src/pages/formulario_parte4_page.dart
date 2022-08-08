@@ -1,5 +1,7 @@
+import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_relacionAnimal_model.dart';
+import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
@@ -65,11 +67,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   bool _guardando = false;
   bool isDisable = true;
   var idFormu2;
+  var idAnimal;
   String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   //DatosPersonalesModel datoPersona = new DatosPersonalesModel();
   RelacionAnimalesModel relacionAnim = new RelacionAnimalesModel();
   FormulariosProvider formulariosProvider = new FormulariosProvider();
+  AnimalesProvider animalesProvider = new AnimalesProvider();
+  AnimalModel animales = new AnimalModel();
 
   @override
   void initState() {
@@ -79,12 +84,15 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   @override
   Widget build(BuildContext context) {
-    var formData = ModalRoute.of(context)!.settings.arguments;
-    if (formData != null) {
-      //   formulario = formData as FormulariosModel;
-      idFormu2 = formData;
-      //   print(formulario.id);
-    }
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    idFormu2 = arg['idFormu'];
+    print(idFormu2);
+    idAnimal = arg['idAnimal'];
+    print(idAnimal);
+    // var formData = ModalRoute.of(context)!.settings.arguments;
+    // if (formData != null) {
+    //   idFormu2 = formData;
+    // }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
@@ -1175,7 +1183,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 //Sentencia If agregada recientemente
     //if (idFormu != null) {
     print(idFormu2);
-    formulariosProvider.crearFormRelacionAnim(relacionAnim, idFormu2, context);
+    animales = await animalesProvider.cargarAnimalId(idAnimal);
+
+    animalesProvider.editarEstado(animales, 'Pendiente');
+    formulariosProvider.crearFormRelacionAnim(
+      relacionAnim,
+      idFormu2,
+      context,
+    );
     // } else {
     //animalProvider.editarAnimal(animal, foto!);
     //print(idFormu);

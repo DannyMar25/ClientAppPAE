@@ -35,6 +35,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   bool _guardando = false;
   bool isDisable = true;
   var idFormu1;
+  var idAnimal;
   String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   //SitFamiliarModel sitFamilia = new SitFamiliarModel();
@@ -50,12 +51,15 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   @override
   Widget build(BuildContext context) {
-    var formData = ModalRoute.of(context)!.settings.arguments;
-    if (formData != null) {
-      //   formulario = formData as FormulariosModel;
-      idFormu1 = formData;
-      //   print(formulario.id);
-    }
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    idFormu1 = arg['idFormu'];
+    print(idFormu1);
+    idAnimal = arg['idAnimal'];
+    print(idAnimal);
+    // var formData = ModalRoute.of(context)!.settings.arguments;
+    // if (formData != null) {
+    //   idFormu1 = formData;
+    // }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 221, 248, 153),
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
@@ -612,7 +616,8 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 //Sentencia If agregada recientemente
     //if (idFormu != null) {
     print(idFormu1);
-    formulariosProvider.crearFormDomicilio(domicilio, idFormu1, context);
+    formulariosProvider.crearFormDomicilio(
+        domicilio, idFormu1, context, idAnimal);
     // } else {
     //animalProvider.editarAnimal(animal, foto!);
     //print(idFormu);

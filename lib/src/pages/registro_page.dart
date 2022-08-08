@@ -108,7 +108,7 @@ class RegistroPage extends StatelessWidget {
               icon: Icon(Icons.alternate_email, color: Colors.green),
               //hintText: 'dany',
               labelText: 'Nombre de usuario:',
-              counterText: snapshot.data,
+              //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
             ),
@@ -131,7 +131,7 @@ class RegistroPage extends StatelessWidget {
               icon: Icon(Icons.alternate_email, color: Colors.green),
               hintText: 'ejemplo@correo.com',
               labelText: 'Correo electronico',
-              counterText: snapshot.data,
+              //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
             ),
@@ -155,7 +155,7 @@ class RegistroPage extends StatelessWidget {
               icon: Icon(Icons.lock_outline, color: Colors.green),
               //hintText: 'ejemplo@correo.com',
               labelText: 'Contrasena',
-              counterText: snapshot.data,
+              //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
             ),
@@ -177,7 +177,7 @@ class RegistroPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.green),
               labelText: 'Confirmar contraseña',
-              counterText: snapshot.data,
+              //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
             ),
@@ -213,11 +213,6 @@ class RegistroPage extends StatelessWidget {
   }
 
   _register(LoginBloc bloc, BuildContext context) async {
-    //print('=================');
-    //print('Email:${bloc.email}');
-    //print('Password: ${bloc.password}');
-    //print('=================');
-
     final info = await usuarioProvider.nuevoUsuario(
         bloc.email, bloc.password, bloc.name);
 //Se anadio el null check !, si no funciona se debe borrar (diciembre 14)

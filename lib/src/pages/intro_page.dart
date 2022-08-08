@@ -16,14 +16,7 @@ class _IntroPageState extends State<IntroPage> {
   final userProvider = new UsuarioProvider();
   final prefs = new PreferenciasUsuario();
   final _headerStyle = const TextStyle(
-      color: Color.fromARGB(255, 51, 49, 49),
-      fontSize: 15,
-      fontWeight: FontWeight.bold);
-  // ignore: unused_field
-  final _contentStyleHeader = const TextStyle(
-      color: Color.fromARGB(255, 49, 47, 47),
-      fontSize: 14,
-      fontWeight: FontWeight.w700);
+      color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold);
   final _contentStyle = const TextStyle(
       color: Color.fromARGB(255, 17, 17, 17),
       fontSize: 14,
@@ -127,7 +120,7 @@ class _IntroPageState extends State<IntroPage> {
                 leftIcon: const Icon(Icons.photo_library, color: Colors.white),
                 header: Text('Encuentra tu mascota ideal', style: _headerStyle),
                 contentBorderColor: const Color(0xffffffff),
-                headerBackgroundColor: Colors.purple,
+                headerBackgroundColor: Color.fromARGB(251, 236, 122, 193),
                 headerBackgroundColorOpened: Colors.purple,
                 content: Column(
                   children: [
@@ -289,6 +282,7 @@ class _IntroPageState extends State<IntroPage> {
                 isOpen: false,
                 leftIcon: const Icon(Icons.list_alt, color: Colors.white),
                 header: Text('Adopta!', style: _headerStyle),
+                headerBackgroundColor: Color.fromARGB(255, 170, 124, 248),
                 content: Column(
                   children: [
                     Text.rich(
@@ -381,7 +375,7 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                   ],
                 ),
-                headerBackgroundColor: Color.fromARGB(255, 226, 175, 8),
+                headerBackgroundColor: Color.fromARGB(255, 240, 160, 39),
               ),
             ],
           ),

@@ -44,42 +44,39 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
           backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
-        body: Stack(children: [
-          // Background(),
-          SingleChildScrollView(
-              child: Flexible(
-            fit: FlexFit.loose,
-            child: Container(
-                //color: Colors.lightGreenAccent,
-                padding: new EdgeInsets.only(top: 10.0),
-                child: Form(
-                    key: formKey,
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Registro de vacunas',
-                          style: TextStyle(
-                            fontSize: 28,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
-                          ),
-                          textAlign: TextAlign.start,
+        body: SingleChildScrollView(
+            child: Flexible(
+          fit: FlexFit.loose,
+          child: Container(
+              //color: Colors.lightGreenAccent,
+              padding: new EdgeInsets.only(top: 5.0),
+              child: Form(
+                  key: formKey,
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Registro de vacunas',
+                        style: TextStyle(
+                          fontSize: 28,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 2
+                            ..color = Colors.blueGrey,
                         ),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        _detalle(),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        _crearListado()
-                      ],
-                    ))),
-          ))
-        ]));
+                        textAlign: TextAlign.start,
+                      ),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      _detalle(),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
+                      _crearListado()
+                    ],
+                  ))),
+        )));
   }
 
   Widget _detalle() {
@@ -112,20 +109,6 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
         vacunas.add(form);
       });
     }
-  }
-
-  Widget _verListado() {
-    return Column(
-      children: [
-        SizedBox(
-          height: 800,
-          child: ListView.builder(
-            itemCount: vacunas.length,
-            itemBuilder: (context, i) => _crearItem(context, vacunas[i]),
-          ),
-        ),
-      ],
-    );
   }
 
   Widget _crearListado() {

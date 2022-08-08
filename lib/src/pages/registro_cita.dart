@@ -262,6 +262,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     return TextFormField(
       //initialValue: animal.nombre,
       controller: telefono,
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Teléfono',
@@ -281,6 +282,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     return TextFormField(
       //initialValue: animal.nombre,
       controller: correo,
+      keyboardType: TextInputType.emailAddress,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Correo',

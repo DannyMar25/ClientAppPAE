@@ -192,6 +192,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.cedula,
       readOnly: false,
+      keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Cédula',
@@ -308,6 +309,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       // },
       initialValue: datoPersona.email,
       readOnly: false,
+      keyboardType: TextInputType.emailAddress,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'E-mail',
@@ -383,6 +385,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfDomi,
       readOnly: false,
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Teléfono de domicilio',
@@ -405,6 +408,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfCel,
       readOnly: false,
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Teléfono celular',
@@ -427,6 +431,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfTrab,
       readOnly: false,
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Teléfono de trabajo',
@@ -493,6 +498,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfRef,
       readOnly: false,
+      keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Teléfono',
@@ -528,12 +534,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           if (formKey.currentState!.validate()) {
             if (cedula.length == 10) {
               //Obtenemos el digito de la region que sonlos dos primeros digitos
-              var digito_region = int.parse(cedula.substring(0, 2));
+              var digitoRegion = int.parse(cedula.substring(0, 2));
 
               //Pregunto si la region existe ecuador se divide en 24 regiones
-              if (digito_region >= 1 && digito_region <= 24) {
+              if (digitoRegion >= 1 && digitoRegion <= 24) {
                 // Extraigo el ultimo digito
-                var ultimo_digito = int.parse(cedula.substring(9, 10));
+                var ultimoDigito = int.parse(cedula.substring(9, 10));
 
                 //Agrupo todos los pares y los sumo
                 var pares = int.parse(cedula.substring(1, 2)) +
@@ -575,23 +581,22 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                 var impares = numero1 + numero3 + numero5 + numero7 + numero9;
 
                 //Suma total
-                var suma_total = (pares + impares);
+                var sumaTotal = (pares + impares);
 
                 //extraemos el primero digito
-                var primer_digito_suma =
-                    (suma_total).toString().substring(0, 1);
+                var primerDigitoSuma = (sumaTotal).toString().substring(0, 1);
 
                 //Obtenemos la decena inmediata
-                var decena = (int.parse(primer_digito_suma) + 1) * 10;
+                var decena = (int.parse(primerDigitoSuma) + 1) * 10;
 
                 //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
-                var digito_validador = decena - suma_total;
+                var digitoValidador = decena - sumaTotal;
 
                 //Si el digito validador es = a 10 toma el valor de 0
-                if (digito_validador == 10) var digito_validador = 0;
+                if (digitoValidador == 10) var digitoValidador = 0;
 
                 //Validamos que el digito validador sea igual al de la cedula
-                if (digito_validador == ultimo_digito) {
+                if (digitoValidador == ultimoDigito) {
                   print('La cédula:' + cedula + ' es correcta');
                   SnackBar(
                     content: Text('Información ingresada correctamente'),
@@ -683,7 +688,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       }
       //formulario.idAnimal = "0H05tnjVPjfF1E8DBw0p";
       formulario.fechaIngreso = DateTime.now().toString();
-      formulariosProvider.crearFormularioPrin(formulario, datoPersona, context);
+
+      formulariosProvider.crearFormularioPrin(
+          formulario, datoPersona, context, animal.id.toString());
     } else {
       //animalProvider.editarAnimal(animal, foto!);
     }

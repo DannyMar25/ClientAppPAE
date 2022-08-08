@@ -80,19 +80,25 @@ class _BusquedaPageState extends State<BusquedaPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            //Padding(padding: EdgeInsets.only(left: 160.0)),
-                            Expanded(
-                              child: SizedBox(
-                                  height: 80,
-                                  child: Image(
-                                      image: AssetImage("assets/dog_an1.gif"))),
-                            ),
-                            Expanded(
-                              child: SizedBox(
-                                  height: 80,
-                                  child: Image(
-                                      image: AssetImage("assets/cat_im2.jpg"))),
-                            ),
+                            Wrap(
+                              spacing: 10,
+                              children: [
+                                Expanded(
+                                  child: SizedBox(
+                                      height: 80,
+                                      child: Image(
+                                          image: AssetImage(
+                                              "assets/dog_an1.gif"))),
+                                ),
+                                Expanded(
+                                  child: SizedBox(
+                                      height: 80,
+                                      child: Image(
+                                          image: AssetImage(
+                                              "assets/cat_im2.jpg"))),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         Padding(padding: EdgeInsets.only(bottom: 15.0)),
@@ -105,24 +111,22 @@ class _BusquedaPageState extends State<BusquedaPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            //Padding(padding: EdgeInsets.only(left: 170.0)),
-                            Expanded(
-                              child: SizedBox(
-                                  height: 60,
-                                  child: Image(
-                                      image: AssetImage(
-                                          "assets/huella_azul3.png"))),
-                            ),
-                            // Padding(
-                            //     padding:
-                            //         EdgeInsets.only(left: 65.0, right: 10.0)),
-                            Expanded(
-                              child: SizedBox(
-                                  height: 140,
-                                  child: Image(
-                                      image: AssetImage(
-                                          "assets/huella_rosa3.png"))),
-                            )
+                            Wrap(spacing: 15, children: [
+                              Expanded(
+                                child: SizedBox(
+                                    height: 60,
+                                    child: Image(
+                                        image: AssetImage(
+                                            "assets/huella_azul3.png"))),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                    height: 60,
+                                    child: Image(
+                                        image: AssetImage(
+                                            "assets/huella_rosa3.png"))),
+                              )
+                            ])
                           ],
                         ),
                         Padding(padding: EdgeInsets.only(bottom: 15.0)),
@@ -136,7 +140,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
                             //Padding(padding: EdgeInsets.only(left: 50.0)),
                             Expanded(
                               child: SizedBox(
-                                  height: 200.0,
+                                  height: 150.0,
                                   child: Image(
                                       image: AssetImage("assets/pets_4.png"))),
                             ),
@@ -153,7 +157,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
                             //Padding(padding: EdgeInsets.only(left: 150.0)),
                             Expanded(
                               child: SizedBox(
-                                  height: 200,
+                                  height: 180,
                                   child: Image(
                                       image: AssetImage("assets/pets_2.png"))),
                             ),
