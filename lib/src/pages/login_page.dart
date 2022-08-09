@@ -191,6 +191,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _crearBotonGoogle(BuildContext context) {
+    final prefs = new PreferenciasUsuario();
     return OutlinedButton(
       //splashColor: Colors.grey,
       onPressed: () async {
@@ -203,6 +204,10 @@ class _LoginPageState extends State<LoginPage> {
               id: user.uid,
               rol: Roles.cliente));
         }
+        //anadido el 9 de agosto
+        final user1 = await usuarioProvider.obtenerUsuario(user.uid);
+        prefs.setEmail(user.email!);
+        prefs.setRol(user1['rol']);
         Navigator.pushReplacementNamed(context, 'home');
       },
       style: OutlinedButton.styleFrom(
