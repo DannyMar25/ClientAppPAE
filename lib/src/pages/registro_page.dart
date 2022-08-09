@@ -195,17 +195,18 @@ class RegistroPage extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.formValidStream1,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
             child: Text('Registrar'),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          elevation: 0.0,
-          color: Colors.green,
-          textColor: Colors.white,
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              elevation: 0.0,
+              primary: Colors.green,
+              textStyle: TextStyle(color: Colors.white)),
           onPressed: snapshot.hasData ? () => _register(bloc, context) : null,
         );
       },
