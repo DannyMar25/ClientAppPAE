@@ -191,8 +191,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _crearBotonGoogle(BuildContext context) {
-    return OutlineButton(
-      splashColor: Colors.grey,
+    return OutlinedButton(
+      //splashColor: Colors.grey,
       onPressed: () async {
         final user = await usuarioProvider.signInGoogle();
         final comprobar = await usuarioProvider.comprobarUsuario(user!.uid);
@@ -205,9 +205,17 @@ class _LoginPageState extends State<LoginPage> {
         }
         Navigator.pushReplacementNamed(context, 'home');
       },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      style: OutlinedButton.styleFrom(
+        primary: Colors.grey,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          side: BorderSide(color: Colors.grey, width: 1.0), // HERE
+        ),
+      ),
+      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      // highlightElevation: 0,
+      // borderSide: BorderSide(color: Colors.grey),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
