@@ -3,7 +3,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class RegistroDespPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
   DatosPersonalesModel datosA = new DatosPersonalesModel();
   RegistroDesparasitacionModel desparasitacion =
       new RegistroDesparasitacionModel();
+  String campoVacio = 'Por favor, llena este campo';
 
   @override
   void initState() {
@@ -154,11 +155,6 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        // title: Text(
-        //   "Registro de vacunas",
-        //   style: TextStyle(
-        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        // ),
         subtitle: Text(
           'En esta sección podras llevar un registro de las desparacitaciones de tu mascota, este registro sera enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
           textAlign: TextAlign.justify,
@@ -176,6 +172,13 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
   Widget _crearFechaConsulta(BuildContext context) {
     return TextFormField(
         controller: _inputFieldDateController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Seleccione una fecha';
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate(context);
@@ -219,12 +222,26 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           desparasitacion.pesoActual = double.parse(s);
         });
       },
+      validator: (value) {
+        if (isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo números';
+        }
+      },
     );
   }
 
   Widget _crearFechaProxima(BuildContext context) {
     return TextFormField(
         controller: _inputFieldDateController1,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Seleccione una fecha';
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate1(context);
@@ -258,11 +275,17 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
 
   Widget _crearProducto() {
     return TextFormField(
-      //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          // labelText: 'Vacuna',
-          ),
+      decoration: InputDecoration(),
+      validator: (value) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el nombre del producto';
+        } else if (value.isEmpty) {
+          return campoVacio;
+        } else {
+          return null;
+        }
+      },
       onChanged: (s) {
         setState(() {
           desparasitacion.nombreProducto = s;
@@ -285,16 +308,23 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            // Navigator.pushNamed(context, 'registroVacunas',
-            //     arguments: animal);
-            formulariosProvider.crearRegistroDesparasitacion(
-                desparasitacion, formularios.id, context);
-            Navigator.pushReplacementNamed(context, 'seguimientoMain',
-                arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                });
+            if (formKey.currentState!.validate()) {
+              // Si el formulario es válido, queremos mostrar un Snackbar
+              SnackBar(
+                content: Text('Información ingresada correctamente'),
+              );
+              formulariosProvider.crearRegistroDesparasitacion(
+                  desparasitacion, formularios.id, context);
+              Navigator.pushReplacementNamed(context, 'seguimientoMain',
+                  arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
+            } else {
+              mostrarAlerta(
+                  context, 'Asegurate de que todos los campos están llenos.');
+            }
           }),
     ]);
   }
@@ -313,11 +343,6 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            // Navigator.pushNamed(context, 'registroVacunas',
-            //     arguments: animal);
-            // formulariosProvider.crearRegistroVacuna(
-            //     vacunas, formularios.id, context);
-
             Navigator.pushReplacementNamed(context, 'verRegistroDesp',
                 arguments: {
                   'datosper': datosA,
@@ -348,7 +373,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
               Icons.pages,
               color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Seguimiento Principal'),
             onTap: () => Navigator.pushReplacementNamed(
                 context, 'seguimientoMain', arguments: {
               'datosper': datosA,
@@ -394,11 +419,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Registro de Desparasitación'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'registroDesp',
@@ -411,7 +436,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
               ),
               ListTile(
                 leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'verRegistroDesp',

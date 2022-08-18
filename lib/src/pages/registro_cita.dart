@@ -143,6 +143,13 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
             color: Colors.green,
           ),
         ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Por favor selecciona una fecha';
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate(context);
@@ -249,8 +256,10 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       ),
       onSaved: (value) => nombre = value as TextEditingController,
       validator: (value) {
-        if (value!.length < 3) {
+        if (value!.length < 3 && value.length > 0) {
           return 'Ingrese su nombre';
+        } else if (value.isEmpty) {
+          return campoVacio;
         } else {
           return null;
         }
@@ -269,8 +278,10 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       ),
       onSaved: (value) => telefono = value as TextEditingController,
       validator: (value) {
-        if (value!.length < 3) {
-          return 'Ingrese su número de teléfono';
+        if (value!.length < 10 || value.length > 10 && value.length > 0) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
+          return campoVacio;
         } else {
           return null;
         }
@@ -288,13 +299,14 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         labelText: 'Correo',
       ),
       onSaved: (value) => correo = value as TextEditingController,
-      validator: (value) {
-        if (value!.length < 3) {
-          return 'Ingrese su correo electrónico';
-        } else {
-          return null;
-        }
-      },
+      validator: (value) => validarEmail(value),
+      // validator: (value) {
+      //   if (value!.length < 3) {
+      //     return 'Ingrese su correo electrónico';
+      //   } else {
+      //     return null;
+      //   }
+      // },
     );
   }
 
@@ -344,7 +356,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
 
     if (citas.id == "") {
       citasProvider.crearCita(citas);
-      mostrarAlertaOk(context, 'La cita ha sido registrada con exito', 'home');
+      mostrarAlertaOk(context, 'La cita ha sido registrada con éxito', 'home');
     }
 
     //Navigator.pushNamed(context, 'bienvenida');

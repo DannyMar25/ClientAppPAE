@@ -94,7 +94,8 @@ class _AnimalPageState extends State<AnimalPage> {
                 _crearEspecie(),
                 _crearNombre(),
                 _crearSexo(),
-                _crearEdad(),
+                //_crearEdad(),
+                Row(children: [_crearEdad(), infoEtapa()]),
                 _crearTemperamento(),
                 _crearPeso(),
                 _crearTamanio(),
@@ -102,8 +103,8 @@ class _AnimalPageState extends State<AnimalPage> {
                 _crearRaza(),
                 _crearEsterilizado(),
                 _crearCaracteristicas(),
-                Padding(padding: EdgeInsets.only(bottom: 20.0)),
-                cardEtapasVida(),
+                // Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                // cardEtapasVida(),
                 Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 cardCita(),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
@@ -180,22 +181,56 @@ class _AnimalPageState extends State<AnimalPage> {
   }
 
   Widget _crearEdad() {
-    return TextFormField(
-      initialValue: animal.etapaVida,
-      readOnly: true,
-      textCapitalization: TextCapitalization.sentences,
-      //keyboardType: TextInputType.numberWithOptions(decimal: true),
-      decoration: InputDecoration(
-        labelText: 'Etapa de vida',
+    return SizedBox(
+      width: 290,
+      height: 50,
+      child: TextFormField(
+        initialValue: animal.etapaVida,
+        readOnly: true,
+        textCapitalization: TextCapitalization.sentences,
+        //keyboardType: TextInputType.numberWithOptions(decimal: true),
+        decoration: InputDecoration(
+          labelText: 'Etapa de vida',
+        ),
+        //onSaved: (value) => animal.etapaVida = value!,
+        // validator: (value) {
+        //   if (utils.isNumeric(value!)) {
+        //     return null;
+        //   } else {
+        //     return 'Solo numeros';
+        //   }
+        // },
       ),
-      onSaved: (value) => animal.etapaVida = value!,
-      // validator: (value) {
-      //   if (utils.isNumeric(value!)) {
-      //     return null;
-      //   } else {
-      //     return 'Solo numeros';
-      //   }
-      // },
+    );
+  }
+
+  Widget infoEtapa() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        ),
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            content: Text(
+              'Cachorro: 0 a 6 meses\nJoven: 7 meses a 2 años\nAdulto: 2 a 6 años\nAnciano: 7 a 11 años\nGeriátrico: mayor a 12 años',
+            ),
+            title: Text('Etapas de vida'),
+          ),
+        );
+      },
+      child: Column(
+        children: const <Widget>[
+          Icon(
+            Icons.info_rounded,
+            color: Colors.green,
+            size: 20.0,
+          ),
+        ],
+      ),
     );
   }
 
@@ -316,6 +351,7 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget _crearCaracteristicas() {
     return TextFormField(
       initialValue: animal.caracteristicas,
+      maxLines: 5,
       readOnly: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(

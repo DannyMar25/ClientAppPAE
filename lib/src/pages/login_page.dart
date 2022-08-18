@@ -27,6 +27,10 @@ class _LoginPageState extends State<LoginPage> {
       print(animal.id);
     }
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('Inicio'),
+      //   backgroundColor: Colors.green,
+      // ),
       body: Stack(
         children: [
           _crearFondo(context),
@@ -44,16 +48,17 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           SafeArea(
             child: Container(
-              height: 230.0,
+              height: 230.0, //230
             ),
           ),
           Container(
+            // width: 390.0,
             width: 390.0,
-            margin: EdgeInsets.symmetric(vertical: 30.0),
-            padding: EdgeInsets.symmetric(vertical: 80.0),
+            margin: EdgeInsets.symmetric(vertical: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 60.0), //80
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(20.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                       color: Colors.black26,
@@ -68,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
-                  height: 60.0,
+                  height: 20.0,
                 ),
                 _crearEmail(bloc),
                 SizedBox(
@@ -96,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(
-            height: 100.0,
+            height: 100.0, //100
           )
         ],
       ),
@@ -114,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.green),
               hintText: 'ejemplo@correo.com',
-              labelText: 'Correo electronico',
+              labelText: 'Correo electrónico',
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
@@ -138,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
               icon: Icon(Icons.lock_outline, color: Colors.green),
               //hintText: 'ejemplo@correo.com',
-              labelText: 'Contrasena',
+              labelText: 'Contraseña',
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
@@ -185,7 +190,8 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacementNamed(context, 'home', arguments: animal);
     } else {
       //mostrarAlerta(context, info['mensaje']);
-      mostrarAlerta(context, 'El correo o contraseña son incorrectos');
+      mostrarAlerta(context,
+          'El correo o contraseña son incorrectos. Si no tienes credenciales por favor créalas.');
     }
 
     //Navigator.pushReplacementNamed(context, 'home');
@@ -232,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Google',
+                'Ingresa con Google',
                 style: TextStyle(
                   fontSize: 17,
                   color: Colors.grey,
@@ -300,7 +306,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
       child: Text(
-        'Olvido la contraseña?',
+        '¿Olvidó la contraseña?',
         style: TextStyle(color: Colors.green, fontSize: 20),
       ),
     );

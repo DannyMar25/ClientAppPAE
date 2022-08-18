@@ -162,10 +162,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearNombre() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese su nombre completo';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.nombreCom,
       readOnly: false,
@@ -185,10 +188,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearCI() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 10 && value.length > 0) {
+          return 'Ingrese número de cédula válido';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.cedula,
       readOnly: false,
@@ -207,43 +213,25 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     );
   }
 
-  // Widget _crearEdad() {
-  //   return TextFormField(
-  //     initialValue: datoPersona.fechaNacimiento,
-  //     readOnly: false,
-  //     //textCapitalization: TextCapitalization.sentences,
-  //     keyboardType: TextInputType.numberWithOptions(decimal: true),
-  //     decoration: InputDecoration(
-  //         labelText: 'Edad',
-  //         labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-  //     onSaved: (value) => datoPersona.fechaNacimiento = value!,
-  //     validator: (value) {
-  //       if (utils.isNumeric(value!)) {
-  //         return null;
-  //       } else {
-  //         return 'Ingrese solo numeros';
-  //       }
-  //     },
-  //   );
-  // }
   Widget _crearFechaNacimiento(BuildContext context) {
     return TextFormField(
         controller: _inputFieldDateController,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-          //counter: Text('Letras ${_nombre.length}'),
-          //hintText: 'Ingrese fecha de agendamiento de cita',
           labelText: 'Fecha de nacimiento:',
           //helperText: 'Solo es el nombre',
           suffixIcon: Icon(
             Icons.perm_contact_calendar,
             color: Colors.green,
           ),
-          // icon: Icon(
-          //   Icons.calendar_today,
-          //   color: Colors.green,
-          // ),
         ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return campoVacio;
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate(context);
@@ -279,10 +267,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearOcupacion() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese una ocupación';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.ocupacion,
       readOnly: false,
@@ -301,12 +292,6 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearEmail() {
     return TextFormField(
       validator: (value) => utils.validarEmail(value),
-      // {
-      //   if (value!.isEmpty) {
-      //     return campoVacio;
-      //   }
-      //   return null;
-      // },
       initialValue: datoPersona.email,
       readOnly: false,
       keyboardType: TextInputType.emailAddress,
@@ -326,10 +311,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearDireccion() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese su dirección';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.direccion,
       readOnly: false,
@@ -356,21 +344,26 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione nivel de instrucción: ',
+          'Seleccione nivel de instrucción:',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection = s;
+        SizedBox(
+          width: 138.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection = s;
 
-                datoPersona.nivelInst = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+                  datoPersona.nivelInst = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -378,10 +371,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearTelfDomicilio() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 9 && value.length > 0 || value.length > 10) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.telfDomi,
       readOnly: false,
@@ -401,10 +397,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearTelfCelular() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 10 && value.length > 0 || value.length > 10) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.telfCel,
       readOnly: false,
@@ -424,10 +423,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearTelfTrabajo() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 9 && value.length > 0 || value.length > 10) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.telfTrab,
       readOnly: false,
@@ -447,10 +449,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearNombreRef() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el nombre';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.nombreRef,
       readOnly: false,
@@ -469,10 +474,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearParentescoRef() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el parentesco';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.parentescoRef,
       readOnly: false,
@@ -491,10 +499,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearTelefonoRef() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 9 && value.length > 0 || value.length > 10) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: datoPersona.telfRef,
       readOnly: false,
@@ -512,6 +523,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   }
 
   Widget _crearBoton(BuildContext context) {
+    bool cedulaCorrecta = false;
     return ElevatedButton.icon(
       style: ButtonStyle(
         backgroundColor:
@@ -532,71 +544,33 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           return null;
         } else {
           if (formKey.currentState!.validate()) {
-            if (cedula.length == 10) {
-              //Obtenemos el digito de la region que sonlos dos primeros digitos
-              var digitoRegion = int.parse(cedula.substring(0, 2));
-
-              //Pregunto si la region existe ecuador se divide en 24 regiones
-              if (digitoRegion >= 1 && digitoRegion <= 24) {
-                // Extraigo el ultimo digito
-                var ultimoDigito = int.parse(cedula.substring(9, 10));
-
-                //Agrupo todos los pares y los sumo
-                var pares = int.parse(cedula.substring(1, 2)) +
-                    int.parse(cedula.substring(3, 4)) +
-                    int.parse(cedula.substring(5, 6)) +
-                    int.parse(cedula.substring(7, 8));
-
-                //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
-                var numero1 = int.parse(cedula.substring(0, 1));
-                numero1 = (numero1 * 2);
-                if (numero1 > 9) {
-                  numero1 = (numero1 - 9);
+            //utils.validadorDeCedula(cedula);
+            if (cedula.length == 10) // ConstantesApp.LongitudCedula
+            {
+              int tercerDigito = int.parse(cedula.substring(2, 3));
+              if (tercerDigito < 6) {
+                List<int> coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+                int verificador = int.parse(cedula.substring(9, 10));
+                int suma = 0;
+                int digito = 0;
+                for (int i = 0; i < (cedula.length - 1); i++) {
+                  digito =
+                      int.parse(cedula.substring(i, i + 1)) * coefValCedula[i];
+                  suma += ((digito % 10) + (digito / 10)).toInt();
                 }
-
-                var numero3 = int.parse(cedula.substring(2, 3));
-                numero3 = (numero3 * 2);
-                if (numero3 > 9) {
-                  numero3 = (numero3 - 9);
-                }
-
-                var numero5 = int.parse(cedula.substring(4, 5));
-                numero5 = (numero5 * 2);
-                if (numero5 > 9) {
-                  numero5 = (numero5 - 9);
-                }
-
-                var numero7 = int.parse(cedula.substring(6, 7));
-                numero7 = (numero7 * 2);
-                if (numero7 > 9) {
-                  numero7 = (numero7 - 9);
-                }
-
-                var numero9 = int.parse(cedula.substring(8, 9));
-                numero9 = (numero9 * 2);
-                if (numero9 > 9) {
-                  numero9 = (numero9 - 9);
-                }
-
-                var impares = numero1 + numero3 + numero5 + numero7 + numero9;
-
-                //Suma total
-                var sumaTotal = (pares + impares);
-
-                //extraemos el primero digito
-                var primerDigitoSuma = (sumaTotal).toString().substring(0, 1);
-
-                //Obtenemos la decena inmediata
-                var decena = (int.parse(primerDigitoSuma) + 1) * 10;
-
-                //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
-                var digitoValidador = decena - sumaTotal;
-
-                //Si el digito validador es = a 10 toma el valor de 0
-                if (digitoValidador == 10) var digitoValidador = 0;
-
-                //Validamos que el digito validador sea igual al de la cedula
-                if (digitoValidador == ultimoDigito) {
+                if ((suma % 10 == 0) && (suma % 10 == verificador)) {
+                  cedulaCorrecta = true;
+                  //print('La cedula es correcta');
+                  print('La cédula:' + cedula + ' es correcta');
+                  SnackBar(
+                    content: Text('Información ingresada correctamente'),
+                  );
+                  formulario.identificacion = cedula;
+                  datoPersona.cedula = cedula;
+                  _submit();
+                } else if ((10 - (suma % 10)) == verificador) {
+                  cedulaCorrecta = true;
+                  //print('La cedula es correcta');
                   print('La cédula:' + cedula + ' es correcta');
                   SnackBar(
                     content: Text('Información ingresada correctamente'),
@@ -605,6 +579,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                   datoPersona.cedula = cedula;
                   _submit();
                 } else {
+                  cedulaCorrecta = false;
+                  //print('La cedula es incorrecta');
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -622,30 +598,32 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                   print('la cedula:' + cedula + ' es incorrecta');
                 }
               } else {
-                // imprimimos en consola si la region no pertenece
+                cedulaCorrecta = false;
                 showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
                         title: Text('Información incorrecta'),
-                        content: Text('Cédula no pertenece a ninguna región'),
+                        content: Text('Número de cédula incorrecto'),
                         actions: [
                           TextButton(
-                            child: Text('OK'),
+                            child: Text('Ok'),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                         ],
                       );
                     });
-                print('Esta cédula no pertenece a ninguna región');
+                print('la cedula:' + cedula + ' es incorrecta');
+                //print('La cedula es incorrecta');
               }
             } else {
+              cedulaCorrecta = false;
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       title: Text('Información incorrecta'),
-                      content: Text('Debe tener al meno 10 dígitos'),
+                      content: Text('Número de cédula incorrecto'),
                       actions: [
                         TextButton(
                           child: Text('Ok'),
@@ -654,14 +632,29 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       ],
                     );
                   });
-              //imprimimos en consola si la cedula tiene mas o menos de 10 digitos
-              print('Esta cédula tiene mas o menos de 10 Dígitos');
+              print('la cedula:' + cedula + ' es incorrecta');
+              //print('La cedula es incorrecta');
             }
-            //Codigo anterior
-            // SnackBar(
-            //   content: Text('Informacion ingresada correctamente'),
-            // );
-            // _submit();
+            if (!cedulaCorrecta) {
+              //print("La Cédula ingresada es Incorrecta");
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Información incorrecta'),
+                      content: Text('Número de cédula incorrecto'),
+                      actions: [
+                        TextButton(
+                          child: Text('Ok'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    );
+                  });
+              print('la cedula:' + cedula + ' es incorrecta');
+            }
+            //return cedulaCorrecta;
+
           } else {
             utils.mostrarAlerta(context,
                 'Asegurate de que los datos hayan sido ingresados correctamente y que no existan campos vacíos.');

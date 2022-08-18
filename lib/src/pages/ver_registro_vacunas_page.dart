@@ -121,7 +121,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
             return Column(
               children: [
                 SizedBox(
-                  height: 700,
+                  height: 600,
                   child: ListView.builder(
                     itemCount: vacunas!.length,
                     itemBuilder: (context, i) =>
@@ -209,17 +209,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
           ),
         ),
         //subtitle: Text('${horario}'),
-        onTap: () async {
-          // datosA = await formulariosProvider.cargarDPId(
-          //     formulario.id, formulario.idDatosPersonales);
-          // animal = await animalesProvider.cargarAnimalId(formulario.idAnimal);
-
-          // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
-          //   'datosper': datosA,
-          //   'formulario': formulario,
-          //   'animal': animal
-          // });
-        });
+        onTap: () async {});
   }
 
   Widget _menuWidget() {
@@ -288,11 +278,11 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Registro de Desparasitación'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'registroDesp',
@@ -305,7 +295,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
               ),
               ListTile(
                 leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'verRegistroDesp',

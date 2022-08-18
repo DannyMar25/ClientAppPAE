@@ -3,8 +3,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class RegistroVacunasPage extends StatefulWidget {
@@ -28,6 +27,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   FormulariosModel formularios = new FormulariosModel();
   DatosPersonalesModel datosA = new DatosPersonalesModel();
   RegistroVacunasModel vacunas = new RegistroVacunasModel();
+  String campoVacio = 'Por favor, llena este campo';
 
   @override
   void initState() {
@@ -97,7 +97,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                           columns: [
                             DataColumn(label: Text("Fecha")),
                             DataColumn(label: Text("Peso(Kg)"), numeric: true),
-                            DataColumn(label: Text("Proxima vacuna")),
+                            DataColumn(label: Text("Próxima vacuna")),
                           ],
                           rows: [
                             DataRow(selected: true, cells: [
@@ -162,6 +162,13 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _crearFechaConsulta(BuildContext context) {
     return TextFormField(
         controller: _inputFieldDateController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Selecciona una fecha';
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate(context);
@@ -195,7 +202,6 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearPesoActual() {
     return TextFormField(
-      //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           //labelText: 'Peso',
@@ -205,12 +211,26 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
           vacunas.pesoActual = double.parse(s);
         });
       },
+      validator: (value) {
+        if (isNumeric(value!)) {
+          return null;
+        } else {
+          return 'Solo números';
+        }
+      },
     );
   }
 
   Widget _crearFechaProxima(BuildContext context) {
     return TextFormField(
         controller: _inputFieldDateController1,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Selecciona una fecha';
+          } else {
+            return null;
+          }
+        },
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
           _selectDate1(context);
@@ -246,9 +266,16 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
     return TextFormField(
       //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          // labelText: 'Vacuna',
-          ),
+      decoration: InputDecoration(),
+      validator: (value) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el nombre de la vacuna';
+        } else if (value.isEmpty) {
+          return campoVacio;
+        } else {
+          return null;
+        }
+      },
       onChanged: (s) {
         setState(() {
           vacunas.tipoVacuna = s;
@@ -259,11 +286,17 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearVeterinario() {
     return TextFormField(
-      //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          // labelText: 'Nombre veterinario',
-          ),
+      decoration: InputDecoration(),
+      validator: (value) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el nombre de la vacuna';
+        } else if (value.isEmpty) {
+          return campoVacio;
+        } else {
+          return null;
+        }
+      },
       onChanged: (s) {
         setState(() {
           vacunas.veterinarioResp = s;
@@ -275,11 +308,6 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        // title: Text(
-        //   "Registro de vacunas",
-        //   style: TextStyle(
-        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        // ),
         subtitle: Text(
           'En esta sección podras llevar un registro de las vacunas de tu mascota, este registro sera enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
           textAlign: TextAlign.justify,
@@ -308,17 +336,24 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            // Navigator.pushNamed(context, 'registroVacunas',
-            //     arguments: animal);
-            formulariosProvider.crearRegistroVacuna(
-                vacunas, formularios.id, context);
+            if (formKey.currentState!.validate()) {
+              // Si el formulario es válido, queremos mostrar un Snackbar
+              SnackBar(
+                content: Text('Información ingresada correctamente'),
+              );
+              formulariosProvider.crearRegistroVacuna(
+                  vacunas, formularios.id, context);
 
-            Navigator.pushReplacementNamed(context, 'seguimientoMain',
-                arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                });
+              Navigator.pushReplacementNamed(context, 'seguimientoMain',
+                  arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
+            } else {
+              mostrarAlerta(
+                  context, 'Asegurate de que todos los campos están llenos.');
+            }
           }),
     ]);
   }
@@ -372,7 +407,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               Icons.pages,
               color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Seguimiento Principal'),
             onTap: () => Navigator.pushReplacementNamed(
                 context, 'seguimientoMain', arguments: {
               'datosper': datosA,
@@ -418,11 +453,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Registro de Desparasitación'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'registroDesp',
@@ -435,7 +470,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               ),
               ListTile(
                 leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'verRegistroDesp',

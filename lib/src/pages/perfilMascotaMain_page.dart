@@ -46,7 +46,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: Text('Informacion enviada en solicitud'),
+          title: Text('Información enviada en solicitud'),
         ),
         body: Stack(alignment: Alignment.center, children: [
           //Background(),
@@ -160,7 +160,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                   children: [
                     //Divider(color: Colors.purple),
                     Text("Nombre del cliente: " + '${formulario.nombreClient}'),
-                    Text("Numero de cedula: " '${formulario.identificacion}'),
+                    Text("Número de cédula: " '${formulario.identificacion}'),
                     Text("Estado de solicitud:"
                         '${formulario.estado}'),
                     Text("Fecha de envio de solicitud: "

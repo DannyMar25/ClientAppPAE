@@ -76,14 +76,16 @@ class _MenuWidgetState extends State<MenuWidget> {
                     //Navigator.pushReplacementNamed(context, 'home');
                   })
               : SizedBox(),
-          ListTile(
-            leading: Icon(Icons.fact_check, color: Colors.green),
-            title: Text('Seguimiento'),
-            onTap: () {
-              //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'evidencia');
-            },
-          ),
+          email != ''
+              ? ListTile(
+                  leading: Icon(Icons.fact_check, color: Colors.green),
+                  title: Text('Seguimiento'),
+                  onTap: () {
+                    //Navigator.pop(context);
+                    Navigator.pushReplacementNamed(context, 'evidencia');
+                  },
+                )
+              : SizedBox()
         ],
       ),
     );

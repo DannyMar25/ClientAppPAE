@@ -61,7 +61,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Galería de mascotas'),
+            title: Text('Galería'),
             backgroundColor: Colors.green,
             actions: [
               Builder(builder: (BuildContext context) {

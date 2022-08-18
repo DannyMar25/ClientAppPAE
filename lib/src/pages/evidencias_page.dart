@@ -44,7 +44,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     final email = prefs.email;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Revision de solicitud'),
+          title: Text('Revisión de solicitud'),
           backgroundColor: Colors.green,
           actions: [
             Builder(builder: (BuildContext context) {
@@ -200,6 +200,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   }
 
   showCitas(String identificacion) async {
+    formularios.clear();
     listaF = await formulariosProvider.cargarInfo(identificacion);
     for (var yy in listaF) {
       FormulariosModel form = await yy;
@@ -210,6 +211,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   }
 
   Widget _verListado() {
+    //return verificarCedula();
     return Column(
       children: [
         SizedBox(
@@ -223,7 +225,95 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     );
   }
 
+  Widget verificarCedula() {
+    if (formularios.length == 0 && identificacion != '') {
+      return Column(children: [
+        AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 45,
+              ),
+              Text('Resultado de busqueda!'),
+            ],
+          ),
+          content: Text('No se ha encotrado ningun registro'),
+          actions: [
+            TextButton(
+                child: Text('Ok'),
+                //onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'home');
+                })
+          ],
+        )
+      ]);
+    } else {
+      return Column(
+        children: [
+          SizedBox(
+            height: 800,
+            child: ListView.builder(
+              itemCount: formularios.length,
+              itemBuilder: (context, i) => _crearItem(context, formularios[i]),
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
   Widget _crearItem(BuildContext context, FormulariosModel formulario) {
+    if (identificacion != formulario.identificacion) {
+      return AlertDialog(
+        title: Row(
+          children: [
+            Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 45,
+            ),
+            Text('Resultado de busqueda!'),
+          ],
+        ),
+        content: Text('No se ha encotrado ningun registro'),
+        actions: [
+          TextButton(
+              child: Text('Ok'),
+              //onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.pushNamed(context, 'home');
+              })
+        ],
+      );
+    }
+    if (formulario.id == '') {
+      return Column(children: [
+        AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 45,
+              ),
+              Text('Resultado de busqueda!'),
+            ],
+          ),
+          content: Text('No se ha encotrado ningun registro'),
+          actions: [
+            TextButton(
+                child: Text('Ok'),
+                //onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'home');
+                })
+          ],
+        )
+      ]);
+    }
     if (formulario.estado == 'Aprobado') {
       return Card(
           color: Colors.lightGreen[200],
@@ -250,7 +340,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
                       Text("Número de cédula: " '${formulario.identificacion}'),
-                      Text("Su solicitud de adopción fue:"
+                      Text("Estado de solicitud:"
                           '${formulario.estado}'),
                       Text("Fecha de aprobación de solicitud: "
                           '${formulario.fechaRespuesta}'),
@@ -280,18 +370,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           color: Colors.lightGreen[200],
           shadowColor: Colors.green,
           child: InkWell(
-            onTap: () async {
-              // datosC = await formulariosProvider.cargarDPId(
-              //     formulario.id, formulario.idDatosPersonales);
-              // animal =
-              //     await animalesProvider.cargarAnimalId(formulario.idAnimal);
-
-              // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
-              //   'datosper': datosC,
-              //   'formulario': formulario,
-              //   'animal': animal
-              // });
-            },
+            onTap: () async {},
             child: Column(
               children: [
                 ListTile(
@@ -300,8 +379,8 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       //Divider(color: Colors.purple),
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
-                      Text("Numero de cedula: " '${formulario.identificacion}'),
-                      Text("Su solicitud de adopcion fue:"
+                      Text("Número de cédula: " '${formulario.identificacion}'),
+                      Text("Estado de solicitud:"
                           '${formulario.estado}'),
                       Text("Nombre mascota adopatada:"
                           '${formulario.animal!.nombre}'),
@@ -324,18 +403,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           color: Colors.lightGreen[200],
           shadowColor: Colors.green,
           child: InkWell(
-            onTap: () async {
-              // datosC = await formulariosProvider.cargarDPId(
-              //     formulario.id, formulario.idDatosPersonales);
-              // animal =
-              //     await animalesProvider.cargarAnimalId(formulario.idAnimal);
-
-              // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
-              //   'datosper': datosC,
-              //   'formulario': formulario,
-              //   'animal': animal
-              // });
-            },
+            onTap: () async {},
             child: Column(
               children: [
                 ListTile(
@@ -344,8 +412,8 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       //Divider(color: Colors.purple),
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
-                      Text("Numero de cedula: " '${formulario.identificacion}'),
-                      Text("Su solicitud de adopcion fue:"
+                      Text("Número de cédula: " '${formulario.identificacion}'),
+                      Text("Estado de solicitud:"
                           '${formulario.estado}'),
                       Text("Nombre mascota adopatada:"
                           '${formulario.animal!.nombre}'),

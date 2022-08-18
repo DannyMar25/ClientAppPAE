@@ -330,7 +330,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               Icons.pages,
               color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Seguimiento Principal'),
             onTap: () => Navigator.pushReplacementNamed(
                 context, 'seguimientoMain', arguments: {
               'datosper': datosA,
@@ -376,11 +376,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Registro de Desparasitación'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'registroDesp',
@@ -393,7 +393,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               ),
               ListTile(
                 leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, 'verRegistroDesp',

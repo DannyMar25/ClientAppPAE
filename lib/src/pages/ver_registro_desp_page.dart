@@ -105,7 +105,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             return Column(
               children: [
                 SizedBox(
-                  height: 700,
+                  height: 600,
                   child: ListView.builder(
                     itemCount: desp!.length,
                     itemBuilder: (context, i) => _crearItem(context, desp[i]),
@@ -194,17 +194,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
           ),
         ),
         //subtitle: Text('${horario}'),
-        onTap: () async {
-          // datosA = await formulariosProvider.cargarDPId(
-          //     formulario.id, formulario.idDatosPersonales);
-          // animal = await animalesProvider.cargarAnimalId(formulario.idAnimal);
-
-          // Navigator.pushNamed(context, 'seguimientoMain', arguments: {
-          //   'datosper': datosA,
-          //   'formulario': formulario,
-          //   'animal': animal
-          // });
-        });
+        onTap: () async {});
   }
 
   Widget _menuWidget() {

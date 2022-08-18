@@ -32,7 +32,8 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     'Lo lleva al centro de salud',
     'Espera que se sane solo'
   ].toList();
-  final List<String> _items4 = ['5 a 20', '21 a 50', '51 en adelante'].toList();
+  final List<String> _items4 =
+      ['\$5 a \$20', '\$21 a \$50', '\$51 en adelante'].toList();
   final List<String> _items5 = [
     'Totalmente de acuerdo',
     'Lo aceptan por Ud.',
@@ -64,7 +65,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   bool isChecked8 = false;
   bool isChecked9 = false;
 
-  bool _guardando = false;
+  //bool _guardando = false;
   bool isDisable = true;
   var idFormu2;
   var idAnimal;
@@ -126,7 +127,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                             fontSize: 33,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
@@ -159,7 +160,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         Divider(),
                         Text(
-                          '¿Donde esta ahora? Si fallecio, perdió o esta en otro lugar, indique la causa.',
+                          '¿Dónde está ahora? Si fallecio, perdió o esta en otro lugar, indique la causa.',
                           style: TextStyle(fontSize: 16),
                         ),
                         _crearLugarM(),
@@ -199,6 +200,10 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         _crearComida(),
                         Divider(),
+                        Text(
+                          '¿Cuántos años cree que vive un perro en promedio?',
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
                         _crearPregunta8(),
                         Divider(),
                         Text(
@@ -233,10 +238,10 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           '¿Esta de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 26,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
@@ -253,10 +258,10 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           '¿Está de acuerdo en que la  mascota sea esterilizada?',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 26,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
@@ -287,10 +292,10 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           'La adopción fue compartida con su familia?',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 26,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
@@ -315,10 +320,13 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   Widget _crearLugarM() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'El texto ingresado es muy corto';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       textAlign: TextAlign.justify,
       initialValue: relacionAnim.ubicMascota,
@@ -340,10 +348,13 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   Widget _crearNombreM() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 1 && value.length > 0) {
+          return 'Ingrese el nombre';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
@@ -362,10 +373,13 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   Widget _crearNombreM1() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 1 && value.length > 0) {
+          return 'Ingrese el nombre';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
@@ -563,7 +577,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: '¿Cuánto tiempo en el dia pasará sola la mascota?',
+          labelText: '¿Cuánto tiempo en el día pasará sola la mascota?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -651,7 +665,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: '¿Cuántos años cree que vive un perro en promedio?',
+          //labelText: '¿Cuántos años cree que vive un perro en promedio?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -888,10 +902,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       mainAxisAlignment: MainAxisAlignment.start,
       //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   'Si Ud. debe salir de viaje más de un día, la mascota:      ',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
             value: _selection1,

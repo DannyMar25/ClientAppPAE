@@ -15,8 +15,10 @@ class AnimalesProvider {
 
   Future<List<AnimalModel>> cargarAnimal() async {
     final List<AnimalModel> animales = <AnimalModel>[];
-    var documents =
-        await refAn.where('nombre', isNotEqualTo: 'Sin Definir').get();
+    var documents = await refAn
+        //.where('nombre', isNotEqualTo: 'Sin Definir')
+        .where('estado', isEqualTo: 'En Adopción')
+        .get();
     animales.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
       var data = e.data() as Map<String, dynamic>;

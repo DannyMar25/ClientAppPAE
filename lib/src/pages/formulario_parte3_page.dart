@@ -127,7 +127,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       ),
                       Divider(),
                       Text(
-                        'El lugar donde pasara la mascota, ¿Tiene cerramiento?',
+                        'El lugar donde pasará la mascota, ¿Tiene cerramiento?',
                         style: TextStyle(
                           fontSize: 33,
                           foreground: Paint()
@@ -186,7 +186,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           return 'Solo números';
         }
       },
-      initialValue: domicilio.m2.toString(),
+      //initialValue: domicilio.m2.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -209,19 +209,20 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       decoration: InputDecoration(
           labelText: 'Teléfono',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      validator: (value) {
+        if (value!.length < 9 && value.length > 0 || value.length > 10) {
+          return 'Ingrese un número de teléfono válido';
+        } else if (value.isEmpty) {
+          return campoVacio;
+        } else {
+          return null;
+        }
+      },
       onChanged: (s) {
         setState(() {
           domicilio.telfD = s;
         });
       },
-      // //onSaved: (value) => animal.edad = int.parse(value!),
-      // validator: (value) {
-      //   if (utils.isNumeric(value!)) {
-      //     return null;
-      //   } else {
-      //     return 'Solo numeros';
-      //   }
-      // },
     );
   }
 
@@ -233,6 +234,15 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       decoration: InputDecoration(
           labelText: 'Nombre',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+      validator: (value) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el nombre';
+        } else if (value.isEmpty) {
+          return campoVacio;
+        } else {
+          return null;
+        }
+      },
       onChanged: (s) {
         setState(() {
           domicilio.nombreD = s;
@@ -255,17 +265,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'Seleccione tipo de inmueble:    ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection = s;
-                domicilio.tipoInmueble = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 150.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection = s;
+                  domicilio.tipoInmueble = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -284,17 +299,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'El inmueble es:    ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection1,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection1 = s;
-                domicilio.inmueble = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 140.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection1,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection1 = s;
+                  domicilio.inmueble = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -308,7 +328,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           return 'Solo números';
         }
       },
-      initialValue: domicilio.alturaC.toString(),
+      //initialValue: domicilio.alturaC.toString(),
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -319,14 +339,6 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           domicilio.alturaC = double.parse(s);
         });
       },
-      //onSaved: (value) => animal.peso = double.parse(value!),
-      // validator: (value) {
-      //   if (utils.isNumeric(value!)) {
-      //     return null;
-      //   } else {
-      //     return 'Solo numeros';
-      //   }
-      // },
     );
   }
 
@@ -437,10 +449,13 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   Widget _crearMaterial() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty) {
+        if (value!.length < 3 && value.length > 0) {
+          return 'Ingrese el material';
+        } else if (value.isEmpty) {
           return campoVacio;
+        } else {
+          return null;
         }
-        return null;
       },
       // initialValue: ,
       readOnly: false,
@@ -470,17 +485,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'Especie:          ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection5,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection5 = s;
-                domicilio.especieAd = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 150.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection5,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection5 = s;
+                  domicilio.especieAd = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -499,17 +519,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'Sexo:            ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection2,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection2 = s;
-                domicilio.sexoAd = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 150.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection2,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection2 = s;
+                  domicilio.sexoAd = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -528,17 +553,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'Edad:           ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection3,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection3 = s;
-                domicilio.edadAd = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 150.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection3,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection3 = s;
+                  domicilio.edadAd = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }
@@ -557,17 +587,22 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           'Tamaño:     ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
-        DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
-            value: _selection4,
-            items: dropdownMenuOptions,
-            onChanged: (s) {
-              setState(() {
-                _selection4 = s;
-                domicilio.tamanioAd = s!;
-                //animal.tamanio = s!;
-              });
-            }),
+        SizedBox(
+          width: 150.0,
+          child: DropdownButtonFormField<String>(
+              //hint: Text(animal.tamanio.toString()),
+              value: _selection4,
+              items: dropdownMenuOptions,
+              validator: (value) =>
+                  value == null ? 'Seleccione una opción' : null,
+              onChanged: (s) {
+                setState(() {
+                  _selection4 = s;
+                  domicilio.tamanioAd = s!;
+                  //animal.tamanio = s!;
+                });
+              }),
+        ),
       ],
     );
   }

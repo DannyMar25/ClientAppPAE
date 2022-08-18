@@ -152,13 +152,9 @@ class FormulariosProvider {
         //.where('estado', isEqualTo: 'Aprobado')
         .where('identificacion', isEqualTo: identificacion)
         .get();
-    //citas.addAll
     var s = (documents.docs.map((e) async {
-      //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
       var data = e.data() as Map<String, dynamic>;
-      //HorariosModel h1 = new HorariosModel();
       AnimalModel anim = new AnimalModel();
-      //h1 = await horariosProvider.cargarHorarioId(e["idHorario"]);
       anim = await animalesProvider.cargarAnimalId(e["idAnimal"]);
       var formulario = FormulariosModel.fromJson({
         "id": e.id,
