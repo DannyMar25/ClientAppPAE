@@ -25,6 +25,18 @@ class PreferenciasUsuario {
   }
   //Email y rol
 
+  String get fcmToken {
+    return _prefs!.getString('tokenFCM') ?? '';
+  }
+
+  void setTokenFCM(String value) {
+    _prefs!.setString('tokenFCM', value);
+  }
+
+  void removeTokenFCM() {
+    _prefs!.remove('tokenFCM');
+  }
+
   String get email {
     return _prefs!.getString('email') ?? '';
   }
@@ -35,6 +47,18 @@ class PreferenciasUsuario {
 
   void removeEmail() {
     _prefs!.remove('email');
+  }
+
+  String get uid {
+    return _prefs!.getString('uid') ?? '';
+  }
+
+  void setUid(String value) {
+    _prefs!.setString('uid', value);
+  }
+
+  void removeUid() {
+    _prefs!.remove('uid');
   }
 
   String get rol {

@@ -7,6 +7,7 @@ import 'package:cliente_app_v1/src/models/formulario_relacionAnimal_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_situacionFam_model.dart';
 import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -213,11 +214,18 @@ class FormulariosProvider {
         .collection('formularios')
         .doc(idFormu)
         .collection('registroVacunas');
+    CollectionReference refRegVacRoot =
+        FirebaseFirestore.instance.collection('registroVacunas');
+    final prefs = new PreferenciasUsuario();
     try {
       var vacunaAdd = await refRegVac.add(vacuna.toJson());
       await refRegVac.doc(vacunaAdd.id).update({"id": vacunaAdd.id});
-
       await refForm.doc(idFormu).update({"idVacuna": vacunaAdd.id});
+      final uid = prefs.uid;
+      await refRegVacRoot.doc(vacunaAdd.id).set(vacuna.toJson());
+      await refRegVacRoot
+          .doc(vacunaAdd.id)
+          .update({"id": vacunaAdd.id, "idCliente": uid});
       //var idFormu1 = idFormu;
       //Navigator.pushNamed(context, 'formularioP3', arguments: idFormu1);
 
@@ -235,6 +243,9 @@ class FormulariosProvider {
         .collection('formularios')
         .doc(idFormu)
         .collection('registroDesparasitacion');
+    CollectionReference refRegDespRoot =
+        FirebaseFirestore.instance.collection('registroDesparasitacion');
+    final prefs = new PreferenciasUsuario();
     try {
       var desparasitacionAdd = await refRegDesp.add(desparasitacion.toJson());
       await refRegDesp
@@ -243,7 +254,24 @@ class FormulariosProvider {
 
       await refForm
           .doc(idFormu)
-          .update({"idDesparasitacion": desparasitacion.id});
+          .update({"idDesparasitacion": desparasitacionAdd.id});
+
+      final uid = prefs.uid;
+
+      final fechaProxDesparasitacion =
+          desparasitacion.toJson()["fechaProxDesparasitacion"];
+      print(fechaProxDesparasitacion);
+      final dateFechaProx = DateTime.parse(fechaProxDesparasitacion);
+      print(dateFechaProx);
+
+      await refRegDespRoot.doc(desparasitacionAdd.id).set({
+        ...desparasitacion.toJson(),
+        "fechaProxDesparasitacion": dateFechaProx,
+      });
+
+      await refRegDespRoot
+          .doc(desparasitacionAdd.id)
+          .update({"id": desparasitacionAdd.id, "idCliente": uid});
       //var idFormu1 = idFormu;
       //Navigator.pushNamed(context, 'formularioP3', arguments: idFormu1);
 

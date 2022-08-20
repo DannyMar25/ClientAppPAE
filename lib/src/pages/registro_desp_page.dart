@@ -261,7 +261,9 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       setState(() {
         _fecha1 = picked.year.toString() +
             '-' +
-            picked.month.toString() +
+            (picked.month < 10
+                ? '0' + picked.month.toString()
+                : picked.month.toString()) +
             '-' +
             picked.day.toString();
 

@@ -7,6 +7,7 @@ import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dar
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/constants.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -180,14 +181,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Future<String?> getFcm() async {
+    late FirebaseMessaging messaging;
+    messaging = FirebaseMessaging.instance;
+    final token = await messaging.getToken();
+    return token;
+  }
+
   _login(LoginBloc bloc, BuildContext context) async {
     final prefs = new PreferenciasUsuario();
     Map info = await usuarioProvider.login(bloc.email, bloc.password);
     if (info['ok']) {
       final user = await usuarioProvider.obtenerUsuario(info['uid']);
+      final tokenFcm = await getFcm();
+      prefs.setUid(info['uid']);
       prefs.setEmail(bloc.email);
       prefs.setRol(user['rol']);
-      Navigator.pushReplacementNamed(context, 'home', arguments: animal);
+      usuarioProvider.saveFcmToken(info['uid'], tokenFcm!);
+      Navigator.pushReplacementNamed(context, 'intro', arguments: animal);
     } else {
       //mostrarAlerta(context, info['mensaje']);
       mostrarAlerta(context,
@@ -213,9 +224,10 @@ class _LoginPageState extends State<LoginPage> {
         }
         //anadido el 9 de agosto
         final user1 = await usuarioProvider.obtenerUsuario(user.uid);
+        prefs.setUid(user.uid);
         prefs.setEmail(user.email!);
         prefs.setRol(user1['rol']);
-        Navigator.pushReplacementNamed(context, 'home');
+        Navigator.pushReplacementNamed(context, 'intro');
       },
       style: OutlinedButton.styleFrom(
         primary: Colors.grey,

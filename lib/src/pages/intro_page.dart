@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
@@ -13,6 +14,7 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> {
+  late FirebaseMessaging messaging;
   final userProvider = new UsuarioProvider();
   final prefs = new PreferenciasUsuario();
   final _headerStyle = const TextStyle(
@@ -29,6 +31,29 @@ class _IntroPageState extends State<IntroPage> {
       borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
   );
+
+  @override
+  void initState() {
+    final email = prefs.email;
+    final uid = prefs.uid;
+    if (email != '') {
+      messaging = FirebaseMessaging.instance;
+      messaging.getToken().then((value) {
+        print("tokeen+++======");
+        print(value);
+        userProvider.saveFcmToken(uid, value!);
+      });
+      messaging.onTokenRefresh.listen((fcmToken) {
+        print("refreshToken");
+        print(fcmToken);
+        userProvider.saveFcmToken(uid, fcmToken);
+      }).onError((err) {
+        print(err);
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final email = prefs.email;

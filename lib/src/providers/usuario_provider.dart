@@ -173,4 +173,13 @@ class UsuarioProvider {
       return false;
     }
   }
+
+  Future<dynamic> saveFcmToken(String uid, String token) async {
+    try {
+      await refUser.doc(uid).update({'token': token});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }
