@@ -99,7 +99,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                         color: Colors.transparent,
                       ),
                       _crearTipoInmueble(),
-                      _crearDimencion(),
+                      Row(
+                        children: [_crearDimencion(), infoAltura()],
+                      ),
+
                       _crearPropiedad(),
                       Divider(),
 
@@ -178,25 +181,29 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   }
 
   Widget _crearDimencion() {
-    return TextFormField(
-      validator: (value) {
-        if (isNumeric(value!)) {
-          return null;
-        } else {
-          return 'Solo números';
-        }
-      },
-      //initialValue: domicilio.m2.toString(),
-      readOnly: false,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          labelText: 'Especifique metros (m2)',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      onChanged: (s) {
-        setState(() {
-          domicilio.m2 = double.parse(s);
-        });
-      },
+    return SizedBox(
+      height: 60.0,
+      width: 290.0,
+      child: TextFormField(
+        validator: (value) {
+          if (isNumeric(value!)) {
+            return null;
+          } else {
+            return 'Solo números';
+          }
+        },
+        //initialValue: domicilio.m2.toString(),
+        readOnly: false,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+            labelText: 'Especifique metros (m2)',
+            labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+        onChanged: (s) {
+          setState(() {
+            domicilio.m2 = double.parse(s);
+          });
+        },
+      ),
     );
   }
 
@@ -320,25 +327,59 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   }
 
   Widget _crearAltura() {
-    return TextFormField(
-      validator: (value) {
-        if (isNumeric(value!)) {
-          return null;
-        } else {
-          return 'Solo números';
-        }
-      },
-      //initialValue: domicilio.alturaC.toString(),
-      readOnly: false,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-        labelText: 'Altura (m)',
+    return SizedBox(
+      height: 50.0,
+      width: 290.0,
+      child: TextFormField(
+        validator: (value) {
+          if (isNumeric(value!)) {
+            return null;
+          } else {
+            return 'Solo números';
+          }
+        },
+        //initialValue: domicilio.alturaC.toString(),
+        readOnly: false,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+          labelText: 'Altura (m)',
+        ),
+        onChanged: (s) {
+          setState(() {
+            domicilio.alturaC = double.parse(s);
+          });
+        },
       ),
-      onChanged: (s) {
-        setState(() {
-          domicilio.alturaC = double.parse(s);
-        });
+    );
+  }
+
+  Widget infoAltura() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        ),
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            content: Text(
+              'Utiliza punto (.) para los decimales\nEjemplo: 100.23',
+            ),
+            title: Text('Ayuda'),
+          ),
+        );
       },
+      child: Column(
+        children: const <Widget>[
+          Icon(
+            Icons.info_rounded,
+            color: Colors.green,
+            size: 20.0,
+          ),
+        ],
+      ),
     );
   }
 
@@ -729,7 +770,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       return Column(
         children: [
           Text(
-              'Si es arrendado, ponga el nombre y telefono del dueño de la casa:'),
+              'Si es arrendado, ponga el nombre y teléfono del dueño de la casa:'),
           Divider(),
           _crearNombreD(),
           _crearTelefono()
@@ -746,7 +787,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   Widget _buildChild2() {
     if (isChecked2 == true) {
       return Column(
-        children: [_crearAltura(), _crearMaterial()],
+        children: [
+          Row(children: [_crearAltura(), infoAltura()]),
+          _crearMaterial()
+        ],
       );
     } //else {
 

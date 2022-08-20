@@ -46,6 +46,12 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, 'home');
+            },
+          ),
           title: Text('Información enviada en solicitud'),
         ),
         body: Stack(alignment: Alignment.center, children: [
@@ -65,21 +71,8 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                             children: [
                               _mostrarImagen(),
                               _verListado(),
-                              Padding(padding: EdgeInsets.only(bottom: 40.0)),
-                              OutlinedButton.icon(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, 'home');
-                                  },
-                                  icon: Icon(
-                                    Icons.photo_album,
-                                    size: 30,
-                                    color: Colors.green,
-                                  ),
-                                  label: Text(
-                                    "Volver a la galeria",
-                                    style: TextStyle(
-                                        color: Colors.green, fontSize: 14),
-                                  )),
+                              Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                              _botonGaleria(),
                             ],
                           )))))
         ]));
@@ -102,7 +95,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                 ),
               ),
               Text(
-                '¡Haz click aquí!',
+                '¡Haz clic aquí!',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
               ),
@@ -116,6 +109,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
   }
 
   showCitas(String idFormu2) async {
+    formularios.clear(); //limpiar lista
     listaF = await formulariosProvider.cargarInfoAnimal(idFormu2);
     //listaF = await formulariosProvider.cargarInfoAnimal('zVIHuMEUoqupCznzHNhG');
     for (var yy in listaF) {
@@ -427,5 +421,21 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
   Future<List<int>> _readImageData(String name) async {
     final ByteData data = await rootBundle.load('assets/$name');
     return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  }
+
+  Widget _botonGaleria() {
+    return OutlinedButton.icon(
+        onPressed: () {
+          Navigator.pushNamed(context, 'home');
+        },
+        icon: Icon(
+          Icons.photo_album,
+          size: 30,
+          color: Colors.green,
+        ),
+        label: Text(
+          "Volver a la galería",
+          style: TextStyle(color: Colors.green, fontSize: 14),
+        ));
   }
 }

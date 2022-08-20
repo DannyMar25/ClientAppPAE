@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
             Locale('en', 'US'), // English, no country code
             Locale('es', 'ES'), // Spanish, no country code
           ],
+          //initialRoute: 'formularioP3',
           initialRoute: 'intro',
           //initialRoute: 'perfilMascota',
           routes: {

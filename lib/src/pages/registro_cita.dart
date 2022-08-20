@@ -330,7 +330,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
             _submit();
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos están llenos.');
+                context, 'Asegurate de que todos los campos estén llenos.');
           }
         }
         // onPressed: () {

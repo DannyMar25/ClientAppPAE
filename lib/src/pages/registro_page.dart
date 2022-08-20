@@ -84,7 +84,7 @@ class RegistroPage extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pushNamed(context, 'login'),
             child: Text(
-              'Ya tienes cuenta? Login',
+              '¿Ya tienes cuenta? Login',
               style: TextStyle(color: Colors.green, fontSize: 17),
             ),
           ),
@@ -154,7 +154,7 @@ class RegistroPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.lock_outline, color: Colors.green),
               //hintText: 'ejemplo@correo.com',
-              labelText: 'Contrasena',
+              labelText: 'Contraseña',
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
@@ -223,7 +223,7 @@ class RegistroPage extends StatelessWidget {
       usuario.email = bloc.email;
       usuario.rol = Roles.cliente;
       usuarioProvider.crearUsuario(usuario);
-      mostrarAlertaOk(context, 'Se ha registrado con exito.', 'login');
+      mostrarAlertaOk(context, 'Se ha registrado con éxito.', 'login');
       //Navigator.pushReplacementNamed(context, 'intro');
     } else {
       mostrarAlerta(context, info['mensaje']);

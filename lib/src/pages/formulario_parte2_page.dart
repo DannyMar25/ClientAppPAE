@@ -125,9 +125,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
                         Divider(),
                         Text(
-                          'Algun familiar espera un bebe?',
+                          '¿Algún familiar espera un bebé?',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 26,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 3
@@ -151,9 +151,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         //),
                         Divider(),
                         Text(
-                          'Alguien que viva con usted es alérgico a los animales o sufre de asma?',
+                          '¿Alguien que viva con usted es alérgico a los animales o sufre de asma?',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 26,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 3

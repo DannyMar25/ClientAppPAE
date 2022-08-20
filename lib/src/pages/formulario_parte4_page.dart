@@ -25,7 +25,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     'Otro'
   ].toList();
   final List<String> _items2 =
-      ['Balanceado', 'Comida Casera', 'Restos', 'Otro'].toList();
+      ['Croquetas', 'Comida Casera', 'Restos', 'Otro'].toList();
   final List<String> _items3 = [
     'Lo lleva al veterinario',
     'Lo medica usted mismo',
@@ -160,7 +160,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         Divider(),
                         Text(
-                          '¿Dónde está ahora? Si fallecio, perdió o esta en otro lugar, indique la causa.',
+                          '¿Dónde está ahora? Si falleció, perdió o está en otro lugar, indique la causa.',
                           style: TextStyle(fontSize: 16),
                         ),
                         _crearLugarM(),
@@ -175,7 +175,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         _crearPregunta2(),
                         Text(
-                          'Con relación a la anterior pregunta ¿Qué pasaria si los dueños de la nueva casa no aceptan mascotas?',
+                          'Con relación a la anterior pregunta ¿Qué pasaría si los dueños de la nueva casa no aceptan mascotas?',
                           style: TextStyle(fontSize: 16),
                         ),
                         Divider(
@@ -236,7 +236,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         _crearPregunta10(),
                         Divider(),
                         Text(
-                          '¿Esta de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
+                          '¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
                           style: TextStyle(
                             fontSize: 26,
                             foreground: Paint()
@@ -577,7 +577,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: '¿Cuánto tiempo en el día pasará sola la mascota?',
+          labelText: '¿Cuánto tiempo en el día pasará sola la mascota? (Horas)',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -1172,12 +1172,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
           if (formKey.currentState!.validate()) {
             // Si el formulario es válido, queremos mostrar un Snackbar
             SnackBar(
-              content: Text('Informacion ingresada correctamente'),
+              content: Text('Información ingresada correctamente'),
             );
             _submit();
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estan llenos.');
+                context, 'Asegurate de que todos los campos estén llenos.');
           }
         }
       },

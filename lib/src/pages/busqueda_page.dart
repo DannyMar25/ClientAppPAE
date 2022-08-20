@@ -274,7 +274,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
       children: [
         Padding(padding: EdgeInsets.only(top: 10.0)),
         Text(
-          'Seleccione etapa:',
+          'Seleccione etapa de vida:',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         Padding(padding: EdgeInsets.only(top: 10.0)),

@@ -425,7 +425,7 @@ class _AnimalPageState extends State<AnimalPage> {
         } else {
           mostrarAlertaOkCancel(
               context,
-              'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
+              'Para poder ingresar al formulario debe registrarse o iniciar sesión.',
               'login',
               animal);
         }
@@ -542,7 +542,7 @@ class _AnimalPageState extends State<AnimalPage> {
           Navigator.pushNamed(context, 'registroCita', arguments: animal);
         },
         child: Container(
-          height: 110,
+          height: 120,
           color: Colors.white,
           child: Row(
             children: [

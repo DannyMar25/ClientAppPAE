@@ -306,7 +306,7 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       Text(
-                        'Ten en cuenta que para poder relalizar este proceso debes iniciar sesión o registrate en la aplicación.',
+                        'Ten en cuenta que para poder realizar este proceso debes iniciar sesión o registrarte en la aplicación.',
                         textAlign: TextAlign.justify,
                       ),
                       //"Para poder llevar a cabo este proceso debes haber seleccionado a tu futura mascota de nuestra galeria y dentro de su perfil dar clic en la opcion '¡Quiero Adoptarlo!'", textAlign: TextAlign.justify,),
