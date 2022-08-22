@@ -72,7 +72,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                     mostrarAlertaOk(
                         context,
                         'Para poder llenar el formulario de adopción debes seleccionar a tu futura mascota en nuestra galería.',
-                        'home');
+                        'home',
+                        'Atención!');
                     //Navigator.pushReplacementNamed(context, 'home');
                   })
               : SizedBox(),

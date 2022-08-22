@@ -108,8 +108,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   onPressed: () async {
                     try {
                       _auth.sendPasswordResetEmail(email: _email!);
-                      mostrarAlertaOk(
-                          context, 'Se envio un correo a $_email', 'login');
+                      mostrarAlertaOk(context, 'Se envió un correo a $_email',
+                          'login', 'Información correcta');
                     } on FirebaseAuthException catch (e) {
                       //print(exception.code);
                       print(e.message);

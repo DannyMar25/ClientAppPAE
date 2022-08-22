@@ -163,15 +163,19 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           color: Colors.white,
         ),
         autofocus: true,
-        //onPressed: (_guardando) ? null : _submit,
-        onPressed: () {
+        onPressed: () async {
           if (formKey.currentState!.validate()) {
-            // Si el formulario es válido, queremos mostrar un Snackbar
-            //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
             SnackBar(
               content: Text('Información ingresada correctamente'),
             );
-            _submit();
+            final estadoCedula =
+                await formulariosProvider.verificar(identificacion);
+            if (estadoCedula.isEmpty) {
+              mostrarAlertaOk(context, 'No se ha encontrado ningun registo',
+                  'home', 'Atención!');
+            } else {
+              _submit();
+            }
           } else {
             mostrarAlerta(
                 context, 'Asegurate de que todos los campos están llenos.');
@@ -186,17 +190,6 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       _guardando = true;
     });
     showCitas(identificacion);
-//Sentencia If agregada recientemente
-    //if (idFormu != null) {
-
-    //formulario = await formulariosProvider.cargarInfo(identificacion);
-
-    //Navigator.pushReplacementNamed(context, 'seguimientoMain');
-    // } else {
-    //animalProvider.editarAnimal(animal, foto!);
-    //print(idFormu);
-    // print("Debe llenar la parte 1 para poder continuar");
-    //}
   }
 
   showCitas(String identificacion) async {
@@ -225,95 +218,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     );
   }
 
-  Widget verificarCedula() {
-    if (formularios.length == 0 && identificacion != '') {
-      return Column(children: [
-        AlertDialog(
-          title: Row(
-            children: [
-              Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 45,
-              ),
-              Text('Resultado de busqueda!'),
-            ],
-          ),
-          content: Text('No se ha encotrado ningun registro'),
-          actions: [
-            TextButton(
-                child: Text('Ok'),
-                //onPressed: () => Navigator.of(context).pop(),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'home');
-                })
-          ],
-        )
-      ]);
-    } else {
-      return Column(
-        children: [
-          SizedBox(
-            height: 800,
-            child: ListView.builder(
-              itemCount: formularios.length,
-              itemBuilder: (context, i) => _crearItem(context, formularios[i]),
-            ),
-          ),
-        ],
-      );
-    }
-  }
-
   Widget _crearItem(BuildContext context, FormulariosModel formulario) {
-    if (identificacion != formulario.identificacion) {
-      return AlertDialog(
-        title: Row(
-          children: [
-            Icon(
-              Icons.check_circle,
-              color: Colors.green,
-              size: 45,
-            ),
-            Text('Resultado de busqueda!'),
-          ],
-        ),
-        content: Text('No se ha encotrado ningun registro'),
-        actions: [
-          TextButton(
-              child: Text('Ok'),
-              //onPressed: () => Navigator.of(context).pop(),
-              onPressed: () {
-                Navigator.pushNamed(context, 'home');
-              })
-        ],
-      );
-    }
-    if (formulario.id == '') {
-      return Column(children: [
-        AlertDialog(
-          title: Row(
-            children: [
-              Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 45,
-              ),
-              Text('Resultado de busqueda!'),
-            ],
-          ),
-          content: Text('No se ha encotrado ningun registro'),
-          actions: [
-            TextButton(
-                child: Text('Ok'),
-                //onPressed: () => Navigator.of(context).pop(),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'home');
-                })
-          ],
-        )
-      ]);
-    }
     if (formulario.estado == 'Aprobado') {
       return Card(
           color: Colors.lightGreen[200],

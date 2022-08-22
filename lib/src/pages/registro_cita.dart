@@ -359,8 +359,8 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       if (estadoCita.isEmpty) {
         print('Puede');
         citasProvider.crearCita(citas);
-        mostrarAlertaOk(
-            context, 'La cita ha sido registrada con éxito.', 'home');
+        mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
+            'home', 'Información correcta');
       } else {
         print('no puede');
         mostrarAlerta(context, 'Al momento ya cuenta con una cita registrada.');

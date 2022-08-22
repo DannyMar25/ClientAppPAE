@@ -455,4 +455,36 @@ class FormulariosProvider {
     }));
     return s.toList();
   }
+
+  Future<List<Future<FormulariosModel>>> verificar(
+      String identificacion) async {
+    var documents =
+        await refForm.where('identificacion', isEqualTo: identificacion).get();
+    var s = (documents.docs.map((e) async {
+      var data = e.data() as Map<String, dynamic>;
+      AnimalModel anim = new AnimalModel();
+      anim = await animalesProvider.cargarAnimalId(e["idAnimal"]);
+      var formulario = FormulariosModel.fromJson({
+        "id": e.id,
+        "idAnimal": e["idAnimal"],
+        "fechaIngreso": e["fechaIngreso"],
+        "fechaRespuesta": e["fechaRespuesta"],
+        "nombreClient": e["nombreClient"],
+        "identificacion": e["identificacion"],
+        "emailClient": e["emailClient"],
+        "estado": e["estado"],
+        "observacion": e["observacion"],
+        "idDatosPersonales": e["idDatosPersonales"],
+        "idSituacionFam": e["idSituacionFam"],
+        "idDomicilio": e["idDomicilio"],
+        "idRelacionAn": e["idRelacionAn"],
+        "idVacuna": e["idVacuna"],
+        "idDesparasitacion": e["idDesparasitacion"],
+        "idEvidencia": e["idEvidencia"],
+      });
+      formulario.animal = anim;
+      return formulario;
+    }));
+    return s.toList();
+  }
 }

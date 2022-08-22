@@ -223,7 +223,8 @@ class RegistroPage extends StatelessWidget {
       usuario.email = bloc.email;
       usuario.rol = Roles.cliente;
       usuarioProvider.crearUsuario(usuario);
-      mostrarAlertaOk(context, 'Se ha registrado con éxito.', 'login');
+      mostrarAlertaOk(context, 'Se ha registrado con éxito.', 'login',
+          'Información correcta');
       //Navigator.pushReplacementNamed(context, 'intro');
     } else {
       mostrarAlerta(context, info['mensaje']);

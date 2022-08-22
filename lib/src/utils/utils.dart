@@ -43,7 +43,8 @@ void mostrarAlertaAuth(BuildContext context, String mensaje, String ruta) {
       });
 }
 
-void mostrarAlertaOk(BuildContext context, String mensaje, String ruta) {
+void mostrarAlertaOk(
+    BuildContext context, String mensaje, String ruta, String titulo) {
   showDialog(
       context: context,
       builder: (context) {
@@ -55,7 +56,7 @@ void mostrarAlertaOk(BuildContext context, String mensaje, String ruta) {
                 color: Colors.green,
                 size: 50,
               ),
-              Text('Información correcta'),
+              Text(titulo),
             ],
           ),
           content: Text(mensaje),
