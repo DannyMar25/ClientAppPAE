@@ -70,8 +70,9 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               _mostrarImagen(),
+
                               _verListado(),
-                              Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                              //Padding(padding: EdgeInsets.only(bottom: 10.0)),
                               _botonGaleria(),
                             ],
                           )))))
@@ -124,7 +125,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     return Column(
       children: [
         SizedBox(
-          height: 800,
+          height: 450,
           child: ListView.builder(
             itemCount: formularios.length,
             itemBuilder: (context, i) => _crearItem(context, formularios[i]),
@@ -136,6 +137,13 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
 
   Widget _crearItem(BuildContext context, FormulariosModel formulario) {
     //if (formulario.estado == 'Pendiente') {
+    var fecha = DateTime.parse(formulario.fechaIngreso);
+    var fechaIngreso = fecha.year.toString() +
+        '-' +
+        fecha.month.toString() +
+        '-' +
+        fecha.day.toString();
+
     return Card(
         color: Colors.lightGreen[200],
         shadowColor: Colors.green,
@@ -157,8 +165,10 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                     Text("Número de cédula: " '${formulario.identificacion}'),
                     Text("Estado de solicitud:"
                         '${formulario.estado}'),
+                    // Text("Fecha de envio de solicitud: "
+                    //     '${formulario.fechaIngreso}'),
                     Text("Fecha de envio de solicitud: "
-                        '${formulario.fechaIngreso}'),
+                        '$fechaIngreso'),
                     Text("Nombre mascota a adoptar:"
                         '${formulario.animal!.nombre}'),
                     //Divider(color: Colors.purple)

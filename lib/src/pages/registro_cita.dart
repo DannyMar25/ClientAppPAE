@@ -355,8 +355,18 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     //citas.idHorario = horarios.id;
 
     if (citas.id == "") {
-      citasProvider.crearCita(citas);
-      mostrarAlertaOk(context, 'La cita ha sido registrada con éxito', 'home');
+      final estadoCita = await citasProvider.verificar(correo.text);
+      if (estadoCita.isEmpty) {
+        print('Puede');
+        citasProvider.crearCita(citas);
+        mostrarAlertaOk(
+            context, 'La cita ha sido registrada con éxito.', 'home');
+      } else {
+        print('no puede');
+        mostrarAlerta(context, 'Al momento ya cuenta con una cita registrada.');
+      }
+      //citasProvider.crearCita(citas);
+      // mostrarAlertaOk(context, 'La cita ha sido registrada con éxito', 'home');
     }
 
     //Navigator.pushNamed(context, 'bienvenida');
