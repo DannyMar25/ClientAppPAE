@@ -2,6 +2,7 @@ import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_situacionFam_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
@@ -463,10 +464,14 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-          sitFamilia.esperaBebe = "Si";
-        });
+        if (isChecked1 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked = value!;
+            sitFamilia.esperaBebe = "Si";
+          });
+        }
       },
     );
   }
@@ -489,10 +494,14 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked1,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked1 = value!;
-          sitFamilia.esperaBebe = "No";
-        });
+        if (isChecked == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked1 = value!;
+            sitFamilia.esperaBebe = "No";
+          });
+        }
       },
     );
   }
@@ -515,10 +524,14 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked2,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked2 = value!;
-          sitFamilia.alergiaAnimal = "Si";
-        });
+        if (isChecked3 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked2 = value!;
+            sitFamilia.alergiaAnimal = "Si";
+          });
+        }
       },
     );
   }
@@ -541,10 +554,14 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked3,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked3 = value!;
-          sitFamilia.alergiaAnimal = "No";
-        });
+        if (isChecked2 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked3 = value!;
+            sitFamilia.alergiaAnimal = "No";
+          });
+        }
       },
     );
   }
@@ -616,17 +633,16 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         if (isDisable == true) {
           return null;
         } else {
-          //if (formKey.currentState!.validate()) {
-          // Si el formulario es válido, queremos mostrar un Snackbar
-          //utils.mostrarAlerta(context, 'Datos ingresados correctamente');
-          SnackBar(
-            content: Text('Información ingresada correctamente'),
-          );
-          _submit();
-          // } else {
-          //   utils.mostrarAlerta(
-          //       context, 'Asegurate de que todos los campos están llenos.');
-          // }
+          if (isChecked == false && isChecked1 == false) {
+            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones.');
+          } else if (isChecked2 == false && isChecked3 == false) {
+            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones');
+          } else {
+            SnackBar(
+              content: Text('Información ingresada correctamente'),
+            );
+            _submit();
+          }
         }
       },
     );

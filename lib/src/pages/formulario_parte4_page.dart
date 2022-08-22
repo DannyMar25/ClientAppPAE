@@ -53,6 +53,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   String? _selection8;
   String? _selection9;
   String? _selection10;
+  String? _selection11;
 
   bool isChecked = false;
   bool isChecked1 = false;
@@ -301,7 +302,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           textAlign: TextAlign.center,
                         ),
                         Divider(),
-                        _crearSiNo(),
+                        _crearSiNo2(),
                         Divider(),
                         _crearFamilia(),
                         Divider(),
@@ -806,10 +807,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-          relacionAnim.visitaPer = "Si";
-        });
+        if (isChecked1 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked = value!;
+            relacionAnim.visitaPer = "Si";
+          });
+        }
       },
     );
   }
@@ -832,10 +837,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked1,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked1 = value!;
-          relacionAnim.visitaPer = "No";
-        });
+        if (isChecked == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked1 = value!;
+            relacionAnim.visitaPer = "No";
+          });
+        }
       },
     );
   }
@@ -858,10 +867,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked2,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked2 = value!;
-          relacionAnim.acuerdoEst = "Si";
-        });
+        if (isChecked3 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked2 = value!;
+            relacionAnim.acuerdoEst = "Si";
+          });
+        }
       },
     );
   }
@@ -884,10 +897,14 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked3,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked3 = value!;
-          relacionAnim.acuerdoEst = "No";
-        });
+        if (isChecked2 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked3 = value!;
+            relacionAnim.acuerdoEst = "No";
+          });
+        }
       },
     );
   }
@@ -1149,6 +1166,35 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     );
   }
 
+  Widget _crearSiNo2() {
+    final dropdownMenuOptions = _items7
+        .map((String item) =>
+            //new DropdownMenuItem<String>(value: item, child: new Text(item)))
+            new DropdownMenuItem<String>(value: item, child: new Text(item)))
+        .toList();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      //mainAxisSize: MainAxisSize.max,
+      children: [
+        // Text(
+        //   '',
+        //   style: TextStyle(fontSize: 16, color: Colors.black),
+        // ),
+        DropdownButton<String>(
+            //hint: Text(animal.tamanio.toString()),
+            value: _selection11,
+            items: dropdownMenuOptions,
+            onChanged: (s) {
+              setState(() {
+                _selection11 = s;
+                relacionAnim.estMs2 = s!;
+                //animal.tamanio = s!;
+              });
+            }),
+      ],
+    );
+  }
+
   Widget _crearBoton() {
     return ElevatedButton.icon(
       style: ButtonStyle(
@@ -1170,11 +1216,18 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
           return null;
         } else {
           if (formKey.currentState!.validate()) {
-            // Si el formulario es válido, queremos mostrar un Snackbar
-            SnackBar(
-              content: Text('Información ingresada correctamente'),
-            );
-            _submit();
+            if (isChecked == false && isChecked1 == false) {
+              mostrarAlerta(
+                  context, 'Debe seleccionar una de las dos opciones.');
+            } else if (isChecked2 == false && isChecked3 == false) {
+              mostrarAlerta(
+                  context, 'Debe seleccionar una de las dos opciones');
+            } else {
+              SnackBar(
+                content: Text('Información ingresada correctamente'),
+              );
+              _submit();
+            }
           } else {
             mostrarAlerta(
                 context, 'Asegurate de que todos los campos estén llenos.');

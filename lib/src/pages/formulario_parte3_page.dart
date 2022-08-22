@@ -401,10 +401,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-          domicilio.planMudanza = "Si";
-        });
+        if (isChecked1 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked = value!;
+            domicilio.planMudanza = "Si";
+          });
+        }
       },
     );
   }
@@ -427,10 +431,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked1,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked1 = value!;
-          domicilio.planMudanza = "No";
-        });
+        if (isChecked == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked1 = value!;
+            domicilio.planMudanza = "No";
+          });
+        }
       },
     );
   }
@@ -453,10 +461,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked2,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked2 = value!;
-          domicilio.cerramiento = "Si";
-        });
+        if (isChecked3 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked2 = value!;
+            domicilio.cerramiento = "Si";
+          });
+        }
       },
     );
   }
@@ -479,10 +491,14 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked3,
       onChanged: (bool? value) {
-        setState(() {
-          isChecked3 = value!;
-          domicilio.cerramiento = "No";
-        });
+        if (isChecked2 == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked3 = value!;
+            domicilio.cerramiento = "No";
+          });
+        }
       },
     );
   }
@@ -669,11 +685,18 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           return null;
         } else {
           if (formKey.currentState!.validate()) {
-            // Si el formulario es válido, queremos mostrar un Snackbar
-            SnackBar(
-              content: Text('Información ingresada correctamente'),
-            );
-            _submit();
+            if (isChecked == false && isChecked1 == false) {
+              mostrarAlerta(
+                  context, 'Debe seleccionar una de las dos opciones.');
+            } else if (isChecked2 == false && isChecked3 == false) {
+              mostrarAlerta(
+                  context, 'Debe seleccionar una de las dos opciones');
+            } else {
+              SnackBar(
+                content: Text('Información ingresada correctamente'),
+              );
+              _submit();
+            }
           } else {
             mostrarAlerta(
                 context, 'Asegurate de que todos los campos están llenos.');

@@ -29,18 +29,12 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   String cedula = '';
   @override
   void initState() {
-    // _selection = _items.last;
     super.initState();
   }
 
   AnimalModel animal = new AnimalModel();
   @override
   Widget build(BuildContext context) {
-    // final Object? formData = ModalRoute.of(context)!.settings.arguments;
-    // if (formData != null) {
-    //   formulario = formData as FormulariosModel;
-    //   print(formulario.id);
-    // }
     final Object? animData = ModalRoute.of(context)!.settings.arguments;
     if (animData != null) {
       animal = animData as AnimalModel;
@@ -48,8 +42,6 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     }
 
     return Scaffold(
-      // backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      // backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text(
