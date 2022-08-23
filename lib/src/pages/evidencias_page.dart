@@ -47,46 +47,72 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           title: Text('Revisión de solicitud'),
           backgroundColor: Colors.green,
           actions: [
-            Builder(builder: (BuildContext context) {
-              return Row(
-                children: [
-                  email == ''
-                      ? TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            Navigator.pushNamed(context, 'login');
-                          },
-                          child: Text('Iniciar sesión'),
-                        )
-                      : TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            userProvider.signOut();
-                            Navigator.pushNamed(context, 'home');
-                          },
-                          child: Text('Cerrar sesión'),
-                        ),
-                  email == ''
-                      ? TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            Navigator.pushNamed(context, 'registro');
-                          },
-                          child: Text('Registrarse'),
-                        )
-                      : SizedBox(),
-                ],
-              );
-            }),
+            email != ''
+                ? PopupMenuButton<int>(
+                    onSelected: (item) => onSelected(context, item),
+                    icon: Icon(Icons.notifications),
+                    itemBuilder: (context) => [])
+                : SizedBox(),
+            PopupMenuButton<int>(
+                onSelected: (item) => onSelected(context, item),
+                icon: Icon(Icons.manage_accounts),
+                itemBuilder: (context) => [
+                      email == ''
+                          ? PopupMenuItem<int>(
+                              child: Text("Iniciar sesión"),
+                              value: 0,
+                            )
+                          : PopupMenuItem<int>(
+                              child: Text("Cerrar Sesión"),
+                              value: 2,
+                            ),
+                      email == ''
+                          ? PopupMenuItem<int>(
+                              child: Text("Registrarse"),
+                              value: 1,
+                            )
+                          : PopupMenuItem(child: Text('')),
+                    ]),
+            // Builder(builder: (BuildContext context) {
+            //   return Row(
+            //     children: [
+            //       email == ''
+            //           ? TextButton(
+            //               style: ButtonStyle(
+            //                 foregroundColor:
+            //                     MaterialStateProperty.all<Color>(Colors.white),
+            //               ),
+            //               onPressed: () async {
+            //                 Navigator.pushNamed(context, 'login');
+            //               },
+            //               child: Text('Iniciar sesión'),
+            //             )
+            //           : TextButton(
+            //               style: ButtonStyle(
+            //                 foregroundColor:
+            //                     MaterialStateProperty.all<Color>(Colors.white),
+            //               ),
+            //               onPressed: () async {
+            //                 userProvider.signOut();
+            //                 Navigator.pushNamed(context, 'home');
+            //               },
+            //               child: Text('Cerrar sesión'),
+            //             ),
+            //       email == ''
+            //           ? TextButton(
+            //               style: ButtonStyle(
+            //                 foregroundColor:
+            //                     MaterialStateProperty.all<Color>(Colors.white),
+            //               ),
+            //               onPressed: () async {
+            //                 Navigator.pushNamed(context, 'registro');
+            //               },
+            //               child: Text('Registrarse'),
+            //             )
+            //           : SizedBox(),
+            //     ],
+            //   );
+            // }),
           ],
         ),
         drawer: MenuWidget(),
@@ -111,6 +137,20 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                         _verListado()
                       ],
                     )))));
+  }
+
+  void onSelected(BuildContext context, int item) {
+    switch (item) {
+      case 0:
+        Navigator.pushNamed(context, 'login');
+        break;
+      case 1:
+        Navigator.pushNamed(context, 'registro');
+        break;
+      case 2:
+        userProvider.signOut();
+        Navigator.pushNamed(context, 'intro');
+    }
   }
 
   Widget mostrarImagen1() {
