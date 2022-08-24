@@ -32,6 +32,9 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   String fotoUrl = '';
   String archivoUrl = '';
   String nombreArchivo = '';
+  final List<String> _items =
+      ['Subir foto', 'Subir archivo', 'Subir fotos y archivos'].toList();
+  String? _selection;
 
   @override
   void initState() {
@@ -59,102 +62,19 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
       ),
       drawer: _menuWidget(context),
       body: Container(
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage("assets/fondoanimales.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        padding: EdgeInsets.all(32),
+        padding: EdgeInsets.all(30),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _mostrarFoto(),
-                Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton.icon(
-                      style: ButtonStyle(backgroundColor:
-                          MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> states) {
-                        return Colors.green;
-                      })),
-                      icon: Icon(Icons.photo_camera),
-                      label: Text('Tomar foto'),
-                      onPressed: _tomarFoto,
-                    ),
-                    Padding(padding: EdgeInsets.only(right: 35.0)),
-                    ElevatedButton.icon(
-                      style: ButtonStyle(backgroundColor:
-                          MaterialStateProperty.resolveWith(
-                              (Set<MaterialState> states) {
-                        return Colors.green;
-                      })),
-                      icon: Icon(Icons.photo_album),
-                      label: Text('Seleccionar foto'),
-                      onPressed: _seleccionarFoto,
-                    ),
-                  ],
+                _crearSeleccion(),
+                Padding(padding: EdgeInsets.only(bottom: 15.0)),
+                buildChild(fileName),
+                Divider(
+                  color: Colors.transparent,
                 ),
-                // ButtonWidget(
-                //     icon: Icons.photo_camera,
-                //     text: 'Tomar foto',
-                //     onClicked: _tomarFoto),
-                // ButtonWidget(
-                //     icon: Icons.photo_camera,
-                //     text: 'Seleccionar foto',
-                //     onClicked: _seleccionarFoto),
-                Divider(),
-                ElevatedButton.icon(
-                  // style: ButtonStyle(backgroundColor:
-                  //     MaterialStateProperty.resolveWith(
-                  //         (Set<MaterialState> states) {
-                  //   return Colors.green;
-                  // })),
-                  label: Text(
-                    'Subir Foto',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  icon: Icon(Icons.cloud_upload_outlined),
-                  onPressed: uploadFoto,
-                ),
-                SizedBox(height: 30),
-                task != null ? buildUploadStatus(task!) : Container(),
-                Divider(),
-                ElevatedButton.icon(
-                  style: ButtonStyle(backgroundColor:
-                      MaterialStateProperty.resolveWith(
-                          (Set<MaterialState> states) {
-                    return Colors.green;
-                  })),
-                  label: Text(
-                    'Seleccionar Archivo',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  icon: Icon(Icons.attach_file),
-                  onPressed: selectFile,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  fileName,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 40),
-                ElevatedButton.icon(
-                  label: Text(
-                    'Subir Archivo',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  icon: Icon(Icons.cloud_upload_outlined),
-                  onPressed: uploadFile,
-                ),
-                SizedBox(height: 15),
-                task1 != null ? buildUploadStatus1(task1!) : Container(),
-                Divider(),
-                Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                Padding(padding: EdgeInsets.only(bottom: 10.0)),
                 _crearBoton(context),
               ],
             ),
@@ -162,6 +82,229 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
         ),
       ),
     );
+  }
+
+  Widget _crearTomarFoto() {
+    return Expanded(
+      child: ElevatedButton.icon(
+        style: ButtonStyle(backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return Colors.green;
+        })),
+        icon: Icon(Icons.photo_camera),
+        label: Text('Tomar foto'),
+        onPressed: _tomarFoto,
+      ),
+    );
+  }
+
+  Widget _crearSeleccionarFoto() {
+    return Expanded(
+      child: ElevatedButton.icon(
+        style: ButtonStyle(backgroundColor:
+            MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          return Colors.green;
+        })),
+        icon: Icon(Icons.photo_album),
+        label: Text('Seleccionar de galería'),
+        onPressed: _seleccionarFoto,
+      ),
+    );
+  }
+
+  Widget _crearCargarFoto() {
+    return ElevatedButton.icon(
+      label: Text(
+        'Cargar foto',
+        style: TextStyle(fontSize: 20),
+      ),
+      icon: Icon(Icons.cloud_upload_outlined),
+      onPressed: uploadFoto,
+    );
+  }
+
+  Widget _crearSelecArchivo() {
+    return ElevatedButton.icon(
+      style: ButtonStyle(backgroundColor:
+          MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+        return Colors.green;
+      })),
+      label: Text(
+        'Seleccionar Archivo',
+        style: TextStyle(fontSize: 16),
+      ),
+      icon: Icon(Icons.attach_file),
+      onPressed: selectFile,
+    );
+  }
+
+  Widget _crearCargarArchivo() {
+    return ElevatedButton.icon(
+      label: Text(
+        'Cargar Archivo',
+        style: TextStyle(fontSize: 20),
+      ),
+      icon: Icon(Icons.cloud_upload_outlined),
+      onPressed: uploadFile,
+    );
+  }
+
+  Widget _crearSeleccion() {
+    final dropdownMenuOptions = _items
+        .map((String item) =>
+            //new DropdownMenuItem<String>(value: item, child: new Text(item)))
+            new DropdownMenuItem<String>(value: item, child: new Text(item)))
+        .toList();
+    return Column(
+      //mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(padding: EdgeInsets.only(top: 10.0)),
+        Text(
+          'Seleccione el tipo de archivo:',
+          style: TextStyle(fontSize: 16, color: Colors.black),
+        ),
+        Padding(padding: EdgeInsets.only(top: 10.0)),
+        DecoratedBox(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.green),
+              borderRadius: BorderRadius.circular(10.0)),
+          child: Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
+            child: SizedBox(
+              width: 210.0,
+              child: DropdownButtonFormField<String>(
+                  //hint: Text(animal.tamanio.toString()),
+                  value: _selection,
+                  items: dropdownMenuOptions,
+                  validator: (value) =>
+                      value == null ? 'Selecciona una opción' : null,
+                  onChanged: (s) {
+                    setState(() {
+                      _selection = s;
+                      //animal.tamanio = s!;
+                    });
+                  }),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Widget _crearSeleccion() {
+  //   final dropdownMenuOptions = _items
+  //       .map((String item) =>
+  //           new DropdownMenuItem<String>(value: item, child: new Text(item)))
+  //       .toList();
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         'Seleccione tipo de archivo:',
+  //         style: TextStyle(fontSize: 16, color: Colors.black),
+  //       ),
+  //       SizedBox(
+  //         width: 100.0,
+  //         child: DropdownButtonFormField<String>(
+  //             //hint: Text(animal.tamanio.toString()),
+  //             value: _selection,
+  //             items: dropdownMenuOptions,
+  //             validator: (value) =>
+  //                 value == null ? 'Seleccione una opción' : null,
+  //             onChanged: (s) {
+  //               setState(() {
+  //                 _selection = s;
+  //               });
+  //             }),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  buildChild(String fileName) {
+    if (_selection == 'Subir foto') {
+      return Column(
+        children: [
+          _mostrarFoto(),
+          Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _crearTomarFoto(),
+              Padding(padding: EdgeInsets.only(right: 35.0)),
+              _crearSeleccionarFoto()
+            ],
+          ),
+          Divider(),
+          _crearCargarFoto(),
+          SizedBox(height: 30),
+          task != null ? buildUploadStatus(task!) : Container(),
+          Divider(),
+        ],
+      );
+    } else if (_selection == 'Subir archivo') {
+      return Column(
+        children: [
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Icon(
+              Icons.description_outlined,
+              size: 80,
+            ),
+          ),
+          _crearSelecArchivo(),
+          SizedBox(height: 10),
+          Text(
+            fileName,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 40),
+          _crearCargarArchivo(),
+          SizedBox(height: 15),
+          task1 != null ? buildUploadStatus1(task1!) : Container(),
+        ],
+      );
+    } else if (_selection == 'Subir fotos y archivos') {
+      return Column(children: [
+        _mostrarFoto(),
+        Divider(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _crearTomarFoto(),
+            Padding(padding: EdgeInsets.only(right: 35.0)),
+            _crearSeleccionarFoto()
+          ],
+        ),
+        Divider(),
+        _crearCargarFoto(),
+        SizedBox(height: 30),
+        task != null ? buildUploadStatus(task!) : Container(),
+        Divider(),
+        SizedBox(
+          height: 100,
+          width: 100,
+          child: Icon(
+            Icons.description_outlined,
+            size: 80,
+          ),
+        ),
+        Divider(),
+        _crearSelecArchivo(),
+        SizedBox(height: 10),
+        Text(
+          fileName,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+        SizedBox(height: 40),
+        _crearCargarArchivo(),
+        SizedBox(height: 15),
+        task1 != null ? buildUploadStatus1(task1!) : Container(),
+      ]);
+    } else {
+      return SizedBox();
+    }
   }
 
   Future selectFile() async {
@@ -274,8 +417,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
 
   _procesarImagen(ImageSource origen) async {
     final _picker = ImagePicker();
-    final pickedFile =
-        await _picker.getImage(source: origen, maxHeight: 720, maxWidth: 720);
+    final pickedFile = await _picker.pickImage(
+        source: origen, maxHeight: 720, maxWidth: 720); //getImage
     foto = File(pickedFile!.path);
 
     setState(() {});
@@ -292,8 +435,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 return Colors.green;
               }),
             ),
-            label:
-                Text('Guardar fotos/archivos', style: TextStyle(fontSize: 20)),
+            label: Text('Guardar foto/archivo', style: TextStyle(fontSize: 20)),
             icon: Icon(Icons.save),
             autofocus: true,
             onPressed: () {
