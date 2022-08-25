@@ -123,7 +123,7 @@ class FormulariosProvider {
   }
 
   Future<bool> crearFormRelacionAnim(RelacionAnimalesModel relacionA,
-      var idFormu2, BuildContext context) async {
+      var idFormu2, BuildContext context, AnimalModel animal) async {
     CollectionReference refFormRel = FirebaseFirestore.instance
         .collection('formularios')
         .doc(idFormu2)
@@ -138,7 +138,8 @@ class FormulariosProvider {
           context,
           'La informacion a sido guardada correctamente! Se revisa de 24 a 48 horas, la respuesta a tu solicitud llega a tu mail, por favor revisar también la bandeja de correo no deseado o spam',
           'perfilMascota',
-          idFormu2);
+          idFormu2,
+          animal);
       //Navigator.pushNamed(context, 'home');
       return true;
     } catch (e) {

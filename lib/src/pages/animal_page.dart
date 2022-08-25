@@ -460,8 +460,7 @@ class _AnimalPageState extends State<AnimalPage> {
               borderRadius: BorderRadius.all(Radius.circular(10.0)))),
       onPressed: () {
         if (email != '') {
-          Navigator.pushReplacementNamed(context, 'formularioMain',
-              arguments: animal);
+          Navigator.pushNamed(context, 'formularioMain', arguments: animal);
         } else {
           mostrarAlertaOkCancel(
               context,
@@ -658,8 +657,7 @@ class _AnimalPageState extends State<AnimalPage> {
       child: InkWell(
         onTap: () {
           if (email != '') {
-            Navigator.pushReplacementNamed(context, 'formularioMain',
-                arguments: animal);
+            Navigator.pushNamed(context, 'formularioMain', arguments: animal);
           } else {
             mostrarAlertaOkCancel(
                 context,
@@ -706,8 +704,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               child: Text("Adoptarlo!"),
                               onPressed: () {
                                 if (email != '') {
-                                  Navigator.pushReplacementNamed(
-                                      context, 'formularioMain',
+                                  Navigator.pushNamed(context, 'formularioMain',
                                       arguments: animal);
                                 } else {
                                   mostrarAlertaOkCancel(

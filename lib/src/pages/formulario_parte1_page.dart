@@ -15,7 +15,7 @@ class FormDatPersonalesPage extends StatefulWidget {
 
 class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   bool _guardando = false;
-  bool isDisable = true;
+  bool isDisable = false;
   String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
   DatosPersonalesModel datoPersona = new DatosPersonalesModel();
@@ -138,7 +138,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       _crearTelefonoRef(),
                       Divider(),
                       // _crearBoton(context),
-                      _crearBotonRevisar(context),
+                      //_crearBotonRevisar(context),
 
                       _crearBoton(context),
                       // _crearBoton1(context)

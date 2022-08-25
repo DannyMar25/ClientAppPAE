@@ -67,7 +67,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   bool isChecked9 = false;
 
   //bool _guardando = false;
-  bool isDisable = true;
+  bool isDisable = false;
   var idFormu2;
   var idAnimal;
   String campoVacio = 'Por favor, llena este campo';
@@ -91,10 +91,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     print(idFormu2);
     idAnimal = arg['idAnimal'];
     print(idAnimal);
-    // var formData = ModalRoute.of(context)!.settings.arguments;
-    // if (formData != null) {
-    //   idFormu2 = formData;
-    // }
     return Scaffold(
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
@@ -306,7 +302,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Divider(),
                         _crearFamilia(),
                         Divider(),
-                        _crearBotonRevisar(context),
+                        //_crearBotonRevisar(context),
                         _crearBoton(),
                       ],
                     )),
@@ -1250,10 +1246,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
     animalesProvider.editarEstado(animales, 'Pendiente');
     formulariosProvider.crearFormRelacionAnim(
-      relacionAnim,
-      idFormu2,
-      context,
-    );
+        relacionAnim, idFormu2, context, animales);
     // } else {
     //animalProvider.editarAnimal(animal, foto!);
     //print(idFormu);

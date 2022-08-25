@@ -258,7 +258,7 @@ class _CrearPerfilPdfPageState extends State<CrearPerfilMascotaPdfPage> {
     grid.draw(
         //page: document.pages.add(),
         page: page,
-        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 5, 500, 500));
+        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 5, 500, 600));
 
     final List<int> bytes = document.saveSync();
     //Dispose the document

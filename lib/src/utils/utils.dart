@@ -70,8 +70,8 @@ void mostrarAlertaOk(
       });
 }
 
-void mostrarOkFormulario(
-    BuildContext context, String mensaje, String ruta, String idFormu) {
+void mostrarOkFormulario(BuildContext context, String mensaje, String ruta,
+    String idFormu, AnimalModel animal) {
   showDialog(
       context: context,
       builder: (context) {
@@ -91,8 +91,8 @@ void mostrarOkFormulario(
             TextButton(
                 child: Text('Ok'),
                 //onPressed: () => Navigator.of(context).pop(),
-                onPressed: () =>
-                    Navigator.pushNamed(context, ruta, arguments: idFormu)),
+                onPressed: () => Navigator.pushNamed(context, ruta,
+                    arguments: {'idFormu': idFormu, 'animal': animal})),
           ],
         );
       });

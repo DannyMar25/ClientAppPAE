@@ -32,17 +32,30 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
   @override
   void initState() {
     super.initState();
+    final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    idFormu2 = arg['idFormu'];
+    print(idFormu2);
+    animal = arg['animal'] as AnimalModel;
+    print(animal.id);
+
+    showCitas(idFormu2);
   }
 
   @override
   Widget build(BuildContext context) {
-    var formData = ModalRoute.of(context)!.settings.arguments;
-    if (formData != null) {
-      //   formulario = formData as FormulariosModel;
-      idFormu2 = formData;
-      //   print(formulario.id);
-      print(idFormu2);
-    }
+    // var formData = ModalRoute.of(context)!.settings.arguments;
+    // if (formData != null) {
+    //   //   formulario = formData as FormulariosModel;
+    //   idFormu2 = formData;
+    //   //   print(formulario.id);
+    //   print(idFormu2);
+    // }
+    // final arg = ModalRoute.of(context)!.settings.arguments as Map;
+    // idFormu2 = arg['idFormu'];
+    // print(idFormu2);
+    // animal = arg['animal'] as AnimalModel;
+    // print(animal.id);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
@@ -69,8 +82,8 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _mostrarImagen(),
-
+                              //_mostrarImagen(),
+                              Padding(padding: EdgeInsets.only(top: 110.0)),
                               _verListado(),
                               //Padding(padding: EdgeInsets.only(bottom: 10.0)),
                               _botonGaleria(),
@@ -125,7 +138,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     return Column(
       children: [
         SizedBox(
-          height: 450,
+          height: 400,
           child: ListView.builder(
             itemCount: formularios.length,
             itemBuilder: (context, i) => _crearItem(context, formularios[i]),
@@ -170,7 +183,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                     Text("Fecha de envio de solicitud: "
                         '$fechaIngreso'),
                     Text("Nombre mascota a adoptar:"
-                        '${formulario.animal!.nombre}'),
+                        '${animal.nombre}'),
                     //Divider(color: Colors.purple)
                   ],
                 ),
@@ -185,7 +198,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
               Text(
                 '¡Ver perfil de mascota en PDF!',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -410,7 +423,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     grid.draw(
         //page: document.pages.add(),
         page: page,
-        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 5, 500, 500));
+        bounds: Rect.fromLTWH(0, layoutResult.bounds.bottom + 5, 500, 600));
 
     final List<int> bytes = document.saveSync();
     //Dispose the document

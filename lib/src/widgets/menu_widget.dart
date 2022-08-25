@@ -40,7 +40,7 @@ class _MenuWidgetState extends State<MenuWidget> {
             ),
             title: Text('Inicio'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'intro');
+              Navigator.pushNamed(context, 'intro');
             },
           ),
           ListTile(
@@ -49,7 +49,7 @@ class _MenuWidgetState extends State<MenuWidget> {
               color: Colors.green,
             ),
             title: Text('Galería de mascotas'),
-            onTap: () => Navigator.pushReplacementNamed(context, 'home'),
+            onTap: () => Navigator.pushNamed(context, 'home'),
           ),
           ListTile(
             leading: Icon(
@@ -58,7 +58,7 @@ class _MenuWidgetState extends State<MenuWidget> {
             ),
             title: Text('Agendar cita'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'registroCita');
+              Navigator.pushNamed(context, 'registroCita');
             },
           ),
           email != ''
@@ -83,7 +83,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                   title: Text('Seguimiento'),
                   onTap: () {
                     //Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, 'evidencia');
+                    Navigator.pushNamed(context, 'evidencia');
                   },
                 )
               : SizedBox()

@@ -33,7 +33,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   bool isChecked3 = false;
 
   bool _guardando = false;
-  bool isDisable = true;
+  bool isDisable = false;
   var idFormu1;
   var idAnimal;
   String campoVacio = 'Por favor, llena este campo';
@@ -169,7 +169,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       _crearEdadM(),
                       _crearTamanio(),
                       Divider(),
-                      _crearBotonRevisar(context),
+                      //_crearBotonRevisar(context),
                       _crearBoton(),
                     ],
                   )),
@@ -194,6 +194,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         },
         //initialValue: domicilio.m2.toString(),
         readOnly: false,
+        keyboardType: TextInputType.number,
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
             labelText: 'Especifique metros (m2)',
@@ -340,6 +341,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         },
         //initialValue: domicilio.alturaC.toString(),
         readOnly: false,
+        keyboardType: TextInputType.number,
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
           labelText: 'Altura (m)',

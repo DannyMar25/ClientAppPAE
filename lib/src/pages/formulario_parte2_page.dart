@@ -16,7 +16,7 @@ class FormSituacionFamPage extends StatefulWidget {
 
 class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
   //bool _guardando = false;
-  bool isDisable = true;
+  bool isDisable = false; //true
   FormulariosModel formulario = new FormulariosModel();
   AnimalModel animal = new AnimalModel();
   SitFamiliarModel sitFamilia = new SitFamiliarModel();
@@ -177,7 +177,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                           ],
                         ),
                         Divider(),
-                        _crearBotonRevisar(context),
+                        //_crearBotonRevisar(context),
                         _crearBoton(),
                       ],
                     )),
