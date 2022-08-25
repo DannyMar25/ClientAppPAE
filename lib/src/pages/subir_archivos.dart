@@ -6,6 +6,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/providers/firebase_api.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,10 +20,12 @@ class SubirArchivosPage extends StatefulWidget {
 }
 
 class _SubirArchivosPageState extends State<SubirArchivosPage> {
+  final formKey = GlobalKey<FormState>();
   UploadTask? task;
   UploadTask? task1;
   File? file;
   File? foto;
+  bool isDisable = true;
   FormulariosProvider formulariosProvider = new FormulariosProvider();
   EvidenciasModel evidencia = new EvidenciasModel();
   AnimalModel animal = new AnimalModel();
@@ -70,12 +73,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               children: [
                 _crearSeleccion(),
                 Padding(padding: EdgeInsets.only(bottom: 15.0)),
-                buildChild(fileName),
-                Divider(
-                  color: Colors.transparent,
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0)),
-                _crearBoton(context),
+                buildChild(fileName, context),
+                // Divider(
+                //   color: Colors.transparent,
+                // ),
+                // Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                // _crearBoton(context),
               ],
             ),
           ),
@@ -191,37 +194,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     );
   }
 
-  // Widget _crearSeleccion() {
-  //   final dropdownMenuOptions = _items
-  //       .map((String item) =>
-  //           new DropdownMenuItem<String>(value: item, child: new Text(item)))
-  //       .toList();
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       Text(
-  //         'Seleccione tipo de archivo:',
-  //         style: TextStyle(fontSize: 16, color: Colors.black),
-  //       ),
-  //       SizedBox(
-  //         width: 100.0,
-  //         child: DropdownButtonFormField<String>(
-  //             //hint: Text(animal.tamanio.toString()),
-  //             value: _selection,
-  //             items: dropdownMenuOptions,
-  //             validator: (value) =>
-  //                 value == null ? 'Seleccione una opción' : null,
-  //             onChanged: (s) {
-  //               setState(() {
-  //                 _selection = s;
-  //               });
-  //             }),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  buildChild(String fileName) {
+  buildChild(String fileName, BuildContext context) {
     if (_selection == 'Subir foto') {
       return Column(
         children: [
@@ -239,7 +212,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           _crearCargarFoto(),
           SizedBox(height: 30),
           task != null ? buildUploadStatus(task!) : Container(),
-          Divider(),
+          //Divider(),
+          Divider(
+            color: Colors.transparent,
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 10.0)),
+          _crearBoton(context),
         ],
       );
     } else if (_selection == 'Subir archivo') {
@@ -263,6 +241,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           _crearCargarArchivo(),
           SizedBox(height: 15),
           task1 != null ? buildUploadStatus1(task1!) : Container(),
+          Divider(
+            color: Colors.transparent,
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 10.0)),
+          _crearBoton(context),
         ],
       );
     } else if (_selection == 'Subir fotos y archivos') {
@@ -301,6 +284,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
         _crearCargarArchivo(),
         SizedBox(height: 15),
         task1 != null ? buildUploadStatus1(task1!) : Container(),
+        Divider(
+          color: Colors.transparent,
+        ),
+        Padding(padding: EdgeInsets.only(bottom: 10.0)),
+        _crearBoton(context),
       ]);
     } else {
       return SizedBox();
@@ -432,21 +420,39 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               //padding: new EdgeInsets.only(top: 5),
               backgroundColor: MaterialStateProperty.resolveWith(
                   (Set<MaterialState> states) {
+                // if (isDisable == true) {
+                //   return Colors.grey;
+                // } else {
                 return Colors.green;
+                //}
               }),
             ),
             label: Text('Guardar foto/archivo', style: TextStyle(fontSize: 20)),
             icon: Icon(Icons.save),
             autofocus: true,
             onPressed: () {
-              evidencia.fecha = DateTime.now().toString();
-              evidencia.fotoUrl = fotoUrl;
-              evidencia.archivoUrl = archivoUrl;
-              evidencia.nombreArchivo = nombreArchivo;
+              if (fotoUrl != '' || archivoUrl != '') {
+                isDisable = false;
+                evidencia.fecha = DateTime.now().toString();
+                evidencia.fotoUrl = fotoUrl;
+                evidencia.archivoUrl = archivoUrl;
+                evidencia.nombreArchivo = nombreArchivo;
 
-              formulariosProvider.crearRegistroEvidencias(
-                  evidencia, formularios.id, context);
-              //Navigator.pushReplacementNamed(context, '');
+                formulariosProvider.crearRegistroEvidencias(
+                    evidencia, formularios.id, context);
+                mostrarOkRegistros(
+                    context,
+                    'Evidencia guardada con éxito.',
+                    'Información correcta',
+                    'seguimientoMain',
+                    datosA,
+                    formularios,
+                    animal);
+              } else {
+                isDisable = true;
+                mostrarAlerta(context, 'Debe cargar una foto o un archivo.');
+                return null;
+              }
             }),
       ])
     ]);
@@ -473,12 +479,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               color: Colors.green,
             ),
             title: Text('Seguimiento Principal'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -490,12 +496,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -504,12 +509,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -525,12 +530,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -538,12 +542,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -557,12 +560,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
         ],

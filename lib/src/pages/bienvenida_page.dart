@@ -47,18 +47,6 @@ class BienvenidaPage extends StatelessWidget {
                       value: 2,
                     )
                   ]),
-          // Builder(builder: (BuildContext context) {
-          //   return TextButton(
-          //     style: ButtonStyle(
-          //       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          //     ),
-          //     onPressed: () async {
-          //       userProvider.signOut();
-          //       Navigator.pushNamed(context, 'login');
-          //     },
-          //     child: Text('Sign Out'),
-          //   );
-          // }),
         ],
         //backgroundColor: (prefs.colorSecundario) ? Colors.teal : Colors.blue,
       ),
@@ -114,7 +102,7 @@ class BienvenidaPage extends StatelessWidget {
     }
   }
 
-  _verUsuario() {
+  verUsuario() {
     //FirebaseAuth.instance.currentUser;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     User? user = _auth.currentUser;

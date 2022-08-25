@@ -3,8 +3,6 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
 class VerRegistroVacunasPage extends StatefulWidget {
@@ -82,17 +80,12 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        // title: Text(
-        //   "Registro de vacunas",
-        //   style: TextStyle(
-        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        // ),
         subtitle: Text(
-          'Aqui encontraras una lista de todas las vacunas de tu mascota.',
+          'Aquí encontrarás una lista de todas las vacunas de tu mascota.',
           textAlign: TextAlign.justify,
         ),
       ),
-      elevation: 8,
+      elevation: 5,
       shadowColor: Colors.green,
       margin: EdgeInsets.all(5),
       shape: OutlineInputBorder(
@@ -157,7 +150,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                 columns: [
                   DataColumn(label: Text("Fecha")),
                   DataColumn(label: Text("Peso(Kg)")),
-                  DataColumn(label: Text("Proxima vacuna")),
+                  DataColumn(label: Text("Próxima vacuna")),
                 ],
                 rows: [
                   DataRow(selected: true, cells: [
@@ -233,12 +226,12 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
               color: Colors.green,
             ),
             title: Text('Seguimiento Home'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -250,12 +243,11 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -264,12 +256,12 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -285,12 +277,11 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                 title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -298,12 +289,11 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                 title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -317,12 +307,11 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
         ],

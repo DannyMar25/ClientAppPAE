@@ -92,7 +92,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
         ]));
   }
 
-  Widget _mostrarImagen() {
+  Widget mostrarImagen() {
     return Card(
         color: Colors.lightGreen[200],
         shadowColor: Colors.green,

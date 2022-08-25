@@ -1,4 +1,6 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
+import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:flutter/material.dart';
 
 bool isNumeric(String s) {
@@ -65,6 +67,44 @@ void mostrarAlertaOk(
                 child: Text('Ok'),
                 //onPressed: () => Navigator.of(context).pop(),
                 onPressed: () => Navigator.pushNamed(context, ruta)),
+          ],
+        );
+      });
+}
+
+void mostrarOkRegistros(
+    BuildContext context,
+    String mensaje,
+    String titulo,
+    String ruta,
+    DatosPersonalesModel datosA,
+    FormulariosModel formularios,
+    AnimalModel animal) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 50,
+              ),
+              Text(titulo),
+            ],
+          ),
+          content: Text(mensaje),
+          actions: [
+            TextButton(
+                child: Text('Ok'),
+                onPressed: () => Navigator.pushNamed(context, ruta, arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }))
+            //onPressed: () => Navigator.of(context).pop()),
+            //onPressed: () => Navigator.pushNamed(context, ruta)),
           ],
         );
       });

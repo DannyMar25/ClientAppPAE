@@ -27,7 +27,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   FormulariosModel formularios = new FormulariosModel();
   DatosPersonalesModel datosA = new DatosPersonalesModel();
   RegistroVacunasModel vacunas = new RegistroVacunasModel();
-  String campoVacio = 'Por favor, llena este campo';
+  String campoVacio = 'Campo vacío';
 
   @override
   void initState() {
@@ -164,7 +164,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
         controller: _inputFieldDateController,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Selecciona una fecha';
+            return campoVacio;
           } else {
             return null;
           }
@@ -203,6 +203,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _crearPesoActual() {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           //labelText: 'Peso',
           ),
@@ -215,7 +216,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
         if (isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo números';
+          return 'Vacio';
         }
       },
     );
@@ -226,7 +227,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
         controller: _inputFieldDateController1,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Selecciona una fecha';
+            return campoVacio;
           } else {
             return null;
           }
@@ -341,15 +342,17 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               SnackBar(
                 content: Text('Información ingresada correctamente'),
               );
+
               formulariosProvider.crearRegistroVacuna(
                   vacunas, formularios.id, context);
-
-              Navigator.pushReplacementNamed(context, 'seguimientoMain',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              mostrarOkRegistros(
+                  context,
+                  'Registro de vacuna guardado con éxito.',
+                  'Información Correcta',
+                  'verRegistrosVacunas',
+                  datosA,
+                  formularios,
+                  animal);
             } else {
               mostrarAlerta(
                   context, 'Asegurate de que todos los campos están llenos.');
@@ -377,12 +380,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             // formulariosProvider.crearRegistroVacuna(
             //     vacunas, formularios.id, context);
 
-            Navigator.pushReplacementNamed(context, 'verRegistroVacunas',
-                arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                });
+            Navigator.pushNamed(context, 'verRegistroVacunas', arguments: {
+              'datosper': datosA,
+              'formulario': formularios,
+              'animal': animal
+            });
           }),
     ]);
   }
@@ -408,12 +410,12 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               color: Colors.green,
             ),
             title: Text('Seguimiento Principal'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -425,12 +427,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -439,12 +440,12 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -460,12 +461,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                 title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -473,12 +473,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                 title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -492,12 +491,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
         ],

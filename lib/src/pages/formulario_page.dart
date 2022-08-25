@@ -142,8 +142,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                         style: flatButtonStyle,
                         onPressed: () {
                           //cardB.currentState?.collapse();
-                          Navigator.pushReplacementNamed(
-                              context, 'formularioP1',
+                          Navigator.pushNamed(context, 'formularioP1',
                               arguments: animal);
                         },
                         child: Column(

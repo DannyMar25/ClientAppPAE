@@ -76,17 +76,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        // title: Text(
-        //   "Registro de vacunas",
-        //   style: TextStyle(
-        //       color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        // ),
         subtitle: Text(
-          'Aqui encontraras una lista de todas las desparacitaciones de tu mascota.',
+          'Aquí encontrarás una lista de todas las desparacitaciones de tu mascota.',
           textAlign: TextAlign.justify,
         ),
       ),
-      elevation: 8,
+      elevation: 4,
       shadowColor: Colors.green,
       margin: EdgeInsets.all(5),
       shape: OutlineInputBorder(
@@ -173,7 +168,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 sortAscending: false,
                 columns: [
                   DataColumn(label: Text("Peso(Kg)")),
-                  DataColumn(label: Text("Proxima desparacitacion")),
+                  DataColumn(label: Text("Próxima desparacitación")),
                 ],
                 rows: [
                   DataRow(selected: true, cells: [
@@ -218,12 +213,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               color: Colors.green,
             ),
             title: Text('Seguimiento Home'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -235,12 +230,11 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -249,12 +243,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -263,19 +257,18 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Registro de Desparasitación'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
                 title: Text('Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -283,12 +276,11 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 title: Text('Ver Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -302,12 +294,11 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
         ],

@@ -29,8 +29,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
               color: Colors.blue,
             ),
             title: Text('Seguimiento Home'),
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'seguimientoMain'),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain'),
           ),
           ListTile(
             leading: Icon(
@@ -39,7 +38,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
             ),
             title: Text('Registro Vacunas'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'registroVacunas');
+              Navigator.pushNamed(context, 'registroVacunas');
             },
           ),
           ListTile(
@@ -48,15 +47,14 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
               color: Colors.blue,
             ),
             title: Text('Ver Registro vacunas'),
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'verRegistroVacunas'),
+            onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas'),
           ),
           ListTile(
             leading: Icon(Icons.settings, color: Colors.blue),
             title: Text('Registro Desparasitacion'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'registroDesp');
+              Navigator.pushNamed(context, 'registroDesp');
             },
           ),
           ListTile(
@@ -64,7 +62,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
             title: Text('Ver Registro Desparasitacion'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'verRegistroDesp');
+              Navigator.pushNamed(context, 'verRegistroDesp');
             },
           ),
           ListTile(
@@ -72,7 +70,7 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos');
+              Navigator.pushNamed(context, 'demoArchivos');
             },
           ),
         ],

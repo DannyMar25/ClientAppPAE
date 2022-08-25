@@ -212,8 +212,7 @@ class _IntroPageState extends State<IntroPage> {
                                   style: flatButtonStyle,
                                   onPressed: () {
                                     //cardB.currentState?.collapse();
-                                    Navigator.pushReplacementNamed(
-                                        context, 'home');
+                                    Navigator.pushNamed(context, 'home');
                                   },
                                   child: Column(
                                     children: <Widget>[
@@ -269,8 +268,7 @@ class _IntroPageState extends State<IntroPage> {
                                   style: flatButtonStyle,
                                   onPressed: () {
                                     //cardB.currentState?.collapse();
-                                    Navigator.pushReplacementNamed(
-                                        context, 'busqueda');
+                                    Navigator.pushNamed(context, 'busqueda');
                                   },
                                   child: Column(
                                     children: <Widget>[
@@ -312,8 +310,7 @@ class _IntroPageState extends State<IntroPage> {
                         style: flatButtonStyle,
                         onPressed: () {
                           //cardB.currentState?.collapse();
-                          Navigator.pushReplacementNamed(
-                              context, 'registroCita');
+                          Navigator.pushNamed(context, 'registroCita');
                         },
                         child: Column(
                           children: <Widget>[
@@ -367,7 +364,7 @@ class _IntroPageState extends State<IntroPage> {
                       TextButton(
                         style: flatButtonStyle,
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, 'home');
+                          Navigator.pushNamed(context, 'home');
                         },
                         child: Column(
                           children: <Widget>[
@@ -414,7 +411,7 @@ class _IntroPageState extends State<IntroPage> {
                       TextButton(
                         style: flatButtonStyle,
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, 'evidencia');
+                          Navigator.pushNamed(context, 'evidencia');
                         },
                         child: Column(
                           children: <Widget>[

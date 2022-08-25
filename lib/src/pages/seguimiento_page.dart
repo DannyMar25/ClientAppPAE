@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
-import 'package:cliente_app_v1/src/widgets/background.dart';
-import 'package:cliente_app_v1/src/widgets/menu_widget2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -39,7 +37,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-        backgroundColor: Color.fromARGB(223, 245, 247, 240),
+        //backgroundColor: Color.fromARGB(223, 248, 248, 245),
         appBar: AppBar(
           title: Text('Seguimiento de mascota adoptada'),
           backgroundColor: Colors.green,
@@ -68,12 +66,9 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             Text(
                               'Información de la mascota adoptada',
                               style: TextStyle(
-                                fontSize: 28,
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 3
-                                  ..color = Colors.blueAccent,
-                              ),
+                                  fontSize: 28,
+                                  color: Colors.blueGrey[600],
+                                  fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                             Divider(),
@@ -183,12 +178,9 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             Text(
                               'Información del adoptante',
                               style: TextStyle(
-                                fontSize: 28,
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 3
-                                  ..color = Colors.blueAccent,
-                              ),
+                                  fontSize: 28,
+                                  color: Colors.blueGrey[600],
+                                  fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                             Divider(),
@@ -254,12 +246,9 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             Text(
                               'Ingresa información de tu mascota',
                               style: TextStyle(
-                                fontSize: 28,
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 3
-                                  ..color = Colors.blueAccent,
-                              ),
+                                  fontSize: 28,
+                                  color: Colors.blueGrey[600],
+                                  fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -361,12 +350,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   onPressed: () {
                     // Navigator.pushNamed(context, 'registroVacunas',
                     //     arguments: animal);
-                    Navigator.pushReplacementNamed(context, 'registroVacunas',
-                        arguments: {
-                          'datosper': datosA,
-                          'formulario': formularios,
-                          'animal': animal
-                        });
+                    Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    });
                   }),
             ),
             Padding(
@@ -383,12 +371,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                     icon: Icon(Icons.edit_note),
                     autofocus: true,
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, 'registroDesp',
-                          arguments: {
-                            'datosper': datosA,
-                            'formulario': formularios,
-                            'animal': animal
-                          });
+                      Navigator.pushNamed(context, 'registroDesp', arguments: {
+                        'datosper': datosA,
+                        'formulario': formularios,
+                        'animal': animal
+                      });
                     }),
               ),
             ),
@@ -441,12 +428,12 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               color: Colors.green,
             ),
             title: Text('Ir a Seguimiento Principal'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -458,12 +445,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -472,12 +458,12 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -493,12 +479,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 title: Text('Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -506,12 +491,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 title: Text('Ver Registro Desparasitacion'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -525,12 +509,11 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
           ListTile(
@@ -538,7 +521,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             title: Text('Ir a Pagina Principal'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(
+              Navigator.pushNamed(
                 context,
                 'home',
               );

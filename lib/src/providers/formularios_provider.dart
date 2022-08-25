@@ -227,8 +227,6 @@ class FormulariosProvider {
       await refRegVacRoot
           .doc(vacunaAdd.id)
           .update({"id": vacunaAdd.id, "idCliente": uid});
-      //var idFormu1 = idFormu;
-      //Navigator.pushNamed(context, 'formularioP3', arguments: idFormu1);
 
       return true;
     } catch (e) {

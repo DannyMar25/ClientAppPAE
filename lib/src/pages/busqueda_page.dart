@@ -36,7 +36,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'home');
+            Navigator.pushNamed(context, 'home');
           },
         ),
         backgroundColor: Colors.green,
@@ -363,7 +363,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
       onPressed: () {
         if (formKey.currentState!.validate()) {
           SnackBar(
-            content: Text('Por favor selecciona una opción'),
+            content: Text('Información ingresada correctamente'),
           );
           _submit();
         } else {

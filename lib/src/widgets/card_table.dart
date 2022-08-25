@@ -9,8 +9,7 @@ class CardTable extends StatelessWidget {
       children: [
         TableRow(children: [
           InkWell(
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'formularioP1'),
+            onTap: () => Navigator.pushNamed(context, 'formularioP1'),
             child: _SingleCard(
               color: Colors.blue,
               icon: Icons.person,
@@ -18,8 +17,7 @@ class CardTable extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'formularioP2'),
+            onTap: () => Navigator.pushNamed(context, 'formularioP2'),
             child: _SingleCard(
               color: Colors.pinkAccent,
               icon: Icons.people,
@@ -29,8 +27,7 @@ class CardTable extends StatelessWidget {
         ]),
         TableRow(children: [
           InkWell(
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'formularioP3'),
+            onTap: () => Navigator.pushNamed(context, 'formularioP3'),
             child: _SingleCard(
               color: Colors.purple,
               icon: Icons.home,
@@ -38,8 +35,7 @@ class CardTable extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, 'formularioP4'),
+            onTap: () => Navigator.pushNamed(context, 'formularioP4'),
             child: _SingleCard(
               color: Colors.blue,
               icon: Icons.pets,

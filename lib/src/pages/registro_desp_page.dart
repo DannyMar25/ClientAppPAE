@@ -28,7 +28,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
   DatosPersonalesModel datosA = new DatosPersonalesModel();
   RegistroDesparasitacionModel desparasitacion =
       new RegistroDesparasitacionModel();
-  String campoVacio = 'Por favor, llena este campo';
+  String campoVacio = 'Campo vacío';
 
   @override
   void initState() {
@@ -174,7 +174,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
         controller: _inputFieldDateController,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Seleccione una fecha';
+            return campoVacio;
           } else {
             return null;
           }
@@ -214,6 +214,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     return TextFormField(
       //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           //labelText: 'Peso',
           ),
@@ -226,7 +227,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
         if (isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo números';
+          return 'Vacío';
         }
       },
     );
@@ -237,7 +238,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
         controller: _inputFieldDateController1,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Seleccione una fecha';
+            return campoVacio;
           } else {
             return null;
           }
@@ -281,7 +282,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       decoration: InputDecoration(),
       validator: (value) {
         if (value!.length < 3 && value.length > 0) {
-          return 'Ingrese el nombre del producto';
+          return 'Inválido';
         } else if (value.isEmpty) {
           return campoVacio;
         } else {
@@ -315,14 +316,18 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
               SnackBar(
                 content: Text('Información ingresada correctamente'),
               );
+
               formulariosProvider.crearRegistroDesparasitacion(
                   desparasitacion, formularios.id, context);
-              Navigator.pushReplacementNamed(context, 'seguimientoMain',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+
+              mostrarOkRegistros(
+                  context,
+                  'Registro de desparasitación guardado con éxito.',
+                  'Información Correcta',
+                  'verRegistroDesp',
+                  datosA,
+                  formularios,
+                  animal);
             } else {
               mostrarAlerta(
                   context, 'Asegurate de que todos los campos están llenos.');
@@ -345,12 +350,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                });
+            Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+              'datosper': datosA,
+              'formulario': formularios,
+              'animal': animal
+            });
           }),
     ]);
   }
@@ -376,12 +380,12 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
               color: Colors.green,
             ),
             title: Text('Seguimiento Principal'),
-            onTap: () => Navigator.pushReplacementNamed(
-                context, 'seguimientoMain', arguments: {
-              'datosper': datosA,
-              'formulario': formularios,
-              'animal': animal
-            }),
+            onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
+                arguments: {
+                  'datosper': datosA,
+                  'formulario': formularios,
+                  'animal': animal
+                }),
           ),
           ExpansionTile(
             title: Text('Registro de Vacunas'),
@@ -393,12 +397,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                 ),
                 title: Text('Realizar registro'),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'registroVacunas',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroVacunas', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -407,12 +410,12 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                   color: Colors.green,
                 ),
                 title: Text('Ver registros'),
-                onTap: () => Navigator.pushReplacementNamed(
-                    context, 'verRegistroVacunas', arguments: {
-                  'datosper': datosA,
-                  'formulario': formularios,
-                  'animal': animal
-                }),
+                onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
+                    arguments: {
+                      'datosper': datosA,
+                      'formulario': formularios,
+                      'animal': animal
+                    }),
               ),
             ],
             leading: Icon(
@@ -428,12 +431,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                 title: Text('Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'registroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'registroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
               ListTile(
@@ -441,12 +443,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                 title: Text('Ver Registro Desparasitación'),
                 onTap: () {
                   //Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, 'verRegistroDesp',
-                      arguments: {
-                        'datosper': datosA,
-                        'formulario': formularios,
-                        'animal': animal
-                      });
+                  Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
+                    'datosper': datosA,
+                    'formulario': formularios,
+                    'animal': animal
+                  });
                 },
               ),
             ],
@@ -460,12 +461,11 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
             title: Text('Cargar Evidencia'),
             onTap: () {
               //Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'demoArchivos',
-                  arguments: {
-                    'datosper': datosA,
-                    'formulario': formularios,
-                    'animal': animal
-                  });
+              Navigator.pushNamed(context, 'demoArchivos', arguments: {
+                'datosper': datosA,
+                'formulario': formularios,
+                'animal': animal
+              });
             },
           ),
         ],

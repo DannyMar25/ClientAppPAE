@@ -198,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
       prefs.setEmail(bloc.email);
       prefs.setRol(user['rol']);
       usuarioProvider.saveFcmToken(info['uid'], tokenFcm!);
-      Navigator.pushReplacementNamed(context, 'intro', arguments: animal);
+      Navigator.pushNamed(context, 'intro', arguments: animal);
     } else {
       //mostrarAlerta(context, info['mensaje']);
       mostrarAlerta(context,
@@ -227,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
         prefs.setUid(user.uid);
         prefs.setEmail(user.email!);
         prefs.setRol(user1['rol']);
-        Navigator.pushReplacementNamed(context, 'intro');
+        Navigator.pushNamed(context, 'intro');
       },
       style: OutlinedButton.styleFrom(
         primary: Colors.grey,

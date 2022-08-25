@@ -333,7 +333,7 @@ Si deseas puedes usar nuestros filtros para realizar una busqueda mas personaliz
                 style: flatButtonStyle,
                 onPressed: () {
                   //cardB.currentState?.collapse();
-                  Navigator.pushReplacementNamed(context, 'busqueda');
+                  Navigator.pushNamed(context, 'busqueda');
                 },
                 child: Column(
                   children: <Widget>[
