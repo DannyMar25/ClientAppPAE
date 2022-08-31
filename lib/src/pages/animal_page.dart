@@ -581,7 +581,7 @@ class _AnimalPageState extends State<AnimalPage> {
           Navigator.pushNamed(context, 'registroCita', arguments: animal);
         },
         child: Container(
-          height: 120,
+          height: 140,
           color: Colors.white,
           child: Row(
             children: [
@@ -688,7 +688,7 @@ class _AnimalPageState extends State<AnimalPage> {
                       Expanded(
                           flex: 5,
                           child: ListTile(
-                            title: Text("Deseas adoptar a ${animal.nombre}!"),
+                            title: Text("¿Deseas adoptar a ${animal.nombre}?"),
                             subtitle: Text(
                               "Si deseas adoptarlo debes llenar el formulario de adopción.",
                               textAlign: TextAlign.justify,

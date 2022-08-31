@@ -29,33 +29,20 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
   final formKey = GlobalKey<FormState>();
 
   AnimalModel animal = new AnimalModel();
+  FormulariosModel formulario = new FormulariosModel();
   @override
   void initState() {
     super.initState();
+    //showCitas(idFormu2);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     idFormu2 = arg['idFormu'];
     print(idFormu2);
     animal = arg['animal'] as AnimalModel;
     print(animal.id);
-
-    showCitas(idFormu2);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // var formData = ModalRoute.of(context)!.settings.arguments;
-    // if (formData != null) {
-    //   //   formulario = formData as FormulariosModel;
-    //   idFormu2 = formData;
-    //   //   print(formulario.id);
-    //   print(idFormu2);
-    // }
-    // final arg = ModalRoute.of(context)!.settings.arguments as Map;
-    // idFormu2 = arg['idFormu'];
-    // print(idFormu2);
-    // animal = arg['animal'] as AnimalModel;
-    // print(animal.id);
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
@@ -83,7 +70,9 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               //_mostrarImagen(),
-                              Padding(padding: EdgeInsets.only(top: 110.0)),
+                              Padding(padding: EdgeInsets.only(top: 50.0)),
+                              _botonPerfil(),
+                              Padding(padding: EdgeInsets.only(top: 95.0)),
                               _verListado(),
                               //Padding(padding: EdgeInsets.only(bottom: 10.0)),
                               _botonGaleria(),
@@ -132,6 +121,22 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
         formularios.add(form);
       });
     }
+  }
+
+  Widget _botonPerfil() {
+    return OutlinedButton.icon(
+        onPressed: () {
+          _submit();
+        },
+        icon: Icon(
+          Icons.folder,
+          size: 30,
+          color: Colors.green,
+        ),
+        label: Text(
+          "Ver Perfil",
+          style: TextStyle(color: Colors.green, fontSize: 14),
+        ));
   }
 
   Widget _verListado() {

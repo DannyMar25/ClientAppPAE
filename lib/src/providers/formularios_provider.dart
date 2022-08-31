@@ -417,7 +417,7 @@ class FormulariosProvider {
 
   Future<List<Future<FormulariosModel>>> cargarInfoAnimal(
       String idFormu) async {
-    final List<FormulariosModel> formularios = <FormulariosModel>[];
+    //final List<FormulariosModel> formularios = <FormulariosModel>[];
     var documents = await refForm
         //.where('estado', isEqualTo: 'Aprobado')
         .where('id', isEqualTo: idFormu)
@@ -425,11 +425,11 @@ class FormulariosProvider {
     //citas.addAll
     var s = (documents.docs.map((e) async {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
-      var data = e.data() as Map<String, dynamic>;
+      //var data = e.data() as Map<String, dynamic>;
       //HorariosModel h1 = new HorariosModel();
-      AnimalModel anim = new AnimalModel();
+      //AnimalModel anim = new AnimalModel();
       //h1 = await horariosProvider.cargarHorarioId(e["idHorario"]);
-      anim = await animalesProvider.cargarAnimalId(e["idAnimal"]);
+      //anim = await animalesProvider.cargarAnimalId(e["idAnimal"]);
       var formulario = FormulariosModel.fromJson({
         "id": e.id,
         "idAnimal": e["idAnimal"],
@@ -449,7 +449,7 @@ class FormulariosProvider {
         "idEvidencia": e["idEvidencia"],
       });
       //cita.horario = h1;
-      formulario.animal = anim;
+      //formulario.animal = anim;
       return formulario;
     }));
     return s.toList();
