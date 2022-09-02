@@ -581,7 +581,8 @@ class _AnimalPageState extends State<AnimalPage> {
           Navigator.pushNamed(context, 'registroCita', arguments: animal);
         },
         child: Container(
-          height: 140,
+          height: 130,
+          //width: 380.0,
           color: Colors.white,
           child: Row(
             children: [
@@ -608,7 +609,7 @@ class _AnimalPageState extends State<AnimalPage> {
                               textAlign: TextAlign.justify,
                             ),
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 5.0)),
                       Expanded(
                         flex: 5,
                         child: Row(

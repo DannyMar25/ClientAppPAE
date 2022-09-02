@@ -1,4 +1,4 @@
-import 'package:cliente_app_v1/src/models/usuarios_model.dart';
+//import 'package:cliente_app_v1/src/models/usuarios_model.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -113,12 +113,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         await usuarioProvider.verificar(_email!);
                     if (estadoUsuario.isEmpty) {
                       mostrarAlerta(
-                          context, 'El email ingresado no es correcto.');
+                          context, 'El correo ingresado no es correcto.');
                     } else {
                       try {
                         _auth.sendPasswordResetEmail(email: _email!);
-                        mostrarAlertaOk(context, 'Se envió un correo a $_email',
-                            'login', 'Información correcta');
+                        mostrarAlertaOk(
+                            context,
+                            'Se ha enviado a tu correo: $_email un enlace para restablecer la contraseña.',
+                            'login',
+                            'Información correcta');
                       } on FirebaseAuthException catch (e) {
                         //print(exception.code);
                         print(e.message);

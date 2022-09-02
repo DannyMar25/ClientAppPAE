@@ -55,7 +55,7 @@ class RegistroPage extends StatelessWidget {
               children: [
                 Text(
                   'Crear cuenta',
-                  style: TextStyle(fontSize: 20.0),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 30.0,
@@ -107,7 +107,7 @@ class RegistroPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.green),
               //hintText: 'dany',
-              labelText: 'Nombre de usuario:',
+              labelText: 'Nombre de usuario',
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
@@ -130,7 +130,7 @@ class RegistroPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.green),
               hintText: 'ejemplo@correo.com',
-              labelText: 'Correo electronico',
+              labelText: 'Correo electrónico',
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
