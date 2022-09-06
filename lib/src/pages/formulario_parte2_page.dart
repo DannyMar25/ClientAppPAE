@@ -654,7 +654,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         sitFamilia, idFormu, context, idAnimal);
   }
 
-  Widget _crearBotonRevisar(BuildContext context) {
+  Widget crearBotonRevisar(BuildContext context) {
     return ElevatedButton.icon(
         style: ButtonStyle(
           backgroundColor:

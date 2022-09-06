@@ -573,6 +573,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.tiempoSolaMas,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           labelText: '¿Cuánto tiempo en el día pasará sola la mascota? (Horas)',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
@@ -661,6 +662,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.promedVida,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           //labelText: '¿Cuántos años cree que vive un perro en promedio?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
@@ -1234,27 +1236,15 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   }
 
   void _submit() async {
-    // if (!formKey.currentState!.validate()) return;
-    // formKey.currentState!.save();
-    // setState(() {
-    //   _guardando = true;
-    // });
-//Sentencia If agregada recientemente
-    //if (idFormu != null) {
     print(idFormu2);
     animales = await animalesProvider.cargarAnimalId(idAnimal);
 
     animalesProvider.editarEstado(animales, 'Pendiente');
     formulariosProvider.crearFormRelacionAnim(
         relacionAnim, idFormu2, context, animales);
-    // } else {
-    //animalProvider.editarAnimal(animal, foto!);
-    //print(idFormu);
-    // print("Debe llenar la parte 1 para poder continuar");
-    //}
   }
 
-  Widget _crearBotonRevisar(BuildContext context) {
+  Widget crearBotonRevisar(BuildContext context) {
     return ElevatedButton.icon(
         style: ButtonStyle(
           backgroundColor:
@@ -1305,7 +1295,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe responder algunas preguntas acerca de su relación con los animales...',
+          'En este formulario debe responder algunas preguntas para constatar la tenencia responsable de la mascota adoptada.',
           textAlign: TextAlign.justify,
         ),
       ),

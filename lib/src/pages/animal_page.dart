@@ -702,7 +702,7 @@ class _AnimalPageState extends State<AnimalPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              child: Text("Adoptarlo!"),
+                              child: Text("¡Adoptarlo!"),
                               onPressed: () {
                                 if (email != '') {
                                   Navigator.pushNamed(context, 'formularioMain',

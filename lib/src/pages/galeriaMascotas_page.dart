@@ -31,33 +31,17 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
   Widget build(BuildContext context) {
     //final bloc = Provider.of(context);
     final email = prefs.email;
-
-    return WillPopScope(
-      onWillPop: () async {
-        final shouldPop = await showDialog<bool>(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Do you want to go back?'),
-              actionsAlignment: MainAxisAlignment.spaceBetween,
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: const Text('Yes'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  child: const Text('No'),
-                ),
-              ],
-            );
-          },
-        );
-        return shouldPop!;
+    return RefreshIndicator(
+      displacement: 250,
+      backgroundColor: Colors.yellow,
+      color: Colors.red,
+      strokeWidth: 3,
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      onRefresh: () async {
+        await Future.delayed(Duration(milliseconds: 1500));
+        setState(() {
+          _crearListado();
+        });
       },
       child: Scaffold(
           appBar: AppBar(
@@ -90,46 +74,6 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
                               )
                             : PopupMenuItem(child: Text('')),
                       ]),
-              // Builder(builder: (BuildContext context) {
-              //   return Row(
-              //     children: [
-              //       email == ''
-              //           ? TextButton(
-              //               style: ButtonStyle(
-              //                 foregroundColor: MaterialStateProperty.all<Color>(
-              //                     Colors.white),
-              //               ),
-              //               onPressed: () async {
-              //                 Navigator.pushNamed(context, 'login');
-              //               },
-              //               child: Text('Iniciar sesión'),
-              //             )
-              //           : TextButton(
-              //               style: ButtonStyle(
-              //                 foregroundColor: MaterialStateProperty.all<Color>(
-              //                     Colors.white),
-              //               ),
-              //               onPressed: () async {
-              //                 userProvider.signOut();
-              //                 Navigator.pushNamed(context, 'home');
-              //               },
-              //               child: Text('Cerrar sesión'),
-              //             ),
-              //       email == ''
-              //           ? TextButton(
-              //               style: ButtonStyle(
-              //                 foregroundColor: MaterialStateProperty.all<Color>(
-              //                     Colors.white),
-              //               ),
-              //               onPressed: () async {
-              //                 Navigator.pushNamed(context, 'registro');
-              //               },
-              //               child: Text('Registrarse'),
-              //             )
-              //           : SizedBox(),
-              //     ],
-              //   );
-              // }),
             ],
           ),
           drawer: MenuWidget(),
@@ -144,8 +88,96 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
           )
 
           //floatingActionButton: _crearBoton(context),
+
           ),
     );
+    // return Scaffold(
+    //     appBar: AppBar(
+    //       title: Text('Galería'),
+    //       backgroundColor: Colors.green,
+    //       actions: [
+    //         email != ''
+    //             ? PopupMenuButton<int>(
+    //                 onSelected: (item) => onSelected(context, item),
+    //                 icon: Icon(Icons.notifications),
+    //                 itemBuilder: (context) => [])
+    //             : SizedBox(),
+    //         PopupMenuButton<int>(
+    //             onSelected: (item) => onSelected(context, item),
+    //             icon: Icon(Icons.manage_accounts),
+    //             itemBuilder: (context) => [
+    //                   email == ''
+    //                       ? PopupMenuItem<int>(
+    //                           child: Text("Iniciar sesión"),
+    //                           value: 0,
+    //                         )
+    //                       : PopupMenuItem<int>(
+    //                           child: Text("Cerrar Sesión"),
+    //                           value: 2,
+    //                         ),
+    //                   email == ''
+    //                       ? PopupMenuItem<int>(
+    //                           child: Text("Registrarse"),
+    //                           value: 1,
+    //                         )
+    //                       : PopupMenuItem(child: Text('')),
+    //                 ]),
+    //         // Builder(builder: (BuildContext context) {
+    //         //   return Row(
+    //         //     children: [
+    //         //       email == ''
+    //         //           ? TextButton(
+    //         //               style: ButtonStyle(
+    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
+    //         //                     Colors.white),
+    //         //               ),
+    //         //               onPressed: () async {
+    //         //                 Navigator.pushNamed(context, 'login');
+    //         //               },
+    //         //               child: Text('Iniciar sesión'),
+    //         //             )
+    //         //           : TextButton(
+    //         //               style: ButtonStyle(
+    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
+    //         //                     Colors.white),
+    //         //               ),
+    //         //               onPressed: () async {
+    //         //                 userProvider.signOut();
+    //         //                 Navigator.pushNamed(context, 'home');
+    //         //               },
+    //         //               child: Text('Cerrar sesión'),
+    //         //             ),
+    //         //       email == ''
+    //         //           ? TextButton(
+    //         //               style: ButtonStyle(
+    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
+    //         //                     Colors.white),
+    //         //               ),
+    //         //               onPressed: () async {
+    //         //                 Navigator.pushNamed(context, 'registro');
+    //         //               },
+    //         //               child: Text('Registrarse'),
+    //         //             )
+    //         //           : SizedBox(),
+    //         //     ],
+    //         //   );
+    //         // }),
+    //       ],
+    //     ),
+    //     drawer: MenuWidget(),
+    //     body: Column(
+    //       children: [
+    //         Padding(padding: EdgeInsets.only(bottom: 10.0)),
+    //         expand_card(),
+    //         Padding(padding: EdgeInsets.only(bottom: 10.0)),
+    //         Expanded(child: _crearListado())
+    //         //_crearListado(),
+    //       ],
+    //     )
+
+    //     //floatingActionButton: _crearBoton(context),
+
+    //     );
   }
 
   void onSelected(BuildContext context, int item) {
@@ -218,8 +250,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
                   ListTile(
                     title: Text('${animal.nombre}'),
                     // title: Text('${animal.nombre} - ${animal.edad}'),
-                    subtitle:
-                        Text('Especie: ${animal.especie} - ${animal.sexo}'),
+                    subtitle: Text('${animal.etapaVida} - ${animal.sexo}'),
                     // onTap: () =>
                     //     Navigator.pushNamed(context, 'animal', arguments: animal),
                   ),
@@ -316,7 +347,7 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
               ),
               child: Text(
                 """Hola, a continuación puedes ver nuestra galería de mascotas en adopción. 
-Si deseas puedes usar nuestros filtros para realizar una busqueda mas personalizada dependiendo de tus gustos en mascotas.""",
+Si deseas puedes usar nuestros filtros para realizar una búsqueda más personalizada dependiendo de tus gustos en mascotas.""",
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!

@@ -270,7 +270,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione tipo de inmueble:    ',
+          'Seleccione tipo de inmueble:',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         SizedBox(
@@ -726,7 +726,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     //}
   }
 
-  Widget _crearBotonRevisar(BuildContext context) {
+  Widget crearBotonRevisar(BuildContext context) {
     return ElevatedButton.icon(
         style: ButtonStyle(
           backgroundColor:
@@ -777,7 +777,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe ingresar características de su domicilio, necesarias para...',
+          'En este formulario debe ingresar características de su domicilio, necesarias para verificar el lugar donde vivirá la mascota adoptada.',
           textAlign: TextAlign.justify,
         ),
       ),

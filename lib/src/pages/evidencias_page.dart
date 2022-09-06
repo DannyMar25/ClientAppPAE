@@ -408,7 +408,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                 SizedBox(
                   height: 200.0,
                   child: Image(
-                    image: AssetImage('assets/cat_6.gif'),
+                    image: AssetImage('assets/dog_an10.gif'),
                   ),
                 )
               ],

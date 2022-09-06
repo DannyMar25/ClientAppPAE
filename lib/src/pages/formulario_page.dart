@@ -33,7 +33,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 250, 249),
       appBar: AppBar(
-        title: Text('Formulario de adopción'),
+        title: Text('Formulario'),
         backgroundColor: Colors.green,
         actions: [
           email != ''
