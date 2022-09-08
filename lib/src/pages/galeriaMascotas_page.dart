@@ -33,8 +33,8 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
     final email = prefs.email;
     return RefreshIndicator(
       displacement: 250,
-      backgroundColor: Colors.yellow,
-      color: Colors.red,
+      backgroundColor: Colors.green,
+      color: Colors.white,
       strokeWidth: 3,
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       onRefresh: () async {
@@ -91,93 +91,6 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
 
           ),
     );
-    // return Scaffold(
-    //     appBar: AppBar(
-    //       title: Text('Galería'),
-    //       backgroundColor: Colors.green,
-    //       actions: [
-    //         email != ''
-    //             ? PopupMenuButton<int>(
-    //                 onSelected: (item) => onSelected(context, item),
-    //                 icon: Icon(Icons.notifications),
-    //                 itemBuilder: (context) => [])
-    //             : SizedBox(),
-    //         PopupMenuButton<int>(
-    //             onSelected: (item) => onSelected(context, item),
-    //             icon: Icon(Icons.manage_accounts),
-    //             itemBuilder: (context) => [
-    //                   email == ''
-    //                       ? PopupMenuItem<int>(
-    //                           child: Text("Iniciar sesión"),
-    //                           value: 0,
-    //                         )
-    //                       : PopupMenuItem<int>(
-    //                           child: Text("Cerrar Sesión"),
-    //                           value: 2,
-    //                         ),
-    //                   email == ''
-    //                       ? PopupMenuItem<int>(
-    //                           child: Text("Registrarse"),
-    //                           value: 1,
-    //                         )
-    //                       : PopupMenuItem(child: Text('')),
-    //                 ]),
-    //         // Builder(builder: (BuildContext context) {
-    //         //   return Row(
-    //         //     children: [
-    //         //       email == ''
-    //         //           ? TextButton(
-    //         //               style: ButtonStyle(
-    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
-    //         //                     Colors.white),
-    //         //               ),
-    //         //               onPressed: () async {
-    //         //                 Navigator.pushNamed(context, 'login');
-    //         //               },
-    //         //               child: Text('Iniciar sesión'),
-    //         //             )
-    //         //           : TextButton(
-    //         //               style: ButtonStyle(
-    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
-    //         //                     Colors.white),
-    //         //               ),
-    //         //               onPressed: () async {
-    //         //                 userProvider.signOut();
-    //         //                 Navigator.pushNamed(context, 'home');
-    //         //               },
-    //         //               child: Text('Cerrar sesión'),
-    //         //             ),
-    //         //       email == ''
-    //         //           ? TextButton(
-    //         //               style: ButtonStyle(
-    //         //                 foregroundColor: MaterialStateProperty.all<Color>(
-    //         //                     Colors.white),
-    //         //               ),
-    //         //               onPressed: () async {
-    //         //                 Navigator.pushNamed(context, 'registro');
-    //         //               },
-    //         //               child: Text('Registrarse'),
-    //         //             )
-    //         //           : SizedBox(),
-    //         //     ],
-    //         //   );
-    //         // }),
-    //       ],
-    //     ),
-    //     drawer: MenuWidget(),
-    //     body: Column(
-    //       children: [
-    //         Padding(padding: EdgeInsets.only(bottom: 10.0)),
-    //         expand_card(),
-    //         Padding(padding: EdgeInsets.only(bottom: 10.0)),
-    //         Expanded(child: _crearListado())
-    //         //_crearListado(),
-    //       ],
-    //     )
-
-    //     //floatingActionButton: _crearBoton(context),
-
-    //     );
   }
 
   void onSelected(BuildContext context, int item) {
