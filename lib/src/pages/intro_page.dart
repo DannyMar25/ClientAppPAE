@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
+import 'package:badges/badges.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({Key? key}) : super(key: key);
@@ -68,10 +69,20 @@ class _IntroPageState extends State<IntroPage> {
         backgroundColor: Colors.green,
         actions: [
           email != ''
-              ? PopupMenuButton<int>(
-                  onSelected: (item) => onSelected(context, item),
-                  icon: Icon(Icons.notifications),
-                  itemBuilder: (context) => [])
+              ? Badge(
+                  badgeContent:
+                      Text("40", style: TextStyle(color: Colors.white)),
+                  position: BadgePosition.topEnd(top: 3, end: 0),
+                  child: IconButton(
+                    //onSelected: (item) => onSelected(context, item),
+                    icon: Icon(
+                      Icons.notifications,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'notificaciones');
+                    },
+                  ),
+                )
               : SizedBox(),
           PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
@@ -301,6 +312,8 @@ class _IntroPageState extends State<IntroPage> {
                   leftIcon: const Icon(Icons.fact_check, color: Colors.white),
                   header: Text('Agenda una cita', style: _headerStyle),
                   headerBackgroundColor: Colors.blue,
+                  headerBackgroundColorOpened:
+                      Color.fromARGB(255, 32, 108, 170),
                   content: Column(
                     children: [
                       Text(
