@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cliente_app_v1/src/models/usuario_notificacion_model.dart';
 import 'package:cliente_app_v1/src/models/usuarios_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cliente_app_v1/src/utils/Notificaciones.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
@@ -161,13 +163,6 @@ class UsuarioProvider {
     try {
       // print("este esadkjljdkjadkjskadjlkjsdljasdljasdj");
       final user = await refUser.doc(uid).get();
-      // print(user.data());
-      //print(user.id);
-      // if (user.data() == null) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
       return user.data() as dynamic;
     } catch (e) {
       return false;
@@ -197,5 +192,31 @@ class UsuarioProvider {
       return user;
     }));
     return s.toList();
+  }
+
+  Future<List<NotificationsModel>> mostrarNotificaciones(String id) async {
+    final List<NotificationsModel> datos = <NotificationsModel>[];
+    //anadir where para filtrar solo las no vistas
+    var documents = await refUser.doc(id).collection('notifications').get();
+    datos.addAll(documents.docs.map((e) {
+      var data = e.data();
+      print(data);
+      print(data["notification"]);
+      var notificaciones = NotificationsModel.fromJson({
+        "notification": data["notification"],
+        "viewed": data["viewed"],
+      });
+      return notificaciones;
+    }).toList());
+    print("data de la consulta: ${datos.length}");
+    return datos;
+  }
+
+  Future<int> mostrarTotalNotificacion(String id) async {
+    //final List<NotificationsModel> datos = <NotificationsModel>[];
+    //anadir where para filtrar solo las no vistas
+    var documents = await refUser.doc(id).collection('notifications').get();
+    print(documents.docs.length);
+    return documents.docs.length;
   }
 }

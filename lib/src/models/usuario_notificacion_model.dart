@@ -1,42 +1,34 @@
+// To parse this JSON data, do
+//
+//     final notificationsModel = notificationsModelFromJson(jsonString);
+
 import 'dart:convert';
 
-UsuariosNotificacionesModel soportesModelFromJson(String str) =>
-    UsuariosNotificacionesModel.fromJson(json.decode(str));
+import 'package:cliente_app_v1/src/utils/Notificaciones.dart';
 
-String soportesModelToJson(UsuariosNotificacionesModel data) =>
+NotificationsModel notificationsModelFromJson(String str) =>
+    NotificationsModel.fromJson(json.decode(str));
+
+String notificationsModelToJson(NotificationsModel data) =>
     json.encode(data.toJson());
 
-class UsuariosNotificacionesModel {
-  UsuariosNotificacionesModel({
-    this.id = '',
-    this.email = '',
-    this.nombre = '',
-    this.rol = '',
-
-    //Esto puso yeye
+class NotificationsModel {
+  NotificationsModel({
+    required this.notification,
+    required this.viewed,
   });
 
-  String id;
-  //String idUs;
-  String email;
-  String nombre;
-  String rol;
-  //String body;
-  //String title;
+  Notification notification;
+  bool viewed;
 
-  factory UsuariosNotificacionesModel.fromJson(Map<String, dynamic> json) =>
-      UsuariosNotificacionesModel(
-        id: json["id"],
-        //idUs: json["idUs"],
-        email: json["email"],
-        nombre: json["nombre"],
-        rol: json["rol"],
+  factory NotificationsModel.fromJson(Map<String, dynamic> json) =>
+      NotificationsModel(
+        notification: Notification.fromJson(json["notification"]),
+        viewed: json["viewed"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "email": email,
-        "nombre": nombre,
-        "rol": rol,
+        "notification": notification.toJson(),
+        "viewed": viewed,
       };
 }

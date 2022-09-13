@@ -16,6 +16,7 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   late FirebaseMessaging messaging;
+  late int total = 0;
   final userProvider = new UsuarioProvider();
   final prefs = new PreferenciasUsuario();
   final _headerStyle = const TextStyle(
@@ -52,6 +53,13 @@ class _IntroPageState extends State<IntroPage> {
         print(err);
       });
     }
+    userProvider.mostrarTotalNotificacion(prefs.uid).then((value) => {
+          setState(() {
+            print(total);
+            total = value;
+            print(total);
+          })
+        });
     super.initState();
   }
 
@@ -70,8 +78,8 @@ class _IntroPageState extends State<IntroPage> {
         actions: [
           email != ''
               ? Badge(
-                  badgeContent:
-                      Text("40", style: TextStyle(color: Colors.white)),
+                  badgeContent: Text(total.toString(),
+                      style: TextStyle(color: Colors.white)),
                   position: BadgePosition.topEnd(top: 3, end: 0),
                   child: IconButton(
                     //onSelected: (item) => onSelected(context, item),
