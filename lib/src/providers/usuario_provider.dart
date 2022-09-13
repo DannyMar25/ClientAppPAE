@@ -197,7 +197,11 @@ class UsuarioProvider {
   Future<List<NotificationsModel>> mostrarNotificaciones(String id) async {
     final List<NotificationsModel> datos = <NotificationsModel>[];
     //anadir where para filtrar solo las no vistas
-    var documents = await refUser.doc(id).collection('notifications').get();
+    var documents = await refUser
+        .doc(id)
+        .collection('notifications')
+        .where('viewed', isEqualTo: false)
+        .get();
     datos.addAll(documents.docs.map((e) {
       var data = e.data();
       print(data);
@@ -215,8 +219,40 @@ class UsuarioProvider {
   Future<int> mostrarTotalNotificacion(String id) async {
     //final List<NotificationsModel> datos = <NotificationsModel>[];
     //anadir where para filtrar solo las no vistas
-    var documents = await refUser.doc(id).collection('notifications').get();
+    var documents = await refUser
+        .doc(id)
+        .collection('notifications')
+        .where('viewed', isEqualTo: false)
+        .get();
     print(documents.docs.length);
     return documents.docs.length;
+  }
+
+  Future<bool> editarView(String id, String idNot) async {
+    try {
+      await refUser
+          .doc(id)
+          .collection('notifications')
+          .doc(idNot)
+          .update({"viewed": true});
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  updateView(NotificationsModel notificacion, String id) async {
+    await refUser
+        .doc(id)
+        .collection('notifications')
+        .get()
+        .then((QuerySnapshot querySnapshot) async {
+      final docId = querySnapshot.docs.first.id;
+
+      await refUser.doc(id).collection('notifications').doc(docId).update({
+        // Add data here
+        "viewed": true,
+      });
+    });
   }
 }

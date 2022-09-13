@@ -80,59 +80,67 @@ class _NotificacionesScreenState extends State<NotificacionesScreen> {
       title: Column(
         children: [
           //Divider(color: Colors.purple),
-          Card(
-            child: Container(
-              height: 100,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Expanded(
-                        child: Image.asset("assets/pet.jpg"),
-                        flex: 2,
+          InkWell(
+            onTap: () {
+              usuarioProvider.updateView(notificacion, prefs.uid);
+            },
+            child: Card(
+              child: Container(
+                height: 100,
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Expanded(
+                          child: Image.asset("assets/pet.jpg"),
+                          flex: 2,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: ListTile(
-                              title: Text('${notificacion.notification.title}'),
-                              subtitle:
-                                  Text('${notificacion.notification.body}'),
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: ListTile(
+                                title:
+                                    Text('${notificacion.notification.title}'),
+                                subtitle:
+                                    Text('${notificacion.notification.body}'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                // TextButton(
-                                //   child: Text("VER INFO"),
-                                //   onPressed: () async {},
-                                // ),
-                                SizedBox(
-                                  width: 8,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                            Expanded(
+                              flex: 5,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  // TextButton(
+                                  //   child: Text("VER INFO"),
+                                  //   onPressed: () async {
+
+                                  //   },
+                                  // ),
+                                  SizedBox(
+                                    width: 8,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+                      flex: 8,
                     ),
-                    flex: 8,
-                  ),
-                ],
+                  ],
+                ),
               ),
+              elevation: 8,
+              margin: EdgeInsets.all(10),
             ),
-            elevation: 8,
-            margin: EdgeInsets.all(10),
           ),
           // Divider(color: Colors.purple)
         ],
