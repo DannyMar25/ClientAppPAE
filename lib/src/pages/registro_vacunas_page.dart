@@ -81,71 +81,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                         Divider(
                           color: Colors.transparent,
                         ),
-                        DataTable(
-                          columnSpacing: 32,
-                          headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 120, 110, 148),
-                          ),
-                          dataRowColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 146, 155, 185)),
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            border: Border.all(width: 1, color: Colors.white),
-                          ),
-                          sortColumnIndex: 2,
-                          sortAscending: false,
-                          columns: [
-                            DataColumn(label: Text("Fecha")),
-                            DataColumn(label: Text("Peso(Kg)"), numeric: true),
-                            DataColumn(label: Text("Próxima vacuna")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(Container(
-                                child: _crearFechaConsulta(context),
-                                width: 80,
-                              )),
-                              DataCell(Container(
-                                child: _crearPesoActual(),
-                                width: 60,
-                              )),
-                              DataCell(Container(
-                                child: _crearFechaProxima(context),
-                                width: 83,
-                              )),
-                            ]),
-                          ],
-                        ),
-                        DataTable(
-                          columnSpacing: 25,
-                          headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 120, 110, 148),
-                          ),
-                          dataRowColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 146, 155, 185)),
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            border: Border.all(width: 1, color: Colors.white),
-                          ),
-                          sortColumnIndex: 1,
-                          sortAscending: false,
-                          columns: [
-                            DataColumn(label: Text("Vacuna Laboratorio ")),
-                            DataColumn(label: Text("Veterinario responsable")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(Container(
-                                child: _crearVacuna(),
-                                width: 100,
-                              )),
-                              DataCell(Container(
-                                child: _crearVeterinario(),
-                                width: 100,
-                              )),
-                            ]),
-                          ],
-                        ),
+                        cardTable(),
                         Divider(),
                         _crearBoton(context),
                         _crearBoton1(context)
@@ -161,6 +97,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearFechaConsulta(BuildContext context) {
     return TextFormField(
+        textAlign: TextAlign.center,
         controller: _inputFieldDateController,
         validator: (value) {
           if (value!.isEmpty) {
@@ -182,6 +119,23 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
       firstDate: new DateTime.now(),
       lastDate: new DateTime(2025),
       locale: Locale('es'),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.green, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.green, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.green, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -202,6 +156,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearPesoActual() {
     return TextFormField(
+      textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
@@ -224,6 +179,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearFechaProxima(BuildContext context) {
     return TextFormField(
+        textAlign: TextAlign.center,
         controller: _inputFieldDateController1,
         validator: (value) {
           if (value!.isEmpty) {
@@ -245,13 +201,32 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
       firstDate: new DateTime.now(),
       lastDate: new DateTime(2025),
       locale: Locale('es', 'ES'),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.green, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.green, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.green, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
       setState(() {
         _fecha1 = picked.year.toString() +
             '-' +
-            picked.month.toString() +
+            (picked.month < 10
+                ? '0' + picked.month.toString()
+                : picked.month.toString()) +
             '-' +
             picked.day.toString();
 
@@ -266,6 +241,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _crearVacuna() {
     return TextFormField(
       //nitialValue: animal.peso.toString(),
+      textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(),
       validator: (value) {
@@ -287,6 +263,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
 
   Widget _crearVeterinario() {
     return TextFormField(
+      textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(),
       validator: (value) {
@@ -349,7 +326,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                   context,
                   'Registro de vacuna guardado con éxito.',
                   'Información Correcta',
-                  'verRegistrosVacunas',
+                  'verRegistroVacunas',
                   datosA,
                   formularios,
                   animal);
@@ -387,6 +364,113 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             });
           }),
     ]);
+  }
+
+  Widget cardTable() {
+    return SizedBox(
+      height: 245.0,
+      width: 650.0,
+      child: Card(
+        color: Color.fromARGB(255, 143, 233, 148),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(1.0)),
+            ColoredBox(
+              color: Color.fromARGB(255, 33, 168, 39),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                  SizedBox(
+                      height: 50.0,
+                      width: 125.0,
+                      child: Center(
+                        child: Text(
+                          'Fecha consulta',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  SizedBox(
+                      height: 50.0,
+                      width: 70.0,
+                      child: Center(
+                        child: Text(
+                          'Peso (Kg.)',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  SizedBox(
+                      height: 50.0,
+                      width: 125.0,
+                      child: Center(
+                        child: Text(
+                          'Próxima vacuna',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                    height: 50.0,
+                    width: 125.0,
+                    child: _crearFechaConsulta(context)),
+                SizedBox(height: 50.0, width: 70.0, child: _crearPesoActual()),
+                SizedBox(
+                    height: 50.0,
+                    width: 125.0,
+                    child: _crearFechaProxima(context))
+              ],
+            ),
+            ColoredBox(
+              color: Color.fromARGB(255, 33, 168, 39),
+              child: Row(
+                children: [
+                  SizedBox(
+                      height: 50.0,
+                      width: 160.0,
+                      child: Center(
+                        child: Text(
+                          'Vacuna laboratorio',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  SizedBox(
+                      height: 50.0,
+                      width: 160.0,
+                      child: Center(
+                        child: Text(
+                          'Veterinario responsable',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                SizedBox(height: 50.0, width: 160.0, child: _crearVacuna()),
+                SizedBox(height: 50.0, width: 160.0, child: _crearVeterinario())
+              ],
+            )
+          ],
+        ),
+        elevation: 8,
+        shadowColor: Colors.green,
+        margin: EdgeInsets.all(20),
+      ),
+    );
   }
 
   Widget _menuWidget() {

@@ -207,6 +207,7 @@ class UsuarioProvider {
       print(data);
       print(data["notification"]);
       var notificaciones = NotificationsModel.fromJson({
+        "id": e.id,
         "notification": data["notification"],
         "viewed": data["viewed"],
       });
@@ -241,18 +242,33 @@ class UsuarioProvider {
     }
   }
 
-  updateView(NotificationsModel notificacion, String id) async {
-    await refUser
-        .doc(id)
-        .collection('notifications')
-        .get()
-        .then((QuerySnapshot querySnapshot) async {
-      final docId = querySnapshot.docs.first.id;
+  Future<bool> editarView1(String id, String idNot) async {
+    try {
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
-      await refUser.doc(id).collection('notifications').doc(docId).update({
-        // Add data here
-        "viewed": true,
+  Future<bool> updateView(NotificationsModel notificacion, String id) async {
+    try {
+      await refUser
+          .doc(id)
+          .collection('notifications')
+          .get()
+          .then((QuerySnapshot querySnapshot) async {
+        final docId = querySnapshot.docs.first.id;
+        print(docId);
+
+        await refUser.doc(id).collection('notifications').doc(docId).update({
+          // Add data here
+          'viewed': true,
+        });
       });
-    });
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

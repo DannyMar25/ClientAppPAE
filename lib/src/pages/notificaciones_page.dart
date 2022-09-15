@@ -58,12 +58,37 @@ class _NotificacionesScreenState extends State<NotificacionesScreen> {
             AsyncSnapshot<List<NotificationsModel>> snapshot) {
           if (snapshot.hasData) {
             final not = snapshot.data;
+            if (not!.length == 0) {
+              return Column(children: [
+                AlertDialog(
+                  title: Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 45,
+                      ),
+                      Text('Aviso!'),
+                    ],
+                  ),
+                  content: Text('No se ha encotrado ninguna notificación.'),
+                  actions: [
+                    TextButton(
+                        child: Text('Ok'),
+                        //onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'home');
+                        })
+                  ],
+                )
+              ]);
+            }
             return Column(
               children: [
                 SizedBox(
                   height: 650,
                   child: ListView.builder(
-                    itemCount: not!.length,
+                    itemCount: not.length,
                     itemBuilder: (context, i) => _crearItem(context, not[i]),
                   ),
                 )
@@ -82,7 +107,9 @@ class _NotificacionesScreenState extends State<NotificacionesScreen> {
           //Divider(color: Colors.purple),
           InkWell(
             onTap: () {
-              usuarioProvider.updateView(notificacion, prefs.uid);
+              // usuarioProvider.updateView(notificacion, prefs.uid);
+              usuarioProvider.editarView(prefs.uid, notificacion.id);
+              Navigator.pushNamed(context, 'evidencia');
             },
             child: Card(
               child: Container(
@@ -94,7 +121,7 @@ class _NotificacionesScreenState extends State<NotificacionesScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Expanded(
-                          child: Image.asset("assets/pet.jpg"),
+                          child: Image.asset("assets/pet_7.png"),
                           flex: 2,
                         ),
                       ),
@@ -107,8 +134,10 @@ class _NotificacionesScreenState extends State<NotificacionesScreen> {
                             Expanded(
                               flex: 5,
                               child: ListTile(
-                                title:
-                                    Text('${notificacion.notification.title}'),
+                                title: Text(
+                                  '${notificacion.notification.title}',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                                 subtitle:
                                     Text('${notificacion.notification.body}'),
                               ),

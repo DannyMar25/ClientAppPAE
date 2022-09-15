@@ -2,7 +2,7 @@
     package="com.example.cliente_app_v1">
 
    <application
-        android:label="cliente_app_v1"
+        android:label="Polipet"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
               android:value="AIzaSyBjTRKBWPKJlewxqvZs7zgPYOGQVJngGfU"/>
@@ -31,6 +31,9 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+              <meta-data
+          android:name="com.google.firebase.messaging.default_notification_icon"
+          android:resource="@drawable/ic_stat_pets"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

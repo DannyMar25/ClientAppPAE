@@ -135,69 +135,159 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
           fit: FlexFit.loose,
           child: Column(
             children: [
-              Divider(color: Colors.transparent),
-              DataTable(
-                columnSpacing: 25,
-                headingRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 120, 110, 148),
+              //Divider(color: Colors.transparent),
+              SizedBox(
+                height: 245.0,
+                width: 750.0,
+                child: Card(
+                  color: Color.fromARGB(255, 143, 233, 148),
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(1.0)),
+                        Expanded(
+                          child: ColoredBox(
+                            color: Color.fromARGB(255, 33, 168, 39),
+                            child: Row(
+                              children: [
+                                Padding(padding: EdgeInsets.only(top: 15)),
+                                SizedBox(
+                                    height: 50.0,
+                                    width: 125.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Fecha consulta',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                                SizedBox(
+                                    height: 50.0,
+                                    width: 70.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Peso (Kg.)',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                                SizedBox(
+                                    height: 50.0,
+                                    width: 125.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Próxima vacuna',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                  height: 50.0,
+                                  width: 125.0,
+                                  child: Center(
+                                      child: Center(
+                                          child: Text(
+                                    vacuna.fechaConsulta,
+                                    textAlign: TextAlign.center,
+                                  )))),
+                              SizedBox(
+                                  height: 50.0,
+                                  width: 70.0,
+                                  child: Center(
+                                    child: Text(
+                                      vacuna.pesoActual.toString(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                              SizedBox(
+                                  height: 50.0,
+                                  width: 125.0,
+                                  child: Center(
+                                      child: Text(
+                                    vacuna.fechaProximaVacuna,
+                                    textAlign: TextAlign.center,
+                                  )))
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: ColoredBox(
+                            color: Color.fromARGB(255, 33, 168, 39),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                    height: 50.0,
+                                    width: 160.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Vacuna laboratorio',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    )),
+                                SizedBox(
+                                    height: 50.0,
+                                    width: 160.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Veterinario responsable',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ))
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                  height: 50.0,
+                                  width: 160.0,
+                                  child: Center(
+                                      child: Text(
+                                    vacuna.tipoVacuna,
+                                    textAlign: TextAlign.center,
+                                  ))),
+                              SizedBox(
+                                  height: 50.0,
+                                  width: 160.0,
+                                  child: Center(
+                                    child: Text(
+                                      vacuna.veterinarioResp,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  elevation: 8,
+                  shadowColor: Colors.green,
+                  margin: EdgeInsets.all(20),
                 ),
-                dataRowColor: MaterialStateColor.resolveWith(
-                    (states) => Color.fromARGB(255, 146, 155, 185)),
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  border: Border.all(width: 1, color: Colors.white),
-                ),
-                columns: [
-                  DataColumn(label: Text("Fecha")),
-                  DataColumn(label: Text("Peso(Kg)")),
-                  DataColumn(label: Text("Próxima vacuna")),
-                ],
-                rows: [
-                  DataRow(selected: true, cells: [
-                    DataCell(Container(
-                      child: Text('${vacuna.fechaConsulta}'),
-                      width: 85,
-                    )),
-                    DataCell(Container(
-                      child: Text('${vacuna.pesoActual}'),
-                      width: 70,
-                    )),
-                    DataCell(Container(
-                      child: Text('${vacuna.fechaProximaVacuna}'),
-                      width: 85,
-                    )),
-                  ]),
-                ],
               ),
-              DataTable(
-                columnSpacing: 20,
-                headingRowColor: MaterialStateColor.resolveWith(
-                  (states) => Color.fromARGB(255, 120, 110, 148),
-                ),
-                dataRowColor: MaterialStateColor.resolveWith(
-                    (states) => Color.fromARGB(255, 146, 155, 185)),
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  border: Border.all(width: 1, color: Colors.white),
-                ),
-                columns: [
-                  DataColumn(label: Text("Vacuna Laboratorio")),
-                  DataColumn(label: Text("Veterinario ")),
-                ],
-                rows: [
-                  DataRow(selected: true, cells: [
-                    DataCell(Container(
-                      child: Text('${vacuna.tipoVacuna}'),
-                      width: 120,
-                    )),
-                    DataCell(Container(
-                      child: Text('${vacuna.veterinarioResp}'),
-                      width: 165,
-                    )),
-                  ]),
-                ],
-              ),
-              Divider(color: Colors.transparent)
+              //Divider(color: Colors.transparent)
             ],
           ),
         ),

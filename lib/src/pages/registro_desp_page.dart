@@ -81,64 +81,8 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                         Divider(
                           color: Colors.transparent,
                         ),
-                        DataTable(
-                          columnSpacing: 15,
-                          headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 120, 110, 148),
-                          ),
-                          dataRowColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 146, 155, 185)),
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            border: Border.all(width: 1, color: Colors.white),
-                          ),
-                          sortColumnIndex: 1,
-                          sortAscending: false,
-                          columns: [
-                            DataColumn(
-                                label: Text("Fecha consulta             ")),
-                            DataColumn(
-                                label:
-                                    Text("            Producto              ")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(_crearFechaConsulta(context)),
-                              //DataCell(_crearPesoActual()),
-                              DataCell(_crearProducto()),
-                            ]),
-                          ],
-                        ),
-                        DataTable(
-                          columnSpacing: 20,
-                          headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color.fromARGB(255, 120, 110, 148),
-                          ),
-                          dataRowColor: MaterialStateColor.resolveWith(
-                              (states) => Color.fromARGB(255, 146, 155, 185)),
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            border: Border.all(width: 1, color: Colors.white),
-                          ),
-                          sortColumnIndex: 1,
-                          sortAscending: false,
-                          //dataRowHeight: 25,
-                          columns: [
-                            DataColumn(
-                                label: Text("Peso(Kg)                "),
-                                numeric: true),
-                            DataColumn(label: Text("Próxima desparacitación")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(_crearPesoActual()),
-                              DataCell(Container(
-                                width: 110,
-                                child: _crearFechaProxima(context),
-                              )),
-                            ]),
-                          ],
-                        ),
+
+                        cardTable(),
                         Divider(),
                         _crearBoton(context),
                         _crearBoton1(context)
@@ -171,6 +115,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
 
   Widget _crearFechaConsulta(BuildContext context) {
     return TextFormField(
+        textAlign: TextAlign.center,
         controller: _inputFieldDateController,
         validator: (value) {
           if (value!.isEmpty) {
@@ -192,6 +137,23 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       firstDate: new DateTime.now(),
       lastDate: new DateTime(2025),
       locale: Locale('es'),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.green, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.green, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.green, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -212,6 +174,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
 
   Widget _crearPesoActual() {
     return TextFormField(
+      textAlign: TextAlign.center,
       //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.number,
@@ -235,6 +198,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
 
   Widget _crearFechaProxima(BuildContext context) {
     return TextFormField(
+        textAlign: TextAlign.center,
         controller: _inputFieldDateController1,
         validator: (value) {
           if (value!.isEmpty) {
@@ -256,6 +220,23 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       firstDate: new DateTime.now(),
       lastDate: new DateTime(2025),
       locale: Locale('es', 'ES'),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.green, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.green, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.green, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -278,6 +259,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
 
   Widget _crearProducto() {
     return TextFormField(
+      textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(),
       validator: (value) {
@@ -357,6 +339,101 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
             });
           }),
     ]);
+  }
+
+  Widget cardTable() {
+    return SizedBox(
+      height: 245.0,
+      width: 620.0,
+      child: Card(
+        color: Color.fromARGB(255, 143, 233, 148),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(1.0)),
+            ColoredBox(
+              color: Color.fromARGB(255, 33, 168, 39),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(top: 15)),
+                  SizedBox(
+                      height: 50.0,
+                      width: 140.0,
+                      child: Center(
+                        child: Text(
+                          'Fecha consulta',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  SizedBox(
+                      height: 50.0,
+                      width: 180.0,
+                      child: Center(
+                        child: Text(
+                          'Producto',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                    height: 50.0,
+                    width: 140.0,
+                    child: _crearFechaConsulta(context)),
+                SizedBox(height: 50.0, width: 180.0, child: _crearProducto())
+              ],
+            ),
+            ColoredBox(
+              color: Color.fromARGB(255, 33, 168, 39),
+              child: Row(
+                children: [
+                  SizedBox(
+                      height: 50.0,
+                      width: 130.0,
+                      child: Center(
+                        child: Text(
+                          'Peso (Kg.)',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                  SizedBox(
+                      height: 50.0,
+                      width: 190.0,
+                      child: Center(
+                        child: Text(
+                          'Próxima desparacitación',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                      ))
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                SizedBox(height: 50.0, width: 130.0, child: _crearPesoActual()),
+                SizedBox(
+                    height: 50.0,
+                    width: 190.0,
+                    child: _crearFechaProxima(context))
+              ],
+            )
+          ],
+        ),
+        elevation: 8,
+        shadowColor: Colors.green,
+        margin: EdgeInsets.all(20),
+      ),
+    );
   }
 
   Widget _menuWidget() {

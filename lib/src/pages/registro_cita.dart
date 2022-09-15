@@ -45,6 +45,8 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       FirebaseFirestore.instance.collection('horarios');
 
   AnimalModel animal = new AnimalModel();
+
+  bool seleccionado = false;
   @override
   Widget build(BuildContext context) {
     final email = prefs.email;
@@ -199,10 +201,27 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: new DateTime.now(),
-      firstDate: new DateTime.now(),
-      lastDate: new DateTime.now().add(Duration(days: 7)),
+      initialDate: new DateTime.now().add(Duration(days: 1)),
+      firstDate: new DateTime.now().add(Duration(days: 1)),
+      lastDate: new DateTime.now().add(Duration(days: 8)),
       locale: Locale('es', 'ES'),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Colors.green, // <-- SEE HERE
+              onPrimary: Colors.white, // <-- SEE HERE
+              onSurface: Colors.green, // <-- SEE HERE
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Colors.green, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -268,6 +287,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         TextFormField(
           readOnly: true,
           onTap: () {
+            seleccionado = true;
             citas.idHorario = horario.id;
             horariosProvider.editarDisponible(horario);
           },
@@ -363,11 +383,16 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         autofocus: true,
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            // Si el formulario es válido, queremos mostrar un Snackbar
-            SnackBar(
-              content: Text('Información ingresada correctamente'),
-            );
-            _submit();
+            if (seleccionado == true) {
+              SnackBar(
+                content: Text('Información ingresada correctamente'),
+              );
+              seleccionado = false;
+              _submit();
+            } else {
+              mostrarAlerta(context,
+                  'Debes seleccionar un horario disponible para tu cita.');
+            }
           } else {
             mostrarAlerta(
                 context, 'Asegurate de que todos los campos estén llenos.');

@@ -66,6 +66,8 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     final email = prefs.email;
+    String nombre = prefs.nombre.toString();
+    String nombreS = nombre.split(' ')[0];
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
@@ -112,46 +114,6 @@ class _IntroPageState extends State<IntroPage> {
                           )
                         : PopupMenuItem(child: Text('')),
                   ]),
-          // Builder(builder: (BuildContext context) {
-          //   return Row(
-          //     children: [
-          //       email == ''
-          //           ? TextButton(
-          //               style: ButtonStyle(
-          //                 foregroundColor:
-          //                     MaterialStateProperty.all<Color>(Colors.white),
-          //               ),
-          //               onPressed: () async {
-          //                 Navigator.pushNamed(context, 'login');
-          //               },
-          //               child: Text('Iniciar sesión'),
-          //             )
-          //           : TextButton(
-          //               style: ButtonStyle(
-          //                 foregroundColor:
-          //                     MaterialStateProperty.all<Color>(Colors.white),
-          //               ),
-          //               onPressed: () async {
-          //                 userProvider.signOut();
-          //                 Navigator.pushNamed(context, 'home');
-          //               },
-          //               child: Text('Cerrar sesión'),
-          //             ),
-          //       email == ''
-          //           ? TextButton(
-          //               style: ButtonStyle(
-          //                 foregroundColor:
-          //                     MaterialStateProperty.all<Color>(Colors.white),
-          //               ),
-          //               onPressed: () async {
-          //                 Navigator.pushNamed(context, 'registro');
-          //               },
-          //               child: Text('Registrarse'),
-          //             )
-          //           : SizedBox(),
-          //     ],
-          //   );
-          // }),
         ],
       ),
       drawer: MenuWidget(),
@@ -163,6 +125,13 @@ class _IntroPageState extends State<IntroPage> {
             child: Image(image: AssetImage('assets/dog_an5.gif')),
             height: 160,
           ),
+          email != ''
+              ? Text(
+                  'Hola ' + nombreS,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                )
+              : SizedBox(),
           SizedBox(
             height: 700,
             child: Accordion(

@@ -223,7 +223,17 @@ class FormulariosProvider {
       await refRegVac.doc(vacunaAdd.id).update({"id": vacunaAdd.id});
       await refForm.doc(idFormu).update({"idVacuna": vacunaAdd.id});
       final uid = prefs.uid;
-      await refRegVacRoot.doc(vacunaAdd.id).set(vacuna.toJson());
+      final fechaProximaVacuna = vacuna.toJson()["fechaProximaVacuna"];
+      print(fechaProximaVacuna);
+      final dateFechaProx = DateTime.parse(fechaProximaVacuna);
+      print(dateFechaProx);
+
+      //await refRegVacRoot.doc(vacunaAdd.id).set(vacuna.toJson());
+      await refRegVacRoot.doc(vacunaAdd.id).set({
+        ...vacuna.toJson(),
+        "fechaProximaVacuna": dateFechaProx,
+      });
+
       await refRegVacRoot
           .doc(vacunaAdd.id)
           .update({"id": vacunaAdd.id, "idCliente": uid});

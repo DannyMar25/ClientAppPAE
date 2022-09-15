@@ -14,20 +14,24 @@ String notificationsModelToJson(NotificationsModel data) =>
 
 class NotificationsModel {
   NotificationsModel({
+    this.id = '',
     required this.notification,
     required this.viewed,
   });
 
+  String id;
   Notification notification;
   bool viewed;
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) =>
       NotificationsModel(
+        id: json["id"],
         notification: Notification.fromJson(json["notification"]),
         viewed: json["viewed"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "notification": notification.toJson(),
         "viewed": viewed,
       };
