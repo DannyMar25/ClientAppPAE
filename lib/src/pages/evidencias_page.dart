@@ -330,9 +330,9 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
                       Text("Número de cédula: " '${formulario.identificacion}'),
-                      Text("Estado de solicitud:"
+                      Text("Estado de solicitud: "
                           '${formulario.estado}'),
-                      Text("Nombre mascota adopatada:"
+                      Text("Nombre mascota adoptada: "
                           '${formulario.animal!.nombre}'),
                       //Divider(color: Colors.purple)
                       Divider(
@@ -396,9 +396,9 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Nombre del cliente: " +
                           '${formulario.nombreClient}'),
                       Text("Número de cédula: " '${formulario.identificacion}'),
-                      Text("Estado de solicitud:"
+                      Text("Estado de solicitud: "
                           '${formulario.estado}'),
-                      Text("Nombre mascota adopatada:"
+                      Text("Nombre mascota adoptada: "
                           '${formulario.animal!.nombre}'),
                       //Divider(color: Colors.purple)
                     ],
@@ -497,7 +497,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     row4.cells[1].value = animal.etapaVida;
     PdfGridRow row5 = grid.rows.add();
     row5.cells[0].value = 'Peso:';
-    row5.cells[1].value = animal.peso.toString();
+    row5.cells[1].value = animal.peso.toString() + 'Kg.';
     PdfGridRow row6 = grid.rows.add();
     row6.cells[0].value = 'Color:';
     row6.cells[1].value = animal.color;

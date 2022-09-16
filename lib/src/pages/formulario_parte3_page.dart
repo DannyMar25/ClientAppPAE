@@ -17,7 +17,8 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
   final List<String> _items = ['Casa', 'Departamento', 'Otro'].toList();
   final List<String> _items1 = ['Propio', 'Arrendado'].toList();
   final List<String> _items2 = ['Macho', 'Hembra', 'Ambos'].toList();
-  final List<String> _items3 = ['Adulto', 'Cachorro'].toList();
+  final List<String> _items3 =
+      ['Cachorro', 'Joven', 'Adulto', 'Anciano', 'Geriátrico'].toList();
   final List<String> _items4 = ['Pequeño', 'Mediano', 'Grande'].toList();
   final List<String> _items5 = ['Canina', 'Felina'].toList();
   String? _selection;
@@ -348,7 +349,13 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         ),
         onChanged: (s) {
           setState(() {
-            domicilio.alturaC = double.parse(s);
+            if (double.parse(s) > 3.0) {
+              mostrarAlerta(
+                  context, 'La altura ingresada no debe ser mayor a 3m');
+            } else {
+              domicilio.alturaC = double.parse(s);
+            }
+            ;
           });
         },
       ),

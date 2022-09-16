@@ -42,6 +42,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   ].toList();
   final List<String> _items6 = ['M', 'H'].toList();
   final List<String> _items7 = ['Si', 'No'].toList();
+  final List<String> _items12 = ['Si', 'No'].toList();
   String? _selection;
   String? _selection1;
   String? _selection2;
@@ -54,6 +55,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   String? _selection9;
   String? _selection10;
   String? _selection11;
+  String? _selection12;
 
   bool isChecked = false;
   bool isChecked1 = false;
@@ -204,7 +206,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         _crearPregunta8(),
                         Divider(),
                         Text(
-                          'Si su mascota se enferma usted: ',
+                          'Si su mascota se enferma, usted: ',
                           style: TextStyle(fontSize: 16, color: Colors.black),
                           textAlign: TextAlign.justify,
                         ),
@@ -225,7 +227,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         _crearGastos(),
                         Divider(),
                         Text(
-                          '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de compañía?',
+                          '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de companía?',
                           style: TextStyle(
                             fontSize: 16,
                           ),
@@ -253,7 +255,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         _crearPorque1(),
                         Divider(),
                         Text(
-                          '¿Está de acuerdo en que la  mascota sea esterilizada?',
+                          '¿Está de acuerdo en que la mascota sea esterilizada?',
                           style: TextStyle(
                             fontSize: 26,
                             foreground: Paint()
@@ -1165,7 +1167,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   }
 
   Widget _crearSiNo2() {
-    final dropdownMenuOptions = _items7
+    final dropdownMenuOptions = _items12
         .map((String item) =>
             //new DropdownMenuItem<String>(value: item, child: new Text(item)))
             new DropdownMenuItem<String>(value: item, child: new Text(item)))
@@ -1180,12 +1182,12 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
-            value: _selection11,
+            value: _selection12,
             items: dropdownMenuOptions,
             onChanged: (s) {
               setState(() {
-                _selection11 = s;
-                relacionAnim.estMs2 = s!;
+                _selection12 = s;
+                relacionAnim.adCompart = s!;
                 //animal.tamanio = s!;
               });
             }),

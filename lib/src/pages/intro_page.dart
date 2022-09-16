@@ -228,7 +228,7 @@ class _IntroPageState extends State<IntroPage> {
                             isOpen: false,
                             leftIcon:
                                 const Icon(Icons.search, color: Colors.white),
-                            header: Text('Busqueda', style: _headerStyle),
+                            header: Text('Búsqueda', style: _headerStyle),
                             headerBackgroundColor:
                                 Color.fromARGB(95, 235, 30, 149),
                             headerBackgroundColorOpened:

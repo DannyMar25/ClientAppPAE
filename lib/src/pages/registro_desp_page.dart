@@ -100,7 +100,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     return Card(
       child: ListTile(
         subtitle: Text(
-          'En esta sección podras llevar un registro de las desparacitaciones de tu mascota, este registro sera enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
+          'En esta sección podrás llevar un registro de las desparacitaciones de tu mascota, este registro será enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
           textAlign: TextAlign.justify,
         ),
       ),

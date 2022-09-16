@@ -221,7 +221,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         if (utils.isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
     );
@@ -289,7 +289,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         if (utils.isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
     );
@@ -350,7 +350,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         if (utils.isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
     );
@@ -418,7 +418,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         if (utils.isNumeric(value!)) {
           return null;
         } else {
-          return 'Solo numeros';
+          return 'Solo números';
         }
       },
     );
@@ -700,7 +700,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     return Card(
       child: ListTile(
         title: Text(
-          "Formulario: Situacion familiar",
+          "Formulario: Situación familiar",
           style: TextStyle(
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),

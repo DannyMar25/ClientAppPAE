@@ -604,7 +604,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                           ],
                         );
                       });
-                  print('la cedula:' + cedula + ' es incorrecta');
+                  print('la cédula:' + cedula + ' es incorrecta');
                 }
               } else {
                 cedulaCorrecta = false;
@@ -622,7 +622,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                         ],
                       );
                     });
-                print('la cedula:' + cedula + ' es incorrecta');
+                print('la cédula:' + cedula + ' es incorrecta');
                 //print('La cedula es incorrecta');
               }
             } else {
@@ -641,7 +641,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       ],
                     );
                   });
-              print('la cedula:' + cedula + ' es incorrecta');
+              print('la cédula:' + cedula + ' es incorrecta');
               //print('La cedula es incorrecta');
             }
             if (!cedulaCorrecta) {
@@ -660,7 +660,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       ],
                     );
                   });
-              print('la cedula:' + cedula + ' es incorrecta');
+              print('la cédula:' + cedula + ' es incorrecta');
             }
             //return cedulaCorrecta;
 
@@ -749,7 +749,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe ingresar sus datos personales, ten en cuenta que estos son importantes durante el proceso de adopcion.',
+          'En este formulario debe ingresar sus datos personales, ten en cuenta que estos son importantes durante el proceso de adopción.',
           textAlign: TextAlign.justify,
         ),
       ),

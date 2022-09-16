@@ -293,7 +293,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
     row4.cells[1].value = animal.etapaVida;
     PdfGridRow row5 = grid.rows.add();
     row5.cells[0].value = 'Peso:';
-    row5.cells[1].value = animal.peso.toString();
+    row5.cells[1].value = animal.peso.toString() + 'Kg.';
     PdfGridRow row6 = grid.rows.add();
     row6.cells[0].value = 'Color:';
     row6.cells[1].value = animal.color;
