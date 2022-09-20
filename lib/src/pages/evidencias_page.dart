@@ -124,7 +124,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
         body: SingleChildScrollView(
             child: Container(
                 //color: Colors.lightGreenAccent,
-                padding: new EdgeInsets.only(top: 20.0),
+                padding: new EdgeInsets.only(top: 10.0),
                 child: Form(
                     key: formKey,
                     child: Column(
@@ -182,10 +182,12 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
         });
       },
       validator: (value) {
-        if (isNumeric(value!)) {
-          return null;
+        if (value!.length < 10 || value.length > 10 && value.length > 0) {
+          return 'Ingrese número de cédula válido';
+        } else if (value.isEmpty) {
+          return 'Por favor, llena este campo';
         } else {
-          return 'Solo números';
+          return null;
         }
       },
     );
@@ -222,8 +224,8 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
               _submit();
             }
           } else {
-            mostrarAlerta(
-                context, 'Asegurate de que todos los campos están llenos.');
+            mostrarAlerta(context,
+                'Asegurate de haber ingresado correctamente el número de cédula');
           }
         });
   }
@@ -253,7 +255,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     return Column(
       children: [
         SizedBox(
-          height: 800,
+          height: 400,
           child: ListView.builder(
             itemCount: formularios.length,
             itemBuilder: (context, i) => _crearItem(context, formularios[i]),
@@ -294,7 +296,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                           '${formulario.estado}'),
                       Text("Fecha de aprobación de solicitud: "
                           '${formulario.fechaRespuesta}'),
-                      Text("Nombre mascota adopatada:"
+                      Text("Nombre mascota adoptada:"
                           '${formulario.animal!.nombre}'),
                       //Divider(color: Colors.purple)
                     ],

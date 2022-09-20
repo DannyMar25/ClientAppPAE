@@ -1,6 +1,7 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   String _fecha = '';
   TextEditingController _inputFieldDateController = new TextEditingController();
   String cedula = '';
+  final prefs = new PreferenciasUsuario();
   @override
   void initState() {
     super.initState();
@@ -118,8 +120,13 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       ),
                       Divider(),
                       _crearTelfCelular(),
-                      _crearTelfDomicilio(),
-                      _crearTelfTrabajo(),
+
+                      Row(
+                        children: [_crearTelfDomicilio(), infoTelefono()],
+                      ),
+                      Row(
+                        children: [_crearTelfTrabajo(), infoTelefono()],
+                      ),
                       Divider(),
                       Text(
                         'Referencias Personales',
@@ -301,7 +308,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   Widget _crearEmail() {
     return TextFormField(
       validator: (value) => utils.validarEmail(value),
-      initialValue: datoPersona.email,
+      //initialValue: datoPersona.email,
+      initialValue: prefs.email,
       readOnly: false,
       keyboardType: TextInputType.emailAddress,
       textCapitalization: TextCapitalization.sentences,
@@ -377,29 +385,63 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     );
   }
 
+  Widget infoTelefono() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        ),
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+            content: Text(
+              'Recuerda que puedes ingresar un número de teléfono celular o convencional.\nEn caso de ingresar un número convencional coloca el código de provincia respectivo. Ejemplo: 02 2393886',
+            ),
+            title: Text('Ayuda'),
+          ),
+        );
+      },
+      child: Column(
+        children: const <Widget>[
+          Icon(
+            Icons.info_rounded,
+            color: Colors.green,
+            size: 20.0,
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _crearTelfDomicilio() {
-    return TextFormField(
-      validator: (value) {
-        if (value!.length < 9 && value.length > 0 || value.length > 10) {
-          return 'Ingrese un número de teléfono válido';
-        } else if (value.isEmpty) {
-          return campoVacio;
-        } else {
-          return null;
-        }
-      },
-      initialValue: datoPersona.telfDomi,
-      readOnly: false,
-      keyboardType: TextInputType.phone,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          labelText: 'Teléfono de domicilio',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      onChanged: (s) {
-        setState(() {
-          datoPersona.telfDomi = s;
-        });
-      },
+    return SizedBox(
+      height: 50,
+      width: 290,
+      child: TextFormField(
+        validator: (value) {
+          if (value!.length < 9 && value.length > 0 || value.length > 10) {
+            return 'Ingrese un número de teléfono válido';
+          } else if (value.isEmpty) {
+            return campoVacio;
+          } else {
+            return null;
+          }
+        },
+        initialValue: datoPersona.telfDomi,
+        readOnly: false,
+        keyboardType: TextInputType.phone,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+            labelText: 'Teléfono de domicilio',
+            labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+        onChanged: (s) {
+          setState(() {
+            datoPersona.telfDomi = s;
+          });
+        },
+      ),
     );
   }
 
@@ -419,7 +461,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Teléfono celular',
+          labelText: 'Teléfono celular (Ej: 0988767543)',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -430,28 +472,32 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
   }
 
   Widget _crearTelfTrabajo() {
-    return TextFormField(
-      validator: (value) {
-        if (value!.length < 9 && value.length > 0 || value.length > 10) {
-          return 'Ingrese un número de teléfono válido';
-        } else if (value.isEmpty) {
-          return campoVacio;
-        } else {
-          return null;
-        }
-      },
-      initialValue: datoPersona.telfTrab,
-      readOnly: false,
-      keyboardType: TextInputType.phone,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          labelText: 'Teléfono de trabajo',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      onChanged: (s) {
-        setState(() {
-          datoPersona.telfTrab = s;
-        });
-      },
+    return SizedBox(
+      height: 50,
+      width: 290,
+      child: TextFormField(
+        validator: (value) {
+          if (value!.length < 9 && value.length > 0 || value.length > 10) {
+            return 'Ingrese un número de teléfono válido';
+          } else if (value.isEmpty) {
+            return campoVacio;
+          } else {
+            return null;
+          }
+        },
+        initialValue: datoPersona.telfTrab,
+        readOnly: false,
+        keyboardType: TextInputType.phone,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+            labelText: 'Teléfono de trabajo',
+            labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+        onChanged: (s) {
+          setState(() {
+            datoPersona.telfTrab = s;
+          });
+        },
+      ),
     );
   }
 
@@ -521,7 +567,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Teléfono',
+          labelText: 'Teléfono celular (Ej: 0988767543)',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {

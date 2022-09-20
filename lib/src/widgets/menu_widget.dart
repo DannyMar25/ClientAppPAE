@@ -86,7 +86,12 @@ class _MenuWidgetState extends State<MenuWidget> {
                     Navigator.pushNamed(context, 'evidencia');
                   },
                 )
-              : SizedBox()
+              : SizedBox(),
+          Padding(padding: EdgeInsets.only(top: 350.0)),
+          Text(
+            '2022 Versión: 0.0.1',
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );
