@@ -756,7 +756,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: '¿Según usted que es tenencia responsable?',
+          labelText: '¿Según usted qué es tenencia responsable?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {

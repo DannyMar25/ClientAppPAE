@@ -310,18 +310,18 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       validator: (value) => utils.validarEmail(value),
       //initialValue: datoPersona.email,
       initialValue: prefs.email,
-      readOnly: false,
+      readOnly: true,
       keyboardType: TextInputType.emailAddress,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'E-mail',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
-      onChanged: (s) {
-        setState(() {
-          datoPersona.email = s;
-          formulario.emailClient = s;
-        });
-      },
+      // onChanged: (s) {
+      //   setState(() {
+      //     datoPersona.email = prefs.email;
+      //     formulario.emailClient = prefs.email;
+      //   });
+      // },
     );
   }
 
@@ -397,7 +397,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
           context: context,
           builder: (context) => const AlertDialog(
             content: Text(
-              'Recuerda que puedes ingresar un número de teléfono celular o convencional.\nEn caso de ingresar un número convencional coloca el código de provincia respectivo. Ejemplo: 02 2393886',
+              'Recuerda que puedes ingresar un número de teléfono celular o convencional.\nEn el caso de ingresar un número convencional coloca el código de provincia respectivo. Ejemplo: 02 2393886',
             ),
             title: Text('Ayuda'),
           ),
@@ -724,6 +724,8 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       formulario.estado = "Pendiente";
       formulario.observacion = "Pendiente";
       formulario.fechaRespuesta = "Pendiente";
+      formulario.emailClient = prefs.email;
+      datoPersona.email = prefs.email;
 
       //Anadir ids de registros de evidencias
       formulario.idVacuna = "Pendiente";

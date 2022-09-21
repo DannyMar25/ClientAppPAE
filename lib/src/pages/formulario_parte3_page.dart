@@ -374,7 +374,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           context: context,
           builder: (context) => const AlertDialog(
             content: Text(
-              'Utiliza punto (.) para los decimales\nEjemplo: 100.23',
+              'Utiliza punto (.) para los decimales\nEjemplo: 2.23',
             ),
             title: Text('Ayuda'),
           ),

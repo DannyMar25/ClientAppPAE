@@ -70,6 +70,8 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               //_mostrarImagen(),
+                              Padding(padding: EdgeInsets.only(top: 20.0)),
+                              detalle(),
                               Padding(padding: EdgeInsets.only(top: 50.0)),
                               _botonPerfil(),
                               Padding(padding: EdgeInsets.only(top: 95.0)),
@@ -134,9 +136,31 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
           color: Colors.green,
         ),
         label: Text(
-          "Ver Perfil",
+          "Ver Perfil de la mascota",
           style: TextStyle(color: Colors.green, fontSize: 14),
         ));
+  }
+
+  Widget detalle() {
+    return Card(
+      child: ListTile(
+        title: Text(
+          "Perfil de mascota:",
+          style: TextStyle(
+              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          'Puedes ver la información de la solicitud y descargar el perfil de la mascota haciendo clic en el botón "Ver perfil de mascota".',
+          textAlign: TextAlign.justify,
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(5),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.green, width: 1)),
+    );
   }
 
   Widget _verListado() {
@@ -181,13 +205,13 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                     //Divider(color: Colors.purple),
                     Text("Nombre del cliente: " + '${formulario.nombreClient}'),
                     Text("Número de cédula: " '${formulario.identificacion}'),
-                    Text("Estado de solicitud:"
+                    Text("Estado de solicitud: "
                         '${formulario.estado}'),
                     // Text("Fecha de envio de solicitud: "
                     //     '${formulario.fechaIngreso}'),
                     Text("Fecha de envio de solicitud: "
                         '$fechaIngreso'),
-                    Text("Nombre mascota a adoptar:"
+                    Text("Nombre mascota a adoptar: "
                         '${animal.nombre}'),
                     //Divider(color: Colors.purple)
                   ],
