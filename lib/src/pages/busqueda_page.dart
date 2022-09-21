@@ -387,13 +387,13 @@ class _BusquedaPageState extends State<BusquedaPage> {
       onPressed: () {
         if (formKey.currentState!.validate()) {
           SnackBar(
-            content: Text('Información ingresada correctamente'),
+            content: Text('Información ingresada correctamente.'),
           );
           //_submit();
           buildChild3();
         } else {
           mostrarAlerta(context,
-              'Todos los campos deben ser seleccionados. Asegurate de haber completado todos');
+              'Todos los campos deben ser seleccionados. Asegúrate de haber completado todos.');
         }
         //_submit();
       },

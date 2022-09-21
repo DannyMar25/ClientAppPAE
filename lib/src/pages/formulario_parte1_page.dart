@@ -712,7 +712,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
           } else {
             utils.mostrarAlerta(context,
-                'Asegurate de que los datos hayan sido ingresados correctamente y que no existan campos vacíos.');
+                'Asegúrate de que los datos hayan sido ingresados correctamente y que no existan campos vacíos.');
           }
         }
       },

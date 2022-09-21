@@ -636,10 +636,10 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
           if (isChecked == false && isChecked1 == false) {
             mostrarAlerta(context, 'Debe seleccionar una de las dos opciones.');
           } else if (isChecked2 == false && isChecked3 == false) {
-            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones');
+            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones.');
           } else {
             SnackBar(
-              content: Text('Información ingresada correctamente'),
+              content: Text('Información ingresada correctamente.'),
             );
             _submit();
           }
@@ -677,7 +677,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
           return AlertDialog(
             title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
+                'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),

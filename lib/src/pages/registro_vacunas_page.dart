@@ -317,7 +317,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             if (formKey.currentState!.validate()) {
               // Si el formulario es válido, queremos mostrar un Snackbar
               SnackBar(
-                content: Text('Información ingresada correctamente'),
+                content: Text('Información ingresada correctamente.'),
               );
 
               formulariosProvider.crearRegistroVacuna(
@@ -332,7 +332,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                   animal);
             } else {
               mostrarAlerta(
-                  context, 'Asegurate de que todos los campos están llenos.');
+                  context, 'Asegúrate de que todos los campos estén llenos.');
             }
           }),
     ]);

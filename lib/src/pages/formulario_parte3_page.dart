@@ -351,7 +351,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           setState(() {
             if (double.parse(s) > 3.0) {
               mostrarAlerta(
-                  context, 'La altura ingresada no debe ser mayor a 3m');
+                  context, 'La altura ingresada no debe ser mayor a 3m.');
             } else {
               domicilio.alturaC = double.parse(s);
             }
@@ -699,16 +699,16 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                   context, 'Debe seleccionar una de las dos opciones.');
             } else if (isChecked2 == false && isChecked3 == false) {
               mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones');
+                  context, 'Debe seleccionar una de las dos opciones.');
             } else {
               SnackBar(
-                content: Text('Información ingresada correctamente'),
+                content: Text('Información ingresada correctamente.'),
               );
               _submit();
             }
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos están llenos.');
+                context, 'Asegúrate de que todos los campos estén llenos.');
           }
         }
       },
@@ -756,7 +756,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
           return AlertDialog(
             title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
+                'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),

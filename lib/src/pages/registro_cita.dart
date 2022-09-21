@@ -241,7 +241,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           _fecha = 'Martes';
         }
         if (_fecha == '3') {
-          _fecha = 'Miercoles';
+          _fecha = 'Miércoles';
         }
         if (_fecha == '4') {
           _fecha = 'Jueves';
@@ -250,21 +250,20 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           _fecha = 'Viernes';
         }
         if (_fecha == '6') {
-          _fecha = 'Sabado';
+          _fecha = 'Sábado';
         }
         if (_fecha == '7') {
           _fecha = 'Domingo';
         }
         //_fecha = DateFormat('EEEE').format(picked);
-        _inputFieldDateController.text = _fecha;
+        _inputFieldDateController.text = _fecha + ' ' + _fechaCompleta;
       });
     }
   }
 
   Widget _verListado() {
     return FutureBuilder(
-        future:
-            horariosProvider.cargarHorariosDia(_inputFieldDateController.text),
+        future: horariosProvider.cargarHorariosDia(_fecha),
         builder: (BuildContext context,
             AsyncSnapshot<List<HorariosModel>> snapshot) {
           if (snapshot.hasData) {
@@ -385,7 +384,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           if (formKey.currentState!.validate()) {
             if (seleccionado == true) {
               SnackBar(
-                content: Text('Información ingresada correctamente'),
+                content: Text('Información ingresada correctamente.'),
               );
               seleccionado = false;
               _submit();
@@ -395,7 +394,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
             }
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estén llenos.');
+                context, 'Asegúrate de que todos los campos estén llenos.');
           }
         }
         // onPressed: () {

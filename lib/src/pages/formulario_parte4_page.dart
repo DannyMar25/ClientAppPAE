@@ -1221,16 +1221,16 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                   context, 'Debe seleccionar una de las dos opciones.');
             } else if (isChecked2 == false && isChecked3 == false) {
               mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones');
+                  context, 'Debe seleccionar una de las dos opciones.');
             } else {
               SnackBar(
-                content: Text('Información ingresada correctamente'),
+                content: Text('Información ingresada correctamente.'),
               );
               _submit();
             }
           } else {
             mostrarAlerta(
-                context, 'Asegurate de que todos los campos estén llenos.');
+                context, 'Asegúrate de que todos los campos estén llenos.');
           }
         }
       },
@@ -1269,7 +1269,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
           return AlertDialog(
             title: Text('Atención'),
             content: Text(
-                'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
+                'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
               TextButton(
                   child: Text('Lo he revisado'),

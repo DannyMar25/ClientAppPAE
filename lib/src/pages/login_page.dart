@@ -203,7 +203,11 @@ class _LoginPageState extends State<LoginPage> {
         //Navigator.pushNamed(context, 'intro');
         Navigator.pushNamed(context, 'intro', arguments: animal);
       } else {
-        mostrarAlertaOk(context, 'No puedes ingresar', 'login', 'Advertencia');
+        mostrarAlertaOk(
+            context,
+            'Tu usuario y contraseña no se encuentran registrados en la aplicación.',
+            'login',
+            'Advertencia');
       }
       //Navigator.pushNamed(context, 'intro', arguments: animal);
     } else {
@@ -239,7 +243,10 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushNamed(context, 'intro');
         } else {
           mostrarAlertaOk(
-              context, 'No puedes ingresar', 'login', 'Advertencia');
+              context,
+              'Tu usuario y contraseña no se encuentran registrados en la aplicación.',
+              'login',
+              'Advertencia');
         }
         //Navigator.pushNamed(context, 'intro');
       },
