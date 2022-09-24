@@ -47,6 +47,9 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   AnimalModel animal = new AnimalModel();
 
   bool seleccionado = false;
+
+  late String horaSeleccionada;
+  late String idHorario;
   @override
   Widget build(BuildContext context) {
     final email = prefs.email;
@@ -286,9 +289,13 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         TextFormField(
           readOnly: true,
           onTap: () {
-            seleccionado = true;
-            citas.idHorario = horario.id;
-            horariosProvider.editarDisponible(horario);
+            //seleccionado = true;
+            idHorario = horario.id;
+            //citas.idHorario = horario.id;
+            //horariosProvider.editarDisponible(horario);
+            horaSeleccionada = horario.hora;
+
+            print(horario.hora);
           },
           initialValue: horario.hora + '  -   ' + horario.disponible,
           decoration: InputDecoration(
@@ -382,16 +389,17 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         autofocus: true,
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            if (seleccionado == true) {
-              SnackBar(
-                content: Text('Información ingresada correctamente.'),
-              );
-              seleccionado = false;
-              _submit();
-            } else {
-              mostrarAlerta(context,
-                  'Debes seleccionar un horario disponible para tu cita.');
-            }
+            //if (seleccionado == true) {
+            SnackBar(
+              content: Text('Información ingresada correctamente.'),
+            );
+            _submit();
+            //seleccionado = false;
+
+            // } else {
+            //   mostrarAlerta(context,
+            //       'Debes seleccionar un horario disponible para tu cita.');
+            // }
           } else {
             mostrarAlerta(
                 context, 'Asegúrate de que todos los campos estén llenos.');
@@ -409,6 +417,8 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     citas.telfClient = telefono.text;
     citas.correoClient = correo.text;
     citas.fechaCita = _fechaCompleta;
+    horariosProvider.editarDisponible(idHorario);
+    citas.idHorario = idHorario;
     citas.estado = 'Pendiente';
     if (animal.id == '') {
       citas.idAnimal = 'WCkke2saDQ5AfeJkU6ck';
@@ -421,10 +431,51 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     if (citas.id == "") {
       final estadoCita = await citasProvider.verificar(correo.text);
       if (estadoCita.isEmpty) {
-        print('Puede');
-        citasProvider.crearCita(citas);
-        mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
-            'home', 'Información correcta');
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Información'),
+                content: Text('Nombre: ' +
+                    nombre.text +
+                    '\n' +
+                    'Teléfono: ' +
+                    telefono.text +
+                    '\n' +
+                    'Correo: ' +
+                    correo.text +
+                    '\n' +
+                    'Fecha de la cita:' +
+                    _fechaCompleta +
+                    '\n' +
+                    'Hora:' +
+                    horaSeleccionada),
+                actions: [
+                  TextButton(
+                      child: Text('Ok'),
+                      //onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () {
+                        print('Puede');
+                        //horariosProvider.editarDisponible(idHorario);
+                        //citas.idHorario = idHorario;
+                        citasProvider.crearCita(citas);
+                        mostrarAlertaOk(
+                            context,
+                            'La cita ha sido registrada con éxito.',
+                            'home',
+                            'Información correcta');
+                      }),
+                  TextButton(
+                      child: Text('Revisar información'),
+                      //onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () => Navigator.of(context).pop()),
+                ],
+              );
+            });
+        // print('Puede');
+        // citasProvider.crearCita(citas);
+        // mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
+        //     'home', 'Información correcta');
       } else {
         print('no puede');
         mostrarAlerta(context, 'Al momento ya cuenta con una cita registrada.');

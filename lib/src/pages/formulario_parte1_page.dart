@@ -724,6 +724,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       formulario.estado = "Pendiente";
       formulario.observacion = "Pendiente";
       formulario.fechaRespuesta = "Pendiente";
+      formulario.idClient = prefs.uid;
       formulario.emailClient = prefs.email;
       datoPersona.email = prefs.email;
 

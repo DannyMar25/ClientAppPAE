@@ -116,7 +116,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: new DateTime.now(),
-      firstDate: new DateTime.now(),
+      firstDate: new DateTime(2022),
       lastDate: new DateTime(2025),
       locale: Locale('es'),
       builder: (context, child) {
