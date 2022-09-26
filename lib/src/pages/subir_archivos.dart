@@ -26,6 +26,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   File? file;
   File? foto;
   bool isDisable = true;
+  bool cargadoArchivo = false;
+  bool cargadoFoto = false;
   FormulariosProvider formulariosProvider = new FormulariosProvider();
   EvidenciasModel evidencia = new EvidenciasModel();
   AnimalModel animal = new AnimalModel();
@@ -326,6 +328,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     final snapshot = await task1!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
     archivoUrl = urlDownload;
+    cargadoArchivo = true;
     nombreArchivo = formularios.nombreClient + "-" + fileName;
     print('Download-Link: $urlDownload');
   }
@@ -345,6 +348,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
     final snapshot = await task!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
     fotoUrl = urlDownload;
+    cargadoFoto = true;
 
     print('Download-Link: $urlDownload');
   }
@@ -431,27 +435,32 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             icon: Icon(Icons.save),
             autofocus: true,
             onPressed: () {
-              if (fotoUrl != '' || archivoUrl != '') {
-                isDisable = false;
-                evidencia.fecha = DateTime.now().toString();
-                evidencia.fotoUrl = fotoUrl;
-                evidencia.archivoUrl = archivoUrl;
-                evidencia.nombreArchivo = nombreArchivo;
+              if (cargadoFoto == true || cargadoArchivo == true) {
+                if (fotoUrl != '' || archivoUrl != '') {
+                  isDisable = false;
+                  evidencia.fecha = DateTime.now().toString();
+                  evidencia.fotoUrl = fotoUrl;
+                  evidencia.archivoUrl = archivoUrl;
+                  evidencia.nombreArchivo = nombreArchivo;
 
-                formulariosProvider.crearRegistroEvidencias(
-                    evidencia, formularios.id, context);
-                mostrarOkRegistros(
-                    context,
-                    'Evidencia guardada con éxito.',
-                    'Información correcta',
-                    'seguimientoMain',
-                    datosA,
-                    formularios,
-                    animal);
+                  formulariosProvider.crearRegistroEvidencias(
+                      evidencia, formularios.id, context);
+                  mostrarOkRegistros(
+                      context,
+                      'Evidencia guardada con éxito.',
+                      'Información correcta',
+                      'seguimientoMain',
+                      datosA,
+                      formularios,
+                      animal);
+                } else {
+                  isDisable = true;
+                  mostrarAlerta(context, 'Debe cargar una foto o un archivo.');
+                  return null;
+                }
               } else {
-                isDisable = true;
-                mostrarAlerta(context, 'Debe cargar una foto o un archivo.');
-                return null;
+                mostrarAlerta(context,
+                    'Asegúrate de que el archivo seleccionado sea el correcto y luego da clic en el botón "Cargar" para poder guardar la evidencia.');
               }
             }),
       ])

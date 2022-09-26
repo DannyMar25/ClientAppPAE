@@ -293,27 +293,48 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            if (formKey.currentState!.validate()) {
-              // Si el formulario es válido, queremos mostrar un Snackbar
-              SnackBar(
-                content: Text('Información ingresada correctamente.'),
-              );
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Aviso'),
+                    content: Text(
+                        'Asegúrate de que toda la información ingresada sea correcta. Una vez guardado el registro este no se podrá modificar.'),
+                    actions: [
+                      TextButton(
+                          child: Text('Es correcta'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              // Si el formulario es válido, queremos mostrar un Snackbar
+                              SnackBar(
+                                content: Text(
+                                    'Información ingresada correctamente.'),
+                              );
 
-              formulariosProvider.crearRegistroDesparasitacion(
-                  desparasitacion, formularios.id, context);
+                              formulariosProvider.crearRegistroDesparasitacion(
+                                  desparasitacion, formularios.id, context);
 
-              mostrarOkRegistros(
-                  context,
-                  'Registro de desparasitación guardado con éxito.',
-                  'Información Correcta',
-                  'verRegistroDesp',
-                  datosA,
-                  formularios,
-                  animal);
-            } else {
-              mostrarAlerta(
-                  context, 'Asegúrate de que todos los campos estén llenos.');
-            }
+                              mostrarOkRegistros(
+                                  context,
+                                  'Registro de desparasitación guardado con éxito.',
+                                  'Información Correcta',
+                                  'verRegistroDesp',
+                                  datosA,
+                                  formularios,
+                                  animal);
+                            } else {
+                              mostrarAlerta(context,
+                                  'Asegúrate de que todos los campos estén llenos.');
+                            }
+                          }),
+                      TextButton(
+                          child: Text('Deseo revisarla'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () => Navigator.of(context).pop()),
+                    ],
+                  );
+                });
           }),
     ]);
   }

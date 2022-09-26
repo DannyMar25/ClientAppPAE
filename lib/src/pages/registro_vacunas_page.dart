@@ -314,26 +314,46 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
           icon: Icon(Icons.save),
           autofocus: true,
           onPressed: () {
-            if (formKey.currentState!.validate()) {
-              // Si el formulario es válido, queremos mostrar un Snackbar
-              SnackBar(
-                content: Text('Información ingresada correctamente.'),
-              );
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Aviso'),
+                    content: Text(
+                        'Asegúrate de que toda la información ingresada sea correcta. Una vez guardado el registro este no se podrá modificar.'),
+                    actions: [
+                      TextButton(
+                          child: Text('Es correcta'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              SnackBar(
+                                content: Text(
+                                    'Información ingresada correctamente.'),
+                              );
 
-              formulariosProvider.crearRegistroVacuna(
-                  vacunas, formularios.id, context);
-              mostrarOkRegistros(
-                  context,
-                  'Registro de vacuna guardado con éxito.',
-                  'Información Correcta',
-                  'verRegistroVacunas',
-                  datosA,
-                  formularios,
-                  animal);
-            } else {
-              mostrarAlerta(
-                  context, 'Asegúrate de que todos los campos estén llenos.');
-            }
+                              formulariosProvider.crearRegistroVacuna(
+                                  vacunas, formularios.id, context);
+                              mostrarOkRegistros(
+                                  context,
+                                  'Registro de vacuna guardado con éxito.',
+                                  'Información Correcta',
+                                  'verRegistroVacunas',
+                                  datosA,
+                                  formularios,
+                                  animal);
+                            } else {
+                              mostrarAlerta(context,
+                                  'Asegúrate de que todos los campos estén llenos.');
+                            }
+                          }),
+                      TextButton(
+                          child: Text('Deseo revisarla'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () => Navigator.of(context).pop()),
+                    ],
+                  );
+                });
           }),
     ]);
   }

@@ -388,22 +388,55 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         icon: Icon(Icons.save),
         autofocus: true,
         onPressed: () {
-          if (formKey.currentState!.validate()) {
-            //if (seleccionado == true) {
-            SnackBar(
-              content: Text('Información ingresada correctamente.'),
-            );
-            _submit();
-            //seleccionado = false;
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Información'),
+                  content: Text('Nombre: ' +
+                      nombre.text +
+                      '\n' +
+                      'Teléfono: ' +
+                      telefono.text +
+                      '\n' +
+                      'Correo: ' +
+                      correo.text +
+                      '\n' +
+                      'Fecha de la cita:' +
+                      _fechaCompleta +
+                      '\n' +
+                      'Hora:' +
+                      horaSeleccionada),
+                  actions: [
+                    TextButton(
+                        child: Text('Ok'),
+                        //onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            //if (seleccionado == true) {
+                            SnackBar(
+                              content:
+                                  Text('Información ingresada correctamente.'),
+                            );
+                            _submit();
+                            //seleccionado = false;
 
-            // } else {
-            //   mostrarAlerta(context,
-            //       'Debes seleccionar un horario disponible para tu cita.');
-            // }
-          } else {
-            mostrarAlerta(
-                context, 'Asegúrate de que todos los campos estén llenos.');
-          }
+                            // } else {
+                            //   mostrarAlerta(context,
+                            //       'Debes seleccionar un horario disponible para tu cita.');
+                            // }
+                          } else {
+                            mostrarAlerta(context,
+                                'Asegúrate de que todos los campos estén llenos.');
+                          }
+                        }),
+                    TextButton(
+                        child: Text('Revisar información'),
+                        //onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => Navigator.of(context).pop()),
+                  ],
+                );
+              });
         }
         // onPressed: () {
         //   print(animal.id);
@@ -431,47 +464,13 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     if (citas.id == "") {
       final estadoCita = await citasProvider.verificar(correo.text);
       if (estadoCita.isEmpty) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text('Información'),
-                content: Text('Nombre: ' +
-                    nombre.text +
-                    '\n' +
-                    'Teléfono: ' +
-                    telefono.text +
-                    '\n' +
-                    'Correo: ' +
-                    correo.text +
-                    '\n' +
-                    'Fecha de la cita:' +
-                    _fechaCompleta +
-                    '\n' +
-                    'Hora:' +
-                    horaSeleccionada),
-                actions: [
-                  TextButton(
-                      child: Text('Ok'),
-                      //onPressed: () => Navigator.of(context).pop(),
-                      onPressed: () {
-                        print('Puede');
-                        //horariosProvider.editarDisponible(idHorario);
-                        //citas.idHorario = idHorario;
-                        citasProvider.crearCita(citas);
-                        mostrarAlertaOk(
-                            context,
-                            'La cita ha sido registrada con éxito.',
-                            'home',
-                            'Información correcta');
-                      }),
-                  TextButton(
-                      child: Text('Revisar información'),
-                      //onPressed: () => Navigator.of(context).pop(),
-                      onPressed: () => Navigator.of(context).pop()),
-                ],
-              );
-            });
+        print('Puede');
+        //horariosProvider.editarDisponible(idHorario);
+        //citas.idHorario = idHorario;
+        citasProvider.crearCita(citas);
+        mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
+            'home', 'Información correcta');
+
         // print('Puede');
         // citasProvider.crearCita(citas);
         // mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',

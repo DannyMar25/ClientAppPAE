@@ -186,52 +186,55 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
         '-' +
         fecha.day.toString();
 
-    return Card(
-        color: Colors.lightGreen[200],
-        shadowColor: Colors.green,
-        child: InkWell(
-          onTap: () async {
-            animal = await animalesProvider.cargarAnimalId(formulario.idAnimal);
-            _createPDF(animal);
+    return SizedBox(
+      height: 340,
+      child: Card(
+          color: Colors.lightGreen[200],
+          shadowColor: Colors.green,
+          child: InkWell(
+            onTap: () async {
+              animal =
+                  await animalesProvider.cargarAnimalId(formulario.idAnimal);
+              _createPDF(animal);
 
-            // Navigator.pushNamed(context, 'perfilMascotaPdf',
-            //     arguments: {'formulario': formulario, 'animal': animal});
-          },
-          child: Column(
-            children: [
-              ListTile(
-                title: Column(
-                  children: [
-                    //Divider(color: Colors.purple),
-                    Text("Nombre del cliente: " + '${formulario.nombreClient}'),
-                    Text("Número de cédula: " '${formulario.identificacion}'),
-                    Text("Estado de solicitud: "
-                        '${formulario.estado}'),
-                    // Text("Fecha de envio de solicitud: "
-                    //     '${formulario.fechaIngreso}'),
-                    Text("Fecha de envio de solicitud: "
-                        '$fechaIngreso'),
-                    Text("Nombre mascota a adoptar: "
-                        '${animal.nombre}'),
-                    //Divider(color: Colors.purple)
-                  ],
+              // Navigator.pushNamed(context, 'perfilMascotaPdf',
+              //     arguments: {'formulario': formulario, 'animal': animal});
+            },
+            child: Column(
+              children: [
+                ListTile(
+                  title: Column(
+                    children: [
+                      //Divider(color: Colors.purple),
+                      Text("Nombre del cliente: " '${formulario.nombreClient}'),
+                      Text("Número de cédula: " '${formulario.identificacion}'),
+                      Text("Estado de solicitud: " '${formulario.estado}'),
+                      Text("Fecha de envio de solicitud: " '$fechaIngreso'),
+                      Text("Nombre mascota a adoptar: " '${animal.nombre}'),
+                      //Divider(color: Colors.purple)
+                    ],
+                  ),
+                  //subtitle: Text('${horario}'),
                 ),
-                //subtitle: Text('${horario}'),
-              ),
-              SizedBox(
-                height: 150.0,
-                child: Image(
-                  image: AssetImage('assets/dog_an8.gif'),
+                SizedBox(
+                  height: 150.0,
+                  child: Image(
+                    image: AssetImage('assets/dog_an8.gif'),
+                  ),
                 ),
-              ),
-              Text(
-                '¡Ver perfil de mascota en PDF!',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ));
+                Text(
+                  '¡Ver perfil de mascota en PDF!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.white),
+                ),
+              ],
+            ),
+          )),
+    );
     // } else {
     //   return SizedBox();
     // }
