@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
@@ -25,6 +26,19 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
   String? sexo;
   String? edad;
   String? tamanio;
+  late int total = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider.mostrarTotalNotificacion(prefs.uid).then((value) => {
+          setState(() {
+            print(total);
+            total = value;
+            print(total);
+          })
+        });
+  }
 
   @override
   //bool shouldPop = true;
@@ -49,10 +63,20 @@ class _GaleriaMascotasPageState extends State<GaleriaMascotasPage> {
             backgroundColor: Colors.green,
             actions: [
               email != ''
-                  ? PopupMenuButton<int>(
-                      onSelected: (item) => onSelected(context, item),
-                      icon: Icon(Icons.notifications),
-                      itemBuilder: (context) => [])
+                  ? Badge(
+                      badgeContent: Text(total.toString(),
+                          style: TextStyle(color: Colors.white)),
+                      position: BadgePosition.topEnd(top: 3, end: 0),
+                      child: IconButton(
+                        //onSelected: (item) => onSelected(context, item),
+                        icon: Icon(
+                          Icons.notifications,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'notificaciones');
+                        },
+                      ),
+                    )
                   : SizedBox(),
               PopupMenuButton<int>(
                   onSelected: (item) => onSelected(context, item),

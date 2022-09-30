@@ -36,6 +36,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   void initState() {
+    super.initState();
     final email = prefs.email;
     final uid = prefs.uid;
     if (email != '') {
@@ -60,7 +61,6 @@ class _IntroPageState extends State<IntroPage> {
             print(total);
           })
         });
-    super.initState();
   }
 
   @override

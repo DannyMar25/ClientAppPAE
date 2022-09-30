@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:badges/badges.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
+import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
+import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -17,19 +20,30 @@ class SeguimientoPage extends StatefulWidget {
 
 class _SeguimientoPageState extends State<SeguimientoPage> {
   final formKey = GlobalKey<FormState>();
+  final prefs = new PreferenciasUsuario();
   FirebaseStorage storage = FirebaseStorage.instance;
   AnimalModel animal = new AnimalModel();
   File? foto;
   DatosPersonalesModel datosA = new DatosPersonalesModel();
   FormulariosModel formularios = new FormulariosModel();
-  final imageList = [
-    'assets/golden retriever (2).jpg',
-    'assets/golden-retriever.jpg',
-    'assets/goldenretriever-t.jpg',
-  ];
+  final userProvider = new UsuarioProvider();
+  late int total = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider.mostrarTotalNotificacion(prefs.uid).then((value) => {
+          setState(() {
+            print(total);
+            total = value;
+            print(total);
+          })
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final email = prefs.email;
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     //if (dat == arg['datosper']) {
     datosA = arg['datosper'] as DatosPersonalesModel;
@@ -41,6 +55,24 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         appBar: AppBar(
           title: Text('Seguimiento de mascota adoptada'),
           backgroundColor: Colors.green,
+          actions: [
+            email != ''
+                ? Badge(
+                    badgeContent: Text(total.toString(),
+                        style: TextStyle(color: Colors.white)),
+                    position: BadgePosition.topEnd(top: 3, end: 0),
+                    child: IconButton(
+                      //onSelected: (item) => onSelected(context, item),
+                      icon: Icon(
+                        Icons.notifications,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'notificaciones');
+                      },
+                    ),
+                  )
+                : SizedBox(),
+          ],
         ),
         drawer: _menuWidget(),
         body: Stack(
@@ -69,7 +101,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                                   fontSize: 28,
                                   color: Colors.blueGrey[600],
                                   fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                             ),
                             Divider(),
                             _mostrarFoto(),
@@ -293,41 +325,41 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     }
   }
 
-  Widget verGaleria(BuildContext context) {
-    return PhotoViewGallery.builder(
-      customSize: Size(450.0, 450.0),
-      itemCount: imageList.length,
-      builder: (context, index) {
-        return PhotoViewGalleryPageOptions(
-          basePosition: Alignment.topCenter,
-          imageProvider: AssetImage(imageList[index]),
-          initialScale: PhotoViewComputedScale.contained * 0.9,
-          minScale: PhotoViewComputedScale.contained * 0.8,
-          maxScale: PhotoViewComputedScale.covered * 1,
-        );
-      },
-      scrollPhysics: BouncingScrollPhysics(),
-      backgroundDecoration: BoxDecoration(
-        color: Theme.of(context).canvasColor,
-      ),
-      loadingBuilder: (context, event) =>
-          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        //Center(
-        // child:
-        Container(
-          alignment: Alignment.topCenter,
-          //width: 20.0,
-          //height: 20.0,
-          child: CircularProgressIndicator(
-            value: event == null
-                ? 0
-                : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
-          ),
-        ),
-        // )
-      ]),
-    );
-  }
+  // Widget verGaleria(BuildContext context) {
+  //   return PhotoViewGallery.builder(
+  //     customSize: Size(450.0, 450.0),
+  //     itemCount: imageList.length,
+  //     builder: (context, index) {
+  //       return PhotoViewGalleryPageOptions(
+  //         basePosition: Alignment.topCenter,
+  //         imageProvider: AssetImage(imageList[index]),
+  //         initialScale: PhotoViewComputedScale.contained * 0.9,
+  //         minScale: PhotoViewComputedScale.contained * 0.8,
+  //         maxScale: PhotoViewComputedScale.covered * 1,
+  //       );
+  //     },
+  //     scrollPhysics: BouncingScrollPhysics(),
+  //     backgroundDecoration: BoxDecoration(
+  //       color: Theme.of(context).canvasColor,
+  //     ),
+  //     loadingBuilder: (context, event) =>
+  //         Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+  //       //Center(
+  //       // child:
+  //       Container(
+  //         alignment: Alignment.topCenter,
+  //         //width: 20.0,
+  //         //height: 20.0,
+  //         child: CircularProgressIndicator(
+  //           value: event == null
+  //               ? 0
+  //               : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
+  //         ),
+  //       ),
+  //       // )
+  //     ]),
+  //   );
+  // }
 
   Widget _crearBoton(BuildContext context) {
     return Column(

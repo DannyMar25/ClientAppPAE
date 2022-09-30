@@ -63,12 +63,12 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         title: Text('Registro de citas'),
         backgroundColor: Colors.green,
         actions: [
-          email != ''
-              ? PopupMenuButton<int>(
-                  onSelected: (item) => onSelected(context, item),
-                  icon: Icon(Icons.notifications),
-                  itemBuilder: (context) => [])
-              : SizedBox(),
+          // email != ''
+          //     ? PopupMenuButton<int>(
+          //         onSelected: (item) => onSelected(context, item),
+          //         icon: Icon(Icons.notifications),
+          //         itemBuilder: (context) => [])
+          //     : SizedBox(),
           PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
               icon: Icon(Icons.manage_accounts),
@@ -366,13 +366,6 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       ),
       onSaved: (value) => correo = value as TextEditingController,
       validator: (value) => validarEmail(value),
-      // validator: (value) {
-      //   if (value!.length < 3) {
-      //     return 'Ingrese su correo electrónico';
-      //   } else {
-      //     return null;
-      //   }
-      // },
     );
   }
 
@@ -413,18 +406,11 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                         //onPressed: () => Navigator.of(context).pop(),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            //if (seleccionado == true) {
                             SnackBar(
                               content:
                                   Text('Información ingresada correctamente.'),
                             );
                             _submit();
-                            //seleccionado = false;
-
-                            // } else {
-                            //   mostrarAlerta(context,
-                            //       'Debes seleccionar un horario disponible para tu cita.');
-                            // }
                           } else {
                             mostrarAlerta(context,
                                 'Asegúrate de que todos los campos estén llenos.');
@@ -437,11 +423,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                   ],
                 );
               });
-        }
-        // onPressed: () {
-        //   print(animal.id);
-        // },
-        );
+        });
   }
 
   void _submit() async {
@@ -459,30 +441,17 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       citas.idAnimal = animal.id!;
     }
 
-    //citas.idHorario = horarios.id;
-
     if (citas.id == "") {
       final estadoCita = await citasProvider.verificar(correo.text);
       if (estadoCita.isEmpty) {
         print('Puede');
-        //horariosProvider.editarDisponible(idHorario);
-        //citas.idHorario = idHorario;
         citasProvider.crearCita(citas);
         mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
             'home', 'Información correcta');
-
-        // print('Puede');
-        // citasProvider.crearCita(citas);
-        // mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
-        //     'home', 'Información correcta');
       } else {
         print('no puede');
         mostrarAlerta(context, 'Al momento ya cuenta con una cita registrada.');
       }
-      //citasProvider.crearCita(citas);
-      // mostrarAlertaOk(context, 'La cita ha sido registrada con éxito', 'home');
     }
-
-    //Navigator.pushNamed(context, 'bienvenida');
   }
 }

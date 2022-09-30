@@ -36,12 +36,12 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
         title: Text('Formulario'),
         backgroundColor: Colors.green,
         actions: [
-          email != ''
-              ? PopupMenuButton<int>(
-                  onSelected: (item) => onSelected(context, item),
-                  icon: Icon(Icons.notifications),
-                  itemBuilder: (context) => [])
-              : SizedBox(),
+          // email != ''
+          //     ? PopupMenuButton<int>(
+          //         onSelected: (item) => onSelected(context, item),
+          //         icon: Icon(Icons.notifications),
+          //         itemBuilder: (context) => [])
+          //     : SizedBox(),
           PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
               icon: Icon(Icons.manage_accounts),

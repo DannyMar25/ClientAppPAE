@@ -227,7 +227,8 @@ class RegistroPage extends StatelessWidget {
           'Información correcta');
       //Navigator.pushReplacementNamed(context, 'intro');
     } else {
-      mostrarAlerta(context, info['mensaje']);
+      //mostrarAlerta(context, info['mensaje']);
+      mostrarAlerta(context, 'El correo electrónico ya existe.');
     }
 
     //Navigator.pushReplacementNamed(context, 'home');

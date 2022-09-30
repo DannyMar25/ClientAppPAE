@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart';
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
@@ -36,10 +37,18 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   DatosPersonalesModel datosC = new DatosPersonalesModel();
   String identificacion = '';
   bool _guardando = false;
+  late int total = 0;
   final prefs = new PreferenciasUsuario();
   final userProvider = new UsuarioProvider();
   @override
   void initState() {
+    userProvider.mostrarTotalNotificacion(prefs.uid).then((value) => {
+          setState(() {
+            print(total);
+            total = value;
+            print(total);
+          })
+        });
     super.initState();
     //showCitas();
   }
@@ -53,10 +62,20 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
           backgroundColor: Colors.green,
           actions: [
             email != ''
-                ? PopupMenuButton<int>(
-                    onSelected: (item) => onSelected(context, item),
-                    icon: Icon(Icons.notifications),
-                    itemBuilder: (context) => [])
+                ? Badge(
+                    badgeContent: Text(total.toString(),
+                        style: TextStyle(color: Colors.white)),
+                    position: BadgePosition.topEnd(top: 3, end: 0),
+                    child: IconButton(
+                      //onSelected: (item) => onSelected(context, item),
+                      icon: Icon(
+                        Icons.notifications,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'notificaciones');
+                      },
+                    ),
+                  )
                 : SizedBox(),
             PopupMenuButton<int>(
                 onSelected: (item) => onSelected(context, item),
@@ -168,28 +187,32 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
   }
 
   Widget _crearCI() {
-    return TextFormField(
-      //initialValue: ,
-      readOnly: false,
-      keyboardType: TextInputType.number,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          labelText: 'Ingrese su número de cédula:',
-          labelStyle: TextStyle(fontSize: 22, color: Colors.black)),
-      onChanged: (s) {
-        setState(() {
-          identificacion = s;
-        });
-      },
-      validator: (value) {
-        if (value!.length < 10 || value.length > 10 && value.length > 0) {
-          return 'Ingrese número de cédula válido';
-        } else if (value.isEmpty) {
-          return 'Por favor, llena este campo';
-        } else {
-          return null;
-        }
-      },
+    return SizedBox(
+      height: 100,
+      width: 330,
+      child: TextFormField(
+        //initialValue: ,
+        readOnly: false,
+        keyboardType: TextInputType.number,
+        textCapitalization: TextCapitalization.sentences,
+        decoration: InputDecoration(
+            labelText: 'Ingrese su número de cédula:',
+            labelStyle: TextStyle(fontSize: 22, color: Colors.black)),
+        onChanged: (s) {
+          setState(() {
+            identificacion = s;
+          });
+        },
+        validator: (value) {
+          if (value!.length < 10 || value.length > 10 && value.length > 0) {
+            return 'Ingrese número de cédula válido';
+          } else if (value.isEmpty) {
+            return 'Por favor, llena este campo';
+          } else {
+            return null;
+          }
+        },
+      ),
     );
   }
 
@@ -256,6 +279,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       children: [
         SizedBox(
           height: 400,
+          width: 360,
           child: ListView.builder(
             itemCount: formularios.length,
             itemBuilder: (context, i) => _crearItem(context, formularios[i]),
@@ -400,8 +424,10 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Número de cédula: " '${formulario.identificacion}'),
                       Text("Estado de solicitud: "
                           '${formulario.estado}'),
-                      Text("Nombre mascota adoptada: "
+                      Text("Nombre mascota: "
                           '${formulario.animal!.nombre}'),
+                      Text("Observación: "
+                          '${formulario.observacion}'),
                       //Divider(color: Colors.purple)
                     ],
                   ),
