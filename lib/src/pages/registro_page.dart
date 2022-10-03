@@ -8,12 +8,29 @@ import 'package:flutter/material.dart';
 
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 
-class RegistroPage extends StatelessWidget {
+class RegistroPage extends StatefulWidget {
+  @override
+  State<RegistroPage> createState() => _RegistroPageState();
+}
+
+class _RegistroPageState extends State<RegistroPage> {
   //const RegistroPage({Key? key}) : super(key: key);
   final usuarioProvider = new UsuarioProvider();
+
   final usuario = new UsuariosModel();
+
+  late bool _passwordVisible;
+  late bool _passwordVisible1;
+
   CollectionReference refUser =
       FirebaseFirestore.instance.collection('usuarios');
+  @override
+  void initState() {
+    _passwordVisible = false;
+    _passwordVisible1 = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,12 +166,24 @@ class RegistroPage extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
-            obscureText: true,
-            //keyboardType: TextInputType.emailAddress,
+            //obscureText: true,
+            obscureText: !_passwordVisible,
             decoration: InputDecoration(
               icon: Icon(Icons.lock_outline, color: Colors.green),
-              //hintText: 'ejemplo@correo.com',
               labelText: 'Contraseña',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.green,
+                ),
+                onPressed: () {
+                  // Update the state i.e. toogle the state of passwordVisible variable
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              ),
               //counterText: snapshot.data,
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
@@ -173,11 +202,24 @@ class RegistroPage extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
-            obscureText: true,
+            //obscureText: true,
+            obscureText: !_passwordVisible1,
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.green),
               labelText: 'Confirmar contraseña',
-              //counterText: snapshot.data,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                  _passwordVisible1 ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.green,
+                ),
+                onPressed: () {
+                  // Update the state i.e. toogle the state of passwordVisible variable
+                  setState(() {
+                    _passwordVisible1 = !_passwordVisible1;
+                  });
+                },
+              ),
               errorText:
                   snapshot.error != null ? snapshot.error.toString() : null,
             ),

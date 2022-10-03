@@ -1,3 +1,4 @@
+//import 'package:badges/badges.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
@@ -49,49 +50,45 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Resultados de busqueda'),
+          title: Text('Resultados'),
           backgroundColor: Colors.green,
           actions: [
-            Builder(builder: (BuildContext context) {
-              return Row(
-                children: [
-                  email == ''
-                      ? TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            Navigator.pushNamed(context, 'login');
-                          },
-                          child: Text('Iniciar sesión'),
-                        )
-                      : TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            userProvider.signOut();
-                            Navigator.pushNamed(context, 'home');
-                          },
-                          child: Text('Cerrar sesión'),
-                        ),
-                  email == ''
-                      ? TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                          ),
-                          onPressed: () async {
-                            Navigator.pushNamed(context, 'registro');
-                          },
-                          child: Text('Registrarse'),
-                        )
-                      : SizedBox(),
-                ],
-              );
-            }),
+            // email != ''
+            //     ? Badge(
+            //         badgeContent: Text(total.toString(),
+            //             style: TextStyle(color: Colors.white)),
+            //         position: BadgePosition.topEnd(top: 3, end: 0),
+            //         child: IconButton(
+            //           //onSelected: (item) => onSelected(context, item),
+            //           icon: Icon(
+            //             Icons.notifications,
+            //           ),
+            //           onPressed: () {
+            //             Navigator.pushNamed(context, 'notificaciones');
+            //           },
+            //         ),
+            //       )
+            //     : SizedBox(),
+            PopupMenuButton<int>(
+                onSelected: (item) => onSelected(context, item),
+                icon: Icon(Icons.manage_accounts),
+                itemBuilder: (context) => [
+                      email == ''
+                          ? PopupMenuItem<int>(
+                              child: Text("Iniciar sesión"),
+                              value: 0,
+                            )
+                          : PopupMenuItem<int>(
+                              child: Text("Cerrar Sesión"),
+                              value: 2,
+                            ),
+                      email == ''
+                          ? PopupMenuItem<int>(
+                              child: Text("Registrarse"),
+                              value: 1,
+                            )
+                          : PopupMenuItem(child: Text('')),
+                    ]),
           ],
         ),
         drawer: MenuWidget(),
@@ -109,6 +106,20 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
         //floatingActionButton: _crearBoton(context),
         );
+  }
+
+  void onSelected(BuildContext context, int item) {
+    switch (item) {
+      case 0:
+        Navigator.pushNamed(context, 'login');
+        break;
+      case 1:
+        Navigator.pushNamed(context, 'registro');
+        break;
+      case 2:
+        userProvider.signOut();
+        Navigator.pushNamed(context, 'intro');
+    }
   }
 
   Widget builChild() {
@@ -139,7 +150,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
                           color: Colors.green,
                           size: 45,
                         ),
-                        Text('Resultado de busqueda!'),
+                        Text('Resultado de busqueda'),
                       ],
                     ),
                     content: Text(
