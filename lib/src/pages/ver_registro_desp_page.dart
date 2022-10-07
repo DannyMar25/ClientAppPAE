@@ -5,6 +5,8 @@ import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/utils.dart';
+
 class VerRegistroDespPage extends StatefulWidget {
   const VerRegistroDespPage({Key? key}) : super(key: key);
 
@@ -21,6 +23,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
 
   List<RegistroDesparasitacionModel> desparasitaciones = [];
   List<Future<RegistroDesparasitacionModel>> listaD = [];
+  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+    //backgroundColor: Colors.green,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +253,58 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                   margin: EdgeInsets.all(20),
                 ),
               ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('¡Atención!'),
+                          content: Text('Estas seguro de borrar el registro.'),
+                          actions: [
+                            TextButton(
+                              child: Text('Si'),
+                              onPressed: () {
+                                print(desparasitacion.id);
+                                formulariosProvider.borrarRegistroDesp(
+                                    formularios.id, desparasitacion.id);
+                                mostrarOkRegistros(
+                                    context,
+                                    'El registro ha sido eliminado',
+                                    'Información',
+                                    'verRegistroDesp',
+                                    datosA,
+                                    formularios,
+                                    animal);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Cancelar'),
+                              //onPressed: () {},
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          ],
+                        );
+                      });
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete_outline,
+                      color: Colors.green,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                    ),
+                    Text(
+                      'Eliminar',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(),
               //Divider(color: Colors.transparent)
             ],
           ),
@@ -352,7 +412,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
           ),
           ListTile(
             leading: Icon(Icons.settings, color: Colors.green),
-            title: Text('Cargar Evidencia'),
+            title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushNamed(context, 'demoArchivos', arguments: {

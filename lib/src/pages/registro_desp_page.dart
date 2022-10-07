@@ -160,7 +160,9 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       setState(() {
         _fecha = picked.year.toString() +
             '-' +
-            picked.month.toString() +
+            (picked.month < 10
+                ? '0' + picked.month.toString()
+                : picked.month.toString()) +
             '-' +
             picked.day.toString();
 
@@ -556,7 +558,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           ),
           ListTile(
             leading: Icon(Icons.settings, color: Colors.green),
-            title: Text('Cargar Evidencia'),
+            title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushNamed(context, 'demoArchivos', arguments: {

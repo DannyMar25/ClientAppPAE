@@ -566,7 +566,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           ),
           ListTile(
             leading: Icon(Icons.settings, color: Colors.green),
-            title: Text('Cargar Evidencia'),
+            title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushNamed(context, 'demoArchivos', arguments: {

@@ -1,4 +1,5 @@
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
@@ -36,12 +37,6 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
         title: Text('Formulario'),
         backgroundColor: Colors.green,
         actions: [
-          // email != ''
-          //     ? PopupMenuButton<int>(
-          //         onSelected: (item) => onSelected(context, item),
-          //         icon: Icon(Icons.notifications),
-          //         itemBuilder: (context) => [])
-          //     : SizedBox(),
           PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
               icon: Icon(Icons.manage_accounts),
@@ -196,7 +191,10 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
         break;
       case 2:
         userProvider.signOut();
-        Navigator.pushNamed(context, 'intro');
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => IntroPage()),
+            (Route<dynamic> route) => false);
+      //Navigator.pushNamed(context, 'intro');
     }
   }
 }
@@ -263,51 +261,4 @@ class _CardBackground extends StatelessWidget {
       ),
     );
   }
-
-  // Widget contenidoAnt(BuildContext context, AnimalModel animal) {
-  //   return Table(
-  //     children: [
-  //       TableRow(children: [
-  //         InkWell(
-  //           onTap: () => Navigator.pushReplacementNamed(context, 'formularioP1',
-  //               arguments: animal),
-  //           child: _SingleCard(
-  //             color: Colors.blue,
-  //             icon: Icons.person,
-  //             text: 'Datos personales',
-  //           ),
-  //         ),
-  //         InkWell(
-  //           onTap: () =>
-  //               Navigator.pushReplacementNamed(context, 'formularioP2'),
-  //           child: _SingleCard(
-  //             color: Colors.pinkAccent,
-  //             icon: Icons.people,
-  //             text: 'Situacion Familiar',
-  //           ),
-  //         ),
-  //       ]),
-  //       TableRow(children: [
-  //         InkWell(
-  //           onTap: () =>
-  //               Navigator.pushReplacementNamed(context, 'formularioP3'),
-  //           child: _SingleCard(
-  //             color: Colors.purple,
-  //             icon: Icons.home,
-  //             text: 'Domicilio',
-  //           ),
-  //         ),
-  //         InkWell(
-  //           onTap: () =>
-  //               Navigator.pushReplacementNamed(context, 'formularioP4'),
-  //           child: _SingleCard(
-  //             color: Colors.green,
-  //             icon: Icons.pets,
-  //             text: 'Relacion con los animales',
-  //           ),
-  //         ),
-  //       ]),
-  //     ],
-  //   );
-  // }
 }

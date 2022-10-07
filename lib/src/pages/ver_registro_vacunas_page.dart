@@ -3,6 +3,7 @@ import 'package:cliente_app_v1/src/models/formulario_datosPersonales_model.dart'
 import 'package:cliente_app_v1/src/models/formulario_principal_model.dart';
 import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class VerRegistroVacunasPage extends StatefulWidget {
@@ -21,6 +22,12 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
 
   List<RegistroVacunasModel> vacunas = [];
   List<Future<RegistroVacunasModel>> listaV = [];
+  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+    //backgroundColor: Colors.green,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+  );
 
   @override
   void initState() {
@@ -287,7 +294,58 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                   margin: EdgeInsets.all(20),
                 ),
               ),
-              //Divider(color: Colors.transparent)
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text('¡Atención!'),
+                          content: Text('Estas seguro de borrar el registro.'),
+                          actions: [
+                            TextButton(
+                              child: Text('Si'),
+                              onPressed: () {
+                                print(vacuna.id);
+                                formulariosProvider.borrarRegistroVacunas(
+                                    formularios.id, vacuna.id);
+                                mostrarOkRegistros(
+                                    context,
+                                    'El registro ha sido eliminado',
+                                    'Información',
+                                    'verRegistroVacunas',
+                                    datosA,
+                                    formularios,
+                                    animal);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Cancelar'),
+                              //onPressed: () {},
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          ],
+                        );
+                      });
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete_outline,
+                      color: Colors.green,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                    ),
+                    Text(
+                      'Eliminar',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(),
             ],
           ),
         ),
@@ -394,7 +452,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
           ),
           ListTile(
             leading: Icon(Icons.settings, color: Colors.green),
-            title: Text('Cargar Evidencia'),
+            title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushNamed(context, 'demoArchivos', arguments: {

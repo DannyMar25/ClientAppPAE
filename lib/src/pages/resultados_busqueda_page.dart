@@ -1,5 +1,6 @@
 //import 'package:badges/badges.dart';
 import 'package:cliente_app_v1/src/models/animales_model.dart';
+import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/animales_provider.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
@@ -118,7 +119,10 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
         break;
       case 2:
         userProvider.signOut();
-        Navigator.pushNamed(context, 'intro');
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => IntroPage()),
+            (Route<dynamic> route) => false);
+      //Navigator.pushNamed(context, 'intro');
     }
   }
 

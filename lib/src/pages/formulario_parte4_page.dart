@@ -346,15 +346,15 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearNombreM() {
     return TextFormField(
-      validator: (value) {
-        if (value!.length < 1 && value.length > 0) {
-          return 'Ingrese el nombre';
-        } else if (value.isEmpty) {
-          return campoVacio;
-        } else {
-          return null;
-        }
-      },
+      // validator: (value) {
+      //   if (value!.length < 1 && value.length > 0) {
+      //     return 'Ingrese el nombre';
+      //   } else if (value.isEmpty) {
+      //     return campoVacio;
+      //   } else {
+      //     return null;
+      //   }
+      // },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -363,23 +363,20 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
           relacionAnim.nombreMs1 = s;
         });
       },
-      // decoration: InputDecoration(
-      //     labelText: 'Nombre Mascota',
-      //     labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
     );
   }
 
   Widget _crearNombreM1() {
     return TextFormField(
-      validator: (value) {
-        if (value!.length < 1 && value.length > 0) {
-          return 'Ingrese el nombre';
-        } else if (value.isEmpty) {
-          return campoVacio;
-        } else {
-          return null;
-        }
-      },
+      // validator: (value) {
+      //   if (value!.length < 1 && value.length > 0) {
+      //     return 'Ingrese el nombre';
+      //   } else if (value.isEmpty) {
+      //     return campoVacio;
+      //   } else {
+      //     return null;
+      //   }
+      // },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -388,35 +385,24 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
           relacionAnim.nombreMs2 = s;
         });
       },
-      // decoration: InputDecoration(
-      //     labelText: 'Nombre Mascota',
-      //     labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
     );
   }
 
   Widget _crearTipoMascota() {
     final dropdownMenuOptions = _items
         .map((String item) =>
-            //new DropdownMenuItem<String>(value: item, child: new Text(item)))
             new DropdownMenuItem<String>(value: item, child: new Text(item)))
         .toList();
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   'Seleccione el tipo de mascota:    ',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
             value: _selection,
             items: dropdownMenuOptions,
             onChanged: (s) {
               setState(() {
                 _selection = s;
                 relacionAnim.tipoMs1 = s!;
-                //animal.tamanio = s!;
               });
             }),
       ],
@@ -426,26 +412,18 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
   Widget _crearTipoMascota1() {
     final dropdownMenuOptions = _items
         .map((String item) =>
-            //new DropdownMenuItem<String>(value: item, child: new Text(item)))
             new DropdownMenuItem<String>(value: item, child: new Text(item)))
         .toList();
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   'Seleccione el tipo de mascota:    ',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
-            //hint: Text(animal.tamanio.toString()),
             value: _selection9,
             items: dropdownMenuOptions,
             onChanged: (s) {
               setState(() {
                 _selection9 = s;
                 relacionAnim.tipoMs2 = s!;
-                //animal.tamanio = s!;
               });
             }),
       ],

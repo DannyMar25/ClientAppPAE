@@ -442,7 +442,10 @@ class _IntroPageState extends State<IntroPage> {
         break;
       case 2:
         userProvider.signOut();
-        Navigator.pushNamed(context, 'intro');
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => IntroPage()),
+            (Route<dynamic> route) => false);
+      //Navigator.pushNamed(context, 'intro');
     }
   }
 }

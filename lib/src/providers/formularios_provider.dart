@@ -341,7 +341,7 @@ class FormulariosProvider {
     var documents = await refForm
         .doc(idForm)
         .collection('registroVacunas')
-        .orderBy('fechaConsulta')
+        .orderBy('fechaConsulta', descending: false)
         .get();
     vacunas.addAll(documents.docs.map((e) {
       //var animal = AnimalModel.fromJson(e.data() as Map<String, dynamic>);
@@ -498,5 +498,23 @@ class FormulariosProvider {
       return formulario;
     }));
     return s.toList();
+  }
+
+  //Eliminar registros de desparacitación y vacunas
+
+  Future<int> borrarRegistroVacunas(String idFormu, String id) async {
+    await refForm.doc(idFormu).collection('registroVacunas').doc(id).delete();
+
+    return 1;
+  }
+
+  Future<int> borrarRegistroDesp(String idFormu, String id) async {
+    await refForm
+        .doc(idFormu)
+        .collection('registroDesparasitacion')
+        .doc(id)
+        .delete();
+
+    return 1;
   }
 }
