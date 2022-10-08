@@ -84,7 +84,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        subtitle: Text(
+        title: Text(
           'Aquí encontrarás una lista de todas las desparacitaciones de tu mascota.',
           textAlign: TextAlign.justify,
         ),
