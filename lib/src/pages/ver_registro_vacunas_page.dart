@@ -63,7 +63,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                       Text(
                         'Registro de vacunas',
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 26,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 2
@@ -87,7 +87,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
   Widget _detalle() {
     return Card(
       child: ListTile(
-        subtitle: Text(
+        title: Text(
           'Aquí encontrarás una lista de todas las vacunas de tu mascota.',
           textAlign: TextAlign.justify,
         ),
