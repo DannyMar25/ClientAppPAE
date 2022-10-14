@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:cliente_app_v1/src/models/usuario_notificacion_model.dart';
 import 'package:cliente_app_v1/src/models/usuarios_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
-import 'package:cliente_app_v1/src/utils/Notificaciones.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
