@@ -6,6 +6,7 @@ import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
+import 'package:flutter/services.dart';
 
 class FormDatPersonalesPage extends StatefulWidget {
   //const formDatPersonalesPage({Key? key}) : super(key: key);
@@ -171,6 +172,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.nombreCom,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Nombre Completo',

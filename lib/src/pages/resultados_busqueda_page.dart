@@ -24,10 +24,10 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
   final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
   final formKey = GlobalKey<FormState>();
-  String? especie;
-  String? sexo;
-  String? etapaVida;
-  String? tamanio;
+  String? especie = '';
+  String? sexo = '';
+  String? etapaVida = '';
+  String? tamanio = '';
   List<AnimalModel> citasA = [];
   List<Future<AnimalModel>> listaC = [];
   @override
@@ -99,7 +99,8 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
             expand_card(),
             Padding(padding: EdgeInsets.only(bottom: 10.0)),
             Expanded(
-              child: builChild(),
+              //child: builChild(),
+              child: _crearListadoBusqueda(),
             )
             //_crearListado(),
           ],
@@ -136,8 +137,8 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
   Widget _crearListadoBusqueda() {
     return FutureBuilder(
-        future: animalesProvider.cargarBusqueda(
-            especie!, sexo!, etapaVida!, tamanio!),
+        future:
+            animalesProvider.cargarBusqueda(especie, sexo, etapaVida, tamanio),
         builder:
             (BuildContext context, AsyncSnapshot<List<AnimalModel>> snapshot) {
           if (snapshot.hasData) {

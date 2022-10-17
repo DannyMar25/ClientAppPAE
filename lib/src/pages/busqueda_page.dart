@@ -230,8 +230,8 @@ class _BusquedaPageState extends State<BusquedaPage> {
                   //hint: Text(animal.tamanio.toString()),
                   value: _selection,
                   items: dropdownMenuOptions,
-                  validator: (value) =>
-                      value == null ? 'Selecciona una opción' : null,
+                  // validator: (value) =>
+                  //     value == null ? 'Selecciona una opción' : null,
                   onChanged: (s) {
                     setState(() {
                       _selection = s;
@@ -272,8 +272,8 @@ class _BusquedaPageState extends State<BusquedaPage> {
                   //hint: Text(animal.tamanio.toString()),
                   value: _selection1,
                   items: dropdownMenuOptions,
-                  validator: (value) =>
-                      value == null ? 'Selecciona una opción' : null,
+                  // validator: (value) =>
+                  //     value == null ? 'Selecciona una opción' : null,
                   onChanged: (s) {
                     setState(() {
                       _selection1 = s;
@@ -314,8 +314,8 @@ class _BusquedaPageState extends State<BusquedaPage> {
                   //hint: Text(animal.tamanio.toString()),
                   value: _selection2,
                   items: dropdownMenuOptions,
-                  validator: (value) =>
-                      value == null ? 'Selecciona una opción' : null,
+                  // validator: (value) =>
+                  //     value == null ? 'Selecciona una opción' : null,
                   onChanged: (s) {
                     setState(() {
                       _selection2 = s;

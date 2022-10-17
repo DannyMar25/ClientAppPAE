@@ -43,8 +43,8 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     formularios = arg['formulario'] as FormulariosModel;
     animal = arg['animal'] as AnimalModel;
     return Scaffold(
-      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
-      backgroundColor: Color.fromARGB(223, 248, 248, 245),
+      backgroundColor: Color.fromARGB(255, 236, 234, 219),
+      //backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('Registro de desparasitación'),
         backgroundColor: Colors.green,
@@ -65,11 +65,9 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                         Text(
                           'Registrar desparacitaciones',
                           style: TextStyle(
-                            fontSize: 33,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28,
+                            color: Color.fromARGB(255, 243, 165, 9),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -369,12 +367,16 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       height: 245.0,
       width: 620.0,
       child: Card(
-        color: Color.fromARGB(255, 143, 233, 148),
+        clipBehavior: Clip.antiAlias,
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Colors.white)),
+        color: Color.fromARGB(255, 243, 243, 230),
         child: Column(
           children: [
             Padding(padding: EdgeInsets.all(1.0)),
             ColoredBox(
-              color: Color.fromARGB(255, 33, 168, 39),
+              color: Color.fromARGB(255, 51, 178, 213),
               child: Row(
                 children: [
                   Padding(padding: EdgeInsets.only(top: 15)),
@@ -413,7 +415,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
               ],
             ),
             ColoredBox(
-              color: Color.fromARGB(255, 33, 168, 39),
+              color: Color.fromARGB(255, 51, 178, 213),
               child: Row(
                 children: [
                   SizedBox(
@@ -453,7 +455,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
           ],
         ),
         elevation: 8,
-        shadowColor: Colors.green,
+        shadowColor: Color.fromARGB(255, 19, 154, 156),
         margin: EdgeInsets.all(20),
       ),
     );

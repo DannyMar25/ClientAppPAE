@@ -70,13 +70,14 @@ class AnimalesProvider {
 
   //Future<List<Future<AnimalModel>>> cargarBusqueda(
   Future<List<AnimalModel>> cargarBusqueda(
-      String especie, String sexo, String etapaVida, String tamanio) async {
+      String? especie, String? sexo, String? etapaVida, String? tamanio) async {
     final List<AnimalModel> animales = <AnimalModel>[];
     var documents = await refAn
         .where('especie', isEqualTo: especie)
         .where('sexo', isEqualTo: sexo)
         .where('etapaVida', isEqualTo: etapaVida)
         .where('tamanio', isEqualTo: tamanio)
+        .where('estado', isEqualTo: 'En Adopción')
         .get();
     //var s = (documents.docs.map((e) async {
     animales.addAll(documents.docs.map((e) {
