@@ -226,7 +226,8 @@ class _LoginPageState extends State<LoginPage> {
             context,
             'Tu usuario y contraseña no se encuentran registrados en la aplicación.',
             'login',
-            'Advertencia');
+            'Advertencia',
+            'Ok');
       }
       //Navigator.pushNamed(context, 'intro', arguments: animal);
     } else {
@@ -265,7 +266,8 @@ class _LoginPageState extends State<LoginPage> {
               context,
               'Tu usuario y contraseña no se encuentran registrados en la aplicación.',
               'login',
-              'Advertencia');
+              'Advertencia',
+              'Ok');
         }
         //Navigator.pushNamed(context, 'intro');
       },

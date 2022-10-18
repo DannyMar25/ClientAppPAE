@@ -381,7 +381,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
             return Colors.green[700];
           }),
         ),
-        label: Text('Guardar'),
+        label: Text('Revisar'),
         icon: Icon(Icons.save),
         autofocus: true,
         onPressed: () {
@@ -406,7 +406,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                       horaSeleccionada),
                   actions: [
                     TextButton(
-                        child: Text('Ok'),
+                        child: Text('Guardar'),
                         //onPressed: () => Navigator.of(context).pop(),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
@@ -421,7 +421,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                           }
                         }),
                     TextButton(
-                        child: Text('Revisar información'),
+                        child: Text('Corregir información'),
                         //onPressed: () => Navigator.of(context).pop(),
                         onPressed: () => Navigator.of(context).pop()),
                   ],
@@ -451,7 +451,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         print('Puede');
         citasProvider.crearCita(citas);
         mostrarAlertaOk(context, 'La cita ha sido registrada con éxito.',
-            'home', 'Información correcta');
+            'home', 'Información correcta', 'Ir a Galería');
       } else {
         print('no puede');
         mostrarAlerta(context, 'Al momento ya cuenta con una cita registrada.');

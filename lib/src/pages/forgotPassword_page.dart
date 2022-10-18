@@ -121,7 +121,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             context,
                             'Se ha enviado a tu correo: $_email un enlace para restablecer la contraseña.',
                             'login',
-                            'Información correcta');
+                            'Información correcta',
+                            'Iniciar sesión');
                       } on FirebaseAuthException catch (e) {
                         //print(exception.code);
                         print(e.message);

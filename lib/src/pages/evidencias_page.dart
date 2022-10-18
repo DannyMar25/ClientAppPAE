@@ -246,7 +246,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                 await formulariosProvider.verificar(identificacion);
             if (estadoCedula.isEmpty) {
               mostrarAlertaOk(context, 'No se ha encontrado ningun registo.',
-                  'evidencia', 'Atención!');
+                  'evidencia', 'Atención!', 'Ok');
             } else {
               _submit();
             }

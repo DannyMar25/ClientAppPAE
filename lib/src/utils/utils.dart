@@ -45,8 +45,8 @@ void mostrarAlertaAuth(BuildContext context, String mensaje, String ruta) {
       });
 }
 
-void mostrarAlertaOk(
-    BuildContext context, String mensaje, String ruta, String titulo) {
+void mostrarAlertaOk(BuildContext context, String mensaje, String ruta,
+    String titulo, String iconText) {
   showDialog(
       context: context,
       builder: (context) {
@@ -64,7 +64,7 @@ void mostrarAlertaOk(
           content: Text(mensaje),
           actions: [
             TextButton(
-                child: Text('Ok'),
+                child: Text(iconText),
                 //onPressed: () => Navigator.of(context).pop(),
                 onPressed: () => Navigator.pushNamed(context, ruta)),
           ],
