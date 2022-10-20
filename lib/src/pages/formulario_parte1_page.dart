@@ -221,7 +221,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         controller: _inputFieldDateController,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-          labelText: 'Fecha de nacimiento:',
+          labelText: 'Ingrese su fecha de nacimiento:',
           //helperText: 'Solo es el nombre',
           suffixIcon: Icon(
             Icons.perm_contact_calendar,

@@ -45,7 +45,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
         //backgroundColor: Color.fromARGB(223, 211, 212, 207),
         backgroundColor: Color.fromARGB(255, 236, 234, 219),
         appBar: AppBar(
-          title: Text('Registros'),
+          title: Text('Vacunas'),
           backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),

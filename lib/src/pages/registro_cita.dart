@@ -10,6 +10,7 @@ import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RegistroClienteCitas extends StatefulWidget {
@@ -320,6 +321,9 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     return TextFormField(
       //initialValue: animal.nombre,
       controller: nombre,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Nombre',

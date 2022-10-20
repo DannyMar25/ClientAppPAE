@@ -46,7 +46,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       backgroundColor: Color.fromARGB(255, 236, 234, 219),
       //backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('Registro de desparasitación'),
+        title: Text('Desparasitaciones'),
         backgroundColor: Colors.green,
       ),
       drawer: _menuWidget(),

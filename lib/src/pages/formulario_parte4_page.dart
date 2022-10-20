@@ -346,15 +346,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearNombreM() {
     return TextFormField(
-      // validator: (value) {
-      //   if (value!.length < 1 && value.length > 0) {
-      //     return 'Ingrese el nombre';
-      //   } else if (value.isEmpty) {
-      //     return campoVacio;
-      //   } else {
-      //     return null;
-      //   }
-      // },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
@@ -368,15 +359,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _crearNombreM1() {
     return TextFormField(
-      // validator: (value) {
-      //   if (value!.length < 1 && value.length > 0) {
-      //     return 'Ingrese el nombre';
-      //   } else if (value.isEmpty) {
-      //     return campoVacio;
-      //   } else {
-      //     return null;
-      //   }
-      // },
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
