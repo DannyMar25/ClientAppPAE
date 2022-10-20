@@ -904,10 +904,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       mainAxisAlignment: MainAxisAlignment.start,
       //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   '¿Qué comerá habitualmente la mascota?:           ',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
             value: _selection2,
@@ -931,12 +927,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         .toList();
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   'Si su mascota se enferma usted: ',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
             value: _selection3,
@@ -1049,10 +1040,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       mainAxisAlignment: MainAxisAlignment.start,
       //mainAxisSize: MainAxisSize.max,
       children: [
-        // Text(
-        //   '',
-        //   style: TextStyle(fontSize: 16, color: Colors.black),
-        // ),
         DropdownButton<String>(
             //hint: Text(animal.tamanio.toString()),
             value: _selection8,
