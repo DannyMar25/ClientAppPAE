@@ -155,11 +155,11 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
                           color: Colors.green,
                           size: 45,
                         ),
-                        Text('Resultado de busqueda'),
+                        Text('Resultado de búsqueda'),
                       ],
                     ),
                     content: Text(
-                        'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+                        'No se ha encotrado ninguna mascota con las características que buscabas.'),
                     actions: [
                       TextButton(
                           child: Text('Ok'),
@@ -205,11 +205,11 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
                           color: Colors.green,
                           size: 45,
                         ),
-                        Text('Resultado de busqueda!'),
+                        Text('Resultado de búsqueda!'),
                       ],
                     ),
                     content: Text(
-                        'No se ha encotrado ninguna mascota con las caracteristicas que buscabas.'),
+                        'No se ha encotrado ninguna mascota con las características que buscabas.'),
                     actions: [
                       TextButton(
                           child: Text('Ok'),
@@ -314,7 +314,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
               ),
               child: Text(
                 """Hola, a continuacion puedes ver nuestra galeria de mascotas en adopcion. 
-Si deseas puedes usar nuestros filtros para realizar una busqueda mas personalizada dependiendo de tus gustos en mascotas.""",
+Si deseas puedes usar nuestros filtros para realizar una busqueda más personalizada dependiendo de tus gustos en mascotas.""",
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!

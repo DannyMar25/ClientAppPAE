@@ -325,7 +325,7 @@ class _IntroPageState extends State<IntroPage> {
                 AccordionSection(
                   isOpen: false,
                   leftIcon: const Icon(Icons.list_alt, color: Colors.white),
-                  header: Text('Adopta!', style: _headerStyle),
+                  header: Text('¡Adopta!', style: _headerStyle),
                   headerBackgroundColor: Color.fromARGB(255, 170, 124, 248),
                   content: Column(
                     children: [

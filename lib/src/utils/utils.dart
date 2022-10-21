@@ -16,7 +16,17 @@ void mostrarAlerta(BuildContext context, String mensaje) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Información incorrecta'),
+          //title: Text('Información incorrecta'),
+          title: Row(
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 50,
+              ),
+              Text('Información incorrecta'),
+            ],
+          ),
           content: Text(mensaje),
           actions: [
             TextButton(

@@ -40,7 +40,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
           },
         ),
         backgroundColor: Colors.green,
-        title: Text('Busqueda de mascotas'),
+        title: Text('Búsqueda de mascotas'),
       ),
       body: Stack(
         children: [
