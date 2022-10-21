@@ -201,6 +201,10 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.cedula,
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
+      ],
       keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -297,6 +301,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.ocupacion,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Ocupación',
@@ -436,6 +443,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         initialValue: datoPersona.telfDomi,
         readOnly: false,
         keyboardType: TextInputType.phone,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
             labelText: 'Teléfono de domicilio',
@@ -462,6 +472,10 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfCel,
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
+      ],
       keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -491,6 +505,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         },
         initialValue: datoPersona.telfTrab,
         readOnly: false,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
         keyboardType: TextInputType.phone,
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
@@ -518,6 +535,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.nombreRef,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Nombre',
@@ -543,6 +563,9 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.parentescoRef,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Parentesco',
@@ -568,6 +591,10 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       },
       initialValue: datoPersona.telfRef,
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
+      ],
       keyboardType: TextInputType.phone,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(

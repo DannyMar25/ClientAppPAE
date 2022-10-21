@@ -5,6 +5,7 @@ import 'package:cliente_app_v1/src/models/registro_vacunas_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegistroVacunasPage extends StatefulWidget {
   const RegistroVacunasPage({Key? key}) : super(key: key);
@@ -162,8 +163,11 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _crearPesoActual() {
     return TextFormField(
       textAlign: TextAlign.center,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+      ],
       textCapitalization: TextCapitalization.sentences,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
           //labelText: 'Peso',
           ),
@@ -269,6 +273,10 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
   Widget _crearVeterinario() {
     return TextFormField(
       textAlign: TextAlign.center,
+      keyboardType: TextInputType.name,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(),
       validator: (value) {

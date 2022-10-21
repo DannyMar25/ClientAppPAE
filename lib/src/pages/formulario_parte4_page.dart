@@ -6,6 +6,7 @@ import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormRelacionMascotas1Page extends StatefulWidget {
   //const formDatPersonalesPage({Key? key}) : super(key: key);
@@ -330,6 +331,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       textAlign: TextAlign.justify,
       initialValue: relacionAnim.ubicMascota,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           //contentPadding: const EdgeInsets.all(0.0),
@@ -348,6 +352,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     return TextFormField(
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -361,6 +368,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     return TextFormField(
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -466,6 +476,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.deseoAdop,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Por qué desea adoptar una mascota?',
@@ -488,6 +501,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.cambioDomi,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           // labelText:
@@ -511,6 +527,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.relNuevaCasa,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           //labelText:
@@ -534,6 +553,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.tiempoSolaMas,
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
@@ -557,6 +579,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.diaNocheMas,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde pasará durante el día y la noche?',
@@ -579,6 +604,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.duermeMas,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde dormirá la mascota?',
@@ -601,6 +629,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.necesidadMas,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Dónde hará sus necesidades?',
@@ -646,6 +677,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.responGastos,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           // labelText:
@@ -669,6 +703,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.recursoVet,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           //labelText:
@@ -692,6 +729,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.benefEst,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Conoce usted los beneficios de la esterilización?',
@@ -714,6 +754,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.tenenciaResp,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Según usted qué es tenencia responsable?',
@@ -736,6 +779,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       },
       initialValue: relacionAnim.ordenMuni,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           //labelText:

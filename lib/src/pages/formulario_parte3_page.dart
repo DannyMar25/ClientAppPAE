@@ -4,6 +4,7 @@ import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormDomicilioPage extends StatefulWidget {
   //const formDatPersonalesPage({Key? key}) : super(key: key);
@@ -57,13 +58,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     print(idFormu1);
     idAnimal = arg['idAnimal'];
     print(idAnimal);
-    // var formData = ModalRoute.of(context)!.settings.arguments;
-    // if (formData != null) {
-    //   idFormu1 = formData;
-    // }
     return Scaffold(
-      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text('DOMICILIO'),
@@ -108,8 +103,6 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       Divider(),
 
                       _buildChild1(),
-                      // _crearNombreD(),
-                      // _crearTelefono(),
                       Divider(),
                       Text(
                         '¿Planea mudarse próximamente?',
@@ -195,7 +188,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         },
         //initialValue: domicilio.m2.toString(),
         readOnly: false,
-        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+        ],
+        keyboardType: TextInputType.numberWithOptions(decimal: true),
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
             labelText: 'Especifique metros (m2)',
@@ -213,6 +209,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     return TextFormField(
       initialValue: domicilio.telfD,
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
+      ],
       textCapitalization: TextCapitalization.sentences,
       //keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
@@ -239,6 +239,9 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     return TextFormField(
       initialValue: domicilio.nombreD,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Nombre',
@@ -342,7 +345,10 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         },
         //initialValue: domicilio.alturaC.toString(),
         readOnly: false,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.numberWithOptions(decimal: true),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+        ],
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
           labelText: 'Altura (m)',
@@ -525,6 +531,9 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       },
       // initialValue: ,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: 'Material',

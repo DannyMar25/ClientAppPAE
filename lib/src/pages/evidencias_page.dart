@@ -197,6 +197,10 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
       child: TextFormField(
         //initialValue: ,
         readOnly: false,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(10)
+        ],
         keyboardType: TextInputType.number,
         textCapitalization: TextCapitalization.sentences,
         decoration: InputDecoration(
@@ -546,7 +550,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     row10.cells[0].value = 'Esterilizado:';
     row10.cells[1].value = animal.esterilizado;
     PdfGridRow row11 = grid.rows.add();
-    row11.cells[0].value = 'Caracteristicas:';
+    row11.cells[0].value = 'Características:';
     row11.cells[1].value = animal.caracteristicas;
     //Estilo de celdas titulo
     row1.cells[0].style = PdfGridCellStyle(

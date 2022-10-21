@@ -6,6 +6,7 @@ import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart' as utils;
+import 'package:flutter/services.dart';
 
 class FormSituacionFamPage extends StatefulWidget {
   //const formDatPersonalesPage({Key? key}) : super(key: key);
@@ -191,17 +192,11 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearNombre1() {
     return TextFormField(
-      // validator: (value) {
-      //   if (value!.length < 3 && value.length > 0) {
-      //     return 'Ingrese el nombre';
-      //   } else if (value.isEmpty) {
-      //     return campoVacio;
-      //   } else {
-      //     return null;
-      //   }
-      // },
       initialValue: sitFamilia.nombreFam1,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -215,6 +210,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     return TextFormField(
       //initialValue: sitFamilia.edadFam1.toString(),
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       onSaved: (value) => sitFamilia.edadFam1 = int.parse(value!),
       validator: (value) {
@@ -240,6 +238,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.parentescoFam1,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -266,6 +267,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.nombreFam2,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -277,13 +281,11 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearEdad2() {
     return TextFormField(
-      //initialValue: sitFamilia.edadFam2.toString(),
       readOnly: false,
-      //textCapitalization: TextCapitalization.sentences,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       keyboardType: TextInputType.numberWithOptions(decimal: true),
-      //decoration: InputDecoration(
-      //  labelText: 'Edad',
-      //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onSaved: (value) => sitFamilia.edadFam2 = int.parse(value!),
       validator: (value) {
         if (utils.isNumeric(value!)) {
@@ -308,6 +310,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.parentescoFam2,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -331,6 +336,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.nombreFam3,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -344,6 +352,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     return TextFormField(
       //initialValue: sitFamilia.edadFam3.toString(),
       readOnly: false,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       onSaved: (value) => sitFamilia.edadFam3 = int.parse(value!),
       validator: (value) {
@@ -369,6 +380,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.parentescoFam3,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -392,6 +406,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.nombreFam4,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -406,13 +423,11 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _crearEdad4() {
     return TextFormField(
-      //initialValue: sitFamilia.edadFam4.toString(),
       readOnly: false,
-      //textCapitalization: TextCapitalization.sentences,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       keyboardType: TextInputType.numberWithOptions(decimal: true),
-      //decoration: InputDecoration(
-      //  labelText: 'Edad',
-      //  labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onSaved: (value) => sitFamilia.edadFam4 = int.parse(value!),
       validator: (value) {
         if (utils.isNumeric(value!)) {
@@ -437,6 +452,9 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
       initialValue: sitFamilia.parentescoFam4,
       readOnly: false,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+      ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
         setState(() {
@@ -565,53 +583,6 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       },
     );
   }
-
-  // Widget _crearFechaParto(BuildContext context) {
-  //   return TextFormField(
-  //     validator: (value) {
-  //       if (value!.isEmpty) {
-  //         return campoVacio;
-  //       }
-  //       return null;
-  //     },
-  //     controller: _inputFieldDateController,
-  //     decoration: InputDecoration(
-  //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-  //       //hintText: 'Ingrese fecha aproximada',
-  //       labelText: 'Fecha aproximada de parto',
-  //       suffixIcon: Icon(Icons.perm_contact_calendar),
-  //       icon: Icon(Icons.calendar_today),
-  //     ),
-  //     onTap: () {
-  //       FocusScope.of(context).requestFocus(new FocusNode());
-  //       _selectDate(context);
-  //     },
-  //     //onSaved: (value) => horarios.dia = _inputFieldDateController.toString(),
-  //   );
-  // }
-
-  // _selectDate(BuildContext context) async {
-  //   DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: new DateTime.now(),
-  //     firstDate: new DateTime(2021),
-  //     lastDate: new DateTime(2025),
-  //     locale: Locale('es', 'ES'),
-  //   );
-
-  //   if (picked != null) {
-  //     setState(() {
-  //       _fecha = picked.year.toString() +
-  //           '-' +
-  //           picked.month.toString() +
-  //           '-' +
-  //           picked.day.toString();
-  //       //_fecha = picked.toString();
-  //       _inputFieldDateController.text = _fecha;
-  //       //horarios.dia = picked.toString();
-  //     });
-  //   }
-  // }
 
   Widget _crearBoton() {
     return ElevatedButton.icon(

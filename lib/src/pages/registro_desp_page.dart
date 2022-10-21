@@ -5,6 +5,7 @@ import 'package:cliente_app_v1/src/models/registro_desparaitaciones_model.dart';
 import 'package:cliente_app_v1/src/providers/formularios_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegistroDespPage extends StatefulWidget {
   const RegistroDespPage({Key? key}) : super(key: key);
@@ -177,7 +178,10 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
       textAlign: TextAlign.center,
       //nitialValue: animal.peso.toString(),
       textCapitalization: TextCapitalization.sentences,
-      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+      ],
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
       decoration: InputDecoration(
           //labelText: 'Peso',
           ),

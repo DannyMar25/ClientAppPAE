@@ -346,6 +346,9 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       //initialValue: animal.nombre,
       controller: telefono,
       keyboardType: TextInputType.phone,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Teléfono',
