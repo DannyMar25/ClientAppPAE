@@ -170,27 +170,6 @@ void mostrarAlertaOkCancel(
         );
       });
 }
-// void mostrarInformacion(
-//     BuildContext context, String mensaje, String ruta, AnimalModel animal) {
-//   showDialog(
-//       context: context,
-//       builder: (context) {
-//         return AlertDialog(
-//           title: Text('Aviso'),
-//           content: Text(mensaje),
-//           actions: [
-//             TextButton(
-//                 child: Text('Ok'),
-//                 //onPressed: () => Navigator.of(context).pop(),
-//                 onPressed: () {}),
-//             TextButton(
-//                 child: Text('Cancelar'),
-//                 //onPressed: () => Navigator.of(context).pop(),
-//                 onPressed: () => Navigator.of(context).pop()),
-//           ],
-//         );
-//       });
-// }
 
 String? validarEmail(String? value) {
   String pattern =

@@ -435,7 +435,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Por qué?',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+          labelStyle: TextStyle(fontSize: 19, color: Colors.black)),
       onChanged: (s) {
         setState(() {
           relacionAnim.justificacion1 = s;
@@ -457,7 +457,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
           labelText: '¿Por qué?',
-          labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
+          labelStyle: TextStyle(fontSize: 19, color: Colors.black)),
       onChanged: (s) {
         setState(() {
           relacionAnim.justificacion2 = s;

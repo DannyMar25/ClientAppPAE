@@ -385,15 +385,18 @@ class _BusquedaPageState extends State<BusquedaPage> {
       autofocus: true,
       //onPressed: (_guardando) ? null : _submit,
       onPressed: () {
-        if (formKey.currentState!.validate()) {
+        if (_selection == null &&
+            _selection1 == null &&
+            _selection2 == null &&
+            _selection3 == null) {
+          mostrarAlerta(context,
+              'Debes seleccionar al menos una de las opciones para realizar la búsqueda.');
+        } else {
           SnackBar(
             content: Text('Información ingresada correctamente.'),
           );
           //_submit();
           buildChild3();
-        } else {
-          mostrarAlerta(context,
-              'Todos los campos deben ser seleccionados. Asegúrate de haber completado todos.');
         }
         //_submit();
       },
