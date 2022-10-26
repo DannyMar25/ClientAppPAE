@@ -152,9 +152,6 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       children: [
                         mostrarImagen1(),
                         _crearCI(),
-                        Divider(
-                          color: Colors.white,
-                        ),
                         _crearBoton(),
                         Divider(
                           color: Colors.white,
@@ -286,8 +283,8 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
     return Column(
       children: [
         SizedBox(
-          height: 400,
-          width: 360,
+          height: 350, //400
+          width: 380,
           child: ListView.builder(
             itemCount: formularios.length,
             itemBuilder: (context, i) => _crearItem(context, formularios[i]),
@@ -326,7 +323,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                       Text("Número de cédula: " '${formulario.identificacion}'),
                       Text("Estado de solicitud:"
                           '${formulario.estado}'),
-                      Text("Fecha de aprobación de solicitud: "
+                      Text("Fecha de aprobación: "
                           '${formulario.fechaRespuesta}'),
                       Text("Nombre mascota adoptada:"
                           '${formulario.animal!.nombre}'),
@@ -336,7 +333,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
-                  height: 150.0,
+                  height: 130.0,
                   child: Image(
                     image: AssetImage('assets/dog_an8.gif'),
                   ),
@@ -407,7 +404,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
-                  height: 200.0,
+                  height: 130.0, //200
                   child: Image(
                     image: AssetImage('assets/cat_4.gif'),
                   ),
@@ -442,7 +439,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
-                  height: 200.0,
+                  height: 130.0, //200
                   child: Image(
                     image: AssetImage('assets/dog_an10.gif'),
                   ),

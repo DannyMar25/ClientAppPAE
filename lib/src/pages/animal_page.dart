@@ -470,7 +470,8 @@ class _AnimalPageState extends State<AnimalPage> {
               context,
               'Para poder ingresar al formulario debe registrarse o iniciar sesión.',
               'login',
-              animal);
+              animal,
+              'Ir a login');
         }
       },
       child: Column(
@@ -668,7 +669,8 @@ class _AnimalPageState extends State<AnimalPage> {
                 context,
                 'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
                 'login',
-                animal);
+                animal,
+                'Ir a login');
           }
         },
         child: Container(
@@ -716,7 +718,8 @@ class _AnimalPageState extends State<AnimalPage> {
                                       context,
                                       'Para poder ingresar al formulario, debe registrarse o iniciar sesión.',
                                       'login',
-                                      animal);
+                                      animal,
+                                      'Ir a login');
                                 }
                               },
                             ),

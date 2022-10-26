@@ -148,17 +148,26 @@ void mostrarOkFormulario(BuildContext context, String mensaje, String ruta,
       });
 }
 
-void mostrarAlertaOkCancel(
-    BuildContext context, String mensaje, String ruta, AnimalModel animal) {
+void mostrarAlertaOkCancel(BuildContext context, String mensaje, String ruta,
+    AnimalModel animal, String opcion) {
   showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Aviso'),
+          title: Row(
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: Colors.green,
+                size: 50,
+              ),
+              Text('Aviso'),
+            ],
+          ),
           content: Text(mensaje),
           actions: [
             TextButton(
-                child: Text('Ok'),
+                child: Text(opcion),
                 //onPressed: () => Navigator.of(context).pop(),
                 onPressed: () =>
                     Navigator.pushNamed(context, ruta, arguments: animal)),

@@ -187,7 +187,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
         fecha.day.toString();
 
     return SizedBox(
-      height: 340,
+      height: 310, //340
       child: Card(
           color: Colors.lightGreen[200],
           shadowColor: Colors.green,
@@ -217,7 +217,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
-                  height: 150.0,
+                  height: 130.0, //150
                   child: Image(
                     image: AssetImage('assets/dog_an8.gif'),
                   ),

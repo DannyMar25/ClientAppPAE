@@ -322,8 +322,10 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       //initialValue: animal.nombre,
       controller: nombre,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        //FilteringTextInputFormatter.allow(RegExp("[a-zA-Z \´\ñ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
+
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Nombre',
