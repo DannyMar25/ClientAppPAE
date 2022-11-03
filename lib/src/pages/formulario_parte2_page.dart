@@ -195,7 +195,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.nombreFam1,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -239,7 +239,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.parentescoFam1,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -268,7 +268,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.nombreFam2,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -311,7 +311,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.parentescoFam2,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -337,7 +337,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.nombreFam3,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -381,7 +381,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.parentescoFam3,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -407,7 +407,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.nombreFam4,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -415,9 +415,6 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
           sitFamilia.nombreFam4 = s;
         });
       },
-      //decoration: InputDecoration(
-      //labelText: 'Nombre Completo',
-      //labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
     );
   }
 
@@ -453,7 +450,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       initialValue: sitFamilia.parentescoFam4,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {

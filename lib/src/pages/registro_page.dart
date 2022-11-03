@@ -122,7 +122,8 @@ class _RegistroPageState extends State<RegistroPage> {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: TextField(
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+              //FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+              FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
             ],
             keyboardType: TextInputType.name,
             decoration: InputDecoration(

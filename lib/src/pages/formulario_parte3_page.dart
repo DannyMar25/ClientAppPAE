@@ -240,7 +240,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       initialValue: domicilio.nombreD,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -532,7 +532,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       // initialValue: ,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(

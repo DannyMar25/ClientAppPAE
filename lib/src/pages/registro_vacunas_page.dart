@@ -275,7 +275,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
       textAlign: TextAlign.center,
       keyboardType: TextInputType.name,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(),

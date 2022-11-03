@@ -332,7 +332,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.ubicMascota,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -353,7 +353,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -369,7 +369,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.nombreMs1,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       onChanged: (s) {
@@ -477,7 +477,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.deseoAdop,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -502,7 +502,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.cambioDomi,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -528,7 +528,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.relNuevaCasa,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -580,7 +580,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.diaNocheMas,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -605,7 +605,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.duermeMas,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -630,7 +630,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.necesidadMas,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -678,7 +678,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.responGastos,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -704,7 +704,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.recursoVet,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -730,7 +730,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.benefEst,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -755,7 +755,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.tenenciaResp,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -780,7 +780,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       initialValue: relacionAnim.ordenMuni,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(

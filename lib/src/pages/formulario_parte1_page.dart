@@ -173,7 +173,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       initialValue: datoPersona.nombreCom,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -302,7 +302,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       initialValue: datoPersona.ocupacion,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -536,7 +536,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       initialValue: datoPersona.nombreRef,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -564,7 +564,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       initialValue: datoPersona.parentescoRef,
       readOnly: false,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
+        FilteringTextInputFormatter.deny(RegExp("[0-9\-=@,\.;]")),
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
