@@ -56,12 +56,13 @@ class _RegistroPageState extends State<RegistroPage> {
             ),
           ),
           Container(
-            width: 390.0,
+            width: MediaQuery.of(context).size.width * 0.95,
+            //390.0,
             margin: EdgeInsets.symmetric(vertical: 30.0),
-            padding: EdgeInsets.symmetric(vertical: 80.0),
+            padding: EdgeInsets.symmetric(vertical: 30.0),
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                       color: Colors.black26,
@@ -76,7 +77,7 @@ class _RegistroPageState extends State<RegistroPage> {
                   style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
                 _crearNombreUs(bloc),
                 SizedBox(
@@ -127,7 +128,7 @@ class _RegistroPageState extends State<RegistroPage> {
             ],
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
-              icon: Icon(Icons.alternate_email, color: Colors.green),
+              icon: Icon(Icons.person, color: Colors.green),
               //hintText: 'dany',
               labelText: 'Nombre de usuario',
               //counterText: snapshot.data,

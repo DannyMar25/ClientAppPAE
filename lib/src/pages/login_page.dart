@@ -21,11 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   AnimalModel animal = new AnimalModel();
 
   late bool _passwordVisible;
-  var disable;
-
   @override
   void initState() {
-    disable = null;
     print('estoo ' + context.toString());
     _passwordVisible = false;
     super.initState();
@@ -197,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
               elevation: 0.0,
               primary: Colors.green,
               textStyle: TextStyle(color: Colors.white)),
-          onPressed: snapshot.hasData ? () => _login(bloc, context) : disable,
+          onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
       },
     );
