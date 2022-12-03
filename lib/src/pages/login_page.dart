@@ -21,9 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   AnimalModel animal = new AnimalModel();
 
   late bool _passwordVisible;
+  var disable;
 
   @override
   void initState() {
+    disable = null;
+    print('estoo ' + context.toString());
     _passwordVisible = false;
     super.initState();
   }
@@ -57,16 +60,16 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           SafeArea(
             child: Container(
-              height: 230.0, //230
+              height: 200.0, //230
             ),
           ),
           Container(
             // width: 390.0,
-            width: 390.0,
+            width: MediaQuery.of(context).size.width * 0.95,
             margin: EdgeInsets.symmetric(vertical: 20.0),
-            padding: EdgeInsets.symmetric(vertical: 60.0), //80
+            padding: EdgeInsets.symmetric(vertical: 30.0), //80
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(20.0),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
@@ -78,15 +81,15 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  'Ingreso',
+                  'I N G R E S O',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: 10.0,
                 ),
                 _crearEmail(bloc),
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
                 _crearPassword(bloc),
                 SizedBox(
@@ -194,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
               elevation: 0.0,
               primary: Colors.green,
               textStyle: TextStyle(color: Colors.white)),
-          onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+          onPressed: snapshot.hasData ? () => _login(bloc, context) : disable,
         );
       },
     );

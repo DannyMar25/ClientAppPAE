@@ -270,6 +270,7 @@ class _RegistroPageState extends State<RegistroPage> {
       usuario.email = bloc.email;
       usuario.rol = Roles.cliente;
       usuarioProvider.crearUsuario(usuario);
+
       mostrarAlertaOk(context, 'Se ha registrado con éxito.', 'login',
           'Información correcta', 'Iniciar sesión');
       //Navigator.pushReplacementNamed(context, 'intro');
