@@ -53,6 +53,12 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
   late String horaSeleccionada;
   late String idHorario;
   @override
+  void initState() {
+    idHorario = '';
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final email = prefs.email;
     final Object? animData = ModalRoute.of(context)!.settings.arguments;
@@ -144,11 +150,15 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                 _crearNombre(),
                 _crearTelefono(),
                 _crearCorreo(),
-                Divider(),
+                Divider(
+                  color: Colors.transparent,
+                ),
                 _crearFecha(context),
-                Divider(),
-                Divider(),
-                _verListado(),
+                Divider(
+                  color: Colors.transparent,
+                ),
+                _verListaHoras(),
+                //_verListado(),
                 _crearBoton(),
               ],
             ),
@@ -156,6 +166,23 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         ),
       ),
     );
+  }
+
+  Widget _verListaHoras() {
+    if (_fecha != '') {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Seleccione hora:"),
+          const Divider(
+            color: Colors.transparent,
+          ),
+          _verListado()
+        ],
+      );
+    } else {
+      return SizedBox();
+    }
   }
 
   void onSelected(BuildContext context, int item) {
@@ -265,6 +292,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         }
         //_fecha = DateFormat('EEEE').format(picked);
         _inputFieldDateController.text = _fecha + ' ' + _fechaCompleta;
+        idHorario = '';
       });
     }
   }
@@ -299,8 +327,6 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
             //citas.idHorario = horario.id;
             //horariosProvider.editarDisponible(horario);
             horaSeleccionada = horario.hora;
-
-            print(horario.hora);
           },
           initialValue: horario.hora + '  -   ' + horario.disponible,
           decoration: InputDecoration(
@@ -308,10 +334,10 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
               //labelText: 'Hora',
               suffixIcon: Icon(Icons.add),
-              icon: Icon(Icons.calendar_today)),
+              icon: Icon(Icons.access_time_outlined)),
         ),
-        Divider(
-          color: Colors.white,
+        SizedBox(
+          height: 7,
         )
       ],
     );
@@ -349,11 +375,12 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
       controller: telefono,
       keyboardType: TextInputType.phone,
       inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.digitsOnly
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        labelText: 'Teléfono',
+        labelText: 'Teléfono (Celular: 0998765432)',
       ),
       onSaved: (value) => telefono = value as TextEditingController,
       validator: (value) {
@@ -394,48 +421,53 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
         icon: Icon(Icons.save),
         autofocus: true,
         onPressed: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text('Información'),
-                  content: Text('Nombre: ' +
-                      nombre.text +
-                      '\n' +
-                      'Teléfono: ' +
-                      telefono.text +
-                      '\n' +
-                      'Correo: ' +
-                      correo.text +
-                      '\n' +
-                      'Fecha de la cita:' +
-                      _fechaCompleta +
-                      '\n' +
-                      'Hora:' +
-                      horaSeleccionada),
-                  actions: [
-                    TextButton(
-                        child: Text('Guardar'),
-                        //onPressed: () => Navigator.of(context).pop(),
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            SnackBar(
-                              content:
-                                  Text('Información ingresada correctamente.'),
-                            );
-                            _submit();
-                          } else {
-                            mostrarAlerta(context,
-                                'Asegúrate de que todos los campos estén llenos.');
-                          }
-                        }),
-                    TextButton(
-                        child: Text('Corregir información'),
-                        //onPressed: () => Navigator.of(context).pop(),
-                        onPressed: () => Navigator.of(context).pop()),
-                  ],
-                );
-              });
+          if (formKey.currentState!.validate() && idHorario != '') {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Información'),
+                    content: Text('Nombre: ' +
+                        nombre.text +
+                        '\n' +
+                        'Teléfono: ' +
+                        telefono.text +
+                        '\n' +
+                        'Correo: ' +
+                        correo.text +
+                        '\n' +
+                        'Fecha de la cita: ' +
+                        _fechaCompleta +
+                        '\n' +
+                        'Hora: ' +
+                        horaSeleccionada),
+                    actions: [
+                      TextButton(
+                          child: Text('Guardar'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              SnackBar(
+                                content: Text(
+                                    'Información ingresada correctamente.'),
+                              );
+                              _submit();
+                            } else {
+                              mostrarAlerta(context,
+                                  'Asegúrate de que todos los campos estén llenos.');
+                            }
+                          }),
+                      TextButton(
+                          child: Text('Corregir información'),
+                          //onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () => Navigator.pop(context)),
+                    ],
+                  );
+                });
+          } else {
+            mostrarAlerta(context,
+                'Asegúrate de que todos los campos estén llenos. Recuerda que debes eleccionar una fecha y hora.');
+          }
         });
   }
 
