@@ -3,6 +3,7 @@ import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class ForgotPassword extends StatefulWidget {
   static String id = 'forgot-password';
@@ -44,7 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           Container(
             width: 390.0,
             margin: EdgeInsets.symmetric(vertical: 30.0),
-            padding: EdgeInsets.symmetric(vertical: 80.0),
+            padding: EdgeInsets.symmetric(vertical: 30.0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5.0),
@@ -56,45 +57,60 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       spreadRadius: 3.0)
                 ]),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   'Recuperación de contraseña',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
-                  height: 60.0,
+                  height: 30.0,
                 ),
                 Text(
                   'Ingresa tu correo:',
                   textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                 ),
-                TextFormField(
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    //labelText: 'Email',
-                    icon: Icon(
-                      Icons.mail,
-                      color: Colors.green,
+                SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
+                    autofocus: true,
+                    style: TextStyle(color: Colors.black),
+                    textCapitalization: TextCapitalization.none,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp("[ ]"))
+                    ],
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      //labelText: 'Email',
+                      icon: Icon(
+                        Icons.mail,
+                        color: Colors.green,
+                      ),
+                      errorStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Colors.black),
+                      hintStyle: TextStyle(color: Colors.white),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Color.fromARGB(255, 46, 173, 35)),
+                      ),
+                      errorBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
                     ),
-                    errorStyle: TextStyle(color: Colors.white),
-                    labelStyle: TextStyle(color: Colors.black),
-                    hintStyle: TextStyle(color: Colors.white),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    errorBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        _email = value.trim().toLowerCase();
+                        print(_email);
+                      });
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      _email = value;
-                    });
-                  },
                 ),
                 SizedBox(
                   height: 30.0,

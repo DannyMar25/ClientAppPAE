@@ -164,7 +164,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                             Navigator.pushNamed(context, 'home');
                           },
                           icon: Icon(
-                            Icons.photo_album,
+                            Icons.arrow_back,
                             size: 30,
                             color: Colors.green,
                           ),

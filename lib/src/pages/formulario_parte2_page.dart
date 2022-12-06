@@ -73,23 +73,33 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                     key: formKey,
                     child: Column(
                       children: [
+                        //Divider(),
+                        // Divider(
+                        //   color: Colors.transparent,
+                        // ),
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+
                         Text(
                           'Mencione las personas con las que vive',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        //Divider(),
                         Divider(
+                          height: 5,
                           color: Colors.transparent,
                         ),
-                        _detalle(),
+                        Text('Deje en blanco si vive solo/a'),
                         Divider(
+                          height: 3,
                           color: Colors.transparent,
                         ),
                         DataTable(
@@ -129,10 +139,10 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         Text(
                           '¿Algún familiar espera un bebé?',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                         ),
@@ -140,44 +150,61 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
                         //Column(
                         // children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('Si'),
                             _crearCheckBox1(),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text('No'), _crearCheckBox2()
+
                             //_crearFechaParto(context),
                           ],
                         ),
-                        Row(
-                          children: [Text('No'), _crearCheckBox2()],
-                        ),
+                        // Row(
+                        //   children: [Text('No'), _crearCheckBox2()],
+                        // ),
                         // ],
                         //),
                         Divider(),
                         Text(
-                          '¿Alguien que viva con usted es alérgico a los animales o sufre de asma?',
+                          '¿Alguien que viva con usted, es alérgico a los animales o sufre de asma?',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
+                              ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Divider(),
+                        Divider(color: Colors.transparent),
                         Column(
                           children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('Si'),
                                 _crearCheckBox3(),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('No'),
+                                _crearCheckBox4()
                               ],
                             ),
-                            Row(
-                              children: [Text('No'), _crearCheckBox4()],
-                            )
+                            // Row(
+                            //   children: [Text('No'), _crearCheckBox4()],
+                            // )
                           ],
                         ),
-                        Divider(),
+                        Divider(
+                          color: Colors.transparent,
+                          height: 10,
+                        ),
                         //_crearBotonRevisar(context),
                         _crearBoton(),
                       ],
@@ -602,9 +629,11 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
           return null;
         } else {
           if (isChecked == false && isChecked1 == false) {
-            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones.');
+            mostrarAlerta(
+                context, 'Debe seleccionar una de las dos opciones (Sí o No).');
           } else if (isChecked2 == false && isChecked3 == false) {
-            mostrarAlerta(context, 'Debe seleccionar una de las dos opciones.');
+            mostrarAlerta(
+                context, 'Debe seleccionar una de las dos opciones (Sí o No).');
           } else {
             SnackBar(
               content: Text('Información ingresada correctamente.'),
@@ -673,7 +702,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
               color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          'En este formulario debe ingresar información de las personas con las que vive.',
+          'En este formulario debe ingresar información de las personas con las que comparte su hogar.',
           textAlign: TextAlign.justify,
         ),
       ),

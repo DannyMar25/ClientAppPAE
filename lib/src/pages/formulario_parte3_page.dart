@@ -75,13 +75,17 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                   key: formKey,
                   child: Column(
                     children: [
+                      _detalle(),
+                      Divider(
+                        color: Colors.transparent,
+                      ),
                       Text(
                         '¿Qué tipo de inmueble posee?',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
+                            ..strokeWidth = 2
                             ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
@@ -90,69 +94,98 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
                       Divider(
                         color: Colors.transparent,
                       ),
-                      _detalle(),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
+
                       _crearTipoInmueble(),
                       Row(
                         children: [_crearDimencion(), infoAltura()],
                       ),
 
                       _crearPropiedad(),
-                      Divider(),
+                      Divider(
+                        height: 5,
+                        color: Colors.transparent,
+                      ),
 
                       _buildChild1(),
-                      Divider(),
+                      Divider(
+                        height: 5,
+                        color: Colors.transparent,
+                      ),
                       Text(
                         '¿Planea mudarse próximamente?',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
+                            ..strokeWidth = 2
                             ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Divider(),
-                      Row(
-                        children: [Text('Si'), _crearCheckBox1()],
+                      Divider(
+                        height: 5,
+                        color: Colors.transparent,
                       ),
                       Row(
-                        children: [Text('No'), _crearCheckBox2()],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Si'),
+                          _crearCheckBox1(),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('No'),
+                          _crearCheckBox2()
+                        ],
                       ),
-                      Divider(),
+
+                      Divider(
+                        height: 5,
+                        color: Colors.transparent,
+                      ),
                       Text(
                         'El lugar donde pasará la mascota, ¿Tiene cerramiento?',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
+                            ..strokeWidth = 2
                             ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Divider(),
+                      Divider(
+                        height: 7,
+                        color: Colors.transparent,
+                      ),
                       Row(
-                        children: [Text('Si'), _crearCheckBox3()],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Si'),
+                          _crearCheckBox3(),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('No'),
+                          _crearCheckBox4()
+                        ],
                       ),
                       _buildChild2(),
                       // _crearAltura(),
                       // _crearMaterial(),
-                      Divider(),
-                      Row(
-                        children: [Text('No'), _crearCheckBox4()],
+                      Divider(
+                        height: 7,
+                        color: Colors.transparent,
                       ),
-                      Divider(),
                       Text(
                         '¿Cuál piensa que es la mascota más adecuada para Ud.?',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
-                            ..strokeWidth = 3
+                            ..strokeWidth = 2
                             ..color = Colors.blueGrey,
                         ),
                         textAlign: TextAlign.center,
@@ -274,7 +307,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione tipo de inmueble:',
+          'Seleccione tipo de inmueble:  ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         SizedBox(
@@ -557,7 +590,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Especie:          ',
+          'Especie:        ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         SizedBox(
@@ -704,11 +737,11 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         } else {
           if (formKey.currentState!.validate()) {
             if (isChecked == false && isChecked1 == false) {
-              mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones.');
+              mostrarAlerta(context,
+                  'Debe seleccionar una de las dos opciones (Sí o No).');
             } else if (isChecked2 == false && isChecked3 == false) {
-              mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones.');
+              mostrarAlerta(context,
+                  'Debe seleccionar una de las dos opciones (Sí o No).');
             } else {
               SnackBar(
                 content: Text('Información ingresada correctamente.'),

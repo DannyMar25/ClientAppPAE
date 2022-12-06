@@ -64,20 +64,20 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                   key: formKey,
                   child: Column(
                     children: [
-                      Text(
-                        'Datos personales',
-                        style: TextStyle(
-                          fontSize: 33,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
+                      // Text(
+                      //   'Datos personales',
+                      //   style: TextStyle(
+                      //     fontSize: 33,
+                      //     foreground: Paint()
+                      //       ..style = PaintingStyle.stroke
+                      //       ..strokeWidth = 2
+                      //       ..color = Colors.blueGrey,
+                      //   ),
+                      //   textAlign: TextAlign.center,
+                      // ),
+                      // Divider(
+                      //   color: Colors.transparent,
+                      // ),
                       _detalle(),
                       Divider(
                         color: Colors.transparent,
@@ -98,7 +98,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       Text(
                         'Instrucción',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 2
@@ -111,7 +111,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       Text(
                         'Teléfonos de contacto',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 2
@@ -132,7 +132,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       Text(
                         'Referencias Personales',
                         style: TextStyle(
-                          fontSize: 33,
+                          fontSize: 20,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 2
@@ -372,7 +372,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione nivel de instrucción:',
+          'Seleccione nivel de instrucción:  ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         SizedBox(

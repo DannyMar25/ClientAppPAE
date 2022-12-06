@@ -114,9 +114,6 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                     key: formKey,
                     child: Column(
                       children: [
-                        Divider(
-                          color: Colors.transparent,
-                        ),
                         _detalle(),
                         Divider(
                           color: Colors.transparent,
@@ -124,13 +121,16 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           'Liste sus dos últimas mascotas',
                           style: TextStyle(
-                            fontSize: 33,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 2
                               ..color = Colors.blueGrey,
                           ),
                           textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'Deje en blanco si no tuvo o tiene mascotas',
                         ),
                         Divider(),
                         DataTable(
@@ -238,7 +238,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           '¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 2
@@ -248,17 +248,27 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         ),
                         Divider(),
                         Row(
-                          children: [Text('Si'), _crearCheckBox1()],
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('Si'),
+                            _crearCheckBox1(),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('No'),
+                            _crearCheckBox2()
+                          ],
                         ),
-                        Row(
-                          children: [Text('No'), _crearCheckBox2()],
-                        ),
+                        // Row(
+                        //   children: [Text('No'), _crearCheckBox2()],
+                        // ),
                         _crearPorque1(),
                         Divider(),
                         Text(
                           '¿Está de acuerdo en que la mascota sea esterilizada?',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 2
@@ -266,13 +276,19 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Divider(),
-                        Row(
-                          children: [Text('Si'), _crearCheckBox3()],
+                        Divider(
+                          color: Colors.transparent,
                         ),
-                        Divider(),
                         Row(
-                          children: [Text('No'), _crearCheckBox4()],
+                          children: [
+                            Text('Si'),
+                            _crearCheckBox3(),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text('No'),
+                            _crearCheckBox4()
+                          ],
                         ),
                         _crearPorque2(),
                         Divider(),
@@ -292,7 +308,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         Text(
                           'La adopción fue compartida con su familia?',
                           style: TextStyle(
-                            fontSize: 26,
+                            fontSize: 20,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 2
@@ -1210,11 +1226,11 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         } else {
           if (formKey.currentState!.validate()) {
             if (isChecked == false && isChecked1 == false) {
-              mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones.');
+              mostrarAlerta(context,
+                  'Debe seleccionar una de las dos opciones  (Sí o No).');
             } else if (isChecked2 == false && isChecked3 == false) {
-              mostrarAlerta(
-                  context, 'Debe seleccionar una de las dos opciones.');
+              mostrarAlerta(context,
+                  'Debe seleccionar una de las dos opciones (Sí o No).');
             } else {
               SnackBar(
                 content: Text('Información ingresada correctamente.'),

@@ -96,7 +96,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
         body: Column(
           children: [
             Padding(padding: EdgeInsets.only(bottom: 10.0)),
-            expand_card(),
+            _botonBusqueda(),
             Padding(padding: EdgeInsets.only(bottom: 10.0)),
             Expanded(
               //child: builChild(),
@@ -173,7 +173,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
               ]);
             }
             return GridView.count(
-              childAspectRatio: 50 / 100,
+              childAspectRatio: 6 / 8,
               shrinkWrap: true,
               crossAxisCount: 2,
               children: List.generate(animales.length, (index) {
@@ -223,7 +223,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
               ]);
             }
             return GridView.count(
-              childAspectRatio: 50 / 100,
+              childAspectRatio: 6 / 8,
               shrinkWrap: true,
               crossAxisCount: 2,
               children: List.generate(animales.length, (index) {
@@ -237,113 +237,60 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
   }
 
   Widget _crearItem1(BuildContext context, AnimalModel animal) {
-    return Expanded(
-      child: Container(
-        height: 100.0,
-        width: 200.0,
-        child: Card(
-          color: Color.fromARGB(248, 202, 241, 170),
-          elevation: 4.0,
-          margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
-          child: Flexible(
-            fit: FlexFit.loose,
-            child: InkWell(
-              onTap: () =>
-                  Navigator.pushNamed(context, 'animal', arguments: animal),
-              child: Column(
-                children: [
-                  (animal.fotoUrl == "")
-                      ? Image(image: AssetImage('assets/no-image.png'))
-                      : Expanded(
-                          child: FadeInImage(
-                            image: NetworkImage(animal.fotoUrl),
-                            placeholder: AssetImage('assets/cat_1.gif'),
-                            height: 300.0,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                  //Padding(padding: EdgeInsets.only(bottom: 5.0)),
-                  ListTile(
-                    title: Text('${animal.nombre}'),
-                    subtitle: Text('${animal.especie} - ${animal.sexo}'),
-                    // onTap: () =>
-                    //     Navigator.pushNamed(context, 'animal', arguments: animal),
-                  ),
-                ],
+    return Card(
+      color: Color.fromARGB(248, 202, 241, 170),
+      elevation: 4.0,
+      //margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
+      child: Flexible(
+        fit: FlexFit.loose,
+        child: InkWell(
+          onTap: () =>
+              Navigator.pushNamed(context, 'animal', arguments: animal),
+          child: Column(
+            children: [
+              (animal.fotoUrl == "")
+                  ? Image(image: AssetImage('assets/no-image.png'))
+                  : Expanded(
+                      child: FadeInImage(
+                        image: NetworkImage(animal.fotoUrl),
+                        placeholder: AssetImage('assets/cat_1.gif'),
+                        height: 300.0,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+              //Padding(padding: EdgeInsets.only(bottom: 5.0)),
+              ListTile(
+                title: Text('${animal.nombre}'),
+                subtitle: Text('${animal.etapaVida} - ${animal.sexo}'),
+                // onTap: () =>
+                //     Navigator.pushNamed(context, 'animal', arguments: animal),
               ),
-            ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget expand_card() {
-    final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      ),
-    );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: ExpansionTileCard(
-        baseColor: Colors.green[100],
-        shadowColor: Colors.green,
-        key: cardA,
-        //leading: CircleAvatar(child: Text('A')),
-        leading: CircleAvatar(
-            backgroundColor: Colors.green,
-            child: Image(
-              image: AssetImage("assets/pet-care.png"),
-              fit: BoxFit.fitWidth,
-            )),
-        title: Text('Bienvenido a nuestra galeria de mascotas!'),
-        subtitle: Text('Ver más!'),
+  Widget _botonBusqueda() {
+    return TextButton(
+      onPressed: () {
+        //cardB.currentState?.collapse();
+        Navigator.pushNamed(context, 'home');
+      },
+      child: Column(
         children: <Widget>[
-          Divider(
-            thickness: 1.0,
-            height: 1.0,
+          Icon(
+            Icons.arrow_back,
+            color: Colors.green,
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
-              ),
-              child: Text(
-                """Hola, a continuacion puedes ver nuestra galeria de mascotas en adopcion. 
-Si deseas puedes usar nuestros filtros para realizar una busqueda más personalizada dependiendo de tus gustos en mascotas.""",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontSize: 16),
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 2.0),
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.spaceAround,
-            buttonHeight: 52.0,
-            buttonMinWidth: 90.0,
-            children: <Widget>[
-              TextButton(
-                style: flatButtonStyle,
-                onPressed: () {
-                  //cardB.currentState?.collapse();
-                  Navigator.pushNamed(context, 'busqueda');
-                },
-                child: Column(
-                  children: <Widget>[
-                    Icon(Icons.search),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    ),
-                    Text('Buscador'),
-                  ],
-                ),
-              ),
-            ],
+          Text(
+            'Volver a la Galería',
+            style: TextStyle(color: Colors.green),
           ),
         ],
       ),
