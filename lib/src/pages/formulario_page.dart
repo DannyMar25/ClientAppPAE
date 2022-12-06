@@ -39,7 +39,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
         actions: [
           PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
-              icon: Icon(Icons.manage_accounts),
+              icon: Icon(Icons.account_circle),
               itemBuilder: (context) => [
                     email == ''
                         ? PopupMenuItem<int>(
