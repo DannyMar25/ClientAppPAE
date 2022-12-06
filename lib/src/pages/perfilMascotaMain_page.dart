@@ -52,7 +52,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
               Navigator.pushNamed(context, 'home');
             },
           ),
-          title: Text('Información enviada en solicitud'),
+          title: Text('Resumen de la solicitud enviada'),
         ),
         body: Stack(alignment: Alignment.center, children: [
           //Background(),
@@ -131,28 +131,40 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
           _submit();
         },
         icon: Icon(
-          Icons.folder,
+          Icons.file_open_outlined,
           size: 30,
           color: Colors.green,
         ),
         label: Text(
-          "Ver Perfil de la mascota",
+          "Ver perfil de la mascota",
           style: TextStyle(color: Colors.green, fontSize: 14),
         ));
   }
 
   Widget detalle() {
     return Card(
-      child: ListTile(
-        title: Text(
-          "Perfil de mascota:",
-          style: TextStyle(
-              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          'Puedes ver la información de la solicitud y descargar el perfil de la mascota haciendo clic en el botón "Ver perfil de mascota".',
-          textAlign: TextAlign.justify,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            title: Text(
+              "Perfil de mascota:",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              'Puedes ver la información de la solicitud y descargar el perfil de la mascota haciendo clic en el botón "Ver perfil de mascota".',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
       ),
       elevation: 8,
       shadowColor: Colors.green,
@@ -209,8 +221,8 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                       Text("Nombre del cliente: " '${formulario.nombreClient}'),
                       Text("Número de cédula: " '${formulario.identificacion}'),
                       Text("Estado de solicitud: " '${formulario.estado}'),
-                      Text("Fecha de envio de solicitud: " '$fechaIngreso'),
-                      Text("Nombre mascota a adoptar: " '${animal.nombre}'),
+                      Text("Fecha de envío de solicitud: " '$fechaIngreso'),
+                      Text("Nombre de la mascota: " '${animal.nombre}'),
                       //Divider(color: Colors.purple)
                     ],
                   ),
