@@ -38,11 +38,12 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   String archivoUrl = '';
   String nombreArchivo = '';
   final List<String> _items =
-      ['Subir foto', 'Subir archivo', 'Subir fotos y archivos'].toList();
-  String? _selection;
+      ['Foto', 'Documento', 'Foto y documento'].toList();
+  String? _selection = "Foto";
 
   @override
   void initState() {
+    _crearSeleccion();
     // _selection = _items.last;
     super.initState();
   }
@@ -51,7 +52,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   Widget build(BuildContext context) {
     final fileName = file != null
         ? basename(file!.path)
-        : 'No se ha seleccionado un archivo';
+        : 'No se ha seleccionado un documento';
     final arg = ModalRoute.of(context)!.settings.arguments as Map;
     datosA = arg['datosper'] as DatosPersonalesModel;
     //if (dat == arg['datosper']) {
@@ -67,11 +68,11 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
       ),
       drawer: _menuWidget(context),
       body: Container(
-        padding: EdgeInsets.all(30),
+        padding: EdgeInsets.all(10),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _crearSeleccion(),
@@ -147,7 +148,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   Widget _crearCargarArchivo() {
     return ElevatedButton.icon(
       label: Text(
-        'Cargar Archivo',
+        'Cargar documento',
         style: TextStyle(fontSize: 20),
       ),
       icon: Icon(Icons.cloud_upload_outlined),
@@ -162,8 +163,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
             new DropdownMenuItem<String>(value: item, child: new Text(item)))
         .toList();
     return Column(
-      //crossAxisAlignment: CrossAxisAlignment.start,
-      //mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
           'Seleccione el tipo de archivo:',
@@ -198,7 +199,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   }
 
   buildChild(String fileName, BuildContext context) {
-    if (_selection == 'Subir foto') {
+    if (_selection == 'Foto') {
       return Column(
         children: [
           _mostrarFoto(),
@@ -223,8 +224,10 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           _crearBoton(context),
         ],
       );
-    } else if (_selection == 'Subir archivo') {
+    } else if (_selection == 'Documento') {
       return Column(
+        //mainAxisAlignment: MainAxisAlignment.start,
+        //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 100,
@@ -251,7 +254,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
           _crearBoton(context),
         ],
       );
-    } else if (_selection == 'Subir fotos y archivos') {
+    } else if (_selection == 'Foto y documento') {
       return Column(children: [
         _mostrarFoto(),
         Divider(),
@@ -411,7 +414,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
   _procesarImagen(ImageSource origen) async {
     final _picker = ImagePicker();
     final pickedFile = await _picker.pickImage(
-        source: origen, maxHeight: 720, maxWidth: 720); //getImage
+        source: origen, maxHeight: 620, maxWidth: 620); //getImage
     foto = File(pickedFile!.path);
 
     setState(() {});
@@ -432,7 +435,8 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 //}
               }),
             ),
-            label: Text('Guardar foto/archivo', style: TextStyle(fontSize: 20)),
+            label:
+                Text('Guardar foto/documento', style: TextStyle(fontSize: 16)),
             icon: Icon(Icons.save),
             autofocus: true,
             onPressed: () {
