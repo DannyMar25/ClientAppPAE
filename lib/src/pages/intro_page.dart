@@ -127,7 +127,7 @@ class _IntroPageState extends State<IntroPage> {
           ),
           email != ''
               ? Text(
-                  'Hola ' + nombreS,
+                  '¡Hola!, ' + nombreS,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 )

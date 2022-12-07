@@ -53,7 +53,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
     return Scaffold(
         //backgroundColor: Color.fromARGB(223, 248, 248, 245),
         appBar: AppBar(
-          title: Text('Seguimiento de mascota adoptada'),
+          title: Text('Seguimiento de mascota'),
           backgroundColor: Colors.green,
           actions: [
             email != ''
@@ -85,23 +85,24 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: Flexible(
                 fit: FlexFit.loose,
                 child: Container(
+                  padding: EdgeInsets.only(bottom: 5),
                   //color: Colors.lightGreenAccent,
                   //padding: new EdgeInsets.only(top: 230.0),
                   child: Form(
                     key: formKey,
                     child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Información de la mascota adoptada',
+                              '${animal.nombre}',
                               style: TextStyle(
                                   fontSize: 28,
                                   color: Colors.blueGrey[600],
                                   fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.left,
+                              textAlign: TextAlign.center,
                             ),
                             Divider(),
                             _mostrarFoto(),
@@ -376,8 +377,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                       return Colors.green;
                     }),
                   ),
-                  label: Text('Registrar Vacunas'),
-                  icon: Icon(Icons.edit_note),
+                  label: Text('Agregar vacuna'),
+                  icon: Icon(Icons.vaccines),
                   autofocus: true,
                   onPressed: () {
                     // Navigator.pushNamed(context, 'registroVacunas',
@@ -399,8 +400,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         return Colors.green;
                       }),
                     ),
-                    label: Text('Registrar Desparasitaciones'),
-                    icon: Icon(Icons.edit_note),
+                    label: Text('Agregar desparasitacion'),
+                    icon: Icon(Icons.medication_liquid_sharp),
                     autofocus: true,
                     onPressed: () {
                       Navigator.pushNamed(context, 'registroDesp', arguments: {
@@ -424,7 +425,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   }),
                 ),
                 label: Text('Subir evidencia'),
-                icon: Icon(Icons.photo_library),
+                icon: Icon(Icons.cloud_upload_outlined),
                 autofocus: true,
                 onPressed: () {
                   Navigator.pushNamed(context, 'demoArchivos', arguments: {
@@ -455,11 +456,22 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
             ),
           ),
           ListTile(
+            leading: Icon(Icons.home, color: Colors.green),
+            title: Text('Inicio'),
+            onTap: () {
+              //Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                'intro',
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(
-              Icons.pages,
+              Icons.manage_search_outlined,
               color: Colors.green,
             ),
-            title: Text('Ir a Seguimiento Principal'),
+            title: Text('Seguimiento de mascota'),
             onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
                 arguments: {
                   'datosper': datosA,
@@ -468,14 +480,14 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 }),
           ),
           ExpansionTile(
-            title: Text('Registro de Vacunas'),
+            title: Text('Vacunas'),
             children: [
               ListTile(
                 leading: Icon(
-                  Icons.meeting_room,
+                  Icons.edit_outlined,
                   color: Colors.green,
                 ),
-                title: Text('Realizar registro'),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   Navigator.pushNamed(context, 'registroVacunas', arguments: {
                     'datosper': datosA,
@@ -486,10 +498,10 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.check,
+                  Icons.list_outlined,
                   color: Colors.green,
                 ),
-                title: Text('Ver registros'),
+                title: Text('Lista de vacunas'),
                 onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
                     arguments: {
                       'datosper': datosA,
@@ -499,16 +511,16 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.vaccines,
               color: Colors.green,
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitacion'),
+            title: Text('Desparasitaciones'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                leading: Icon(Icons.edit_outlined, color: Colors.green),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'registroDesp', arguments: {
@@ -519,8 +531,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                leading: Icon(Icons.list, color: Colors.green),
+                title: Text('Lista de desparacitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
@@ -532,12 +544,12 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.medication_liquid_sharp,
               color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.green),
+            leading: Icon(Icons.cloud_upload_rounded, color: Colors.green),
             title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
@@ -546,17 +558,6 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                 'formulario': formularios,
                 'animal': animal
               });
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.home, color: Colors.green),
-            title: Text('Ir a Pagina Principal'),
-            onTap: () {
-              //Navigator.pop(context);
-              Navigator.pushNamed(
-                context,
-                'home',
-              );
             },
           ),
         ],

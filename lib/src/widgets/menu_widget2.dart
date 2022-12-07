@@ -24,11 +24,22 @@ class _SubMenuWidgetState extends State<SubMenuWidget> {
             ),
           ),
           ListTile(
+            leading: Icon(Icons.home, color: Colors.green),
+            title: Text('Inicio'),
+            onTap: () {
+              //Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                'intro',
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(
-              Icons.pages,
-              color: Colors.blue,
+              Icons.manage_search_sharp,
+              color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Seguimiento de mascota'),
             onTap: () => Navigator.pushNamed(context, 'seguimientoMain'),
           ),
           ListTile(

@@ -70,11 +70,11 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               //_mostrarImagen(),
-                              Padding(padding: EdgeInsets.only(top: 20.0)),
+                              Padding(padding: EdgeInsets.only(top: 10.0)),
                               detalle(),
-                              Padding(padding: EdgeInsets.only(top: 50.0)),
+                              Padding(padding: EdgeInsets.only(top: 15.0)),
                               _botonPerfil(),
-                              Padding(padding: EdgeInsets.only(top: 95.0)),
+                              Padding(padding: EdgeInsets.only(top: 25.0)),
                               _verListado(),
                               //Padding(padding: EdgeInsets.only(bottom: 10.0)),
                               _botonGaleria(),
@@ -136,7 +136,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
           color: Colors.green,
         ),
         label: Text(
-          "Ver perfil de la mascota",
+          "Ver resumen",
           style: TextStyle(color: Colors.green, fontSize: 14),
         ));
   }
@@ -147,16 +147,9 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
         //mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: 10,
+            height: 7,
           ),
           ListTile(
-            title: Text(
-              "Perfil de mascota:",
-              style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
             subtitle: Text(
               'Puedes ver la información de la solicitud y descargar el perfil de la mascota haciendo clic en el botón "Ver perfil de mascota".',
               textAlign: TextAlign.justify,
@@ -167,7 +160,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
           )
         ],
       ),
-      elevation: 8,
+      elevation: 4,
       shadowColor: Colors.green,
       margin: EdgeInsets.all(5),
       shape: OutlineInputBorder(
@@ -230,19 +223,19 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
                   //subtitle: Text('${horario}'),
                 ),
                 SizedBox(
-                  height: 130.0, //150
+                  height: 100.0, //150
                   child: Image(
                     image: AssetImage('assets/dog_an8.gif'),
                   ),
                 ),
+                Icon(
+                  Icons.picture_as_pdf_rounded,
+                  color: Colors.green,
+                  size: 40,
+                ),
                 Text(
-                  '¡Ver perfil de mascota en PDF!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.white),
+                  'Ver perfil de mascota',
+                  style: TextStyle(color: Colors.green),
                 ),
               ],
             ),
@@ -497,7 +490,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
           Navigator.pushNamed(context, 'home');
         },
         icon: Icon(
-          Icons.photo_album,
+          Icons.arrow_back,
           size: 30,
           color: Colors.green,
         ),

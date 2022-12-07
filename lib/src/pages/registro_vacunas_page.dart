@@ -47,7 +47,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
       //backgroundColor: Color.fromARGB(223, 248, 248, 245),
       backgroundColor: Color.fromARGB(255, 236, 234, 219),
       appBar: AppBar(
-        title: Text('Vacunas'),
+        title: Text('Agregar nuevo registro '),
         backgroundColor: Colors.green,
       ),
       drawer: _menuWidget(),
@@ -64,7 +64,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                     child: Column(
                       children: [
                         Text(
-                          'Registrar vacunas',
+                          'Datos de la vacuna',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
@@ -382,7 +382,7 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             }),
           ),
           label: Text('Ver registros'),
-          icon: Icon(Icons.save),
+          icon: Icon(Icons.list),
           autofocus: true,
           onPressed: () {
             // Navigator.pushNamed(context, 'registroVacunas',
@@ -529,11 +529,22 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
             ),
           ),
           ListTile(
+            leading: Icon(Icons.home, color: Colors.green),
+            title: Text('Inicio'),
+            onTap: () {
+              //Navigator.pop(context);
+              Navigator.pushNamed(
+                context,
+                'intro',
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(
-              Icons.pages,
+              Icons.manage_search_sharp,
               color: Colors.green,
             ),
-            title: Text('Seguimiento Principal'),
+            title: Text('Seguimiento de mascota'),
             onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
                 arguments: {
                   'datosper': datosA,
@@ -542,14 +553,14 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                 }),
           ),
           ExpansionTile(
-            title: Text('Registro de Vacunas'),
+            title: Text('Vacunas'),
             children: [
               ListTile(
                 leading: Icon(
-                  Icons.meeting_room,
+                  Icons.edit_outlined,
                   color: Colors.green,
                 ),
-                title: Text('Realizar registro'),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   Navigator.pushNamed(context, 'registroVacunas', arguments: {
                     'datosper': datosA,
@@ -560,10 +571,10 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.check,
+                  Icons.list,
                   color: Colors.green,
                 ),
-                title: Text('Ver registros'),
+                title: Text('Lista de vacunas'),
                 onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
                     arguments: {
                       'datosper': datosA,
@@ -573,16 +584,16 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.vaccines,
               color: Colors.green,
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitación'),
+            title: Text('Desparasitaciones'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitación'),
+                leading: Icon(Icons.edit_outlined, color: Colors.green),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'registroDesp', arguments: {
@@ -593,8 +604,8 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitación'),
+                leading: Icon(Icons.list, color: Colors.green),
+                title: Text('Lista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
@@ -606,12 +617,12 @@ class _RegistroVacunasPageState extends State<RegistroVacunasPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.medication_liquid_sharp,
               color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.green),
+            leading: Icon(Icons.cloud_upload_rounded, color: Colors.green),
             title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);

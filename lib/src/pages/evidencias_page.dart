@@ -246,7 +246,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
             final estadoCedula =
                 await formulariosProvider.verificar(identificacion);
             if (estadoCedula.isEmpty) {
-              mostrarAlertaOk(context, 'No se ha encontrado ningún registo.',
+              mostrarAlertaOk(context, 'No se ha encontrado ningún registro.',
                   'evidencia', '¡Atención!', 'Ok');
             } else {
               _submit();
@@ -385,7 +385,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                         child: Column(
                           children: <Widget>[
                             Icon(
-                              Icons.photo_library_outlined,
+                              Icons.picture_as_pdf_rounded,
                               color: Colors.green,
                             ),
                             Padding(
@@ -393,7 +393,7 @@ class _EvidenciasPageState extends State<EvidenciasPage> {
                                   const EdgeInsets.symmetric(vertical: 2.0),
                             ),
                             Text(
-                              'Ver Perfil de Mascota en PDF',
+                              'Ver perfil de mascota',
                               style: TextStyle(color: Colors.green),
                             ),
                           ],

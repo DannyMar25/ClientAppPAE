@@ -41,7 +41,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
 
         backgroundColor: Color.fromARGB(255, 236, 234, 219),
         appBar: AppBar(
-          title: Text('Desparasitaciones'),
+          title: Text('Lista de desparacitaciones '),
           backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
@@ -58,7 +58,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Registros de desparasitación',
+                              'Registros',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 28,
@@ -333,10 +333,10 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
           ),
           ListTile(
             leading: Icon(
-              Icons.pages,
+              Icons.manage_search_sharp,
               color: Colors.green,
             ),
-            title: Text('Seguimiento Home'),
+            title: Text('Seguimiento de la mascota'),
             onTap: () => Navigator.pushNamed(context, 'seguimientoMain',
                 arguments: {
                   'datosper': datosA,
@@ -345,14 +345,14 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 }),
           ),
           ExpansionTile(
-            title: Text('Registro de Vacunas'),
+            title: Text('Vacunas'),
             children: [
               ListTile(
                 leading: Icon(
-                  Icons.meeting_room,
+                  Icons.edit_outlined,
                   color: Colors.green,
                 ),
-                title: Text('Realizar registro'),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   Navigator.pushNamed(context, 'registroVacunas', arguments: {
                     'datosper': datosA,
@@ -363,10 +363,10 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.check,
+                  Icons.list,
                   color: Colors.green,
                 ),
-                title: Text('Ver registros'),
+                title: Text('Lista de vacunas'),
                 onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
                     arguments: {
                       'datosper': datosA,
@@ -376,12 +376,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.vaccines,
               color: Colors.green,
             ),
           ),
           ExpansionTile(
-            title: Text('Registro de Desparasitación'),
+            title: Text('Desparasitaciones'),
             children: [
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.green),
@@ -396,8 +396,8 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Ver Registro Desparasitacion'),
+                leading: Icon(Icons.list, color: Colors.green),
+                title: Text('Lista de desparacitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {
@@ -409,12 +409,12 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ),
             ],
             leading: Icon(
-              Icons.assignment,
+              Icons.medication_liquid_rounded,
               color: Colors.green,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.green),
+            leading: Icon(Icons.cloud_upload_rounded, color: Colors.green),
             title: Text('Subir Evidencia'),
             onTap: () {
               //Navigator.pop(context);
