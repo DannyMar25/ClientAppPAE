@@ -144,7 +144,7 @@ class _PerfilMainPageState extends State<PerfilMainPage> {
   Widget detalle() {
     return Card(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        //mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             height: 10,
