@@ -27,7 +27,10 @@ void mostrarAlerta(BuildContext context, String mensaje) {
               Text('Información incorrecta'),
             ],
           ),
-          content: Text(mensaje),
+          content: Text(
+            mensaje,
+            textAlign: TextAlign.justify,
+          ),
           actions: [
             TextButton(
               child: Text('Ok'),
@@ -68,10 +71,13 @@ void mostrarAlertaOk(BuildContext context, String mensaje, String ruta,
                 color: Colors.green,
                 size: 50,
               ),
+              SizedBox(
+                width: 7,
+              ),
               Text(titulo),
             ],
           ),
-          content: Text(mensaje),
+          content: Text(mensaje, textAlign: TextAlign.justify),
           actions: [
             TextButton(
                 child: Text(iconText),
@@ -133,10 +139,16 @@ void mostrarOkFormulario(BuildContext context, String mensaje, String ruta,
                 color: Colors.green,
                 size: 50,
               ),
+              SizedBox(
+                width: 7,
+              ),
               Text('Información correcta'),
             ],
           ),
-          content: Text(mensaje),
+          content: Text(
+            mensaje,
+            textAlign: TextAlign.justify,
+          ),
           actions: [
             TextButton(
                 child: Text('Ok'),

@@ -51,7 +51,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Resultados'),
+          title: Text('Resultado de búsqueda'),
           backgroundColor: Colors.green,
           actions: [
             // email != ''
@@ -238,6 +238,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
 
   Widget _crearItem1(BuildContext context, AnimalModel animal) {
     return Card(
+      //shape: ,
       color: Color.fromARGB(248, 202, 241, 170),
       elevation: 4.0,
       //margin: EdgeInsets.only(bottom: 90.0, left: 5.0, right: 5.0),
@@ -289,7 +290,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
             padding: const EdgeInsets.symmetric(vertical: 2.0),
           ),
           Text(
-            'Volver a la Galería',
+            'Volver a la galería',
             style: TextStyle(color: Colors.green),
           ),
         ],

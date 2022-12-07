@@ -78,11 +78,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Text(
-                  'I N G R E S O',
-                  style: TextStyle(fontSize: 20.0),
+                  'Iniciar sesión',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 _crearEmail(bloc),
                 SizedBox(
@@ -360,7 +360,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
       child: Text(
-        '¿Olvidó la contraseña?',
+        '¿Olvidaste tu contraseña?',
         style: TextStyle(color: Colors.green, fontSize: 20),
       ),
     );

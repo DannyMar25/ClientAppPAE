@@ -60,14 +60,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Recuperación de contraseña',
-                  style: TextStyle(fontSize: 20.0),
+                  'Reestablece tu contraseña',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 30.0,
                 ),
                 Text(
-                  'Ingresa tu correo:',
+                  'Ingresa tu correo electrónico:',
                   textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 18, color: Colors.black),
                 ),

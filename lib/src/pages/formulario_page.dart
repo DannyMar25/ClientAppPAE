@@ -34,7 +34,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 250, 249),
       appBar: AppBar(
-        title: Text('Formulario'),
+        title: Text('Solicitud de adopción'),
         backgroundColor: Colors.green,
         actions: [
           PopupMenuButton<int>(
@@ -110,29 +110,28 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                 child: Form(
                     key: formKey,
                     child: Column(children: [
-                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
-
-                      Text(
-                        'Solicitud de adopción',
-                        style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple),
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                      //Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                      // Text(
+                      //   'Solicitud de adopción',
+                      //   style: TextStyle(
+                      //       fontSize: 26,
+                      //       fontWeight: FontWeight.bold,
+                      //       color: Colors.deepPurple),
+                      // ),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       SizedBox(
                         child: Image(
                           image: AssetImage("assets/dog_an9.gif"),
                         ),
-                        height: 150.0,
+                        height: 100.0,
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 30.0)),
                       Text(
-                        'Por favor llena el siguiente formulario con tus datos personales e información acerca de las condiciones de adopción, nuestros asesores la revisarán y se pondrán en contacto contigo para seguir el proceso.',
+                        'Por favor, llena el siguiente formulario con tus datos personales e información acerca de las condiciones de adopción. Nuestros asesores revisarán la información y se pondrán en contacto contigo para seguir el proceso.\n\nContenido:\nSección 1: Datos Personales\nSección 2: Situación Familiar\nSección 3. Domicilio\nSección 4: Relación con los animales\n\nSugerencias: \n-  Asegúrate de completar las cuatro secciones.\n-  Se requiere aproximadamente de 5 a 10 minutos para completar el formulario.',
                         style: TextStyle(fontSize: 16, color: Colors.black),
                         textAlign: TextAlign.justify,
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 40.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
                       TextButton(
                         style: flatButtonStyle,
                         onPressed: () {
@@ -143,16 +142,16 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                         child: Column(
                           children: <Widget>[
                             Icon(
-                              Icons.list_alt,
+                              Icons.edit_note,
                               color: Colors.green,
-                              size: 100.0,
+                              size: 70.0,
                             ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 2.0),
                             ),
                             Text(
-                              'Llenar Formulario',
+                              'Llenar formulario',
                               style: TextStyle(color: Colors.green),
                             ),
                           ],

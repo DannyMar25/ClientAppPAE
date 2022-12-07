@@ -39,7 +39,7 @@ class _AnimalPageState extends State<AnimalPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Text('Animal'),
+        title: Text('Perfil del animal'),
         backgroundColor: Colors.green,
         actions: [
           email != ''
@@ -136,7 +136,7 @@ class _AnimalPageState extends State<AnimalPage> {
                 cardCita(),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
                 //_crearBotonCita(),
-                Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                Padding(padding: EdgeInsets.only(bottom: 5.0)),
                 cardAdopcion(),
                 Padding(padding: EdgeInsets.only(bottom: 10.0)),
                 //_crearBotonAdopta(),
@@ -581,6 +581,10 @@ class _AnimalPageState extends State<AnimalPage> {
 
   Widget cardCita() {
     return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          side: BorderSide(color: Colors.green)),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(context, 'registroCita', arguments: animal);
@@ -588,14 +592,14 @@ class _AnimalPageState extends State<AnimalPage> {
         child: Container(
           height: 130,
           //width: 380.0,
-          color: Colors.white,
+          color: Color.fromARGB(255, 255, 255, 255),
           child: Row(
             children: [
               Center(
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(10),
                   child: Expanded(
-                    child: Image.asset("assets/dog_an8.gif"),
+                    child: Image.asset("assets/dog_an8.gif", width: 80),
                     flex: 2,
                   ),
                 ),
@@ -605,10 +609,13 @@ class _AnimalPageState extends State<AnimalPage> {
                   alignment: Alignment.topLeft,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 8,
+                      ),
                       Expanded(
                           flex: 5,
                           child: ListTile(
-                            title: Text("Agenda una cita!"),
+                            title: Text("Agenda una cita"),
                             subtitle: Text(
                               "Si deseas conocer a ${animal.nombre} puedes visitarnos agendando tu cita con anticipción.",
                               textAlign: TextAlign.justify,
@@ -660,6 +667,13 @@ class _AnimalPageState extends State<AnimalPage> {
   Widget cardAdopcion() {
     final email = prefs.email;
     return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.green),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0),
+        ),
+      ),
       child: InkWell(
         onTap: () {
           if (email != '') {
@@ -682,7 +696,10 @@ class _AnimalPageState extends State<AnimalPage> {
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Expanded(
-                    child: Image.asset("assets/dog_an7.gif"),
+                    child: Image.asset(
+                      "assets/dog_an7.gif",
+                      width: 80,
+                    ),
                     flex: 2,
                   ),
                 ),
@@ -692,6 +709,9 @@ class _AnimalPageState extends State<AnimalPage> {
                   alignment: Alignment.topLeft,
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 8,
+                      ),
                       Expanded(
                           flex: 5,
                           child: ListTile(

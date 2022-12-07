@@ -98,7 +98,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('RELACIÓN CON LOS ANIMALES'),
+        title: Text('Formulario de adopción'),
         backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
@@ -130,7 +130,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Deje en blanco si no tuvo o tiene mascotas',
+                          'Deje en blanco si no ha tenido mascotas',
                         ),
                         Divider(),
                         DataTable(
@@ -571,6 +571,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       inputFormatters: <TextInputFormatter>[
         FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(2),
       ],
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.number,
@@ -672,6 +673,9 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
       readOnly: false,
       textCapitalization: TextCapitalization.sentences,
       keyboardType: TextInputType.number,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(2),
+      ],
       decoration: InputDecoration(
           //labelText: '¿Cuántos años cree que vive un perro en promedio?',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
@@ -1276,7 +1280,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Atención'),
+            title: Text('¡Atención!'),
             content: Text(
                 'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
@@ -1299,16 +1303,28 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
 
   Widget _detalle() {
     return Card(
-      child: ListTile(
-        title: Text(
-          "Formulario: Relación con los animales",
-          style: TextStyle(
-              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          'En este formulario debe responder algunas preguntas para constatar la tenencia responsable de la mascota adoptada.',
-          textAlign: TextAlign.justify,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 7,
+          ),
+          ListTile(
+            title: Text(
+              "Sección 4: Relación con los animales",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              'En esta sección debe responder algunas preguntas para constatar la tenencia responsable de la mascota.',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          SizedBox(
+            height: 7,
+          ),
+        ],
       ),
       elevation: 8,
       shadowColor: Colors.green,

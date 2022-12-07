@@ -48,12 +48,12 @@ class _MenuWidgetState extends State<MenuWidget> {
               Icons.pets,
               color: Colors.green,
             ),
-            title: Text('Galería de mascotas'),
+            title: Text('Ver mascotas'),
             onTap: () => Navigator.pushNamed(context, 'home'),
           ),
           ListTile(
             leading: Icon(
-              Icons.meeting_room,
+              Icons.edit_calendar,
               color: Colors.green,
             ),
             title: Text('Agendar cita'),
@@ -67,14 +67,14 @@ class _MenuWidgetState extends State<MenuWidget> {
                     Icons.assignment,
                     color: Colors.green,
                   ),
-                  title: Text('Llenar formulario de adopción'),
+                  title: Text('Adopción'),
                   onTap: () {
                     mostrarAlertaOk(
                         context,
                         'Para poder llenar el formulario de adopción debes seleccionar a tu futura mascota en nuestra galería.',
                         'home',
-                        'Atención!',
-                        'Ir a Galería');
+                        '¡Atención!',
+                        'Ver mascotas');
                     //Navigator.pushReplacementNamed(context, 'home');
                   })
               : SizedBox(),

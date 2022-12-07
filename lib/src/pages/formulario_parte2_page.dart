@@ -57,7 +57,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
       //backgroundColor: Color.fromARGB(223, 211, 212, 207),
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('SITUACIÓN FAMILIAR'),
+        title: Text('Formulario de adopción'),
         backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
@@ -672,7 +672,7 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Atención'),
+            title: Text('¡Atención!'),
             content: Text(
                 'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
@@ -695,16 +695,28 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
 
   Widget _detalle() {
     return Card(
-      child: ListTile(
-        title: Text(
-          "Formulario: Situación familiar",
-          style: TextStyle(
-              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          'En este formulario debe ingresar información de las personas con las que comparte su hogar.',
-          textAlign: TextAlign.justify,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 7,
+          ),
+          ListTile(
+            title: Text(
+              "Ssección 2: Situación familiar",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              'En esta sección debe ingresar información de las personas con las que comparte su hogar.',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          SizedBox(
+            height: 7,
+          ),
+        ],
       ),
       elevation: 8,
       shadowColor: Colors.green,

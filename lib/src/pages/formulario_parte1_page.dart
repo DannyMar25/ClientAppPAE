@@ -48,7 +48,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
         title: Text(
-          'DATOS PERSONALES',
+          'Formulario de adopción',
         ),
         backgroundColor: Colors.green,
       ),
@@ -80,6 +80,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                       // ),
                       _detalle(),
                       Divider(
+                        height: 5,
                         color: Colors.transparent,
                       ),
                       _crearNombre(),
@@ -140,7 +141,6 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Divider(),
                       _crearNombreRef(),
                       _crearParentescoRef(),
                       _crearTelefonoRef(),
@@ -177,7 +177,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       ],
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: 'Nombre Completo',
+          labelText: 'Nombre completo',
           labelStyle: TextStyle(fontSize: 16, color: Colors.black)),
       onChanged: (s) {
         setState(() {
@@ -799,7 +799,7 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Atención'),
+            title: Text('¡Atención!'),
             content: Text(
                 'Antes de guardar esta sección, asegurate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
@@ -822,18 +822,30 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
 
   Widget _detalle() {
     return Card(
-      child: ListTile(
-        title: Text(
-          "Formulario: Datos Personales",
-          style: TextStyle(
-              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          'En este formulario debe ingresar sus datos personales, ten en cuenta que estos son importantes durante el proceso de adopción.',
-          textAlign: TextAlign.justify,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 7,
+          ),
+          ListTile(
+            title: Text(
+              "Sección 1: Datos Personales",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              'En esta sección debe ingresar sus datos personales, nivel de intrucción, teléfonos de contacto e información de referencias personales.Ten en cuenta que estos son importantes durante el proceso de adopción.',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          SizedBox(
+            height: 7,
+          ),
+        ],
       ),
-      elevation: 8,
+      elevation: 5,
       shadowColor: Colors.green,
       margin: EdgeInsets.all(5),
       shape: OutlineInputBorder(

@@ -26,7 +26,7 @@ class _IntroPageState extends State<IntroPage> {
       fontSize: 14,
       fontWeight: FontWeight.normal);
   final _loremIpsum =
-      '''PoliPet es una app dedicada a difundir la adopción de mascotas, nuestro principal objetivo es mejorar la calidad de vida de animalitos que no tienen un hogar''';
+      '''PoliPet es una app dedicada a difundir la adopción de mascotas, nuestro principal objetivo es mejorar la calidad de vida de animalitos que no tienen un hogar.''';
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     //backgroundColor: Colors.green,
     shape: const RoundedRectangleBorder(
@@ -150,7 +150,11 @@ class _IntroPageState extends State<IntroPage> {
                   headerBackgroundColor: Colors.green,
                   headerBackgroundColorOpened: Colors.green,
                   header: Text('¿Qué es PoliPet?', style: _headerStyle),
-                  content: Text(_loremIpsum, style: _contentStyle),
+                  content: Text(
+                    _loremIpsum,
+                    style: _contentStyle,
+                    textAlign: TextAlign.justify,
+                  ),
                   contentHorizontalPadding: 20,
                   contentBorderWidth: 1,
                   // onOpenSection: () => print('onOpenSection ...'),
@@ -286,7 +290,8 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 AccordionSection(
                   isOpen: false,
-                  leftIcon: const Icon(Icons.fact_check, color: Colors.white),
+                  leftIcon:
+                      const Icon(Icons.edit_calendar, color: Colors.white),
                   header: Text('Agenda una cita', style: _headerStyle),
                   headerBackgroundColor: Colors.blue,
                   headerBackgroundColorOpened:
@@ -305,7 +310,7 @@ class _IntroPageState extends State<IntroPage> {
                         child: Column(
                           children: <Widget>[
                             Icon(
-                              Icons.date_range,
+                              Icons.edit,
                               color: Colors.green,
                             ),
                             Padding(
@@ -367,7 +372,7 @@ class _IntroPageState extends State<IntroPage> {
                                   const EdgeInsets.symmetric(vertical: 2.0),
                             ),
                             Text(
-                              'Galería',
+                              'Ver mascotas',
                               style: TextStyle(color: Colors.green),
                             ),
                           ],
@@ -385,7 +390,7 @@ class _IntroPageState extends State<IntroPage> {
                 AccordionSection(
                   isOpen: false,
                   leftIcon: const Icon(Icons.pets, color: Colors.white),
-                  header: Text('Ingresa información de tu mascota adoptada',
+                  header: Text('Ingresa la información de tu mascota adoptada',
                       style: _headerStyle),
                   content: Column(
                     children: [

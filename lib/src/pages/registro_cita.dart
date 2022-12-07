@@ -68,7 +68,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registro de citas'),
+        title: Text('Agendar cita'),
         backgroundColor: Colors.green,
         actions: [
           // email != ''
@@ -418,7 +418,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
           }),
         ),
         label: Text('Revisar'),
-        icon: Icon(Icons.save),
+        icon: Icon(Icons.check_circle_outline_outlined),
         autofocus: true,
         onPressed: () {
           if (formKey.currentState!.validate() && idHorario != '') {
@@ -426,21 +426,33 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Información'),
-                    content: Text('Nombre: ' +
-                        nombre.text +
-                        '\n' +
-                        'Teléfono: ' +
-                        telefono.text +
-                        '\n' +
-                        'Correo: ' +
-                        correo.text +
-                        '\n' +
-                        'Fecha de la cita: ' +
-                        _fechaCompleta +
-                        '\n' +
-                        'Hora: ' +
-                        horaSeleccionada),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.edit_calendar_outlined),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('Datos de la cita'),
+                      ],
+                    ),
+                    content: Text(
+                      'Nombre: ' +
+                          nombre.text +
+                          '\n' +
+                          'Teléfono: ' +
+                          telefono.text +
+                          '\n' +
+                          'Correo: ' +
+                          correo.text +
+                          '\n' +
+                          'Fecha de la cita: ' +
+                          _fechaCompleta +
+                          '\n' +
+                          'Hora: ' +
+                          horaSeleccionada,
+                      textAlign: TextAlign.justify,
+                    ),
                     actions: [
                       TextButton(
                           child: Text('Guardar'),
@@ -466,7 +478,7 @@ class _RegistroClienteCitasState extends State<RegistroClienteCitas> {
                 });
           } else {
             mostrarAlerta(context,
-                'Asegúrate de que todos los campos estén llenos. Recuerda que debes eleccionar una fecha y hora.');
+                'Asegúrate de que todos los campos estén llenos. Recuerda que debes seleccionar una fecha y hora.');
           }
         });
   }

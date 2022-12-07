@@ -136,7 +136,7 @@ class FormulariosProvider {
       await refForm.doc(idFormu2).update({"idRelacionAn": relacionAnimAdd.id});
       mostrarOkFormulario(
           context,
-          'La información ha sido guardada correctamente. La respuesta a tu solicitud llegará a tu correo electrónico dentro de 24 a 48 horas, por favor revisa la bandeja de correo no deseado o spam.',
+          'La información ha sido guardada correctamente. La respuesta a tu solicitud llegará a tu correo electrónico dentro de 24 a 48 horas. \n\nPor favor revisa la bandeja de correo no deseado o spam.',
           'perfilMascota',
           idFormu2,
           animal);

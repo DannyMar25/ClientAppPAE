@@ -61,7 +61,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(223, 248, 248, 245),
       appBar: AppBar(
-        title: Text('DOMICILIO'),
+        title: Text('Formulario de adopción'),
         backgroundColor: Colors.green,
       ),
       drawer: MenuWidget(),
@@ -796,7 +796,7 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Atención'),
+            title: Text('¡Atención!'),
             content: Text(
                 'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
             actions: [
@@ -819,16 +819,28 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
 
   Widget _detalle() {
     return Card(
-      child: ListTile(
-        title: Text(
-          "Formulario: Domicilio",
-          style: TextStyle(
-              color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          'En este formulario debe ingresar características de su domicilio, necesarias para verificar el lugar donde vivirá la mascota adoptada.',
-          textAlign: TextAlign.justify,
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 7,
+          ),
+          ListTile(
+            title: Text(
+              "Sección 3: Domicilio",
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              'En esta sección debe ingresar características de su domicilio, las cuales son necesarias para verificar el lugar donde vivirá la mascota adoptada.',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          SizedBox(
+            height: 7,
+          ),
+        ],
       ),
       elevation: 8,
       shadowColor: Colors.green,
