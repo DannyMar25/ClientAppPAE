@@ -85,7 +85,8 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               child: Flexible(
                 fit: FlexFit.loose,
                 child: Container(
-                  padding: EdgeInsets.only(bottom: 5),
+                  margin: EdgeInsets.all(10),
+                  //padding: EdgeInsets.only(bottom: 20),
                   //color: Colors.lightGreenAccent,
                   //padding: new EdgeInsets.only(top: 230.0),
                   child: Form(
@@ -96,6 +97,9 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(
+                              height: 3,
+                            ),
                             Text(
                               '${animal.nombre}',
                               style: TextStyle(
@@ -104,10 +108,13 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
-                            Divider(),
+                            Divider(
+                              color: Colors.transparent,
+                              height: 5,
+                            ),
                             _mostrarFoto(),
                             Divider(
-                              color: Colors.white,
+                              color: Colors.transparent,
                             ),
                             Row(
                               children: [
@@ -206,19 +213,19 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                             ),
                             Divider(),
                             Divider(
-                              color: Colors.white,
+                              color: Colors.transparent,
                             ),
                             Text(
                               'Información del adoptante',
                               style: TextStyle(
-                                  fontSize: 28,
+                                  fontSize: 25,
                                   color: Colors.blueGrey[600],
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
-                            Divider(),
                             Divider(
-                              color: Colors.white,
+                              height: 10,
+                              color: Colors.transparent,
                             ),
                             Row(
                               children: [
@@ -276,10 +283,14 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                               ],
                             ),
                             Divider(),
+                            Divider(
+                              height: 10,
+                              color: Colors.transparent,
+                            ),
                             Text(
                               'Ingresa información de tu mascota',
                               style: TextStyle(
-                                  fontSize: 28,
+                                  fontSize: 25,
                                   color: Colors.blueGrey[600],
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
@@ -311,7 +322,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
       return FadeInImage(
         image: NetworkImage(animal.fotoUrl),
         placeholder: AssetImage('assets/jar-loading.gif'),
-        height: 300,
+        height: 250,
         fit: BoxFit.contain,
       );
     } else {
@@ -319,7 +330,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
         return Image.file(
           foto!,
           fit: BoxFit.cover,
-          height: 300.0,
+          height: 250.0,
         );
       }
       return Image.asset(foto?.path ?? 'assets/no-image.png');
@@ -391,7 +402,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                   }),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(5.0),
               child: Expanded(
                 child: ElevatedButton.icon(
                     style: ButtonStyle(
@@ -400,7 +411,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
                         return Colors.green;
                       }),
                     ),
-                    label: Text('Agregar desparasitacion'),
+                    label: Text('Agregar desparasitación'),
                     icon: Icon(Icons.medication_liquid_sharp),
                     autofocus: true,
                     onPressed: () {
@@ -415,7 +426,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(0.0),
           child: Expanded(
             child: ElevatedButton.icon(
                 style: ButtonStyle(
@@ -532,7 +543,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
               ),
               ListTile(
                 leading: Icon(Icons.list, color: Colors.green),
-                title: Text('Lista de desparacitaciones'),
+                title: Text('Lista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {

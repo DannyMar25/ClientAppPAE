@@ -564,7 +564,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               ),
               ListTile(
                 leading: Icon(Icons.check, color: Colors.green),
-                title: Text('Llista de desparacitaciones'),
+                title: Text('Llista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {

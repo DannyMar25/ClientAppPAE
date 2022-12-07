@@ -447,7 +447,7 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
               ),
               ListTile(
                 leading: Icon(Icons.list, color: Colors.green),
-                title: Text('Lista de desparacitaciones'),
+                title: Text('Lista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {

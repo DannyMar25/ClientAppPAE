@@ -41,7 +41,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
 
         backgroundColor: Color.fromARGB(255, 236, 234, 219),
         appBar: AppBar(
-          title: Text('Lista de desparacitaciones '),
+          title: Text('Lista de desparasitaciones '),
           backgroundColor: Colors.green,
         ),
         drawer: _menuWidget(),
@@ -84,7 +84,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
     return Card(
       child: ListTile(
         title: Text(
-          'Aquí encontrarás una lista de todas las desparacitaciones de tu mascota.',
+          'Aquí encontrarás una lista de todas las desparasitaciones de tu mascota.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -217,7 +217,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                                 width: 190.0,
                                 child: Center(
                                   child: Text(
-                                    'Próxima desparacitación',
+                                    'Próxima desparasitación',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -397,7 +397,7 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
               ),
               ListTile(
                 leading: Icon(Icons.list, color: Colors.green),
-                title: Text('Lista de desparacitaciones'),
+                title: Text('Lista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'verRegistroDesp', arguments: {

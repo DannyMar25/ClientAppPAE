@@ -64,7 +64,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                     child: Column(
                       children: [
                         Text(
-                          'Datos de desparacitación',
+                          'Datos de desparasitación',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
@@ -99,7 +99,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
     return Card(
       child: ListTile(
         subtitle: Text(
-          'En esta sección podrás llevar un registro de las desparacitaciones de tu mascota, este registro será enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
+          'En esta sección podrás llevar un registro de las desparasitaciones de tu mascota, este registro será enviado a nuestros colaboradores para poder constatar que tu mascota se encuentre en buenas condiciones de salud.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -438,7 +438,7 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                       width: 190.0,
                       child: Center(
                         child: Text(
-                          'Próxima desparacitación',
+                          'Próxima desparasitación',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold),
