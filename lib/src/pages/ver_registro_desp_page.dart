@@ -263,7 +263,16 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('¡Atención!'),
+                          title: Row(
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: Colors.red,
+                                size: 50,
+                              ),
+                              Text('¡Atención!'),
+                            ],
+                          ),
                           content: Text('¿Estás seguro de borrar el registro?'),
                           actions: [
                             TextButton(
@@ -384,8 +393,8 @@ class _VerRegistroDespPageState extends State<VerRegistroDespPage> {
             title: Text('Desparasitaciones'),
             children: [
               ListTile(
-                leading: Icon(Icons.settings, color: Colors.green),
-                title: Text('Registro Desparasitacion'),
+                leading: Icon(Icons.edit_outlined, color: Colors.green),
+                title: Text('Agregar nuevo registro'),
                 onTap: () {
                   //Navigator.pop(context);
                   Navigator.pushNamed(context, 'registroDesp', arguments: {

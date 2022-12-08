@@ -530,10 +530,10 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.edit_outlined,
+                  Icons.list,
                   color: Colors.green,
                 ),
-                title: Text('Agregar nuevo registro'),
+                title: Text('Lista de vacunas'),
                 onTap: () => Navigator.pushNamed(context, 'verRegistroVacunas',
                     arguments: {
                       'datosper': datosA,
@@ -563,7 +563,7 @@ class _SubirArchivosPageState extends State<SubirArchivosPage> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.check, color: Colors.green),
+                leading: Icon(Icons.list, color: Colors.green),
                 title: Text('Llista de desparasitaciones'),
                 onTap: () {
                   //Navigator.pop(context);

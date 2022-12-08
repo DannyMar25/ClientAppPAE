@@ -301,9 +301,23 @@ class _RegistroDespPageState extends State<RegistroDespPage> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Aviso'),
+                    title: Row(
+                      children: [
+                        Icon(
+                          Icons.warning_amber_outlined,
+                          color: Colors.amber,
+                          size: 60,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('  Aviso'),
+                      ],
+                    ),
                     content: Text(
-                        'Asegúrate de que toda la información ingresada sea correcta. Una vez guardado el registro este no se podrá modificar.'),
+                      'Asegúrate de que toda la información ingresada sea correcta. Una vez guardado el registro este no se podrá modificar.',
+                      textAlign: TextAlign.justify,
+                    ),
                     actions: [
                       TextButton(
                           child: Text('Es correcta'),

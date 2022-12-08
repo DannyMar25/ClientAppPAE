@@ -303,7 +303,16 @@ class _VerRegistroVacunasPageState extends State<VerRegistroVacunasPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text('¡Atención!'),
+                          title: Row(
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: Colors.red,
+                                size: 50,
+                              ),
+                              Text('¡Atención!'),
+                            ],
+                          ),
                           content: Text('¿Estás seguro de borrar el registro?'),
                           actions: [
                             TextButton(
