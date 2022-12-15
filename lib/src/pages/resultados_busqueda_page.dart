@@ -159,7 +159,7 @@ class _ResultadosBusquedaPageState extends State<ResultadosBusquedaPage> {
                       ],
                     ),
                     content: Text(
-                        'No se ha encotrado ninguna mascota con las características que buscabas.'),
+                        'No se ha encontrado ninguna mascota con las características que buscabas.'),
                     actions: [
                       TextButton(
                           child: Text('Ok'),

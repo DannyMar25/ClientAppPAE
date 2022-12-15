@@ -222,7 +222,7 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
                         _crearPregunta9(),
                         Divider(),
                         Text(
-                          'Estime cuánto dinero podía gastar en su mascota mensualmente:   ',
+                          'Estime cuánto dinero podría gastar en su mascota mensualmente:   ',
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
                         _crearGastos(),
