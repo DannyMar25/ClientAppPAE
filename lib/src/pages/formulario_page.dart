@@ -2,6 +2,7 @@ import 'package:cliente_app_v1/src/models/animales_model.dart';
 import 'package:cliente_app_v1/src/pages/intro_page.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
+import 'package:cliente_app_v1/src/utils/utils.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
       borderRadius: BorderRadius.all(Radius.circular(4.0)),
     ),
   );
+  bool isDisable = false;
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     final email = prefs.email;
@@ -110,14 +114,6 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                 child: Form(
                     key: formKey,
                     child: Column(children: [
-                      //Padding(padding: EdgeInsets.only(bottom: 20.0)),
-                      // Text(
-                      //   'Solicitud de adopción',
-                      //   style: TextStyle(
-                      //       fontSize: 26,
-                      //       fontWeight: FontWeight.bold,
-                      //       color: Colors.deepPurple),
-                      // ),
                       Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       SizedBox(
                         child: Image(
@@ -132,12 +128,24 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                         textAlign: TextAlign.justify,
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                      Row(
+                        children: [
+                          _crearCheckBox1(),
+                          Text(
+                              "He leído las instrucciones y estoy de acuerdo."),
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
                       TextButton(
                         style: flatButtonStyle,
                         onPressed: () {
-                          //cardB.currentState?.collapse();
-                          Navigator.pushNamed(context, 'formularioP1',
-                              arguments: animal);
+                          if (isChecked == false) {
+                            mostrarAlerta(context,
+                                "Asegurate de confirmar que haz leído las instrucciones.");
+                          } else {
+                            Navigator.pushNamed(context, 'formularioP1',
+                                arguments: animal);
+                          }
                         },
                         child: Column(
                           children: <Widget>[
@@ -177,6 +185,35 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _crearCheckBox1() {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.blue;
+    }
+
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: MaterialStateProperty.resolveWith(getColor),
+      value: isChecked,
+      onChanged: (bool? value) {
+        if (isChecked == true) {
+          return null;
+        } else {
+          setState(() {
+            isChecked = value!;
+          });
+        }
+      },
     );
   }
 
