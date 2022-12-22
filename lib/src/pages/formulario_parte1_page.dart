@@ -372,11 +372,11 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       //mainAxisSize: MainAxisSize.max,
       children: [
         Text(
-          'Seleccione nivel de instrucción:  ',
+          'Seleccione nivel de instrucción: ',
           style: TextStyle(fontSize: 16, color: Colors.black),
         ),
         SizedBox(
-          width: 138.0,
+          width: 130.0,
           child: DropdownButtonFormField<String>(
               //hint: Text(animal.tamanio.toString()),
               value: _selection,

@@ -110,11 +110,11 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
           // Background(),
           SingleChildScrollView(
             child: Container(
-                padding: EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(10.0),
                 child: Form(
                     key: formKey,
                     child: Column(children: [
-                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 5.0)),
                       SizedBox(
                         child: Image(
                           image: AssetImage("assets/dog_an9.gif"),
@@ -135,13 +135,13 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                               "He leído las instrucciones y estoy de acuerdo."),
                         ],
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       TextButton(
                         style: flatButtonStyle,
                         onPressed: () {
                           if (isChecked == false) {
                             mostrarAlerta(context,
-                                "Asegurate de confirmar que haz leído las instrucciones.");
+                                "Asegúrate de confirmar que haz leído las instrucciones.");
                           } else {
                             Navigator.pushNamed(context, 'formularioP1',
                                 arguments: animal);
@@ -206,13 +206,9 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
-        if (isChecked == true) {
-          return null;
-        } else {
-          setState(() {
-            isChecked = value!;
-          });
-        }
+        setState(() {
+          isChecked = value!;
+        });
       },
     );
   }
