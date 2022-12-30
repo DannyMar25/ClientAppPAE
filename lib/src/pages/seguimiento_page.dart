@@ -561,7 +561,7 @@ class _SeguimientoPageState extends State<SeguimientoPage> {
           ),
           ListTile(
             leading: Icon(Icons.cloud_upload_rounded, color: Colors.green),
-            title: Text('Subir Evidencia'),
+            title: Text('Subir evidencia'),
             onTap: () {
               //Navigator.pop(context);
               Navigator.pushNamed(context, 'demoArchivos', arguments: {
