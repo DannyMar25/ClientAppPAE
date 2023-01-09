@@ -1,4 +1,3 @@
-import 'package:cliente_app_v1/src/models/notificaciones_model.dart';
 import 'package:cliente_app_v1/src/models/usuario_notificacion_model.dart';
 import 'package:cliente_app_v1/src/preferencias_usuario/preferencias_usuario.dart';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';

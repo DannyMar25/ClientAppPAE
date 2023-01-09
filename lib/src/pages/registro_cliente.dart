@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:cliente_app_v1/src/providers/usuario_provider.dart';
 import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -19,11 +18,11 @@ class RegistroClientePage extends StatefulWidget {
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  // static final CameraPosition _kLake = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(37.43296265331129, -122.08832357078792),
+  //     tilt: 59.440717697143555,
+  //     zoom: 19.151926040649414);
 
   @override
   _RegistroClientePageState createState() => _RegistroClientePageState();
@@ -195,22 +194,22 @@ class _RegistroClientePageState extends State<RegistroClientePage> {
   }
 
   void _currentLocation() async {
-    final GoogleMapController controller = await _controller.future;
-    LocationData currentLocation;
-    var location = new Location();
-    try {
-      currentLocation = await location.getLocation();
-    } on Exception {
-      currentLocation = null!;
-    }
+    //final GoogleMapController controller = await _controller.future;
+    //LocationData currentLocation;
+    //var location = new Location();
+    // try {
+    //   currentLocation = await location.getLocation();
+    // } on Exception {
+    //   currentLocation = null!;
+    // }
 
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        bearing: 0,
-        target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
-        zoom: 17.0,
-      ),
-    ));
+    // controller.animateCamera(CameraUpdate.newCameraPosition(
+    //   CameraPosition(
+    //     bearing: 0,
+    //     target: LatLng(currentLocation.latitude!, currentLocation.longitude!),
+    //     zoom: 17.0,
+    //   ),
+    // ));
   }
 
   _handleTap(LatLng tappedPoint) {

@@ -36,7 +36,7 @@ class CitasProvider {
         .get();
     //citas.addAll
     var s = (documents.docs.map((e) async {
-      var data = e.data() as Map<String, dynamic>;
+      //var data = e.data() as Map<String, dynamic>;
       var cita = CitasModel.fromJson({
         "id": e.id,
         "nombreClient": e["nombreClient"],

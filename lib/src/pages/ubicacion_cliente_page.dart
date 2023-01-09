@@ -4,7 +4,6 @@ import 'package:cliente_app_v1/src/widgets/menu_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart';
 import 'package:location/location.dart';
 
 class UbicacionPage extends StatefulWidget {
@@ -15,11 +14,11 @@ class UbicacionPage extends StatefulWidget {
     zoom: 14.4746,
   );
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  // static final CameraPosition _kLake = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(37.43296265331129, -122.08832357078792),
+  //     tilt: 59.440717697143555,
+  //     zoom: 19.151926040649414);
 
   @override
   _UbicacionPageState createState() => _UbicacionPageState();
@@ -76,11 +75,11 @@ class _UbicacionPageState extends State<UbicacionPage> {
     //}
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller
-        .animateCamera(CameraUpdate.newCameraPosition(UbicacionPage._kLake));
-  }
+  // Future<void> _goToTheLake() async {
+  //   final GoogleMapController controller = await _controller.future;
+  //   controller
+  //       .animateCamera(CameraUpdate.newCameraPosition(UbicacionPage._kLake));
+  // }
 
   Widget _crearBoton() {
     return ElevatedButton.icon(
@@ -120,6 +119,7 @@ class _UbicacionPageState extends State<UbicacionPage> {
       currentLocation = await location.getLocation();
       _handleTap(LatLng(currentLocation.latitude!, currentLocation.longitude!));
     } on Exception {
+      // ignore: null_check_always_fails
       currentLocation = null!;
     }
     controller.animateCamera(CameraUpdate.newCameraPosition(
@@ -150,8 +150,8 @@ class _UbicacionPageState extends State<UbicacionPage> {
         data = documentSnapshot.data();
         print(data['long']);
         print(data['lat']);
-        var lat_long = LatLng(data['lat'], data['long']);
-        _handleTap(lat_long);
+        //var lat_long = LatLng(data['lat'], data['long']);
+        //_handleTap(lat_long);
       }
     });
   }

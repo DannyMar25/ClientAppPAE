@@ -16,7 +16,7 @@ class FormDatPersonalesPage extends StatefulWidget {
 }
 
 class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
-  bool _guardando = false;
+  //bool _guardando = false;
   bool isDisable = false;
   String campoVacio = 'Por favor, llena este campo';
   FormulariosModel formulario = new FormulariosModel();
@@ -778,47 +778,47 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
     }
   }
 
-  Widget _crearBotonRevisar(BuildContext context) {
-    return ElevatedButton.icon(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            return Colors.green;
-          }),
-        ),
-        label: Text('Revisar'),
-        icon: Icon(Icons.save),
-        autofocus: true,
-        onPressed: () {
-          _mostrarConfirmacion(context);
-        });
-  }
+  // Widget _crearBotonRevisar(BuildContext context) {
+  //   return ElevatedButton.icon(
+  //       style: ButtonStyle(
+  //         backgroundColor:
+  //             MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+  //           return Colors.green;
+  //         }),
+  //       ),
+  //       label: Text('Revisar'),
+  //       icon: Icon(Icons.save),
+  //       autofocus: true,
+  //       onPressed: () {
+  //         _mostrarConfirmacion(context);
+  //       });
+  // }
 
-  Future _mostrarConfirmacion(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('¡Atención!'),
-            content: Text(
-                'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
-            actions: [
-              TextButton(
-                  child: Text('Lo he revisado'),
-                  //onPressed: () => Navigator.of(context).pop(),
-                  onPressed: () {
-                    setState(() {
-                      isDisable = false;
-                      Navigator.of(context).pop();
-                    });
-                  }),
-              TextButton(
-                  child: Text('Revisar'),
-                  onPressed: () => Navigator.of(context).pop()),
-            ],
-          );
-        });
-  }
+  // Future _mostrarConfirmacion(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text('¡Atención!'),
+  //           content: Text(
+  //               'Antes de guardar esta sección, asegúrate de haber llenado todos lo campos con la información solicitada.'),
+  //           actions: [
+  //             TextButton(
+  //                 child: Text('Lo he revisado'),
+  //                 //onPressed: () => Navigator.of(context).pop(),
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     isDisable = false;
+  //                     Navigator.of(context).pop();
+  //                   });
+  //                 }),
+  //             TextButton(
+  //                 child: Text('Revisar'),
+  //                 onPressed: () => Navigator.of(context).pop()),
+  //           ],
+  //         );
+  //       });
+  // }
 
   Widget _detalle() {
     return Card(

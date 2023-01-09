@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:cliente_app_v1/src/models/usuario_notificacion_model.dart';
-
 UsuariosModel soportesModelFromJson(String str) =>
     UsuariosModel.fromJson(json.decode(str));
 

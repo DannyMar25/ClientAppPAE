@@ -141,7 +141,7 @@ class _FormularioAdopcionPageState extends State<FormularioAdopcionPage> {
                         onPressed: () {
                           if (isChecked == false) {
                             mostrarAlerta(context,
-                                "Asegúrate de confirmar que haz leído las instrucciones.");
+                                "Asegúrate de confirmar que has leído las instrucciones.");
                           } else {
                             Navigator.pushNamed(context, 'formularioP1',
                                 arguments: animal);
