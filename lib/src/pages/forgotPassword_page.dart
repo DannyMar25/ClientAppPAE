@@ -15,7 +15,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _auth = FirebaseAuth.instance;
   UsuarioProvider usuarioProvider = new UsuarioProvider();
-
+  final formKey = GlobalKey<FormState>();
   String? _email;
   @override
   Widget build(BuildContext context) {
@@ -56,102 +56,121 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       offset: Offset(0.0, 5.0),
                       spreadRadius: 3.0)
                 ]),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Restablece tu contraseña',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
-                  'Ingresa tu correo electrónico:',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    autofocus: true,
-                    style: TextStyle(color: Colors.black),
-                    textCapitalization: TextCapitalization.none,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.deny(RegExp("[ ]"))
-                    ],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      //labelText: 'Email',
-                      icon: Icon(
-                        Icons.mail,
-                        color: Colors.green,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Restablece tu contraseña',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text(
+                    'Ingresa tu correo electrónico:',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      autofocus: true,
+                      style: TextStyle(color: Colors.black),
+                      textCapitalization: TextCapitalization.none,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp("[ ]"))
+                      ],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        //labelText: 'Email',
+                        icon: Icon(
+                          Icons.mail,
+                          color: Colors.green,
+                        ),
+                        errorStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.black),
+                        hintStyle: TextStyle(color: Colors.white),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.green),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromARGB(255, 46, 173, 35)),
+                        ),
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
                       ),
-                      errorStyle: TextStyle(color: Colors.white),
-                      labelStyle: TextStyle(color: Colors.black),
-                      hintStyle: TextStyle(color: Colors.white),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 46, 173, 35)),
-                      ),
-                      errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Por favor, ingrese su correo electrónico';
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (s) async {
+                        setState(() {
+                          _email = s.trim().toLowerCase();
+                          //print(_email);
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        _email = value.trim().toLowerCase();
-                        print(_email);
-                      });
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                    ),
+                    child: Text(
+                      'Enviar',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    onPressed: () async {
+                      if (_email == '' || _email == null) {
+                        return mostrarAlerta(context,
+                            'Por favor, ingrese su correo electrónico.');
+                      } else {}
+                      final estadoUsuario =
+                          await usuarioProvider.verificar(_email!);
+                      //if (formKey.currentState!.validate()) {
+                      if (estadoUsuario.isEmpty) {
+                        mostrarAlerta(
+                            context, 'El correo ingresado no es correcto.');
+                      } else {
+                        try {
+                          _auth.sendPasswordResetEmail(email: _email!);
+                          mostrarAlertaOk(
+                              context,
+                              'Se ha enviado a tu correo: $_email un enlace para restablecer la contraseña.',
+                              'login',
+                              'Información correcta',
+                              'Iniciar sesión');
+                        } on FirebaseAuthException catch (e) {
+                          //print(exception.code);
+                          print(e.message);
+                          mostrarAlertaAuth(context, 'adasdasd', 'soporte');
+                        }
+                      }
+                      // } else {
+                      //   mostrarAlerta(context, 'No se ha ingresado un correo');
+                      // }
                     },
                   ),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                  // _crearPassword(bloc),
+                  SizedBox(
+                    height: 30.0,
                   ),
-                  child: Text(
-                    'Enviar',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () async {
-                    final estadoUsuario =
-                        await usuarioProvider.verificar(_email!);
-                    if (estadoUsuario.isEmpty) {
-                      mostrarAlerta(
-                          context, 'El correo ingresado no es correcto.');
-                    } else {
-                      try {
-                        _auth.sendPasswordResetEmail(email: _email!);
-                        mostrarAlertaOk(
-                            context,
-                            'Se ha enviado a tu correo: $_email un enlace para restablecer la contraseña.',
-                            'login',
-                            'Información correcta',
-                            'Iniciar sesión');
-                      } on FirebaseAuthException catch (e) {
-                        //print(exception.code);
-                        print(e.message);
-                        mostrarAlertaAuth(context, 'adasdasd', 'soporte');
-                      }
-                    }
-                  },
-                ),
-                // _crearPassword(bloc),
-                SizedBox(
-                  height: 30.0,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           _crearBotonPass(context)
