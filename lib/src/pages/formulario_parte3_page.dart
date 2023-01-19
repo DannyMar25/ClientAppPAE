@@ -58,151 +58,180 @@ class _FormDomicilioPageState extends State<FormDomicilioPage> {
     print(idFormu1);
     idAnimal = arg['idAnimal'];
     print(idAnimal);
-    return Scaffold(
-      backgroundColor: Color.fromARGB(223, 248, 248, 245),
-      appBar: AppBar(
-        title: Text('Formulario de adopción'),
-        backgroundColor: Colors.green,
-      ),
-      drawer: MenuWidget(),
-      body: Stack(
-        children: [
-          //Background(),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      _detalle(),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        '¿Qué tipo de inmueble posee?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                  'Si realizas esta acción deberás volver a llenar las secciones nuevamente.'),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Estoy de acuerdo'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar'),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
+        appBar: AppBar(
+          title: Text('Formulario de adopción'),
+          backgroundColor: Colors.green,
+        ),
+        drawer: MenuWidget(),
+        body: Stack(
+          children: [
+            //Background(),
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        _detalle(),
+                        Divider(
+                          color: Colors.transparent,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      //Divider(),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
-
-                      _crearTipoInmueble(),
-                      Row(
-                        children: [_crearDimencion(), infoAltura()],
-                      ),
-
-                      _crearPropiedad(),
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-
-                      _buildChild1(),
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        '¿Planea mudarse próximamente?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Si'),
-                          _crearCheckBox1(),
-                          SizedBox(
-                            width: 5,
+                        Text(
+                          '¿Qué tipo de inmueble posee?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
                           ),
-                          Text('No'),
-                          _crearCheckBox2()
-                        ],
-                      ),
+                          textAlign: TextAlign.center,
+                        ),
+                        //Divider(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
 
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        'El lugar donde pasará la mascota, ¿Tiene cerramiento?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
+                        _crearTipoInmueble(),
+                        Row(
+                          children: [_crearDimencion(), infoAltura()],
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(
-                        height: 7,
-                        color: Colors.transparent,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Si'),
-                          _crearCheckBox3(),
-                          SizedBox(
-                            width: 5,
+
+                        _crearPropiedad(),
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+
+                        _buildChild1(),
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+                        Text(
+                          '¿Planea mudarse próximamente?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
                           ),
-                          Text('No'),
-                          _crearCheckBox4()
-                        ],
-                      ),
-                      _buildChild2(),
-                      // _crearAltura(),
-                      // _crearMaterial(),
-                      Divider(
-                        height: 7,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        '¿Cuál piensa que es la mascota más adecuada para Ud.?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      _crearEspecie(),
-                      _crearSexo(),
-                      _crearEdadM(),
-                      _crearTamanio(),
-                      Divider(),
-                      //_crearBotonRevisar(context),
-                      _crearBoton(),
-                    ],
-                  )),
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Si'),
+                            _crearCheckBox1(),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('No'),
+                            _crearCheckBox2()
+                          ],
+                        ),
+
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+                        Text(
+                          'El lugar donde pasará la mascota, ¿Tiene cerramiento?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Divider(
+                          height: 7,
+                          color: Colors.transparent,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Si'),
+                            _crearCheckBox3(),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('No'),
+                            _crearCheckBox4()
+                          ],
+                        ),
+                        _buildChild2(),
+                        // _crearAltura(),
+                        // _crearMaterial(),
+                        Divider(
+                          height: 7,
+                          color: Colors.transparent,
+                        ),
+                        Text(
+                          '¿Cuál piensa que es la mascota más adecuada para Ud.?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Divider(),
+                        _crearEspecie(),
+                        _crearSexo(),
+                        _crearEdadM(),
+                        _crearTamanio(),
+                        Divider(),
+                        //_crearBotonRevisar(context),
+                        _crearBoton(),
+                      ],
+                    )),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

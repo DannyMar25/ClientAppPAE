@@ -48,7 +48,9 @@ class FormulariosProvider {
           .update({"idDatosPersonales": datosPersonalesAdd.id});
       //return formularioAdd.id;
       var idFormu = formularioAdd.id;
-      Navigator.pushNamed(context, 'formularioP2',
+      // Navigator.pushNamed(context, 'formularioP2',
+      //     arguments: {'idFormu': idFormu, 'idAnimal': idAnimal});
+      Navigator.pushReplacementNamed(context, 'formularioP2',
           arguments: {'idFormu': idFormu, 'idAnimal': idAnimal});
       print(idFormu);
       return idFormu;
@@ -94,7 +96,7 @@ class FormulariosProvider {
 
       await refForm.doc(idFormu).update({"idSituacionFam": sitFamiliarAdd.id});
       var idFormu1 = idFormu;
-      Navigator.pushNamed(context, 'formularioP3',
+      Navigator.pushReplacementNamed(context, 'formularioP3',
           arguments: {'idFormu': idFormu1, 'idAnimal': idAnimal});
 
       return true;
@@ -114,7 +116,7 @@ class FormulariosProvider {
       await refFormDom.doc(domicilioAdd.id).update({"id": domicilioAdd.id});
       await refForm.doc(idFormu1).update({"idDomicilio": domicilioAdd.id});
       var idFormu2 = idFormu1;
-      Navigator.pushNamed(context, 'formularioP4',
+      Navigator.pushReplacementNamed(context, 'formularioP4',
           arguments: {'idFormu': idFormu2, 'idAnimal': idAnimal});
       return true;
     } catch (e) {

@@ -48,171 +48,194 @@ class _FormSituacionFamPageState extends State<FormSituacionFamPage> {
     print(idFormu);
     idAnimal = arg['idAnimal'];
     print(idAnimal);
-    // var formData = ModalRoute.of(context)!.settings.arguments;
-    // if (formData != null) {
-    //   idFormu = formData;
-    // }
-    return Scaffold(
-      //backgroundColor: Color.fromARGB(223, 221, 248, 153),
-      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
-      backgroundColor: Color.fromARGB(223, 248, 248, 245),
-      appBar: AppBar(
-        title: Text('Formulario de adopción'),
-        backgroundColor: Colors.green,
-      ),
-      drawer: MenuWidget(),
-      body: Stack(
-        children: [
-          //Background(),
-          SingleChildScrollView(
-            child: Flexible(
-              fit: FlexFit.loose,
-              child: Container(
-                padding: EdgeInsets.all(15.0),
-                child: Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        //Divider(),
-                        // Divider(
-                        //   color: Colors.transparent,
-                        // ),
-                        _detalle(),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-
-                        Text(
-                          'Mencione las personas con las que vive',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                  'Si realizas esta acción deberás volver a llenar las secciones nuevamente.'),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Estoy de acuerdo'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar'),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
+        appBar: AppBar(
+          title: Text('Formulario de adopción'),
+          backgroundColor: Colors.green,
+        ),
+        drawer: MenuWidget(),
+        body: Stack(
+          children: [
+            //Background(),
+            SingleChildScrollView(
+              child: Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          //Divider(),
+                          // Divider(
+                          //   color: Colors.transparent,
+                          // ),
+                          _detalle(),
+                          Divider(
+                            color: Colors.transparent,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Divider(
-                          height: 5,
-                          color: Colors.transparent,
-                        ),
-                        Text('Deje en blanco si vive solo/a'),
-                        Divider(
-                          height: 3,
-                          color: Colors.transparent,
-                        ),
-                        DataTable(
-                          sortColumnIndex: 2,
-                          sortAscending: false,
-                          columnSpacing: 30,
-                          columns: [
-                            DataColumn(label: Text("Nombre")),
-                            DataColumn(label: Text("Edad "), numeric: true),
-                            DataColumn(label: Text("Parentesco")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(_crearNombre1()),
-                              DataCell(_crearEdad1()),
-                              DataCell(_crearParentesco1()),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(_crearNombre2()),
-                              DataCell(_crearEdad2()),
-                              DataCell(_crearParentesco2()),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(_crearNombre3()),
-                              DataCell(_crearEdad3()),
-                              DataCell(_crearParentesco3()),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(_crearNombre4()),
-                              DataCell(_crearEdad4()),
-                              DataCell(_crearParentesco4()),
-                            ])
-                          ],
-                        ),
 
-                        Divider(),
-                        Text(
-                          '¿Algún familiar espera un bebé?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
-                          ),
-                        ),
-                        Divider(),
-                        //Column(
-                        // children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Si'),
-                            _crearCheckBox1(),
-                            SizedBox(
-                              width: 10,
+                          Text(
+                            'Mencione las personas con las que vive',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
                             ),
-                            Text('No'), _crearCheckBox2()
-
-                            //_crearFechaParto(context),
-                          ],
-                        ),
-                        // Row(
-                        //   children: [Text('No'), _crearCheckBox2()],
-                        // ),
-                        // ],
-                        //),
-                        Divider(),
-                        Text(
-                          '¿Alguien que viva con usted, es alérgico a los animales o sufre de asma?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Divider(color: Colors.transparent),
-                        Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Si'),
-                                _crearCheckBox3(),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('No'),
-                                _crearCheckBox4()
-                              ],
+                          Divider(
+                            height: 5,
+                            color: Colors.transparent,
+                          ),
+                          Text('Deje en blanco si vive solo/a'),
+                          Divider(
+                            height: 3,
+                            color: Colors.transparent,
+                          ),
+                          DataTable(
+                            sortColumnIndex: 2,
+                            sortAscending: false,
+                            columnSpacing: 30,
+                            columns: [
+                              DataColumn(label: Text("Nombre")),
+                              DataColumn(label: Text("Edad "), numeric: true),
+                              DataColumn(label: Text("Parentesco")),
+                            ],
+                            rows: [
+                              DataRow(selected: true, cells: [
+                                DataCell(_crearNombre1()),
+                                DataCell(_crearEdad1()),
+                                DataCell(_crearParentesco1()),
+                              ]),
+                              DataRow(cells: [
+                                DataCell(_crearNombre2()),
+                                DataCell(_crearEdad2()),
+                                DataCell(_crearParentesco2()),
+                              ]),
+                              DataRow(cells: [
+                                DataCell(_crearNombre3()),
+                                DataCell(_crearEdad3()),
+                                DataCell(_crearParentesco3()),
+                              ]),
+                              DataRow(cells: [
+                                DataCell(_crearNombre4()),
+                                DataCell(_crearEdad4()),
+                                DataCell(_crearParentesco4()),
+                              ])
+                            ],
+                          ),
+
+                          Divider(),
+                          Text(
+                            '¿Algún familiar espera un bebé?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
                             ),
-                            // Row(
-                            //   children: [Text('No'), _crearCheckBox4()],
-                            // )
-                          ],
-                        ),
-                        Divider(
-                          color: Colors.transparent,
-                          height: 10,
-                        ),
-                        //_crearBotonRevisar(context),
-                        _crearBoton(),
-                      ],
-                    )),
+                          ),
+                          Divider(),
+                          //Column(
+                          // children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Si'),
+                              _crearCheckBox1(),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text('No'), _crearCheckBox2()
+
+                              //_crearFechaParto(context),
+                            ],
+                          ),
+                          // Row(
+                          //   children: [Text('No'), _crearCheckBox2()],
+                          // ),
+                          // ],
+                          //),
+                          Divider(),
+                          Text(
+                            '¿Alguien que viva con usted, es alérgico a los animales o sufre de asma?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(color: Colors.transparent),
+                          Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Si'),
+                                  _crearCheckBox3(),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('No'),
+                                  _crearCheckBox4()
+                                ],
+                              ),
+                              // Row(
+                              //   children: [Text('No'), _crearCheckBox4()],
+                              // )
+                            ],
+                          ),
+                          Divider(
+                            color: Colors.transparent,
+                            height: 10,
+                          ),
+                          //_crearBotonRevisar(context),
+                          _crearBoton(),
+                        ],
+                      )),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

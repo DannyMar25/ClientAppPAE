@@ -44,117 +44,132 @@ class _FormDatPersonalesPageState extends State<FormDatPersonalesPage> {
       print(animal.id);
     }
 
-    return Scaffold(
-      backgroundColor: Color.fromARGB(223, 248, 248, 245),
-      appBar: AppBar(
-        title: Text(
-          'Formulario de adopción',
-        ),
-        backgroundColor: Colors.green,
-      ),
-      //backgroundColor: Colors.green,
-      drawer: MenuWidget(),
-      body: Stack(
-        children: [
-          // Background(),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(15.0),
-              child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      // Text(
-                      //   'Datos personales',
-                      //   style: TextStyle(
-                      //     fontSize: 33,
-                      //     foreground: Paint()
-                      //       ..style = PaintingStyle.stroke
-                      //       ..strokeWidth = 2
-                      //       ..color = Colors.blueGrey,
-                      //   ),
-                      //   textAlign: TextAlign.center,
-                      // ),
-                      // Divider(
-                      //   color: Colors.transparent,
-                      // ),
-                      _detalle(),
-                      Divider(
-                        height: 5,
-                        color: Colors.transparent,
-                      ),
-                      _crearNombre(),
-                      _crearCI(),
-                      _crearDireccion(),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
-                      _crearFechaNacimiento(context),
-                      Divider(
-                        color: Colors.transparent,
-                      ),
-                      _crearOcupacion(),
-                      _crearEmail(),
-                      Divider(),
-                      Text(
-                        'Instrucción',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
-                        ),
-                      ),
-                      Divider(),
-                      _crearInstruccion(),
-                      Divider(),
-                      Text(
-                        'Teléfonos de contacto',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Divider(),
-                      _crearTelfCelular(),
-
-                      Row(
-                        children: [_crearTelfDomicilio(), infoTelefono()],
-                      ),
-                      Row(
-                        children: [_crearTelfTrabajo(), infoTelefono()],
-                      ),
-                      Divider(),
-                      Text(
-                        'Referencias Personales',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.blueGrey,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      _crearNombreRef(),
-                      _crearParentescoRef(),
-                      _crearTelefonoRef(),
-                      Divider(),
-                      // _crearBoton(context),
-                      //_crearBotonRevisar(context),
-
-                      _crearBoton(context),
-                      // _crearBoton1(context)
-                    ],
-                  )),
-            ),
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                  'Si realizas esta acción deberás volver a llenar las secciones nuevamente.'),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Estoy de acuerdo'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar'),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
+        appBar: AppBar(
+          title: Text(
+            'Formulario de adopción',
           ),
-        ],
+          backgroundColor: Colors.green,
+        ),
+        //backgroundColor: Colors.green,
+        drawer: MenuWidget(),
+        body: Stack(
+          children: [
+            // Background(),
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        _detalle(),
+                        Divider(
+                          height: 5,
+                          color: Colors.transparent,
+                        ),
+                        _crearNombre(),
+                        _crearCI(),
+                        _crearDireccion(),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _crearFechaNacimiento(context),
+                        Divider(
+                          color: Colors.transparent,
+                        ),
+                        _crearOcupacion(),
+                        _crearEmail(),
+                        Divider(),
+                        Text(
+                          'Instrucción',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                        ),
+                        Divider(),
+                        _crearInstruccion(),
+                        Divider(),
+                        Text(
+                          'Teléfonos de contacto',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Divider(),
+                        _crearTelfCelular(),
+
+                        Row(
+                          children: [_crearTelfDomicilio(), infoTelefono()],
+                        ),
+                        Row(
+                          children: [_crearTelfTrabajo(), infoTelefono()],
+                        ),
+                        Divider(),
+                        Text(
+                          'Referencias Personales',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2
+                              ..color = Colors.blueGrey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        _crearNombreRef(),
+                        _crearParentescoRef(),
+                        _crearTelefonoRef(),
+                        Divider(),
+                        // _crearBoton(context),
+                        //_crearBotonRevisar(context),
+
+                        _crearBoton(context),
+                        // _crearBoton1(context)
+                      ],
+                    )),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

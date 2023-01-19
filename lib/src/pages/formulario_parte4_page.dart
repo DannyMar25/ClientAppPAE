@@ -94,241 +94,270 @@ class _FormRelacionMascotas1PageState extends State<FormRelacionMascotas1Page> {
     print(idFormu2);
     idAnimal = arg['idAnimal'];
     print(idAnimal);
-    return Scaffold(
-      //backgroundColor: Color.fromARGB(223, 211, 212, 207),
-      backgroundColor: Color.fromARGB(223, 248, 248, 245),
-      appBar: AppBar(
-        title: Text('Formulario de adopción'),
-        backgroundColor: Colors.green,
-      ),
-      drawer: MenuWidget(),
-      body: Stack(
-        children: [
-          //Background(),
-          SingleChildScrollView(
-            child: Flexible(
-              fit: FlexFit.loose,
-              child: Container(
-                padding: EdgeInsets.all(15.0),
-                child: Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        _detalle(),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        Text(
-                          'Liste sus dos últimas mascotas',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text(
+                  'Si realizas esta acción deberás volver a llenar las secciones nuevamente.'),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Estoy de acuerdo'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('Cancelar'),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+      child: Scaffold(
+        //backgroundColor: Color.fromARGB(223, 211, 212, 207),
+        backgroundColor: Color.fromARGB(223, 248, 248, 245),
+        appBar: AppBar(
+          title: Text('Formulario de adopción'),
+          backgroundColor: Colors.green,
+        ),
+        drawer: MenuWidget(),
+        body: Stack(
+          children: [
+            //Background(),
+            SingleChildScrollView(
+              child: Flexible(
+                fit: FlexFit.loose,
+                child: Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          _detalle(),
+                          Divider(
+                            color: Colors.transparent,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'Deje en blanco si no ha tenido mascotas',
-                        ),
-                        Divider(),
-                        DataTable(
-                          columnSpacing: 25,
-                          sortColumnIndex: 2,
-                          sortAscending: false,
-                          columns: [
-                            DataColumn(label: Text("Tipo")),
-                            DataColumn(label: Text("Nombre")),
-                            DataColumn(label: Text("Sexo")),
-                            DataColumn(label: Text("Esterilizado")),
-                          ],
-                          rows: [
-                            DataRow(selected: true, cells: [
-                              DataCell(_crearTipoMascota()),
-                              DataCell(_crearNombreM()),
-                              DataCell(_crearSexo()),
-                              DataCell(_crearSiNo())
-                            ]),
-                            DataRow(cells: [
-                              DataCell(_crearTipoMascota1()),
-                              DataCell(_crearNombreM1()),
-                              DataCell(_crearSexo1()),
-                              DataCell(_crearSiNo1())
-                            ]),
-                          ],
-                        ),
-                        Divider(),
-                        Text(
-                          '¿Dónde está ahora? Si falleció, perdió o está en otro lugar, indique la causa.',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        _crearLugarM(),
-                        Divider(),
-                        _crearPregunta1(),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        Text(
-                          'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        _crearPregunta2(),
-                        Text(
-                          'Con relación a la anterior pregunta ¿Qué pasaría si los dueños de la nueva casa no aceptan mascotas?',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        _crearPregunta3(),
-                        Divider(),
-                        Text(
-                          'Si Ud. debe salir de viaje más de un día, la mascota:',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        _crearViaje(),
-                        Divider(),
-                        _crearPregunta4(),
-                        _crearPregunta5(),
-                        _crearPregunta6(),
-                        _crearPregunt7(),
-                        Divider(),
-                        Text(
-                          '¿Qué comerá habitualmente la mascota?:           ',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        _crearComida(),
-                        Divider(),
-                        Text(
-                          '¿Cuántos años cree que vive un perro en promedio?',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        _crearPregunta8(),
-                        Divider(),
-                        Text(
-                          'Si su mascota se enferma, usted: ',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                          textAlign: TextAlign.justify,
-                        ),
-                        _crearEnfermedad(),
-                        Divider(),
-                        Text(
-                          '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        _crearPregunta9(),
-                        Divider(),
-                        Text(
-                          'Estime cuánto dinero podría gastar en su mascota mensualmente:   ',
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        _crearGastos(),
-                        Divider(),
-                        Text(
-                          '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de companía?',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        _crearPregunta10(),
-                        Divider(),
-                        Text(
-                          '¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Divider(),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text('Si'),
-                            _crearCheckBox1(),
-                            SizedBox(
-                              width: 5,
+                          Text(
+                            'Liste sus dos últimas mascotas',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
                             ),
-                            Text('No'),
-                            _crearCheckBox2()
-                          ],
-                        ),
-                        // Row(
-                        //   children: [Text('No'), _crearCheckBox2()],
-                        // ),
-                        _crearPorque1(),
-                        Divider(),
-                        Text(
-                          '¿Está de acuerdo en que la mascota sea esterilizada?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        Row(
-                          children: [
-                            Text('Si'),
-                            _crearCheckBox3(),
-                            SizedBox(
-                              height: 5,
+                          Text(
+                            'Deje en blanco si no ha tenido mascotas',
+                          ),
+                          Divider(),
+                          DataTable(
+                            columnSpacing: 25,
+                            sortColumnIndex: 2,
+                            sortAscending: false,
+                            columns: [
+                              DataColumn(label: Text("Tipo")),
+                              DataColumn(label: Text("Nombre")),
+                              DataColumn(label: Text("Sexo")),
+                              DataColumn(label: Text("Esterilizado")),
+                            ],
+                            rows: [
+                              DataRow(selected: true, cells: [
+                                DataCell(_crearTipoMascota()),
+                                DataCell(_crearNombreM()),
+                                DataCell(_crearSexo()),
+                                DataCell(_crearSiNo())
+                              ]),
+                              DataRow(cells: [
+                                DataCell(_crearTipoMascota1()),
+                                DataCell(_crearNombreM1()),
+                                DataCell(_crearSexo1()),
+                                DataCell(_crearSiNo1())
+                              ]),
+                            ],
+                          ),
+                          Divider(),
+                          Text(
+                            '¿Dónde está ahora? Si falleció, perdió o está en otro lugar, indique la causa.',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          _crearLugarM(),
+                          Divider(),
+                          _crearPregunta1(),
+                          Divider(
+                            color: Colors.transparent,
+                          ),
+                          Text(
+                            'Si por algún motivo tuviera que cambiar de domicilio, ¿Qué pasaría con su mascota?',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          _crearPregunta2(),
+                          Text(
+                            'Con relación a la anterior pregunta ¿Qué pasaría si los dueños de la nueva casa no aceptan mascotas?',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Divider(
+                            color: Colors.transparent,
+                          ),
+                          _crearPregunta3(),
+                          Divider(),
+                          Text(
+                            'Si Ud. debe salir de viaje más de un día, la mascota:',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          _crearViaje(),
+                          Divider(),
+                          _crearPregunta4(),
+                          _crearPregunta5(),
+                          _crearPregunta6(),
+                          _crearPregunt7(),
+                          Divider(),
+                          Text(
+                            '¿Qué comerá habitualmente la mascota?:           ',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          _crearComida(),
+                          Divider(),
+                          Text(
+                            '¿Cuántos años cree que vive un perro en promedio?',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          _crearPregunta8(),
+                          Divider(),
+                          Text(
+                            'Si su mascota se enferma, usted: ',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            textAlign: TextAlign.justify,
+                          ),
+                          _crearEnfermedad(),
+                          Divider(),
+                          Text(
+                            '¿Quién será el responsable y se hará cargo de cubrir los gastos de la mascota?',
+                            style: TextStyle(
+                              fontSize: 16,
                             ),
-                            Text('No'),
-                            _crearCheckBox4()
-                          ],
-                        ),
-                        _crearPorque2(),
-                        Divider(),
-                        _crearPregunta11(),
-                        _crearPregunta12(),
-                        Divider(
-                          color: Colors.transparent,
-                        ),
-                        Text(
-                          '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
-                          style: TextStyle(
-                            fontSize: 16,
                           ),
-                        ),
-                        _crearPregunta13(),
-                        Divider(),
-                        Text(
-                          'La adopción fue compartida con su familia?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.blueGrey,
+                          _crearPregunta9(),
+                          Divider(),
+                          Text(
+                            'Estime cuánto dinero podría gastar en su mascota mensualmente:   ',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Divider(),
-                        _crearSiNo2(),
-                        Divider(),
-                        _crearFamilia(),
-                        Divider(),
-                        //_crearBotonRevisar(context),
-                        _crearBoton(),
-                      ],
-                    )),
+                          _crearGastos(),
+                          Divider(),
+                          Text(
+                            '¿Cuenta con los recursos para cubrir los gastos veterinarios del animal de companía?',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          _crearPregunta10(),
+                          Divider(),
+                          Text(
+                            '¿Está de acuerdo en que se haga una visita periódica a su domicilio para ver como se encuentra el adoptado?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Si'),
+                              _crearCheckBox1(),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('No'),
+                              _crearCheckBox2()
+                            ],
+                          ),
+                          // Row(
+                          //   children: [Text('No'), _crearCheckBox2()],
+                          // ),
+                          _crearPorque1(),
+                          Divider(),
+                          Text(
+                            '¿Está de acuerdo en que la mascota sea esterilizada?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(
+                            color: Colors.transparent,
+                          ),
+                          Row(
+                            children: [
+                              Text('Si'),
+                              _crearCheckBox3(),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text('No'),
+                              _crearCheckBox4()
+                            ],
+                          ),
+                          _crearPorque2(),
+                          Divider(),
+                          _crearPregunta11(),
+                          _crearPregunta12(),
+                          Divider(
+                            color: Colors.transparent,
+                          ),
+                          Text(
+                            '¿Está Ud. informado y conciente sobre la ordenanza municipal sobre la tenencia responsable de mascotas?',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          _crearPregunta13(),
+                          Divider(),
+                          Text(
+                            'La adopción fue compartida con su familia?',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 2
+                                ..color = Colors.blueGrey,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(),
+                          _crearSiNo2(),
+                          Divider(),
+                          _crearFamilia(),
+                          Divider(),
+                          //_crearBotonRevisar(context),
+                          _crearBoton(),
+                        ],
+                      )),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
